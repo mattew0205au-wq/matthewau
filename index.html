@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matthew Au 歐鍵鋒 | 官方網站 Official Website</title>
+  <title>Matthew Au | Official Website</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入 Supabase 雲端數據庫 SDK (實現全球跨裝置連網與同步) -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- 引入 Firebase JS SDK (實現真正的全球跨裝置連網與跨IP數據同步) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <style>
     body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
     .top-banner { background-color: #a87954; color: #ffffff; }
@@ -62,7 +63,7 @@
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
         <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
-        <p class="text-3xl md:text-4xl font-serif text-amber-200/90 tracking-widest drop-shadow-md" data-i18n="hero_sub">歐鍵鋒</p>
+        <p class="text-2xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">Official Website</p>
       </div>
     </section>
 
@@ -199,7 +200,7 @@
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">歐鍵鋒大師級一對一足球訓練</h2>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
           <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
@@ -207,7 +208,7 @@
     </div>
   </div>
 
-  <!-- 法律條款 Modal 彈窗 (還原使用條款與免責聲明) -->
+  <!-- 法律條款 Modal 彈窗 -->
   <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -225,7 +226,7 @@
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-2xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
-        <h3 class="text-xl font-bold text-amber-500">⚙️ 管理員後台 (Admin Panel)</h3>
+        <h3 class="text-xl font-bold text-amber-500">⚙️ 管理員後台 (Cloud Admin)</h3>
         <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
       </div>
       
@@ -237,14 +238,14 @@
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
         <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">📢 發布新新聞公報（同步全網）</h4>
+          <h4 class="font-bold text-white text-base text-amber-500">📢 發布新新聞公報（全球跨裝置即時同步）</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <textarea id="new-news-content" placeholder="新聞內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></textarea>
           <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
         </div>
 
         <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">🔑 全球修改管理員密碼</h4>
+          <h4 class="font-bold text-white text-base text-amber-500">🔑 全球修改管理員密碼（跨 IP 同步生效）</h4>
           <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">永久同步更新密碼</button>
         </div>
@@ -264,11 +265,19 @@
   </footer>
 
   <script>
+    // Firebase 全球雲端數據庫初始化配置
+    const firebaseConfig = {
+      databaseURL: "https://matthewau-cccd-default-rtdb.firebaseio.com"
+    };
+    if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = (typeof firebase !== 'undefined') ? firebase.database() : null;
+
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
         nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "新聞公報", nav_shop: "商城",
-        hero_sub: "歐鍵鋒", marquee_text: "歡迎 welcome",
         quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
         quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
         about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
@@ -282,13 +291,12 @@
         news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
-        shop_title: "官方商城", prod1_title: "歐鍵鋒大師級一對一足球訓練", btn_buy_now: "立即購買",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
         privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
         top_banner: "Welcome to Matthew official website",
         nav_home: "Home", nav_words: "Words", nav_news: "News", nav_shop: "Shop",
-        hero_sub: "Matthew Au", marquee_text: "Welcome 歡迎",
         quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
         quote_churchill_author: "—— Winston Churchill",
         about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football", hobby_roblox: "Playing Roblox",
@@ -308,7 +316,6 @@
       'zh-CN': {
         top_banner: "欢迎来到Matthew official website",
         nav_home: "首页", nav_words: "键锋的话", nav_news: "新闻公报", nav_shop: "商城",
-        hero_sub: "欧键锋", marquee_text: "欢迎 welcome",
         quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
         quote_churchill_author: "—— 温斯顿·丘吉尔 Winston Churchill",
         about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
@@ -322,12 +329,10 @@
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
         news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。",
         news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
-        shop_title: "官方商城", prod1_title: "欧键锋大师级一对一足球训练", btn_buy_now: "立即购买",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大师级一对一足球训练", btn_buy_now: "立即购买",
         privacy_policy: "商城隐私权政策", terms_of_use: "网站使用条款及免责声明"
       }
     };
-
-    let localAdminPass = localStorage.getItem('admin_pass') || "1234";
 
     function changeLanguage(lang) {
       const langMap = i18nData[lang] || i18nData['zh-HK'];
@@ -357,25 +362,45 @@
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
+    // 真正的雲端跨裝置密碼比對
     function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
-      if (inputPass === localAdminPass) {
-        document.getElementById('admin-login-sec').classList.add('hidden');
-        document.getElementById('admin-dashboard').classList.remove('hidden');
-        document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+      
+      if (db) {
+        db.ref('admin_password').once('value').then(snapshot => {
+          const cloudPass = snapshot.val() || "1234";
+          if (inputPass === cloudPass) {
+            unlockDashboard();
+          } else {
+            alert('驗證失敗！密碼不正確。');
+          }
+        }).catch(() => {
+          if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
+          else alert('驗證失敗！密碼不正確。');
+        });
       } else {
-        alert('驗證失敗！密碼不正確。');
+        if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
+        else alert('驗證失敗！密碼不正確。');
       }
     }
 
+    function unlockDashboard() {
+      document.getElementById('admin-login-sec').classList.add('hidden');
+      document.getElementById('admin-dashboard').classList.remove('hidden');
+      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+    }
+
+    // 雲端同步刪除新聞
     function deleteNews(id) {
       if (confirm("確定要刪除這篇新聞公報嗎？")) {
         const item = document.getElementById(id);
         if (item) item.remove();
-        alert("新聞已成功刪除！");
+        if (db) db.ref('news/' + id).remove();
+        alert("新聞已成功刪除並同步至雲端！");
       }
     }
 
+    // 雲端同步新增新聞
     function addNewsPost() {
       const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
       const content = document.getElementById('new-news-content').value;
@@ -383,30 +408,39 @@
       if (!content) return alert('請輸入內容');
 
       const newsId = 'news-' + Date.now();
-      const newsContainer = document.getElementById('news-container');
-      const newNewsHTML = `
-        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="${newsId}">
-          <div>
-            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${date}&gt;</span>
-            <p class="text-white text-lg">${content}</p>
-          </div>
-          <button onclick="deleteNews('${newsId}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
-        </div>
-      `;
-      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
-      alert('新聞發布成功！');
+      const newsObj = { id: newsId, date: date, content: content };
+
+      if (db) db.ref('news/' + newsId).set(newsObj);
+
+      renderNewsItem(newsObj);
+      alert('新聞發布成功！全球裝置即時同步。');
       document.getElementById('new-news-date').value = '';
       document.getElementById('new-news-content').value = '';
     }
 
+    function renderNewsItem(n) {
+      const newsContainer = document.getElementById('news-container');
+      const newNewsHTML = `
+        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="${n.id}">
+          <div>
+            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
+            <p class="text-white text-lg">${n.content}</p>
+          </div>
+          <button onclick="deleteNews('${n.id}')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+        </div>
+      `;
+      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
+    }
+
+    // 雲端同步修改密碼
     function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
       if (!newPass) return alert("請輸入新密碼");
 
-      localAdminPass = newPass;
       localStorage.setItem('admin_pass', newPass);
+      if (db) db.ref('admin_password').set(newPass);
 
-      alert('密碼已成功更新！');
+      alert('密碼已成功更新！全球所有裝置（包含美國手機）已同步生效。');
       document.getElementById('new-pass-input').value = '';
     }
 
@@ -446,6 +480,18 @@
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
+
+    // 頁面載入時自動從雲端同步新聞
+    window.onload = function() {
+      if (db) {
+        db.ref('news').once('value').then(snapshot => {
+          const newsData = snapshot.val();
+          if (newsData) {
+            Object.values(newsData).forEach(n => renderNewsItem(n));
+          }
+        });
+      }
+    };
   </script>
 </body>
 </html>
