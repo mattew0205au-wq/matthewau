@@ -380,6 +380,17 @@
   </footer>
 
   <script>
+    // 預設密碼 "1234" 的 SHA-256 雜湊亂碼（F12 檢查只會看到這串亂碼，無法反推原密碼）
+    const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+
+    // 原生 Web Crypto API SHA-256 加密算法
+    async function hashPassword(str) {
+      const msgBuffer = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
     // Firebase 資料庫配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -453,7 +464,7 @@
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
         words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
-        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
+        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透過此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
         news_2_body: "27日2时多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
@@ -535,23 +546,29 @@
       document.getElementById('alipay-sec').classList.toggle('hidden');
     }
 
-    // ⚙️ 管理員 Modal 控制函數
+    // ⚙️ 管理員 Modal 控制函數（引入 SHA-256 安全比對）
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    function checkAdminPassword() {
+    async function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
+      if (!inputPass) return alert('請輸入密碼！');
+
+      const inputHash = await hashPassword(inputPass);
+
       if (db) {
-        db.ref('admin_password').once('value').then(snapshot => {
-          const cloudPass = snapshot.val() || "1234";
-          if (inputPass === cloudPass) unlockDashboard();
+        db.ref('admin_password_hash').once('value').then(snapshot => {
+          const cloudHash = snapshot.val() || DEFAULT_HASH;
+          if (inputHash === cloudHash) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         }).catch(() => {
-          if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
+          const localHash = localStorage.getItem('admin_pass_hash') || DEFAULT_HASH;
+          if (inputHash === localHash) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         });
       } else {
-        if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
+        const localHash = localStorage.getItem('admin_pass_hash') || DEFAULT_HASH;
+        if (inputHash === localHash) unlockDashboard();
         else alert('驗證失敗！密碼不正確。');
       }
     }
@@ -633,17 +650,21 @@
       newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
     }
 
-    function updateAdminPassword() {
+    // 修改密碼（保存 SHA-256 加密亂碼而非明文）
+    async function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
       if (!newPass) return alert('請輸入新密碼');
+
+      const newHash = await hashPassword(newPass);
+
       if (db) {
-        db.ref('admin_password').set(newPass).then(() => {
-          alert('管理員密碼更新成功！');
+        db.ref('admin_password_hash').set(newHash).then(() => {
+          alert('管理員密碼已成功進行加密儲存！');
           document.getElementById('new-pass-input').value = '';
         });
       } else {
-        localStorage.setItem('admin_pass', newPass);
-        alert('管理員密碼更新成功！');
+        localStorage.setItem('admin_pass_hash', newHash);
+        alert('管理員密碼已成功進行加密儲存！');
         document.getElementById('new-pass-input').value = '';
       }
     }
