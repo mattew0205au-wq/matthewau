@@ -35,10 +35,6 @@
       border-bottom: 1px solid #2a2a2a;
       color: #a87954;
     }
-    .chat-btn {
-      background-color: #c49a78;
-      color: #ffffff;
-    }
     .btn-buy {
       background-color: #c49a78;
       color: #ffffff;
@@ -70,22 +66,9 @@
   <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
-      <!-- 原版 LOGO：向量內嵌 SVG（含金皇冠、足球、花紋底座與黑字，100% 絕不破圖變白條） -->
-      <a onclick="switchTab('home')" class="bg-white p-1.5 rounded shadow flex items-center justify-center cursor-pointer">
-        <svg width="130" height="55" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
-          <!-- 皇冠 -->
-          <path d="M70 30 L82 10 L100 22 L118 10 L130 30 Z" fill="#E5C158"/>
-          <!-- 足球 -->
-          <circle cx="100" cy="44" r="16" fill="black"/>
-          <circle cx="100" cy="44" r="15" fill="white"/>
-          <polygon points="100,34 105,38 103,45 97,45 95,38" fill="black"/>
-          <!-- 花紋 -->
-          <path d="M68 62 C 82 56, 94 68, 100 62 C 106 68, 118 56, 132 62" stroke="#999999" stroke-width="2" fill="none"/>
-          <!-- 文字 THE KING MATTHEW AU ® -->
-          <text x="100" y="72" font-family="Arial, sans-serif" font-weight="900" font-size="10" fill="#4A3425" text-anchor="middle">THE KING</text>
-          <text x="100" y="86" font-family="Arial, sans-serif" font-weight="900" font-size="15" fill="#3D2817" text-anchor="middle">MATTHEW AU</text>
-          <text x="156" y="70" font-family="Arial, sans-serif" font-size="8" fill="#3D2817">®</text>
-        </svg>
+      <!-- Logo 區域（套用您提供的 Base64 圖片） -->
+      <a onclick="switchTab('home')" class="cursor-pointer flex items-center">
+        <img src="data:image/webp;base64,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" alt="Matthew Au Logo" class="h-12 w-auto object-contain">
       </a>
 
       <!-- 導覽選單 -->
@@ -101,7 +84,7 @@
   <!-- ==================== 1. 首頁 TAB ==================== -->
   <div id="page-home" class="tab-page">
     
-    <!-- Hero 主圖 (陽光散景背景) -->
+    <!-- Hero 主圖區塊 -->
     <section class="relative h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
@@ -128,7 +111,7 @@
       </div>
     </section>
 
-    <!-- 興趣與政治理念區塊 (使用高可用圖庫，絕無奧巴馬/政治人物) -->
+    <!-- 興趣與政治理念區塊 (去政治化圖片) -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
       
       <!-- 足球 -->
@@ -139,7 +122,7 @@
           <p class="text-gray-400">足球</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://picsum.photos/id/1058/800/500" alt="足球" class="w-full h-72 object-cover">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="足球" class="w-full h-72 object-cover">
         </div>
       </div>
 
@@ -150,14 +133,14 @@
           <p class="text-gray-400">玩Roblox</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://picsum.photos/id/1070/800/500" alt="Roblox" class="w-full h-72 object-cover">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Roblox" class="w-full h-72 object-cover">
         </div>
       </div>
 
-      <!-- 政治理念 (民主指示牌／無人物) -->
+      <!-- 政治理念 -->
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://picsum.photos/id/1020/800/500" alt="Democracy" class="w-full h-72 object-cover">
+          <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80" alt="民主自由" class="w-full h-72 object-cover">
         </div>
         <div>
           <h2 class="text-2xl font-bold mb-4">政治理念</h2>
@@ -172,13 +155,13 @@
       <div class="max-w-5xl mx-auto">
         <h2 class="text-3xl font-bold text-white mb-12">評論</h2>
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl">
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
             <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
             <p class="text-lg font-medium mb-6">"佢樣樣都好呀"</p>
             <p class="text-xs text-gray-500">匿名 - 11/2/2023</p>
           </div>
-          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl">
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
             <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
             <p class="text-lg font-medium mb-6">"佢係我見過踢波最好嘅人！"</p>
@@ -209,7 +192,7 @@
       </form>
 
       <div class="border-t border-gray-800 pt-12 text-sm text-gray-300 space-y-2">
-        <p class="font-bold mb-4">可預約見時間</p>
+        <p class="font-bold mb-4">可預約時間</p>
         <div class="max-w-md mx-auto space-y-2 text-left">
           <div class="flex justify-between border-b border-gray-800 py-1"><span>週一</span><span class="text-gray-500">關閉中</span></div>
           <div class="flex justify-between border-b border-gray-800 py-1"><span>週二</span><span class="text-gray-500">關閉中</span></div>
@@ -258,7 +241,7 @@
       <!-- 商品 1 -->
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://picsum.photos/id/1058/800/500" alt="足球訓練" class="w-full h-80 object-cover">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
           <h2 class="text-3xl font-bold text-amber-600/90 mb-4">歐鍵鋒大師級一對一足球訓練</h2>
@@ -278,7 +261,7 @@
       <!-- 商品 2 -->
       <div class="grid md:grid-cols-2 gap-12 items-center border-t border-gray-800 pt-16">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://picsum.photos/id/1025/800/500" alt="心靈支持" class="w-full h-80 object-cover">
+          <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80" alt="心靈支持" class="w-full h-80 object-cover">
         </div>
         <div>
           <h2 class="text-3xl font-bold text-amber-600/90 mb-4">得到我心靈上的支持</h2>
@@ -359,19 +342,9 @@
 
         <h4 class="font-bold text-white text-base pt-2">二、 智慧財產權與授權使用</h4>
         <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
-        <p><strong>禁止行為：</strong> 未經事前書面授權，您不得複製、重製、修改、散布、轉載本站任何內容，亦不得將本站內容用於任何商業目的。</p>
 
-        <h4 class="font-bold text-white text-base pt-2">三、 使用者規範與行為限制</h4>
-        <p>使用本站時，您承諾不得從事以下行為：<br>
-        1. 上傳、張貼或傳播任何違法、侵權、誹謗、猥褻或有害之內容。<br>
-        2. 使用任何自動化工具（如爬蟲程式）未經許可擷取本站資料。<br>
-        3. 試圖未經授權存取本站系統，或植入木馬、病毒等惡意程式。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">四、 外部第三方網站連結</h4>
-        <p>本站可能包含前往第三方網站之超連結。本站對任何第三方網站之內容、隱私政策或商業行為無控制權，亦不承擔任何責任。存取外部連結之風險由您自行承擔。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">五、 條款修訂與更新</h4>
-        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。您於條款變更後繼續使用本站，即視為您已接受該等變更。</p>
+        <h4 class="font-bold text-white text-base pt-2">三、 條款修訂與更新</h4>
+        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
@@ -382,35 +355,10 @@
         <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。本站之運作方式以歐盟《一般資料保護規範》（GDPR）、美國《加州消費者隱私法》（CCPA/CPRA）以及香港《個人資料（隱私）條例》之規範與標準為基礎擬定。</p>
 
         <h4 class="font-bold text-white text-base pt-2">一、 資料收集與使用</h4>
-        <p><strong>伺服器紀錄：</strong> 當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。這些資料用於系統維護、流量分析與網絡安全。</p>
-        <p><strong>聯絡資料：</strong> 若您透過本站表單或電子郵件聯絡本站，本站會收集您提供的姓名與電子郵件地址，用於處理您的查詢或相關聯繫。</p>
+        <p>當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間及瀏覽器類型）。若您透過聯絡表單發送訊息，我們將僅收集您主動提供的姓名與電子郵件。</p>
 
-        <h4 class="font-bold text-white text-base pt-2">二、 資料處理依據</h4>
-        <p>本站處理個人資料基於以下情況：您主動發送訊息或同意使用 Cookie；或本站為維持網站正常運作與安全防護之必要。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">三、 Cookie 技術</h4>
-        <p>本站會使用 Cookie 以優化瀏覽體驗。您可以隨時透過瀏覽器設定拒絕或刪除 Cookie，但這可能會影響本站部分功能的運作。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">四、 資料分享與轉讓</h4>
-        <p>本站保留將收集到的資料（包括但不限於去識別化數據或個人資料）出售、出租或分享予第三方的權利。<br>
-        如因法律規定、行政命令或執法單位要求，本站亦可能向相關機構披露資料。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">五、 跨境傳輸</h4>
-        <p>本站資料可能於您所在國家/地區以外的伺服器進行處理與儲存，本站會採取合理措施保障資料安全。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">六、 使用者權利</h4>
-        <p>您有權向本站提出以下要求：<br>
-        • 查詢、閱覽或更正您的個人資料。<br>
-        • 請求刪除本站留存的個人資料。<br>
-        • 限制或反對本站處理您的資料。<br>
-        • 索取您個人資料的電子副本。<br>
-        如需行使上述權利，請透過電子郵件(<a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>)聯絡本站。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">七、 外部連結</h4>
-        <p>本站包含第三方網站連結。點擊連結離開本站後，本政策即不再適用，本站不對外部網站的內容與做法負責。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">八、 條款修訂</h4>
-        <p>本站有權隨時修改本隱私權政策。更新內容刊登於本頁面即時生效，不另行通知。</p>
+        <h4 class="font-bold text-white text-base pt-2">二、 使用者權利</h4>
+        <p>您有權要求查詢、更正或刪除您的個人資料。如有需求請聯繫 <a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
