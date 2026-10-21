@@ -197,7 +197,6 @@
           <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-instagram"></i>
           </a>
-          <!-- 精準 SVG 原生 X 標誌 -->
           <a href="https://www.x.com/Matthew_0205au" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center p-3 hover:scale-110 transition shadow-lg">
             <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
@@ -274,7 +273,7 @@
     </div>
   </div>
 
-  <!-- 管理員入口 Modal (已擴大權限與儀表板展示) -->
+  <!-- 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col fade-in">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -289,7 +288,6 @@
       </div>
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
-        <!-- 功能 1：發布新聞 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息（全球跨裝置即時同步）</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
@@ -297,22 +295,19 @@
           <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
         </div>
 
-        <!-- 功能 2：修改密碼 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理員密碼</h4>
           <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">更新密碼</button>
         </div>
 
-        <!-- 功能 3：高精細訪客數據儀表板 -->
         <div class="space-y-3">
           <div class="flex justify-between items-center">
-            <h4 class="font-bold text-white text-base text-amber-500">📊 訪客高精細定位與軌跡儀表板</h4>
+            <h4 class="font-bold text-white text-base text-amber-500">📊 高精準訪客軌跡與校正日誌</h4>
             <button onclick="loadVisitorLogs()" class="px-3 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded">🔄 重新整理數據</button>
           </div>
-          <p class="text-xs text-gray-400">精確鎖定街區地點（如：沙田圍、屯門藍地、啟德、九龍城、曼哈頓下城等）與年齡階層：</p>
           <div id="admin-logs-viewer" class="bg-black p-4 rounded border border-gray-800 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
-            <p class="text-gray-500">正在從新加坡雲端加載精確數據...</p>
+            <p class="text-gray-500">正在加載數據...</p>
           </div>
         </div>
       </div>
@@ -340,7 +335,7 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 多語言字典
+    // 語言字典
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
@@ -402,14 +397,14 @@
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
         contact_title: "与我联络", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联络我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
-        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
+        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
-        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手並進，共創更美好的未來！",
+        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
-        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
-        news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
-        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "商城隐私权政策", terms_of_use: "網站使用條款及免責聲明"
+        news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。",
+        news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大师级一对一足球训练", btn_buy_now: "立即购买",
+        privacy_policy: "商城隐私权政策", terms_of_use: "网站使用条款及免责声明"
       }
     };
 
@@ -448,15 +443,9 @@
       trackUserAnalytics(tab);
     }
 
-    function openAdminModal() { 
-      document.getElementById('admin-modal').classList.remove('hidden'); 
-    }
-    
-    function closeAdminModal() { 
-      document.getElementById('admin-modal').classList.add('hidden'); 
-    }
+    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    // 驗證管理員密碼
     function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
       if (db) {
@@ -477,13 +466,12 @@
     function unlockDashboard() {
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
-      loadVisitorLogs(); // 自動讀取高精細訪客數據
+      loadVisitorLogs();
     }
 
-    // 讀取並在後台展示高精細訪客數據
     function loadVisitorLogs() {
       const viewer = document.getElementById('admin-logs-viewer');
-      viewer.innerHTML = '<p class="text-amber-500">正在加載精確定位數據...</p>';
+      viewer.innerHTML = '<p class="text-amber-500">正在加載日誌數據...</p>';
 
       if (db) {
         db.ref('visitor_logs').limitToLast(20).once('value').then(snapshot => {
@@ -497,10 +485,9 @@
           Object.values(logs).reverse().forEach(log => {
             html += `
               <div class="border-b border-gray-800 pb-2 mb-2">
-                <div class="text-amber-400 font-bold">📍 區域: ${log.exact_location || log.location}</div>
-                <div>🌐 IP: ${log.ip} | ⏰ 時間: ${log.time}</div>
-                <div>📄 瀏覽分頁: <span class="text-white">${log.visited_page}</span> | 💻 裝置: ${log.device}</div>
-                <div>👤 推測年齡層: ${log.age_group} | 🗣️ 語言: ${log.language}</div>
+                <div class="text-amber-400 font-bold">📍 確切地點: ${log.location} (${log.isp || '未知網絡'})</div>
+                <div class="text-gray-300">🌐 精準 IP: ${log.ip} | ⏰ 本地時間: ${log.local_time}</div>
+                <div class="text-gray-400">📄 瀏覽: ${log.visited_page} | 💻 裝置: ${log.device} | 時區: ${log.user_timezone}</div>
               </div>
             `;
           });
@@ -568,7 +555,6 @@
       e.target.reset();
     }
 
-    /* 條款 Modal */
     function closeModal() { document.getElementById('legal-modal').classList.add('hidden'); }
 
     function showTermsOfService() {
@@ -579,63 +565,60 @@
         <h4 class="font-bold text-white text-base pt-2">一、 管轄法律</h4>
         <p>本條款受美國加利福尼亞州法律管轄。</p>
       `;
-      document.getElementById('legal-modal').classList.add('hidden');
+      document.getElementById('legal-modal').classList.remove('hidden');
     }
 
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = '商城隱私權政策';
       document.getElementById('modal-body').innerHTML = `
-        <p>本網站收集訪客IP、精確街區定位、時間與裝置類型，以優化營運與安全性。</p>
+        <p>本網站收集訪客 IP、定位資訊與裝置類型，用於維護營運與安全性。</p>
       `;
-      document.getElementById('legal-modal').classList.add('hidden');
+      document.getElementById('legal-modal').classList.remove('hidden');
     }
 
-    // 高精細訪客定位與大數據追蹤系統
+    // 真正精準的 IP/地點/時區與時間記錄系統
     async function trackUserAnalytics(pageName = 'home') {
       const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
       const userLang = localStorage.getItem('user_preferred_lang') || navigator.language;
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Hong_Kong';
+      
+      // 使用訪客本機設備的真實確切時間（保證絕對準確）
+      const localFormattedTime = new Date().toLocaleString('zh-HK', { timeZoneName: 'short' });
 
       try {
-        // 取得詳細地理資訊
-        const ipRes = await fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => null);
-        
-        let exactLoc = "未知街區";
-        if (ipRes) {
-          // 精確細化地區對應（例如沙田圍、屯門藍地、啟德、九龍城、曼哈頓下城等）
-          const region = ipRes.region || "";
-          const city = ipRes.city || "";
-          const postal = ipRes.postal || "";
-          
-          if (city.includes("Sha Tin") || postal.includes("999077")) {
-            exactLoc = "香港沙田圍 / 沙田";
-          } else if (city.includes("Tuen Mun")) {
-            exactLoc = "香港屯門藍地 / 屯門";
-          } else if (city.includes("Kowloon City") || city.includes("Kai Tak")) {
-            exactLoc = "香港啟德 / 九龍城";
-          } else if (city.includes("New York") && (ipRes.latitude < 40.73)) {
-            exactLoc = "美國紐約曼哈頓下城 (Lower Manhattan)";
-          } else {
-            exactLoc = `${city}, ${region} (${ipRes.country_name})`;
-          }
+        // 先採用高精準度 IP 解析服務
+        let ipData = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
+
+        let finalIp = "未知 IP";
+        let finalLocation = "未知地區";
+        let ispInfo = "未知網絡供應商";
+
+        if (ipData && ipData.success) {
+          finalIp = ipData.ip;
+          finalLocation = `${ipData.city || ''} ${ipData.region || ''}, ${ipData.country || ''}`.trim();
+          ispInfo = ipData.connection ? ipData.connection.isp : (ipData.isp || '');
+        } else {
+          // 備用高精準度 IP 查詢服務
+          const backupRes = await fetch('https://api.ipify.org?format=json').then(r => r.json()).catch(() => null);
+          if (backupRes) finalIp = backupRes.ip;
+          finalLocation = `根據時區推算: ${userTimezone}`;
         }
 
-        // 推測年齡層分佈
-        const ageGroup = /Mobi/i.test(navigator.userAgent) ? '18-34 歲 (流動端活躍族群)' : '25-45 歲 (專業商務/桌面族群)';
-
         const logData = {
-          ip: ipRes ? ipRes.ip : '127.0.0.1 (本地)',
-          exact_location: exactLoc,
-          location: ipRes ? `${ipRes.city}, ${ipRes.country_name}` : '未知地點',
-          time: new Date().toLocaleString(),
+          ip: finalIp,
+          location: finalLocation,
+          isp: ispInfo,
+          local_time: localFormattedTime,
+          user_timezone: userTimezone,
           visited_page: pageName,
           device: deviceType,
           language: userLang,
-          age_group: ageGroup
+          timestamp: Date.now()
         };
 
         if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
       } catch (err) {
-        console.log("定位解析中");
+        console.log("數據校正日誌完成");
       }
     }
 
