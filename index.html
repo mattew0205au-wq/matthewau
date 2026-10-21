@@ -12,14 +12,15 @@
   <!-- 引入 Firebase JS SDK (實現真正的全球跨裝置連網與跨IP數據同步) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <!-- 引入 FontAwesome 圖標庫 (支援社群媒體 Logo) -->
+  <!-- 引入 FontAwesome 圖標庫 (支援社群媒體 Logo 與手機選單) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
     .top-banner { background-color: #a87954; color: #ffffff; }
     .nav-bar { background-color: #1a1a1a; }
-    .nav-link { color: #d1d5db; font-size: 0.95rem; padding-bottom: 4px; cursor: pointer; transition: color 0.2s; }
-    .nav-link.active { color: #a87954; border-bottom: 2px solid #a87954; }
+    .nav-link { color: #d1d5db; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
+    .nav-link.active { color: #a87954; border-bottom: 2px solid #a87954; font-weight: bold; }
     .marquee-section { background-color: #1a1a1a; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; color: #a87954; }
     .btn-buy { background-color: #c49a78; color: #ffffff; }
     .btn-buy:hover { background-color: #b08563; }
@@ -31,21 +32,21 @@
 <body class="antialiased">
 
   <!-- 1. 頂部公告條 -->
-  <div class="top-banner py-2 px-4 text-center text-sm font-medium tracking-wide flex items-center justify-center gap-2">
+  <div class="top-banner py-2 px-4 text-center text-xs md:text-sm font-medium tracking-wide flex items-center justify-center gap-2">
     <span>🌱</span> <span data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
-  <!-- 2. 主導覽列 -->
+  <!-- 2. 主導覽列 (徹底防破版與手機適應) -->
   <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
       
       <!-- Logo 區域 -->
       <a onclick="switchTab('home')" class="cursor-pointer flex items-center">
-        <img src="Logo.jpg" alt="Matthew Au Logo" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='logo.jpg';">
+        <img src="Logo.jpg" alt="Matthew Au Logo" class="h-10 md:h-12 w-auto object-contain" onerror="this.onerror=null; this.src='logo.jpg';">
       </a>
 
-      <!-- 導覽選單與語言切換 -->
-      <div class="flex items-center gap-6">
+      <!-- 電腦版導覽選單與語言切換 -->
+      <div class="hidden md:flex items-center gap-6">
         <nav class="flex items-center gap-6">
           <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active" data-i18n="nav_home">首頁</span>
           <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link" data-i18n="nav_words">鍵鋒的話</span>
@@ -53,23 +54,43 @@
           <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link" data-i18n="nav_shop">商城</span>
         </nav>
 
-        <select onchange="changeLanguage(this.value)" id="lang-select" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2 py-1 rounded focus:outline-none cursor-pointer">
+        <select onchange="changeLanguage(this.value)" id="lang-select-desktop" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2.5 py-1.5 rounded focus:outline-none cursor-pointer">
           <option value="zh-HK">繁體中文</option>
           <option value="en">English</option>
           <option value="zh-CN">简体中文</option>
         </select>
       </div>
 
+      <!-- 手機版選單控制區 -->
+      <div class="flex items-center gap-2 md:hidden">
+        <select onchange="changeLanguage(this.value)" id="lang-select-mobile" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2 py-1 rounded">
+          <option value="zh-HK">繁中</option>
+          <option value="en">EN</option>
+          <option value="zh-CN">简中</option>
+        </select>
+        <button onclick="toggleMobileMenu()" class="text-amber-500 text-xl p-2 rounded focus:outline-none">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- 手機版下拉選單 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-b border-gray-800 px-6 py-4 space-y-3">
+      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_home">首頁</div>
+      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_words">鍵鋒的話</div>
+      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_news">新聞公報</div>
+      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_shop">商城</div>
     </div>
   </header>
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
   <div id="page-home" class="tab-page">
-    <section class="relative h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
+    <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
         <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
-        <p class="text-2xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">Official Website</p>
+        <p class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">Official Website</p>
       </div>
     </section>
 
@@ -80,14 +101,15 @@
       </div>
     </div>
 
-    <section class="bg-stone-900 py-24 px-8 text-center border-b border-gray-800">
+    <!-- 邱吉爾名言 -->
+    <section class="bg-stone-900 py-20 px-6 text-center border-b border-gray-800">
       <div class="max-w-3xl mx-auto">
         <blockquote class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80">To improve is to change; to be perfect is to change often.</p>
         <p class="text-sm font-sans tracking-wide text-amber-600 font-bold" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
       </div>
     </section>
 
+    <!-- 關於我與興趣展示 -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -142,18 +164,18 @@
       </div>
     </section>
 
-    <!-- 拿破崙名言 -->
-    <section class="py-24 px-6 text-center bg-neutral-900 border-b border-gray-800">
+    <!-- 拿破崙名言 (法文原文) -->
+    <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">The man who has made up his mind to win will never say “impossible”.</h2>
+        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">« Impossible n'est pas français. »</h2>
         <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
-        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold" data-i18n="quote_napoleon_author">Napoléon Bonaparte 拿破崙</p>
+        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold">—— Napoléon Bonaparte 拿破崙</p>
       </div>
     </section>
 
-    <!-- 聯絡表單與社群媒體圖標 -->
+    <!-- 聯絡表單與社群媒體圖標區 (完整真實連結) -->
     <section class="max-w-3xl mx-auto px-6 py-20 text-center">
-      <h2 class="text-3xl font-bold text-amber-600/90 mb-2">聯繫我</h2>
+      <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
       <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
       <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-12">
         <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
@@ -162,36 +184,39 @@
         <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition" data-i18n="btn_send">傳送</button>
       </form>
 
-      <!-- 社交媒體圖標區塊 (對應您提供的設計) -->
-      <div class="pt-6 border-t border-gray-800 flex justify-center items-center gap-6">
-        <!-- Facebook -->
-        <a href="https://facebook.com" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <!-- Instagram (點擊可直接跳轉至您的 IG) -->
-        <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <!-- LinkedIn -->
-        <a href="https://linkedin.com" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-          <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <!-- X (Twitter) -->
-        <a href="https://x.com" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-          <i class="fa-brands fa-x-twitter"></i>
-        </a>
+      <!-- 社群連結按鈕 (已帶入您提供的專屬網址) -->
+      <div class="pt-8 border-t border-gray-800">
+        <p class="text-sm text-gray-400 mb-6 font-medium" data-i18n="social_hint">或使用社交媒體聯絡我</p>
+        <div class="flex justify-center items-center gap-6">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/kinfung.au.3" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <!-- X (Twitter) -->
+          <a href="https://www.x.com/Matthew_0205au" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <!-- Email -->
+          <a href="mailto:mattew0205au@gmail.com" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
       </div>
     </section>
   </div>
 
-  <!-- ==================== 2. 鍵鋒的話 TAB (內文加長版) ==================== -->
+  <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
   <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_words">鍵鋒的話</h2>
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
-      <p class="text-lg">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
-      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p>無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
-      <p>感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
+      <p class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
+      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+      <p data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
+      <p data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
     </div>
   </div>
 
@@ -202,7 +227,7 @@
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
         <div>
           <span class="text-amber-500 text-sm font-mono block mb-2">&lt;13/5/2026&gt;</span>
-          <p class="text-white text-lg">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
+          <p class="text-white text-lg" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
         </div>
         <button onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
       </div>
@@ -210,8 +235,8 @@
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-2">
         <div>
           <span class="text-red-400 text-sm font-mono block mb-2">&lt;27/3/2026&gt;</span>
-          <p class="text-white text-lg mb-4">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
-          <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
+          <p class="text-white text-lg mb-4" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
+          <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
         </div>
         <button onclick="deleteNews('news-item-2')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
       </div>
@@ -227,9 +252,9 @@
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 class="text-3xl font-bold text-amber-600/90 mb-4">Matthew Au 大師級一對一足球訓練</h2>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
-          <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3">💳 立即購買</button>
+          <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
       </div>
     </div>
@@ -301,20 +326,75 @@
     }
     const db = (typeof firebase !== 'undefined') ? firebase.database() : null;
 
+    // 完整的多語言字典 (全站內文覆蓋)
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
         nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "新聞公報", nav_shop: "商城",
+        marquee_text: "歡迎 welcome",
+        quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
+        quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
+        about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        political_view_title: "政治理念", political_view_desc: "促進民主、自由社會發展，拒絕專制政權。",
+        reviews_title: "評論", anon_user: "匿",
+        review1_text: '"佢樣樣都好呀"', review1_author: "匿名 - 11/2/2023",
+        review2_text: '"佢係我見過踢波最好嘅人！"', review2_author: "匿名 - 7/6/2023",
+        quote_napoleon_zh: "有著必勝信念的人，從不說「不可能」。",
+        contact_title: "與我聯絡", contact_sub: "歡迎來信！", social_hint: "或使用社交媒體聯絡我",
+        ph_name: "名稱", ph_email: "電子郵件*", ph_msg: "訊息", btn_send: "傳送",
+        words_p1: "歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
+        words_p2: "無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。",
+        words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
+        news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
+        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
+        news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
         privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
-        top_banner: "Welcome to Matthew official website",
+        top_banner: "Welcome to Matthew Official Website",
         nav_home: "Home", nav_words: "Words", nav_news: "News", nav_shop: "Shop",
+        marquee_text: "Welcome 歡迎",
+        quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
+        quote_churchill_author: "—— Winston Churchill",
+        about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football", hobby_roblox: "Playing Roblox",
+        political_view_title: "Political Views", political_view_desc: "Promote democracy, free society, and resist authoritarian regimes.",
+        reviews_title: "Reviews", anon_user: "A",
+        review1_text: '"He is great at everything!"', review1_author: "Anonymous - 11/2/2023",
+        review2_text: '"Best football player I have ever seen!"', review2_author: "Anonymous - 7/6/2023",
+        quote_napoleon_zh: "Victory belongs to the most persevering.",
+        contact_title: "Contact Me", contact_sub: "Feel free to get in touch!", social_hint: "Or connect via social media",
+        ph_name: "Name", ph_email: "Email*", ph_msg: "Message", btn_send: "Send",
+        words_p1: "Welcome to my official website! As someone who upholds independent thinking and advocates for freedom and democracy, I hope to share my vision, reflections, and insights here.",
+        words_p2: "Whether playing football on the pitch or exploring endless creativity in digital gaming worlds like Roblox, I approach everything with passion and persistence. Life is a marathon where continuous adaptation and strong conviction are essential.",
+        words_p3: "Thank you for your support. I will continue to post updates here. Let's move forward together!",
+        news_1: "Warmly welcome the President of the United States on visiting China for cooperation.",
+        news_2_body: "On the 27th around 2 AM, my official social media (@mattew0205_au) was hacked. The hacker posts financial scam images every 2 hours. Legal action or police reports may follow.",
+        news_2_sub: "Finally, I strongly condemn account theft and financial fraud, demanding an immediate stop and compensation.",
+        shop_title: "Official Shop", prod1_title: "Matthew Au Master 1-on-1 Football Coaching", btn_buy_now: "Buy Now",
         privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use"
       },
       'zh-CN': {
         top_banner: "欢迎来到Matthew official website",
         nav_home: "首页", nav_words: "键锋的话", nav_news: "新闻公报", nav_shop: "商城",
+        marquee_text: "欢迎 welcome",
+        quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
+        quote_churchill_author: "—— 温斯顿·丘吉尔 Winston Churchill",
+        about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        political_view_title: "政治理念", political_view_desc: "促进民主、自由社会发展，拒绝专制政权。",
+        reviews_title: "评论", anon_user: "匿",
+        review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
+        review2_text: '"他是我见过踢球最好的人！"', review2_author: "匿名 - 7/6/2023",
+        quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
+        contact_title: "与我联络", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联络我",
+        ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
+        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
+        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
+        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
+        news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
+        news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。",
+        news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大师级一对一足球训练", btn_buy_now: "立即购买",
         privacy_policy: "商城隐私权政策", terms_of_use: "网站使用条款及免责声明"
       }
     };
@@ -325,6 +405,14 @@
         const key = el.getAttribute('data-i18n');
         if (langMap[key]) el.innerText = langMap[key];
       });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (langMap[key]) el.placeholder = langMap[key];
+      });
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
     function switchTab(tab) {
@@ -436,21 +524,48 @@
       document.getElementById('legal-modal').classList.add('hidden');
     }
 
+    // 完全版網站使用條款 (包含您提供的所有條款細則)
     function showTermsOfService() {
       document.getElementById('modal-title').innerText = '網站使用條款及免責聲明';
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
         <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
         
-        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明與管轄法律</h4>
+        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明、爭議解決與管轄法律</h4>
         <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
+        <p><strong>違約責任與賠償：</strong> 若您違反本條款之任何規定，致使本站或其關聯方遭受任何損失、第三方追討或權利主張，您同意負擔完全之賠償責任（包括但不限於訴訟費用及合理律師費）。</p>
         <p><strong>管轄法律與法院管轄權：</strong><br>
         1. 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。<br>
         2. 您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。您並明確同意且接受該等法院具備無可爭議之屬人管轄權（Personal Jurisdiction）與屬地管轄權（Venue）。</p>
+        <p><strong>歐盟用戶特別條款（ODR 平台與消費爭議）：</strong><br>
+        若您為居住於歐盟（EU）或歐洲經濟區（EEA）之消費者，上述管轄法律與法院設定不影響您依據所在國強制性法律所享有之消費者權利。歐盟委員會提供線上爭議解決平台（Online Dispute Resolution / ODR），您可以透過 ec.europa.eu/consumers/odr 存取該平台以尋求非訴訟性爭議解決方案。</p>
+        <p><strong>強制仲裁條款之無效性：</strong><br>
+        若您所在國家或地區之法律明文禁止強制仲裁條款、集體訴訟棄權條款或限制消費者向當地法院提起訴訟之權利，則本條款中有關強制仲裁或專屬管轄之限制於該法律適用範圍內即刻失效，並不影響本條款其他部分之有效性與可執行性。</p>
+        <p><strong>意見、反饋與諮詢：</strong><br>
+        若您對本使用條款有任何疑問、建議、申訴或法律諮詢需求，請透過本站指定的電子郵件 (<a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>) 或聯絡表單與本站聯繫。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">二、 智慧財產權與授權使用</h4>
+        <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
+        <p><strong>禁止行為：</strong> 未經事前書面授權，您不得複製、重製、修改、散布、轉載本站任何內容，亦不得將本站內容用於任何商業目的。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">三、 使用者規範與行為限制</h4>
+        <p>使用本站時，您承諾不得從事以下行為：</p>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>上傳、張貼或傳播任何違法、侵權、誹謗、猥褻或有害之內容。</li>
+          <li>使用任何自動化工具（如爬蟲程式）未經許可擷取本站資料。</li>
+          <li>試圖未經授權存取本站系統，或植入木馬、病毒等惡意程式。</li>
+        </ul>
+
+        <h4 class="font-bold text-white text-base pt-2">四、 外部第三方網站連結</h4>
+        <p>本站可能包含前往第三方網站之超連結。本站對任何第三方網站之內容、隱私政策或商業行為無控制權，亦不承擔任何責任。存取外部連結之風險由您自行承擔。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">五、 條款修訂與更新</h4>
+        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。您於條款變更後繼續使用本站，即視為您已接受該等變更。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
+    // 完全版商城隱私權政策
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = '商城隱私權政策';
       document.getElementById('modal-body').innerHTML = `
@@ -503,9 +618,6 @@
         });
       }
     };
-  </script>
-</body>
-</html>
   </script>
 </body>
 </html>
