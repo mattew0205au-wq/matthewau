@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matthew Au| 官方網站</title>
+  <title>Matthew Au 歐鍵鋒 | 官方網站 Official Website</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -11,13 +11,8 @@
       color: #ffffff;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
-    .top-banner {
-      background-color: #a87954;
-      color: #ffffff;
-    }
-    .nav-bar {
-      background-color: #1a1a1a;
-    }
+    .top-banner { background-color: #a87954; color: #ffffff; }
+    .nav-bar { background-color: #1a1a1a; }
     .nav-link {
       color: #d1d5db;
       font-size: 0.95rem;
@@ -35,16 +30,9 @@
       border-bottom: 1px solid #2a2a2a;
       color: #a87954;
     }
-    .btn-buy {
-      background-color: #c49a78;
-      color: #ffffff;
-    }
-    .btn-buy:hover {
-      background-color: #b08563;
-    }
-    .modal-bg {
-      background-color: rgba(0, 0, 0, 0.85);
-    }
+    .btn-buy { background-color: #c49a78; color: #ffffff; }
+    .btn-buy:hover { background-color: #b08563; }
+    .modal-bg { background-color: rgba(0, 0, 0, 0.85); }
     @keyframes marquee {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -59,148 +47,147 @@
 
   <!-- 1. 頂部公告條 -->
   <div class="top-banner py-2 px-4 text-center text-sm font-medium tracking-wide flex items-center justify-center gap-2">
-    <span>🌱</span> 歡迎來到Matthew official website <span>🌱</span>
+    <span>🌱</span> <span data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
   <!-- 2. 主導覽列 -->
   <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
-      <!-- Logo 區域（套用您提供的 Base64 圖片） -->
+      <!-- Logo 區域 -->
       <a onclick="switchTab('home')" class="cursor-pointer flex items-center">
-        <img src="data:image/webp;base64,UklGRv4OAABXRUJQVlA4WAoAAAAIAAAAlQAAlQAAVlA4IDYOAADQPQCdASqWAJYAPhkMhUGhBIbtNQQAYSzt3C6pew33LSxe+eYxXf7399tsuKn1wfk/Of/jvYB+bPYA/ST/O/lV2gPMB/L/6J/yf7t7Qn7O+4D6ZvkA/Tn1X/7x7BH9O/znsMfrp6Yf7dfBL+1n7XfAV+xXUAcJR/Ru0L+d/ir5t99jup60fuH/l+d/yr/oPyA9x/4j9RPqv9k/XT+xf+H/S/DP+I8AfUB6gX4p/J/6z+Qn7lf9f1Gu1Brv/mfyA+AL1Z+W/3f8e/7n/1v9P7MP7t6AfUb/F/ih9AH8O/ln9v/rn7Ef3Pnw/GfYA/kX9B/xP93/ar/b//P7Wv4z/df4f/C/9j/Ae1z80/tv+o/wX7uf5z7Bv5H/Ov8f/bf8t/xf8H///+Z9z3sH/aj2UP2J//48owX1JBo2oI3LRkMjQq7DIahJwlCljiv3YL1/W5vjvkHlToEokaLSfzPbxdY/hjbmNJEAcGWTgMcKuedgvp8I8qLfmRAqlkGxAQT2XyN8lJbxc6/gr8cYolvxGykYclh/nU5ace0TO0CvelQWxsODzo5TNVwcWB5N0b4KieUDjtL4TM4gZx18KuVWD0G5a6ueCMIorrAnmzuIkbEsTEaoZ5zRFHqe3mQXx1SonnVnV/n/A4l5sanpH0RRotOEs6L1gvqQIAD+//MmwPL5hdisKfKCSbSCka37SMQTfsLhb+Yz5NA3zr9+UwWPt+DgrPehvwAwPP+JCskg2/ibu59twZFnIUpqtDmgdrdZzgPDzPOWwz6t+6fOUc1wvBw82iiGoz1CATp4WubnWtgP8Mq+MVFXVXjESoW7MqrQoZKmPG135Iirf3zR6J3tv2++svSt/zvd94BqHufmDkyPkm0bDNVq0/VoKLSMNM+zA7BoPDEJL0T03LzS0ZlBvhZPS3/bCVncU6vFzXm4iQcHd1AR8XLM6V+o2c68weTsjpZ+OyGaLh8xYNUpY+yez5qxeIoI6Nf4bZxvqeQj12FdixhLPArs84rfuZIJAZTiLcbykbxEelP7yKjxC2zkT6c87FdQ+L9GRPLMZ5dzLfrzcYf8BCfYa6itUY9PLtTGtFks1cOpnEKAihOA8RfWHwPN1DP+TbTSm/+cLZ9JhFGPV7ghw/2Mof+/mJgebTezg7oKCDY0V6L07OfiBTHD4n6LRSd3cnDc+dmh6bEqDsDSDS4nFaoxem7bA9Rq6GraEVBRw+mDsnn5VfJfXUEIObdfE7fkrws7GmeCKk1EajEjebNWUk9uwQgzk7YZk2oafhs6qx4rPD6nWCYHV4JFklvYrauoJszKoHHwzKcu4fAOZnoE1jyFYuchPMdgSh04iJzUj/4++woX2wr9umCfCkJmQyaDZKq5shPpQrZrOdEROPDvxijZ8tDhXNrrU1xRhasIVPWz6BwSKsOHN7R8Q9DiA6II8wAO9oRhaVcM2x0rOYOszeDm/TD4L4c0+vyF2TpgHeGDe75GYz9GO69XKcj/0xWcovrNFF2PK3UHoTkyD6JnhmWzFc3kqRCPRkO/LfdajrpcOlzIVq//19BEqGzmWORtBYIrFSNz4HGEqO8UG6e2TjOjj7cMLN9fEHGik4JqCUYq5I8xs5/DrZJMLz5VT5e0fGhS+4b/xtDFpXSANjZJCEHmRyAaQubrC0Yq6deZhWvOrv7nDycqH+fnNvgmysNkjLC6bBXNaY2MO2OSVxKj0lxNzvykfVZqOxeu4F5hAhr70Bv9BZnG+mib28bcnHToP419p6Xew3CgJQ0qnnNNtMDj07IziPjhVE4/3f88N4EoRuHBW7CHp+Ai+LJ/X5PjHrhlEtUH9vYGrslhj8Zq90YENJvdiztomDtYYHpf20RPIgS0imw4Y6WwJYcu5SiyjM08aaJoNJv2VYVBIqBqg8hRVS4GzhAYi2BnomAD6JfEAQ/Z/H8IoJ1WRiwlLZ1ga0Bp3rDLk3xVfjOdaJmTVh1nuw9s5c0ZuEP4trw0YOAxhYrP7vHGAieHim8j3idmy4W4QtqE5SL9APY8tBeGFqvkUkRkaZmH/Uu4qUkDPqOGXHEDARqwk/nsix7BMtI/PW9jI4Ic24zGOlrH6VUI6ein83VTg2JOZYTjXTy2TyyzHpTSf1WRaJgeK8ic0xcQBIdf3cBBKHHVRLQPxHURx0jr/UYyOMGHASzZLfc6Zh7Mfj69UifP9RXLlD22MUbxFPA2RtaROqaMQ+BOaUU7SSs9fLqlzyEBB6b4yz91VrlHtI0pylOzX8JVyx447BFF3+NrU1SeyVJPSgqRIcr4LlLbvGlexwWiCIGfSfqL0IEjeDesNw0bC2f+Qn4vX1um856woFlpBjq8N0i20v+Lfhn3zeQDXAmO1dOBpEXch9OL2OHFDYFPmVlTmeZ2q+HAICp7z72UmNWOXy2Yq2OI6VSu4UExX+zEWx2bzYYUz14u1SUx2PlNfbPy0qf7V5O16SLZLnG4x1O2Yns4nelS6ZniMsntB2RQZirePp3xy/kgZTCFI/GWQKGex1AYFe0QSKEvXpEiw7/+rItmfS60+Jm45YLcAsXwQSh67gMSfWy64kNW+YfL/cryOclcYKTN8+neVlkCh9dEFJWLC7bjO96XBR4r87EqAM2o61erHqtB+1oLX6+xqvyQTyqRnbt8x6WgekiuM54TDJmv4Oza5SGa3UYFHehBdBIqlDwlo/bSDOcF+h7DCfqGULKwcB1l3un34SXPcP/Qk7UYwuS6HCB3ZSz7fQyyIP1kXq9sQynPbnQi3egvwdllA6aFZxxPNpSBHiHKoOkhR4T2tvcU18Caa5QOS5kmo1PAMY/mOxZXbSd8pD2v4K23QUp41BZ16W4Ru13YA71I4M4CmiANs2TvWeGR0OHmVNl/GA/pvWXC6TZsYMfP9aUW2bda3dkszJOL9bWx6WmclGDR8V1j+Bbe3MUokBIaTQDw/xLXbVTLxYKluPhni31AJTROPz38V65/Qd7VUY9B1lnJXRxB+YUXtxzpbQE7Lz4L//9YhRgiBgTq3chdRnMmv0xtbp7GiDPVokp+FYJaaSiKt1owtsMYNUUp6MJGIia4vNpIBi02JMhTfyjDoZ1PwvTIgsaZRbw1g14kTfHhAH4tRsCy0iCInwENcrz1gIHKecRbrMUi3EqipCaCy9iahZS5FktLIw4tizr3JOYztkGo8cMWFhE/TteZk5/nhNWf9uR2vl+jX6SnqtPKk2kgAoQa+B1Nm4yDCiiUbY4hcJqy6M+tdWN9kimMtzk2pHoV4bvgJiQRIIQpxKxFX52l0WmK6UlQ+uX5XH6N+Y7Hv6tfmGnkf4gg/5Z/v41rZV63qglIs5s9w7JJIgEUB97+4MMiSytd9om2GOV9qnxKbhHn87oW/ITqYbsKR/6YIr7wfvd4s3KfSClaA+YbyoYR3vIuKuud/y5Sv7YgT5onpSKndG0H4V+JMlpeH7Ges+7HoYzGJIXeQdbui4Ygr3t0J89EkrKfkox2/5AEkgIJL9Mm64VyR4DzfGrA1x9jZXbVd/rXhFcn18lX6dVtxNHC0lI9PYRm59+W7HBwQ/JZBuUdmhJtd+dQV+aNqh9E2096me3lXxsp51L+WrYRkjrpzWRJBwEp6NqadzRiDhN0NCVHD59kkuweP9pw4j4/giZ5XKIk4WWnATnSXG1qai4wND3xlq6/0JtmrOaXh1ZYmCTJgeD+Jf7E8Db4PpM8K4/pBG1IgP8MKK5aMFMS8tH9TqoTjuVslKFj6OBeWji8V2cd2xB2U/WYoywXLMIvAj3Pl3IcaVTWle0h71wa94E9Ut+4mYYP/4WbCfQX1ImM02vnX92y5L3UN6rKUTNzJ4LDPdAzmTRup1AdEexjEdPqly/uRS8LtTNi2gTwam3M/fVVqRbwmUCWEcLqNXfHJR6VIFjhnQslC51AFYKdCvXG3xf/uSX/E4e5yg0U3v9XJTnd7O6I1QtOrK/FA9zjGxX//WBFhRUEyjuAQ5w9d2gWqrIPKV5JYrY3ar66nRXZ1MosPlX8TrZc8Hw8350aOdx7dUFh4VOQQOKlML2Cm4QQORSftmAKz8Un2bzqBO0+spG25Qylxv/RHVBeLXVEIpzAWEZfB4ERnhXX+AJHhFyeCxihRgegE7G5+Wbl9XeoTClgPx7SoaMoJYlqUxnPZp4VwOHvBI8SRptRcLR2jTHj+OMQ5m63X16puMKdmMa0aQoL8G4dX92LAOL3DrPfgO90kIEn/jKQwBHWrCvFRlFNhZ833xPK3r8j9w32xbqyACfB05kBbc1BvC9XclBPlqfFQCXWgYGN8dn60E+PLRMtTct9Mjutt3/9/hkQoLFtHkOzBcWaLjqy49+drNoDMwftsO9EGmHe4Cm8chwwFtcJv6eQW+/zIx39/fjBlctih1g3lDtjn0/Q9MD/MqM2avT9x27a3OT0w4omkBglCkNr8ERuIN2gkh3qmv4bvIZ3oEtoOOm0CR1MSrjEO+8KM1hnb6eAalgTEAOAfQyRp7F9/M7XKTlse7VKBw9lXk5eWaNHRJbva3qIOJXen8K3jmLnCEq4PO80/HrJxIFOLe7qFdP4d6vFBgj9Fc0OrBqvX/3dncY+B6iPUOalXcRRj5abGO4MRL8TaFgzWaWGoeYScmiHBYFNID0Ad6/LE/WJdanhbf+QxtnhbJNrl7xaOGJY4FRLEndCI8DwwDc2KW859FdU32ejT/iehGX1ow54D0Or19uLCdwjxGNUi2Lyo5rzQN8XdMk7b6qdpkK2K6nqeBefyOwSj6xmKARkiG+mfuZY+0Oo5FitDm/1iRZS/HveguPaO14OtSYGlk+/HZH/Q+fJ/IXhQj0lAqGQLuKHBxTeJvxjPgAAAEVYSUaiAAAARXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAGM4AAAD6AAAYzgAAAPoAAWQAAAHAAAABDAyMTCgAAAHAAAABDAxMDCgAQADAAAAAf//AACgAgAEAAAAAQAAAJagAwAEAAAAAQAAAJYAAAAA" alt="Matthew Au Logo" class="h-12 w-auto object-contain">
+        <img src="data:image/webp;base64,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" alt="Matthew Au Logo" class="h-12 w-auto object-contain">
       </a>
 
-      <!-- 導覽選單 -->
-      <nav class="flex items-center gap-8">
-        <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active">首頁</span>
-        <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link">鍵鋒的話</span>
-        <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link">新聞公報</span>
-        <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link">商城</span>
-      </nav>
+      <!-- 導覽選單與語言切換 -->
+      <div class="flex items-center gap-6">
+        <nav class="flex items-center gap-6">
+          <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active" data-i18n="nav_home">首頁</span>
+          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link" data-i18n="nav_words">鍵鋒的話</span>
+          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link" data-i18n="nav_news">新聞公報</span>
+          <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link" data-i18n="nav_shop">商城</span>
+        </nav>
+
+        <!-- 多語言下拉選單 -->
+        <select onchange="changeLanguage(this.value)" id="lang-select" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2 py-1 rounded focus:outline-none">
+          <option value="zh-HK">繁體中文</option>
+          <option value="en">English</option>
+          <option value="zh-CN">简体中文</option>
+        </select>
+      </div>
+
     </div>
   </header>
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
   <div id="page-home" class="tab-page">
     
-    <!-- Hero 主圖區塊 -->
     <section class="relative h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
         <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
-        <p class="text-3xl md:text-4xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">歐鍵鋒</p>
+        <p class="text-3xl md:text-4xl font-serif text-amber-200/90 tracking-widest drop-shadow-md" data-i18n="hero_sub">歐鍵鋒</p>
       </div>
     </section>
 
-    <!-- 跑馬燈 -->
     <div class="marquee-section py-4 overflow-hidden">
       <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
-        <span class="mx-6">歡迎 welcome</span><span class="mx-6">歡迎 welcome</span>
-        <span class="mx-6">歡迎 welcome</span><span class="mx-6">歡迎 welcome</span>
-        <span class="mx-6">歡迎 welcome</span><span class="mx-6">歡迎 welcome</span>
+        <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
+        <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
       </div>
     </div>
 
-    <!-- 邱吉爾名言區塊 -->
     <section class="bg-stone-900 py-24 px-8 text-center border-b border-gray-800">
       <div class="max-w-3xl mx-auto">
-        <blockquote class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+        <blockquote class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
         <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80">To improve is to change; to be perfect is to change often.</p>
-        <p class="text-sm font-sans tracking-wide text-amber-600 font-bold">—— 溫斯頓·邱吉爾 Winston Churchill</p>
+        <p class="text-sm font-sans tracking-wide text-amber-600 font-bold" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
       </div>
     </section>
 
-    <!-- 興趣與政治理念區塊 (去政治化圖片) -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
       
-      <!-- 足球 -->
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="text-2xl font-bold mb-4">關於我</h2>
-          <h3 class="text-xl text-gray-300 mb-2">我的興趣</h3>
-          <p class="text-gray-400">足球</p>
+          <h2 class="text-2xl font-bold mb-4" data-i18n="about_me">關於我</h2>
+          <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
+          <p class="text-gray-400" data-i18n="hobby_football">足球</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="足球" class="w-full h-72 object-cover">
         </div>
       </div>
 
-      <!-- Roblox -->
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h3 class="text-xl text-gray-300 mb-2">我的興趣</h3>
-          <p class="text-gray-400">玩Roblox</p>
+          <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
+          <p class="text-gray-400" data-i18n="hobby_roblox">玩Roblox</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Roblox" class="w-full h-72 object-cover">
         </div>
       </div>
 
-      <!-- 政治理念 -->
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80" alt="民主自由" class="w-full h-72 object-cover">
         </div>
         <div>
-          <h2 class="text-2xl font-bold mb-4">政治理念</h2>
-          <p class="text-gray-300">促進民主、自由社會發展，拒絕專制政權。</p>
+          <h2 class="text-2xl font-bold mb-4" data-i18n="political_view_title">政治理念</h2>
+          <p class="text-gray-300" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
         </div>
       </div>
 
     </section>
 
-    <!-- 評論區 -->
     <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-white mb-12">評論</h2>
+        <h2 class="text-3xl font-bold text-white mb-12" data-i18n="reviews_title">評論</h2>
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4">匿</div>
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p class="text-lg font-medium mb-6">"佢樣樣都好呀"</p>
-            <p class="text-xs text-gray-500">匿名 - 11/2/2023</p>
+            <p class="text-lg font-medium mb-6" data-i18n="review1_text">"佢樣樣都好呀"</p>
+            <p class="text-xs text-gray-500" data-i18n="review1_author">匿名 - 11/2/2023</p>
           </div>
           <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4">匿</div>
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p class="text-lg font-medium mb-6">"佢係我見過踢波最好嘅人！"</p>
-            <p class="text-xs text-gray-500">匿名 - 7/6/2023</p>
+            <p class="text-lg font-medium mb-6" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
+            <p class="text-xs text-gray-500" data-i18n="review2_author">匿名 - 7/6/2023</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 拿破崙名言 -->
     <section class="py-24 px-6 text-center bg-neutral-900 border-b border-gray-800">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">Impossible n'est pas français.</h2>
-        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80">有著必勝信念的人，從不說「不可能」。</p>
-        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold">Napoléon Bonaparte 拿破崙</p>
+        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">The man who has made up his mind to win will never say “impossible”.</h2>
+        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
+        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold" data-i18n="quote_napoleon_author">Napoléon Bonaparte 拿破崙</p>
       </div>
     </section>
 
-    <!-- 聯絡與預約 -->
     <section class="max-w-3xl mx-auto px-6 py-20 text-center">
-      <h2 class="text-3xl font-bold text-amber-600/90 mb-2">與我聯絡</h2>
-      <p class="text-gray-300 mb-8">歡迎來信！</p>
+      <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
+      <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
       <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-16">
-        <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none"></textarea>
-        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition">傳送</button>
+        <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
+        <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_email">
+        <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_msg"></textarea>
+        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition" data-i18n="btn_send">傳送</button>
       </form>
 
       <div class="border-t border-gray-800 pt-12 text-sm text-gray-300 space-y-2">
-        <p class="font-bold mb-4">可預約時間</p>
+        <p class="font-bold mb-4" data-i18n="schedule_title">可預約時間</p>
         <div class="max-w-md mx-auto space-y-2 text-left">
-          <div class="flex justify-between border-b border-gray-800 py-1"><span>週一</span><span class="text-gray-500">關閉中</span></div>
-          <div class="flex justify-between border-b border-gray-800 py-1"><span>週二</span><span class="text-gray-500">關閉中</span></div>
-          <div class="flex justify-between border-b border-gray-800 py-1"><span>週三</span><span class="text-gray-500">關閉中</span></div>
-          <div class="flex justify-between border-b border-gray-800 py-1"><span>週四</span><span class="text-gray-500">關閉中</span></div>
-          <div class="flex justify-between border-b border-gray-800 py-1"><span>週五</span><span class="text-gray-400">請先預約</span></div>
-          <div class="flex justify-between border-b border-gray-800 py-1"><span class="text-amber-500">週六</span><span class="text-amber-500">下午04:00 – 下午08:00</span></div>
-          <div class="flex justify-between border-b border-gray-800 py-1"><span>週日</span><span class="text-gray-400">請先預約</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span data-i18n="mon">週一</span><span class="text-gray-500" data-i18n="closed">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span data-i18n="tue">週二</span><span class="text-gray-500" data-i18n="closed">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span data-i18n="wed">週三</span><span class="text-gray-500" data-i18n="closed">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span data-i18n="thu">週四</span><span class="text-gray-500" data-i18n="closed">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span data-i18n="fri">週五</span><span class="text-gray-400" data-i18n="by_app">請先預約</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span class="text-amber-500" data-i18n="sat">週六</span><span class="text-amber-500" data-i18n="sat_time">下午04:00 – 下午08:00</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span data-i18n="sun">週日</span><span class="text-gray-400" data-i18n="by_app">請先預約</span></div>
         </div>
       </div>
     </section>
@@ -208,67 +195,65 @@
 
   <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
   <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500">鍵鋒的話</h2>
+    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_words">鍵鋒的話</h2>
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
-      <p class="text-lg">歡迎來到我的官方網站！作為一個重視獨立思考與社會自由的人，我希望能透過此平台與大家分享我的理念與日常心得。</p>
-      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p>無論是在足球場上的奔跑，還是在遊戲世界裡的探索，我都抱持著堅持與熱情。感謝大家的關心與支持！</p>
+      <p class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個重視獨立思考與社會自由的人，我希望能透過此平台與大家分享我的理念與日常心得。</p>
+      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+      <p data-i18n="words_p2">無論是在足球場上的奔跑，還是在遊戲世界裡的探索，我都抱持著堅持與熱情。感謝大家的關心與支持！</p>
     </div>
   </div>
 
   <!-- ==================== 3. 新聞公報 TAB ==================== -->
   <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500">新聞公報</h2>
-    <div class="space-y-8">
+    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">新聞公報</h2>
+    <div id="news-container" class="space-y-8">
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
         <span class="text-amber-500 text-sm font-mono block mb-2">&lt;13/5/2026&gt;</span>
-        <p class="text-white text-lg">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
+        <p class="text-white text-lg" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
       </div>
 
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
         <span class="text-red-400 text-sm font-mono block mb-2">&lt;27/3/2026&gt;</span>
-        <p class="text-white text-lg mb-4">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。本人亦正考慮使用全新帳號，詳情將於稍後公佈。</p>
-        <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
+        <p class="text-white text-lg mb-4" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。本人亦正考慮使用全新帳號，詳情將於稍後公佈。</p>
+        <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
       </div>
     </div>
   </div>
 
   <!-- ==================== 4. 商城 TAB ==================== -->
   <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold mb-12 text-amber-500">官方商城</h2>
-    <div class="space-y-20">
+    <h2 class="text-3xl font-bold mb-12 text-amber-500" data-i18n="shop_title">官方商城</h2>
+    <div id="shop-container" class="space-y-20">
       
-      <!-- 商品 1 -->
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 class="text-3xl font-bold text-amber-600/90 mb-4">歐鍵鋒大師級一對一足球訓練</h2>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">歐鍵鋒大師級一對一足球訓練</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
           <div class="mb-6">
             <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow flex items-center justify-center gap-2 mb-3">
-              <span>💳</span> 立即購買
+              <span>💳</span> <span data-i18n="btn_buy_now">立即購買</span>
             </button>
           </div>
           <p class="text-gray-400 text-sm leading-relaxed">
-            由歐鍵鋒主理，課程時間為90分鐘一節。<br>
-            <span class="text-amber-500/80">此為玩笑切勿當真</span>
+            <span data-i18n="prod1_desc">由歐鍵鋒主理，課程時間為90分鐘一節。</span><br>
+            <span class="text-amber-500/80" data-i18n="joke_disclaimer">此為玩笑切勿當真</span>
           </p>
         </div>
       </div>
 
-      <!-- 商品 2 -->
       <div class="grid md:grid-cols-2 gap-12 items-center border-t border-gray-800 pt-16">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=800&q=80" alt="心靈支持" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 class="text-3xl font-bold text-amber-600/90 mb-4">得到我心靈上的支持</h2>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod2_title">得到我心靈上的支持</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$100.00</p>
           <div>
             <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow flex items-center justify-center gap-2 mb-3">
-              <span>💳</span> 立即購買
+              <span>💳</span> <span data-i18n="btn_buy_now">立即購買</span>
             </button>
           </div>
         </div>
@@ -291,17 +276,160 @@
     </div>
   </div>
 
+  <!-- 管理員入口 Modal 彈窗 -->
+  <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-2xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center p-6 border-b border-gray-800">
+        <h3 class="text-xl font-bold text-amber-500">⚙️ 管理員後台 (Admin Panel)</h3>
+        <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
+      </div>
+      
+      <!-- 登入區域 -->
+      <div id="admin-login-sec" class="p-8 space-y-4">
+        <p class="text-gray-300 text-sm">請輸入管理員密碼（預設密碼：1234）：</p>
+        <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
+        <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">登入管理</button>
+      </div>
+
+      <!-- 後台操作區域 -->
+      <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
+        
+        <!-- 新增新聞 -->
+        <div class="border-b border-gray-800 pb-6 space-y-3">
+          <h4 class="font-bold text-white text-base text-amber-500">📢 發布新新聞公報</h4>
+          <input type="text" id="new-news-date" placeholder="日期 (例如：20/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
+          <textarea id="new-news-content" placeholder="新聞內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded"></textarea>
+          <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold">發布新聞</button>
+        </div>
+
+        <!-- 查看聯絡訊息 -->
+        <div class="border-b border-gray-800 pb-6 space-y-3">
+          <h4 class="font-bold text-white text-base text-amber-500">📬 收到的聯絡留言表單</h4>
+          <div id="messages-list" class="bg-gray-800 p-4 rounded text-xs space-y-2 max-h-40 overflow-y-auto">
+            <p class="text-gray-500">目前暫無留言記錄。</p>
+          </div>
+        </div>
+
+        <!-- 修改密碼 -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理密碼</h4>
+          <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded">
+          <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold">更新密碼</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
   <!-- 頁尾 -->
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3">
     <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer">商城隱私權政策</a>
-      <a onclick="showTermsOfService()" class="hover:underline cursor-pointer">網站使用條款</a>
+      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">商城隱私權政策</a>
+      <a onclick="showTermsOfService()" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款</a>
+      <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
     <p class="text-gray-600">By Matthew Au</p>
   </footer>
 
   <script>
+    // 語言翻譯資料庫
+    const i18nData = {
+      'zh-HK': {
+        top_banner: "歡迎來到Matthew official website",
+        nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "新聞公報", nav_shop: "商城",
+        hero_sub: "歐鍵鋒", marquee_text: "歡迎 welcome",
+        quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
+        quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
+        about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        political_view_title: "政治理念", political_view_desc: "促進民主、自由社會發展，拒絕專制政權。",
+        reviews_title: "評論", anon_user: "匿",
+        review1_text: '"佢樣樣都好呀"', review1_author: "匿名 - 11/2/2023",
+        review2_text: '"佢係我見過踢波最好嘅人！"', review2_author: "匿名 - 7/6/2023",
+        quote_napoleon_zh: "有著必勝信念的人，從不說「不可能」。", quote_napoleon_author: "Napoléon Bonaparte 拿破崙",
+        contact_title: "與我聯絡", contact_sub: "歡迎來信！",
+        ph_name: "名稱", ph_email: "電子郵件*", ph_msg: "訊息", btn_send: "傳送",
+        schedule_title: "可預約時間", mon: "週一", tue: "週二", wed: "週三", thu: "週四", fri: "週五", sat: "週六", sun: "週日",
+        closed: "關閉中", by_app: "請先預約", sat_time: "下午04:00 – 下午08:00",
+        words_p1: "歡迎來到我的官方網站！作為一個重視獨立思考與社會自由的人，我希望能透過此平台與大家分享我的理念與日常心得。",
+        words_p2: "無論是在足球場上的奔跑，還是在遊戲世界裡的探索，我都抱持著堅持與熱情。感謝大家的關心與支持！",
+        news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
+        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。本人亦正考慮使用全新帳號，詳情將於稍後公佈。",
+        news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
+        shop_title: "官方商城", prod1_title: "歐鍵鋒大師級一對一足球訓練", prod1_desc: "由歐鍵鋒主理，課程時間為90分鐘一節。", joke_disclaimer: "此為玩笑切勿當真",
+        prod2_title: "得到我心靈上的支持", btn_buy_now: "立即購買",
+        privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款"
+      },
+      'en': {
+        top_banner: "Welcome to Matthew official website",
+        nav_home: "Home", nav_words: "Words", nav_news: "News", nav_shop: "Shop",
+        hero_sub: "Matthew Au", marquee_text: "Welcome 歡迎",
+        quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
+        quote_churchill_author: "—— Winston Churchill",
+        about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football", hobby_roblox: "Playing Roblox",
+        political_view_title: "Political Views", political_view_desc: "Promote democracy, free society, and resist authoritarian regimes.",
+        reviews_title: "Reviews", anon_user: "A",
+        review1_text: '"He is great at everything!"', review1_author: "Anonymous - 11/2/2023",
+        review2_text: '"Best football player I have ever seen!"', review2_author: "Anonymous - 7/6/2023",
+        quote_napoleon_zh: "The man who has made up his mind to win will never say 'impossible'.", quote_napoleon_author: "Napoléon Bonaparte",
+        contact_title: "Contact Me", contact_sub: "Feel free to get in touch!",
+        ph_name: "Name", ph_email: "Email*", ph_msg: "Message", btn_send: "Send",
+        schedule_title: "Available Hours", mon: "Mon", tue: "Tue", wed: "Wed", thu: "Thu", fri: "Fri", sat: "Sat", sun: "Sun",
+        closed: "Closed", by_app: "By Appointment", sat_time: "04:00 PM – 08:00 PM",
+        words_p1: "Welcome to my official website! As someone who values independent thinking and freedom, I hope to share my vision and daily life through this platform.",
+        words_p2: "Whether running on the football pitch or exploring virtual worlds, I remain passionate and dedicated. Thank you for your support!",
+        news_1: "Warmly welcome the President of the United States on visiting China for cooperation.",
+        news_2_body: "On the 27th around 2 AM, my official social media (@mattew0205_au) was hacked. The hacker posts financial scam images every 2 hours. Legal action or police reports may follow.",
+        news_2_sub: "Finally, I strongly condemn account theft and financial fraud, demanding an immediate stop and compensation.",
+        shop_title: "Official Shop", prod1_title: "Matthew Au Master 1-on-1 Football Training", prod1_desc: "Hosted by Matthew Au, 90 minutes per session.", joke_disclaimer: "Just a joke, don't take it seriously!",
+        prod2_title: "Spiritual Support from Me", btn_buy_now: "Buy Now",
+        privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use"
+      },
+      'zh-CN': {
+        top_banner: "欢迎来到Matthew official website",
+        nav_home: "首页", nav_words: "键锋的话", nav_news: "新闻公报", nav_shop: "商城",
+        hero_sub: "欧键锋", marquee_text: "欢迎 welcome",
+        quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
+        quote_churchill_author: "—— 温斯顿·丘吉尔 Winston Churchill",
+        about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        political_view_title: "政治理念", political_view_desc: "促进民主、自由社会发展，拒绝专制政权。",
+        reviews_title: "评论", anon_user: "匿",
+        review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
+        review2_text: '"他是我见过踢球最好的人！"', review2_author: "匿名 - 7/6/2023",
+        quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。", quote_napoleon_author: "Napoléon Bonaparte 拿破仑",
+        contact_title: "与我联络", contact_sub: "欢迎来信！",
+        ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
+        schedule_title: "可预约时间", mon: "周一", tue: "周二", wed: "周三", thu: "周四", fri: "周五", sat: "周六", sun: "周日",
+        closed: "关闭中", by_app: "请先预约", sat_time: "下午04:00 – 下午08:00",
+        words_p1: "欢迎来到我的官方网站！作为一个重视独立思考与社会自由的人，我希望能透过此平台与大家分享我的理念与日常心得。",
+        words_p2: "无论是在足球场上的奔跑，还是在游戏世界里的探索，我都抱持着坚持与热情。感谢大家的关心与支持！",
+        news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
+        news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。本人亦正考虑使用全新账号，详情将于稍后公布。",
+        news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
+        shop_title: "官方商城", prod1_title: "欧键锋大师级一对一足球训练", prod1_desc: "由欧键锋主理，课程时间为90分钟一节。", joke_disclaimer: "此为玩笑切勿当真",
+        prod2_title: "得到我心灵上的支持", btn_buy_now: "立即购买",
+        privacy_policy: "商城隐私权政策", terms_of_use: "网站使用条款"
+      }
+    };
+
+    let currentAdminPass = "1234";
+    let contactMessages = [];
+
+    function changeLanguage(lang) {
+      const langMap = i18nData[lang] || i18nData['zh-HK'];
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langMap[key]) el.innerText = langMap[key];
+      });
+
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (langMap[key]) el.placeholder = langMap[key];
+      });
+    }
+
     function switchTab(tab) {
       document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
       document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
@@ -317,10 +445,73 @@
 
     function handleContact(e) {
       e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const msg = document.getElementById('contact-msg').value;
+
+      contactMessages.push({ name, email, msg, date: new Date().toLocaleString() });
+
       alert('訊息已成功傳送！感謝您的來信。');
       document.getElementById('contact-name').value = '';
       document.getElementById('contact-email').value = '';
       document.getElementById('contact-msg').value = '';
+    }
+
+    /* 管理員模態框控制 */
+    function openAdminModal() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+    }
+    function closeAdminModal() {
+      document.getElementById('admin-modal').classList.add('hidden');
+    }
+    function checkAdminPassword() {
+      const inputPass = document.getElementById('admin-pass-input').value;
+      if (inputPass === currentAdminPass) {
+        document.getElementById('admin-login-sec').classList.add('hidden');
+        document.getElementById('admin-dashboard').classList.remove('hidden');
+        renderAdminMessages();
+      } else {
+        alert('密碼錯誤！預設密碼為 1234');
+      }
+    }
+    function updateAdminPassword() {
+      const newPass = document.getElementById('new-pass-input').value;
+      if (newPass) {
+        currentAdminPass = newPass;
+        alert('密碼修改成功！新密碼為：' + newPass);
+        document.getElementById('new-pass-input').value = '';
+      }
+    }
+    function addNewsPost() {
+      const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
+      const content = document.getElementById('new-news-content').value;
+
+      if (!content) return alert('請輸入新聞內容');
+
+      const newsContainer = document.getElementById('news-container');
+      const newNewsHTML = `
+        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+          <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${date}&gt;</span>
+          <p class="text-white text-lg">${content}</p>
+        </div>
+      `;
+      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
+      alert('新聞公報發布成功！');
+      document.getElementById('new-news-date').value = '';
+      document.getElementById('new-news-content').value = '';
+    }
+    function renderAdminMessages() {
+      const list = document.getElementById('messages-list');
+      if (contactMessages.length === 0) {
+        list.innerHTML = '<p class="text-gray-500">目前暫無留言記錄。</p>';
+        return;
+      }
+      list.innerHTML = contactMessages.map(m => `
+        <div class="border-b border-gray-700 pb-2 mb-2">
+          <p class="text-amber-400 font-bold">${m.name} (${m.email}) <span class="text-gray-500 text-[10px]">${m.date}</span></p>
+          <p class="text-gray-200">${m.msg}</p>
+        </div>
+      `).join('');
     }
 
     function closeModal() {
@@ -333,18 +524,8 @@
         <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
         <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
         
-        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明、爭議解決與管轄法律</h4>
-        <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
-        <p><strong>違約責任與賠償：</strong> 若您違反本條款之任何規定，致使本站或其關聯方遭受任何損失、第三方追討或權利主張，您同意負擔完全之賠償責任（包括但不限於訴訟費用及合理律師費）。</p>
-        <p><strong>管轄法律與法院管轄權：</strong><br>
-        1. 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。<br>
-        2. 您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。您並明確同意且接受該等法院具備無可爭議之屬人管轄權（Personal Jurisdiction）與屬地管轄權（Venue）。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">二、 智慧財產權與授權使用</h4>
-        <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">三、 條款修訂與更新</h4>
-        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。</p>
+        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明與管轄法律</h4>
+        <p>本站及其所有內容均以「現狀」基礎提供。本條款之解釋與管轄均應受美國加利福尼亞州（State of California）法律所管轄。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
@@ -352,13 +533,8 @@
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = '隱私權政策';
       document.getElementById('modal-body').innerHTML = `
-        <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。本站之運作方式以歐盟《一般資料保護規範》（GDPR）、美國《加州消費者隱私法》（CCPA/CPRA）以及香港《個人資料（隱私）條例》之規範與標準為基礎擬定。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">一、 資料收集與使用</h4>
-        <p>當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間及瀏覽器類型）。若您透過聯絡表單發送訊息，我們將僅收集您主動提供的姓名與電子郵件。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">二、 使用者權利</h4>
-        <p>您有權要求查詢、更正或刪除您的個人資料。如有需求請聯繫 <a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>。</p>
+        <p>本網站說明關於個人資料的收集與使用方式，遵循 GDPR、CCPA 以及香港《個人資料（隱私）條例》等標準。</p>
+        <p class="pt-2">如有疑問請聯繫 <a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
