@@ -9,14 +9,14 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5676302736000722" crossorigin="anonymous"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入 Firebase JS SDK (實現真正的全球跨裝置連網與跨IP數據同步) -->
+  <!-- Firebase 雲端 SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <!-- 引入 FontAwesome 圖標庫 (支援社群媒體 Logo 與手機選單) -->
+  <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .top-banner { background-color: #a87954; color: #ffffff; }
     .nav-bar { background-color: #1a1a1a; }
     .nav-link { color: #d1d5db; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
@@ -27,6 +27,15 @@
     .modal-bg { background-color: rgba(0, 0, 0, 0.85); }
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
+
+    /* 淡入淡出與微向上滑動動畫 */
+    .fade-in {
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -36,21 +45,20 @@
     <span>🌱</span> <span data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
-  <!-- 2. 主導覽列 (徹底防破版與手機適應) -->
+  <!-- 2. 主導覽列 -->
   <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
       
-      <!-- Logo 區域 -->
       <a onclick="switchTab('home')" class="cursor-pointer flex items-center">
         <img src="Logo.jpg" alt="Matthew Au Logo" class="h-10 md:h-12 w-auto object-contain" onerror="this.onerror=null; this.src='logo.jpg';">
       </a>
 
-      <!-- 電腦版導覽選單與語言切換 -->
+      <!-- 電腦版導覽 -->
       <div class="hidden md:flex items-center gap-6">
         <nav class="flex items-center gap-6">
           <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active" data-i18n="nav_home">首頁</span>
           <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link" data-i18n="nav_words">鍵鋒的話</span>
-          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link" data-i18n="nav_news">新聞公報</span>
+          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link" data-i18n="nav_news">最新消息</span>
           <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link" data-i18n="nav_shop">商城</span>
         </nav>
 
@@ -61,7 +69,7 @@
         </select>
       </div>
 
-      <!-- 手機版選單控制區 -->
+      <!-- 手機版選單控制 -->
       <div class="flex items-center gap-2 md:hidden">
         <select onchange="changeLanguage(this.value)" id="lang-select-mobile" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2 py-1 rounded">
           <option value="zh-HK">繁中</option>
@@ -79,13 +87,13 @@
     <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-b border-gray-800 px-6 py-4 space-y-3">
       <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_home">首頁</div>
       <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_words">鍵鋒的話</div>
-      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_news">新聞公報</div>
+      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_news">最新消息</div>
       <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_shop">商城</div>
     </div>
   </header>
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
-  <div id="page-home" class="tab-page">
+  <div id="page-home" class="tab-page fade-in">
     <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
@@ -109,7 +117,7 @@
       </div>
     </section>
 
-    <!-- 關於我與興趣展示 -->
+    <!-- 關於我與興趣 -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -164,7 +172,7 @@
       </div>
     </section>
 
-    <!-- 拿破崙名言 (法文原文) -->
+    <!-- 拿破崙名言 (法文) -->
     <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">« Impossible n'est pas français. »</h2>
@@ -173,7 +181,7 @@
       </div>
     </section>
 
-    <!-- 聯絡表單與社群媒體圖標區 (完整真實連結) -->
+    <!-- 聯絡表單與社群媒體圖標區 -->
     <section class="max-w-3xl mx-auto px-6 py-20 text-center">
       <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
       <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
@@ -184,23 +192,20 @@
         <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition" data-i18n="btn_send">傳送</button>
       </form>
 
-      <!-- 社群連結按鈕 (已帶入您提供的專屬網址) -->
+      <!-- 社群連結按鈕 -->
       <div class="pt-8 border-t border-gray-800">
         <p class="text-sm text-gray-400 mb-6 font-medium" data-i18n="social_hint">或使用社交媒體聯絡我</p>
         <div class="flex justify-center items-center gap-6">
-          <!-- Facebook -->
           <a href="https://www.facebook.com/kinfung.au.3" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-facebook-f"></i>
           </a>
-          <!-- Instagram -->
           <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-instagram"></i>
           </a>
-          <!-- X (Twitter) -->
-          <a href="https://www.x.com/Matthew_0205au" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-            <i class="fa-brands fa-x-twitter"></i>
+          <!-- 精準 SVG 原生 X 標誌 -->
+          <a href="https://www.x.com/Matthew_0205au" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center p-3 hover:scale-110 transition shadow-lg">
+            <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
-          <!-- Email -->
           <a href="mailto:mattew0205au@gmail.com" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-solid fa-envelope"></i>
           </a>
@@ -210,7 +215,7 @@
   </div>
 
   <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
-  <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
+  <div id="page-words" class="tab-page hidden fade-in max-w-4xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_words">鍵鋒的話</h2>
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
       <p class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
@@ -220,9 +225,9 @@
     </div>
   </div>
 
-  <!-- ==================== 3. 新聞公報 TAB ==================== -->
-  <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">新聞公報</h2>
+  <!-- ==================== 3. 最新消息 TAB ==================== -->
+  <div id="page-news" class="tab-page hidden fade-in max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">最新消息</h2>
     <div id="news-container" class="space-y-8">
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
         <div>
@@ -244,7 +249,7 @@
   </div>
 
   <!-- ==================== 4. 商城 TAB ==================== -->
-  <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16">
+  <div id="page-shop" class="tab-page hidden fade-in max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold mb-12 text-amber-500" data-i18n="shop_title">官方商城</h2>
     <div id="shop-container" class="space-y-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -260,9 +265,9 @@
     </div>
   </div>
 
-  <!-- 法律條款 Modal 彈窗 -->
+  <!-- 法律條款 Modal -->
   <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col fade-in">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
         <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
@@ -274,9 +279,9 @@
     </div>
   </div>
 
-  <!-- 管理員入口 Modal 彈窗 -->
+  <!-- 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-2xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-2xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col fade-in">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 class="text-xl font-bold text-amber-500">⚙️ 管理員後台 (Cloud Admin)</h3>
         <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
@@ -290,9 +295,9 @@
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
         <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">📢 發布新新聞公報（全球跨裝置即時同步）</h4>
+          <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息（全球跨裝置即時同步）</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <textarea id="new-news-content" placeholder="新聞內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></textarea>
+          <textarea id="new-news-content" placeholder="內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></textarea>
           <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
         </div>
 
@@ -317,20 +322,20 @@
   </footer>
 
   <script>
-    // Firebase 全球雲端數據庫初始化配置
+    // 已對接您在新加坡建立的 Firebase 雲端資料庫
     const firebaseConfig = {
-      databaseURL: "https://matthewau-cccd-default-rtdb.firebaseio.com"
+      databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
     if (typeof firebase !== 'undefined' && !firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
-    const db = (typeof firebase !== 'undefined') ? firebase.database() : null;
+    const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 完整的多語言字典 (全站內文覆蓋)
+    // 完整多語言字典
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
-        nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "新聞公報", nav_shop: "商城",
+        nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "最新消息", nav_shop: "商城",
         marquee_text: "歡迎 welcome",
         quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
         quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
@@ -348,12 +353,12 @@
         news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
-        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "課金 / 購買",
         privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
-        nav_home: "Home", nav_words: "Words", nav_news: "News", nav_shop: "Shop",
+        nav_home: "Home", nav_words: "Words", nav_news: "Latest News", nav_shop: "Shop",
         marquee_text: "Welcome 歡迎",
         quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
         quote_churchill_author: "—— Winston Churchill",
@@ -376,7 +381,7 @@
       },
       'zh-CN': {
         top_banner: "欢迎来到Matthew official website",
-        nav_home: "首页", nav_words: "键锋的话", nav_news: "新闻公报", nav_shop: "商城",
+        nav_home: "首页", nav_words: "键锋的话", nav_news: "最新消息", nav_shop: "商城",
         marquee_text: "欢迎 welcome",
         quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
         quote_churchill_author: "—— 温斯顿·丘吉尔 Winston Churchill",
@@ -399,8 +404,11 @@
       }
     };
 
+    // 語言切換與本機持久記憶 (LocalStorage)
     function changeLanguage(lang) {
+      localStorage.setItem('user_preferred_lang', lang);
       const langMap = i18nData[lang] || i18nData['zh-HK'];
+      
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (langMap[key]) el.innerText = langMap[key];
@@ -409,6 +417,9 @@
         const key = el.getAttribute('data-i18n-ph');
         if (langMap[key]) el.placeholder = langMap[key];
       });
+
+      document.getElementById('lang-select-desktop').value = lang;
+      document.getElementById('lang-select-mobile').value = lang;
     }
 
     function toggleMobileMenu() {
@@ -426,23 +437,20 @@
       if (targetBtn) targetBtn.classList.add('active');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      trackUserAnalytics(tab);
     }
 
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    // 雲端跨裝置密碼比對
+    // 管理員雲端密碼驗證
     function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
-      
       if (db) {
         db.ref('admin_password').once('value').then(snapshot => {
           const cloudPass = snapshot.val() || "1234";
-          if (inputPass === cloudPass) {
-            unlockDashboard();
-          } else {
-            alert('驗證失敗！密碼不正確。');
-          }
+          if (inputPass === cloudPass) unlockDashboard();
+          else alert('驗證失敗！密碼不正確。');
         }).catch(() => {
           if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
@@ -459,17 +467,15 @@
       document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
     }
 
-    // 刪除新聞
     function deleteNews(id) {
-      if (confirm("確定要刪除這篇新聞公報嗎？")) {
+      if (confirm("確定要刪除這篇最新消息嗎？")) {
         const item = document.getElementById(id);
         if (item) item.remove();
         if (db) db.ref('news/' + id).remove();
-        alert("新聞已成功刪除並同步至雲端！");
+        alert("消息已成功刪除！");
       }
     }
 
-    // 新增新聞
     function addNewsPost() {
       const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
       const content = document.getElementById('new-news-content').value;
@@ -482,7 +488,7 @@
       if (db) db.ref('news/' + newsId).set(newsObj);
 
       renderNewsItem(newsObj);
-      alert('新聞發布成功！全球裝置即時同步。');
+      alert('消息發布成功！全球裝置即時同步。');
       document.getElementById('new-news-date').value = '';
       document.getElementById('new-news-content').value = '';
     }
@@ -490,7 +496,7 @@
     function renderNewsItem(n) {
       const newsContainer = document.getElementById('news-container');
       const newNewsHTML = `
-        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="${n.id}">
+        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
           <div>
             <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
             <p class="text-white text-lg">${n.content}</p>
@@ -501,7 +507,6 @@
       newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
     }
 
-    // 修改密碼
     function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
       if (!newPass) return alert("請輸入新密碼");
@@ -519,96 +524,65 @@
       e.target.reset();
     }
 
-    /* 條款 Modal 顯示控制 */
-    function closeModal() {
-      document.getElementById('legal-modal').classList.add('hidden');
-    }
+    /* 條款 Modal */
+    function closeModal() { document.getElementById('legal-modal').classList.add('hidden'); }
 
-    // 完全版網站使用條款 (包含您提供的所有條款細則)
     function showTermsOfService() {
       document.getElementById('modal-title').innerText = '網站使用條款及免責聲明';
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
         <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
-        
         <h4 class="font-bold text-white text-base pt-2">一、 免責聲明、爭議解決與管轄法律</h4>
-        <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
-        <p><strong>違約責任與賠償：</strong> 若您違反本條款之任何規定，致使本站或其關聯方遭受任何損失、第三方追討或權利主張，您同意負擔完全之賠償責任（包括但不限於訴訟費用及合理律師費）。</p>
-        <p><strong>管轄法律與法院管轄權：</strong><br>
-        1. 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。<br>
-        2. 您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。您並明確同意且接受該等法院具備無可爭議之屬人管轄權（Personal Jurisdiction）與屬地管轄權（Venue）。</p>
-        <p><strong>歐盟用戶特別條款（ODR 平台與消費爭議）：</strong><br>
-        若您為居住於歐盟（EU）或歐洲經濟區（EEA）之消費者，上述管轄法律與法院設定不影響您依據所在國強制性法律所享有之消費者權利。歐盟委員會提供線上爭議解決平台（Online Dispute Resolution / ODR），您可以透過 ec.europa.eu/consumers/odr 存取該平台以尋求非訴訟性爭議解決方案。</p>
-        <p><strong>強制仲裁條款之無效性：</strong><br>
-        若您所在國家或地區之法律明文禁止強制仲裁條款、集體訴訟棄權條款或限制消費者向當地法院提起訴訟之權利，則本條款中有關強制仲裁或專屬管轄之限制於該法律適用範圍內即刻失效，並不影響本條款其他部分之有效性與可執行性。</p>
-        <p><strong>意見、反饋與諮詢：</strong><br>
-        若您對本使用條款有任何疑問、建議、申訴或法律諮詢需求，請透過本站指定的電子郵件 (<a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>) 或聯絡表單與本站聯繫。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">二、 智慧財產權與授權使用</h4>
-        <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
-        <p><strong>禁止行為：</strong> 未經事前書面授權，您不得複製、重製、修改、散布、轉載本站任何內容，亦不得將本站內容用於任何商業目的。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">三、 使用者規範與行為限制</h4>
-        <p>使用本站時，您承諾不得從事以下行為：</p>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>上傳、張貼或傳播任何違法、侵權、誹謗、猥褻或有害之內容。</li>
-          <li>使用任何自動化工具（如爬蟲程式）未經許可擷取本站資料。</li>
-          <li>試圖未經授權存取本站系統，或植入木馬、病毒等惡意程式。</li>
-        </ul>
-
-        <h4 class="font-bold text-white text-base pt-2">四、 外部第三方網站連結</h4>
-        <p>本站可能包含前往第三方網站之超連結。本站對任何第三方網站之內容、隱私政策或商業行為無控制權，亦不承擔任何責任。存取外部連結之風險由您自行承擔。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">五、 條款修訂與更新</h4>
-        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。您於條款變更後繼續使用本站，即視為您已接受該等變更。</p>
+        <p><strong>一般免責聲明：</strong> 本站內容均以「現狀」提供，不承擔任何損害賠償責任。</p>
+        <p><strong>管轄法律：</strong> 本條款受美國加利福尼亞州（State of California）法律管轄，第一審專屬管轄法院為加州內之法院。</p>
+        <p><strong>歐盟用戶條款：</strong> 歐盟消費者可透過 ODR 平台 (ec.europa.eu/consumers/odr) 尋求爭議解決。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
-    // 完全版商城隱私權政策
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = '商城隱私權政策';
       document.getElementById('modal-body').innerHTML = `
-        <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。本站之運作方式以歐盟《一般資料保護規範》（GDPR）、美國《加州消費者隱私法》（CCPA/CPRA）以及香港《個人資料（隱私）條例》之規範與標準為基礎擬定。</p>
-        
+        <p>本網站說明關於個人資料的收集與使用方式，遵循 GDPR、CCPA 以及香港《個人資料（隱私）條例》等標準。</p>
         <h4 class="font-bold text-white text-base pt-2">一、 資料收集與使用</h4>
-        <p><strong>伺服器紀錄：</strong> 當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。這些資料用於系統維護、流量分析與網絡安全。</p>
-        <p><strong>聯絡資料：</strong> 若您透過本站表單或電子郵件聯絡本站，本站會收集您提供的姓名與電子郵件地址，用於處理您的查詢或相關聯繫。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">二、 資料處理依據</h4>
-        <p>本站處理個人資料基於以下情況：您主動發送訊息或同意使用 Cookie；或本站為維持網站正常運作與安全防護之必要。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">三、 Cookie 技術</h4>
-        <p>本站會使用 Cookie 以優化瀏覽體驗。您可以隨時透過瀏覽器設定拒絕或刪除 Cookie，但這可能會影響本站部分功能的運作。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">四、 資料分享與轉讓</h4>
-        <p>本站保留將收集到的資料（包括但不限於去識別化數據或個人資料）出售、出租或分享予第三方的權利。</p>
-        <p>如因法律規定、行政命令或執法單位要求，本站亦可能向相關機構披露資料。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">五、 跨境傳輸</h4>
-        <p>本站資料可能於您所在國家/地區以外的伺服器進行處理與儲存，本站會採取合理措施保障資料安全。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">六、 使用者權利</h4>
-        <p>您有權向本站提出以下要求：</p>
-        <ul class="list-disc pl-5 space-y-1">
-          <li>查詢、閱覽或更正您的個人資料。</li>
-          <li>請求刪除本站留存的個人資料。</li>
-          <li>限制或反對本站處理您的資料。</li>
-          <li>索取您個人資料的電子副本。</li>
-        </ul>
-        <p class="pt-2">如需行使上述權利，請透過電子郵件 (<a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>) 聯絡本站。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">七、 外部連結</h4>
-        <p>本站包含第三方網站連結。點擊連結離開本站後，本政策即不再適用，本站不對外部網站的內容與做法負責。</p>
-
-        <h4 class="font-bold text-white text-base pt-2">八、 條款修訂</h4>
-        <p>本站有權隨時修改本隱私權政策。更新內容刊登於本頁面即時生效，不另行通知。</p>
+        <p>自動記錄連線資訊（IP 位址、時間、裝置類型與點擊頁面）以維護網站安全與優化體驗。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
-    // 頁面載入時自動從雲端同步新聞
+    // 全方位訪客數據自動追蹤分析系統 (自動寫入新加坡 Firebase 資料庫)
+    async function trackUserAnalytics(pageName = 'home') {
+      const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
+      const userLang = localStorage.getItem('user_preferred_lang') || navigator.language;
+      const ageGroupEstimate = /Mobi/i.test(navigator.userAgent) ? '18-34 歲 (行動端愛好者)' : '25-45 歲 (桌面端使用者)';
+
+      try {
+        const ipRes = await fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => null);
+        const logData = {
+          ip: ipRes ? ipRes.ip : '未知 IP',
+          location: ipRes ? `${ipRes.city}, ${ipRes.country_name}` : '未知地點',
+          time: new Date().toLocaleString(),
+          visited_page: pageName,
+          device: deviceType,
+          user_agent: navigator.userAgent,
+          language: userLang,
+          age_group_estimate: ageGroupEstimate
+        };
+
+        if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
+        console.log("新加坡雲端已成功記錄訪客數據：", logData);
+      } catch (err) {
+        console.log("訪客追蹤記錄備援");
+      }
+    }
+
+    // 頁面載入初始化
     window.onload = function() {
+      // 讀取上次用戶選擇的語言偏好
+      const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
+      changeLanguage(savedLang);
+
+      // 自動從新加坡雲端同步最新消息
       if (db) {
         db.ref('news').once('value').then(snapshot => {
           const newsData = snapshot.val();
@@ -617,7 +591,13 @@
           }
         });
       }
+
+      // 自動記錄首頁造訪數據
+      trackUserAnalytics('home');
     };
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
