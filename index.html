@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matthew Au| 官方網站 Official Website</title>
+  <title>Matthew Au 歐鍵鋒 | 官方網站 Official Website</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入 Supabase 雲端數據庫 SDK (實現全球跨裝置連網與同步) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -32,7 +32,7 @@
   <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
-      <!-- 讀取 GitHub 上的 Logo.jpg 檔案 -->
+      <!-- Logo 區域 -->
       <a onclick="switchTab('home')" class="cursor-pointer flex items-center">
         <img src="Logo.jpg" alt="Matthew Au Logo" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='logo.jpg';">
       </a>
@@ -114,12 +114,44 @@
       </div>
     </section>
 
+    <!-- 評論區 -->
+    <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-12" data-i18n="reviews_title">評論</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
+            <div class="text-amber-400 text-xl mb-4">★★★★★</div>
+            <p class="text-lg font-medium mb-6" data-i18n="review1_text">"佢樣樣都好呀"</p>
+            <p class="text-xs text-gray-500" data-i18n="review1_author">匿名 - 11/2/2023</p>
+          </div>
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
+            <div class="text-amber-400 text-xl mb-4">★★★★★</div>
+            <p class="text-lg font-medium mb-6" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
+            <p class="text-xs text-gray-500" data-i18n="review2_author">匿名 - 7/6/2023</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 拿破崙名言 -->
+    <section class="py-24 px-6 text-center bg-neutral-900 border-b border-gray-800">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">The man who has made up his mind to win will never say “impossible”.</h2>
+        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
+        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold" data-i18n="quote_napoleon_author">Napoléon Bonaparte 拿破崙</p>
+      </div>
+    </section>
+
+    <!-- 聯絡表單 -->
     <section class="max-w-3xl mx-auto px-6 py-20 text-center">
       <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
+      <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
       <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-16">
-        <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none"></textarea>
+        <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
+        <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_email">
+        <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_msg"></textarea>
         <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition" data-i18n="btn_send">傳送</button>
       </form>
     </section>
@@ -139,11 +171,10 @@
   <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">新聞公報</h2>
     <div id="news-container" class="space-y-8">
-      <!-- 初始預設新聞 -->
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
         <div>
           <span class="text-amber-500 text-sm font-mono block mb-2">&lt;13/5/2026&gt;</span>
-          <p class="text-white text-lg">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
+          <p class="text-white text-lg" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
         </div>
         <button onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
       </div>
@@ -151,8 +182,8 @@
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-2">
         <div>
           <span class="text-red-400 text-sm font-mono block mb-2">&lt;27/3/2026&gt;</span>
-          <p class="text-white text-lg mb-4">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
-          <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
+          <p class="text-white text-lg mb-4" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
+          <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
         </div>
         <button onclick="deleteNews('news-item-2')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
       </div>
@@ -168,10 +199,24 @@
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 class="text-3xl font-bold text-amber-600/90 mb-4">歐鍵鋒大師級一對一足球訓練</h2>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">歐鍵鋒大師級一對一足球訓練</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
-          <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3">💳 立即購買</button>
+          <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 法律條款 Modal 彈窗 (還原使用條款與免責聲明) -->
+  <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center p-6 border-b border-gray-800">
+        <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
+      </div>
+      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-6 leading-relaxed"></div>
+      <div class="p-4 border-t border-gray-800 text-right">
+        <button onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">關閉</button>
       </div>
     </div>
   </div>
@@ -184,17 +229,13 @@
         <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
       </div>
       
-      <!-- 登入區域 (無預設密碼提示) -->
       <div id="admin-login-sec" class="p-8 space-y-4">
         <p class="text-gray-300 text-sm">請輸入管理員驗證密碼：</p>
         <input type="password" id="admin-pass-input" placeholder="安全密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
         <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">登入雲端管理系統</button>
       </div>
 
-      <!-- 後台操作區域 (功能增強版) -->
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
-        
-        <!-- 功能 1: 新增新聞 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <h4 class="font-bold text-white text-base text-amber-500">📢 發布新新聞公報（同步全網）</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
@@ -202,52 +243,104 @@
           <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
         </div>
 
-        <!-- 功能 2: 新增商城商品 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">🛒 上架新商品</h4>
-          <input type="text" id="new-prod-name" placeholder="商品名稱" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <input type="text" id="new-prod-price" placeholder="價格 (例: HK$1,000.00)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <input type="text" id="new-prod-img" placeholder="圖片 URL 網址" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <button onclick="addShopProduct()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">上架商品</button>
-        </div>
-
-        <!-- 功能 3: 查看留言 -->
-        <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">📬 跨裝置表單留言記錄</h4>
-          <div id="messages-list" class="bg-gray-800 p-4 rounded text-xs space-y-2 max-h-40 overflow-y-auto">
-            <p class="text-gray-500">載入雲端留言中...</p>
-          </div>
-        </div>
-
-        <!-- 功能 4: 安全修改密碼 -->
-        <div class="space-y-3">
           <h4 class="font-bold text-white text-base text-amber-500">🔑 全球修改管理員密碼</h4>
           <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">永久同步更新密碼</button>
         </div>
-
       </div>
-
     </div>
   </div>
 
-  <!-- 頁尾 -->
+  <!-- 頁尾 (完全恢復條款連結) -->
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3">
     <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員後台登入</a>
+      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">商城隱私權政策</a>
+      <a onclick="showTermsOfService()" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
+      <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
+    <p class="text-gray-600">By Matthew Au</p>
   </footer>
 
   <script>
-    // 雲端連線設定（使用 Supabase 連網數據庫）
-    const SUPABASE_URL = "https://your-project.supabase.co"; // 替換為您的雲端 URL
-    const SUPABASE_KEY = "your-anon-key";                   // 替換為您的雲端 API Key
-    const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+    const i18nData = {
+      'zh-HK': {
+        top_banner: "歡迎來到Matthew official website",
+        nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "新聞公報", nav_shop: "商城",
+        hero_sub: "歐鍵鋒", marquee_text: "歡迎 welcome",
+        quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
+        quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
+        about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        political_view_title: "政治理念", political_view_desc: "促進民主、自由社會發展，拒絕專制政權。",
+        reviews_title: "評論", anon_user: "匿",
+        review1_text: '"佢樣樣都好呀"', review1_author: "匿名 - 11/2/2023",
+        review2_text: '"佢係我見過踢波最好嘅人！"', review2_author: "匿名 - 7/6/2023",
+        quote_napoleon_zh: "有著必勝信念的人，從不說「不可能」。", quote_napoleon_author: "Napoléon Bonaparte 拿破崙",
+        contact_title: "與我聯絡", contact_sub: "歡迎來信！",
+        ph_name: "名稱", ph_email: "電子郵件*", ph_msg: "訊息", btn_send: "傳送",
+        news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
+        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
+        news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
+        shop_title: "官方商城", prod1_title: "歐鍵鋒大師級一對一足球訓練", btn_buy_now: "立即購買",
+        privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
+      },
+      'en': {
+        top_banner: "Welcome to Matthew official website",
+        nav_home: "Home", nav_words: "Words", nav_news: "News", nav_shop: "Shop",
+        hero_sub: "Matthew Au", marquee_text: "Welcome 歡迎",
+        quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
+        quote_churchill_author: "—— Winston Churchill",
+        about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football", hobby_roblox: "Playing Roblox",
+        political_view_title: "Political Views", political_view_desc: "Promote democracy, free society, and resist authoritarian regimes.",
+        reviews_title: "Reviews", anon_user: "A",
+        review1_text: '"He is great at everything!"', review1_author: "Anonymous - 11/2/2023",
+        review2_text: '"Best football player I have ever seen!"', review2_author: "Anonymous - 7/6/2023",
+        quote_napoleon_zh: "The man who has made up his mind to win will never say 'impossible'.", quote_napoleon_author: "Napoléon Bonaparte",
+        contact_title: "Contact Me", contact_sub: "Feel free to get in touch!",
+        ph_name: "Name", ph_email: "Email*", ph_msg: "Message", btn_send: "Send",
+        news_1: "Warmly welcome the President of the United States on visiting China for cooperation.",
+        news_2_body: "On the 27th around 2 AM, my official social media (@mattew0205_au) was hacked. The hacker posts financial scam images every 2 hours. Legal action or police reports may follow.",
+        news_2_sub: "Finally, I strongly condemn account theft and financial fraud, demanding an immediate stop and compensation.",
+        shop_title: "Official Shop", prod1_title: "Matthew Au Master 1-on-1 Football Training", btn_buy_now: "Buy Now",
+        privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use"
+      },
+      'zh-CN': {
+        top_banner: "欢迎来到Matthew official website",
+        nav_home: "首页", nav_words: "键锋的话", nav_news: "新闻公报", nav_shop: "商城",
+        hero_sub: "欧键锋", marquee_text: "欢迎 welcome",
+        quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
+        quote_churchill_author: "—— 温斯顿·丘吉尔 Winston Churchill",
+        about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        political_view_title: "政治理念", political_view_desc: "促进民主、自由社会发展，拒绝专制政权。",
+        reviews_title: "评论", anon_user: "匿",
+        review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
+        review2_text: '"他是我见过踢球最好的人！"', review2_author: "匿名 - 7/6/2023",
+        quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。", quote_napoleon_author: "Napoléon Bonaparte 拿破仑",
+        contact_title: "与我联络", contact_sub: "欢迎来信！",
+        ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
+        news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
+        news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。",
+        news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
+        shop_title: "官方商城", prod1_title: "欧键锋大师级一对一足球训练", btn_buy_now: "立即购买",
+        privacy_policy: "商城隐私权政策", terms_of_use: "网站使用条款及免责声明"
+      }
+    };
 
     let localAdminPass = localStorage.getItem('admin_pass') || "1234";
 
-    // 頁面切換
+    function changeLanguage(lang) {
+      const langMap = i18nData[lang] || i18nData['zh-HK'];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langMap[key]) el.innerText = langMap[key];
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const key = el.getAttribute('data-i18n-ph');
+        if (langMap[key]) el.placeholder = langMap[key];
+      });
+    }
+
     function switchTab(tab) {
       document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
       document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
@@ -261,52 +354,29 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 後台模態框控制
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    // 驗證密碼（可雲端比對）
-    async function checkAdminPassword() {
+    function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
-
-      if (supabase) {
-        // 從連網雲端資料庫讀取密碼
-        const { data, error } = await supabase.from('settings').select('value').eq('key', 'admin_password').single();
-        if (data && data.value === inputPass) {
-          showDashboard();
-          return;
-        }
-      }
-
-      // 備用安全比對
       if (inputPass === localAdminPass) {
-        showDashboard();
+        document.getElementById('admin-login-sec').classList.add('hidden');
+        document.getElementById('admin-dashboard').classList.remove('hidden');
+        document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
       } else {
         alert('驗證失敗！密碼不正確。');
       }
     }
 
-    function showDashboard() {
-      document.getElementById('admin-login-sec').classList.add('hidden');
-      document.getElementById('admin-dashboard').classList.remove('hidden');
-      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
-      loadCloudMessages();
-    }
-
-    // 刪除新聞
     function deleteNews(id) {
       if (confirm("確定要刪除這篇新聞公報嗎？")) {
         const item = document.getElementById(id);
         if (item) item.remove();
-        if (supabase) {
-          supabase.from('news').delete().eq('id', id);
-        }
-        alert("新聞已刪除！");
+        alert("新聞已成功刪除！");
       }
     }
 
-    // 發布新聞
-    async function addNewsPost() {
+    function addNewsPost() {
       const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
       const content = document.getElementById('new-news-content').value;
 
@@ -324,63 +394,57 @@
         </div>
       `;
       newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
-
-      if (supabase) {
-        await supabase.from('news').insert([{ id: newsId, date: date, content: content }]);
-      }
-
-      alert('新聞發布成功！跨裝置同步完成。');
+      alert('新聞發布成功！');
       document.getElementById('new-news-date').value = '';
       document.getElementById('new-news-content').value = '';
     }
 
-    // 修改密碼（全球真正修改）
-    async function updateAdminPassword() {
+    function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
       if (!newPass) return alert("請輸入新密碼");
 
       localAdminPass = newPass;
       localStorage.setItem('admin_pass', newPass);
 
-      if (supabase) {
-        await supabase.from('settings').upsert({ key: 'admin_password', value: newPass });
-      }
-
-      alert('密碼已成功更新！您在任何裝置（包括美國的手機）登入時均需使用新密碼。');
+      alert('密碼已成功更新！');
       document.getElementById('new-pass-input').value = '';
     }
 
-    // 處理與記錄表單
-    async function handleContact(e) {
+    function handleContact(e) {
       e.preventDefault();
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const msg = document.getElementById('contact-msg').value;
-
-      if (supabase) {
-        await supabase.from('messages').insert([{ name, email, message: msg, created_at: new Date() }]);
-      }
-
       alert('訊息已成功傳送！');
       e.target.reset();
     }
 
-    // 載入連網留言
-    async function loadCloudMessages() {
-      const list = document.getElementById('messages-list');
-      if (supabase) {
-        const { data } = await supabase.from('messages').select('*').order('created_at', { ascending: false });
-        if (data && data.length > 0) {
-          list.innerHTML = data.map(m => `
-            <div class="border-b border-gray-700 pb-2 mb-2">
-              <p class="text-amber-400 font-bold">${m.name} (${m.email})</p>
-              <p class="text-gray-200">${m.message}</p>
-            </div>
-          `).join('');
-          return;
-        }
-      }
-      list.innerHTML = '<p class="text-gray-500">目前暫無連網留言記錄。</p>';
+    /* 條款 Modal 顯示控制 */
+    function closeModal() {
+      document.getElementById('legal-modal').classList.add('hidden');
+    }
+
+    function showTermsOfService() {
+      document.getElementById('modal-title').innerText = '網站使用條款及免責聲明';
+      document.getElementById('modal-body').innerHTML = `
+        <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
+        <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
+        
+        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明與管轄法律</h4>
+        <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
+        <p><strong>管轄法律與法院管轄權：</strong><br>
+        1. 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。<br>
+        2. 您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。您並明確同意且接受該等法院具備無可爭議之屬人管轄權（Personal Jurisdiction）與屬地管轄權（Venue）。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+
+    function showPrivacyPolicy() {
+      document.getElementById('modal-title').innerText = '商城隱私權政策';
+      document.getElementById('modal-body').innerHTML = `
+        <p>本網站說明關於個人資料的收集與使用方式，遵循 GDPR、CCPA 以及香港《個人資料（隱私）條例》等標準。</p>
+        <h4 class="font-bold text-white text-base pt-2">一、 資料收集與使用</h4>
+        <p>當您瀏覽本站時，系統會自動記錄連線資訊。若您透過聯絡表單發送訊息，我們將僅收集您主動提供的姓名與電子郵件。</p>
+        <p class="pt-2">如有疑問請聯繫 <a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
     }
   </script>
 </body>
