@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matthew Au | Official Website</title>
-
+  
   <!-- Google AdSense 廣告腳本 -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5676302736000722" crossorigin="anonymous"></script>
 
@@ -27,15 +27,29 @@
     .nav-link { color: #d1d5db; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
     .nav-link.active { color: #a87954; border-bottom: 2px solid #a87954; font-weight: bold; }
     .marquee-section { background-color: #1a1a1a; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; color: #a87954; }
-    .btn-buy { background-color: #c49a78; color: #ffffff; transition: all 0.2s; }
+    .btn-buy { background-color: #c49a78; color: #ffffff; }
     .btn-buy:hover { background-color: #b08563; }
     .modal-bg { background-color: rgba(0, 0, 0, 0.85); }
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
 
-    /* 淡入淡出動畫 */
-    .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    /* 滾動式漸進淡入動畫 (Scroll-Triggered Fade-In) */
+    .scroll-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .scroll-fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 編輯模式下可編輯元素的邊框樣式 */
+    .editable-mode {
+      border: 2px dashed #a87954 !important;
+      padding: 4px;
+      background-color: rgba(168, 121, 84, 0.1);
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -93,8 +107,8 @@
   </header>
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
-  <div id="page-home" class="tab-page fade-in">
-    <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
+  <div id="page-home" class="tab-page">
+    <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800 scroll-fade">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
         <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
@@ -102,7 +116,7 @@
       </div>
     </section>
 
-    <div class="marquee-section py-4 overflow-hidden">
+    <div class="marquee-section py-4 overflow-hidden scroll-fade">
       <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
         <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
         <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
@@ -110,49 +124,49 @@
     </div>
 
     <!-- 邱吉爾名言 -->
-    <section class="bg-stone-900 py-20 px-6 text-center border-b border-gray-800">
+    <section class="bg-stone-900 py-20 px-6 text-center border-b border-gray-800 scroll-fade">
       <div class="max-w-3xl mx-auto">
-        <blockquote class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+        <blockquote id="editable-quote-churchill" class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
         <p class="text-sm font-sans tracking-wide text-amber-600 font-bold" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
       </div>
     </section>
 
     <!-- 關於我與興趣 -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
           <h2 class="text-2xl font-bold mb-4" data-i18n="about_me">關於我</h2>
           <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
-          <p class="text-gray-400" data-i18n="hobby_football">足球</p>
+          <p id="editable-hobby-1" class="text-gray-400" data-i18n="hobby_football">足球</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="足球" class="w-full h-72 object-cover">
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
           <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
-          <p class="text-gray-400" data-i18n="hobby_roblox">玩Roblox</p>
+          <p id="editable-hobby-2" class="text-gray-400" data-i18n="hobby_roblox">玩Roblox</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Roblox" class="w-full h-72 object-cover">
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80" alt="民主自由" class="w-full h-72 object-cover">
         </div>
         <div>
           <h2 class="text-2xl font-bold mb-4" data-i18n="political_view_title">政治理念</h2>
-          <p class="text-gray-300" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
+          <p id="editable-political" class="text-gray-300" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
         </div>
       </div>
     </section>
 
     <!-- 評論區 -->
-    <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800">
+    <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800 scroll-fade">
       <div class="max-w-5xl mx-auto">
         <h2 class="text-3xl font-bold text-white mb-12" data-i18n="reviews_title">評論</h2>
         <div class="grid md:grid-cols-2 gap-8">
@@ -173,7 +187,7 @@
     </section>
 
     <!-- 拿破崙名言 -->
-    <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800">
+    <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800 scroll-fade">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">« Impossible n'est pas français. »</h2>
         <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
@@ -182,7 +196,7 @@
     </section>
 
     <!-- 聯絡表單與社群媒體圖標區 -->
-    <section class="max-w-3xl mx-auto px-6 py-20 text-center">
+    <section class="max-w-3xl mx-auto px-6 py-20 text-center scroll-fade">
       <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
       <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
       <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-12">
@@ -214,18 +228,18 @@
   </div>
 
   <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
-  <div id="page-words" class="tab-page hidden fade-in max-w-4xl mx-auto px-6 py-16">
+  <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
     <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_words">鍵鋒的話</h2>
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
-      <p class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
+      <p id="editable-words-1" class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
       <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
-      <p data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
+      <p id="editable-words-2" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
+      <p id="editable-words-3" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
     </div>
   </div>
 
   <!-- ==================== 3. 最新消息 TAB ==================== -->
-  <div id="page-news" class="tab-page hidden fade-in max-w-4xl mx-auto px-6 py-16">
+  <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
     <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">最新消息</h2>
     <div id="news-container" class="space-y-8">
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
@@ -247,7 +261,7 @@
     </div>
   </div>
 
-  <!-- ==================== 4. 商城 TAB ==================== -->
+ <!-- ==================== 4. 商城 TAB ==================== -->
   <div id="page-shop" class="tab-page hidden fade-in max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold mb-12 text-amber-500" data-i18n="shop_title">官方商城</h2>
     <div id="shop-container" class="space-y-20">
@@ -308,66 +322,108 @@
     </div>
   </div>
 
-  <!-- 📜 法律條款 Modal -->
+  <!-- 法律條款 Modal -->
   <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col fade-in">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
         <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
       </div>
-      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-4 leading-relaxed"></div>
+      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-6 leading-relaxed"></div>
       <div class="p-4 border-t border-gray-800 text-right">
         <button onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">關閉</button>
       </div>
     </div>
   </div>
 
-  <!-- ⚙️ 管理員入口 Modal -->
+  <!-- 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col fade-in">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 class="text-xl font-bold text-amber-500">⚙️ 高級管理員後台控制中心 (Cloud Admin)</h3>
         <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
       </div>
       
       <div id="admin-login-sec" class="p-8 space-y-4">
-        <p class="text-gray-300 text-sm">請輸入高級管理員密碼：</p>
-        <input type="password" id="admin-pass-input" placeholder="安全密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">解鎖管理系統</button>
+        <p class="text-gray-300 text-sm">請輸入管理員密碼：</p>
+        <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
+        <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">解鎖系統</button>
       </div>
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
+        
+        <!-- 全域內容編輯模式切換 -->
+        <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex justify-between items-center">
+          <div>
+            <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
+            <p class="text-xs text-gray-400">開啟後可直接在網頁上編輯並儲存所有文字內容。</p>
+          </div>
+          <button id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs">開啟編輯模式</button>
+        </div>
+
+        <!-- 發布最新消息 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息（全球跨裝置即時同步）</h4>
+          <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <textarea id="new-news-content" placeholder="內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></textarea>
           <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
         </div>
 
+        <!-- 實時數據統計儀表板 (Analytics & Charts) -->
+        <div class="border-b border-gray-800 pb-6 space-y-4">
+          <h4 class="font-bold text-white text-base text-amber-500">📊 實時流量與數據統計儀表板</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-total-visits">0</div>
+              <div class="text-xs text-gray-400">總訪問次數</div>
+            </div>
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-mobile-pct">0%</div>
+              <div class="text-xs text-gray-400">行動裝置佔比</div>
+            </div>
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-desktop-pct">0%</div>
+              <div class="text-xs text-gray-400">桌面裝置佔比</div>
+            </div>
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-top-page">-</div>
+              <div class="text-xs text-gray-400">熱門分頁</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 訪客軌跡與高精準定位（摺疊下拉選單 + 單獨清除/清除全部） -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
+          <details class="bg-black rounded border border-gray-800 p-4">
+            <summary class="cursor-pointer font-bold text-amber-500 text-base flex justify-between items-center">
+              <span>🎯 訪客精確軌跡與 IP 定位日誌（點擊展開/收合）</span>
+              <div class="space-x-2">
+                <button onclick="event.stopPropagation(); loadVisitorLogs()" class="px-2 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded">🔄 重新整理</button>
+                <button onclick="event.stopPropagation(); clearAllVisitorLogs()" class="px-2 py-1 bg-red-700 hover:bg-red-600 text-white text-xs rounded">🗑️ 清除全部</button>
+              </div>
+            </summary>
+            <div id="admin-logs-viewer" class="mt-4 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
+              <p class="text-gray-500">正在加載精確數據...</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- 修改管理員密碼（已移至最底部） -->
+        <div class="space-y-3 pt-2">
           <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理員密碼</h4>
           <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">更新密碼</button>
         </div>
 
-        <div class="space-y-3">
-          <div class="flex justify-between items-center">
-            <h4 class="font-bold text-white text-base text-amber-500">🎯 訪客精確軌跡與日誌記錄</h4>
-            <button onclick="loadVisitorLogs()" class="px-3 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded">🔄 重新整理數據</button>
-          </div>
-          <div id="admin-logs-viewer" class="bg-black p-4 rounded border border-gray-800 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
-            <p class="text-gray-500">正在加載精確數據...</p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 
   <!-- 頁尾 -->
-  <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3">
+  <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
     <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
+      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">商城隱私權政策</a>
       <a onclick="showTermsOfService()" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
       <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
@@ -375,17 +431,7 @@
   </footer>
 
   <script>
-    // 預設密碼 "1234" 的 SHA-256 雜湊值
-    const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
-
-    async function hashPassword(str) {
-      const msgBuffer = new TextEncoder().encode(str);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    // Firebase 配置
+    // Firebase 資料庫配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
@@ -394,7 +440,7 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 多國語言字典
+    // 語言字典
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
@@ -417,7 +463,7 @@
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明"
+        privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
@@ -454,16 +500,16 @@
         review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
         review2_text: '"他是我见过踢球最好的人！"', review2_author: "匿名 - 7/6/2023",
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
-        contact_title: "与我联络", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联络我",
+        contact_title: "与我联絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联絡我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
         words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
-        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透過此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
+        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
-        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
+        news_2_body: "27日2时多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
+        privacy_policy: "商城隐私权政策", terms_of_use: "網站使用條款及免責聲明"
       }
     };
 
@@ -499,56 +545,25 @@
       if (targetBtn) targetBtn.classList.add('active');
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      trackUserAnalytics(tab);
     }
 
-    // Modal 與付款控制
-    function openPaymentModal() { document.getElementById('payment-modal').classList.remove('hidden'); }
-    function closePaymentModal() { document.getElementById('payment-modal').classList.add('hidden'); }
-    function toggleAlipay() { document.getElementById('alipay-sec').classList.toggle('hidden'); }
-
-    function showPrivacyPolicy() {
-      document.getElementById('modal-title').innerText = "隱私權政策";
-      document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 個人資料收集與使用</p>
-        <p>本網站僅在您進行商品購買或透過聯絡表單發送訊息時收集必要之個人資料（例如電子郵件、名稱及付款備註）。相關資料僅用於訂單核對及溝通服務，絕不會洩漏給第三方。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 交易安全</p>
-        <p>本網站之付款流程均直接透過 PayPal 及 AlipayHK 官方安全加密平台完成，本網站伺服器不會記錄或儲存您的信用卡號碼或支付密碼。</p>
-      `;
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
-
-    function showTermsOfService() {
-      document.getElementById('modal-title').innerText = "網站使用條款及免責聲明";
-      document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 服務條款</p>
-        <p>歡迎瀏覽 Matthew Au 官方網站。本網站提供之所有內容僅供資訊參考，未經授權禁止商業複製。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 免責聲明</p>
-        <p>本網站保留隨時更新或修改網站內容之權利，恕不另行通知。</p>
-      `;
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
-
-    function closeModal() { document.getElementById('legal-modal').classList.add('hidden'); }
-
-    // 管理員 Modal 控制
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    async function checkAdminPassword() {
+    function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
-      const hashedInput = await hashPassword(inputPass);
-
       if (db) {
-        db.ref('admin_hash').once('value').then(snapshot => {
-          const cloudHash = snapshot.val() || DEFAULT_HASH;
-          if (hashedInput === cloudHash) unlockDashboard();
+        db.ref('admin_password').once('value').then(snapshot => {
+          const cloudPass = snapshot.val() || "1234";
+          if (inputPass === cloudPass) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         }).catch(() => {
-          if (hashedInput === (localStorage.getItem('admin_hash') || DEFAULT_HASH)) unlockDashboard();
+          if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         });
       } else {
-        if (hashedInput === (localStorage.getItem('admin_hash') || DEFAULT_HASH)) unlockDashboard();
+        if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
         else alert('驗證失敗！密碼不正確。');
       }
     }
@@ -556,113 +571,342 @@
     function unlockDashboard() {
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
-      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
       loadVisitorLogs();
     }
 
-    async function updateAdminPassword() {
-      const newPass = document.getElementById('new-pass-input').value;
-      if (!newPass) return alert('請輸入新密碼！');
+    // 雲端同步載入自定義文本內容
+    function loadCustomTexts() {
+      if (!db) return;
+      db.ref('custom_texts').once('value').then(snapshot => {
+        const texts = snapshot.val();
+        if (texts) {
+          if (texts.quoteChurchill) document.getElementById('editable-quote-churchill').innerText = texts.quoteChurchill;
+          if (texts.hobby1) document.getElementById('editable-hobby-1').innerText = texts.hobby1;
+          if (texts.hobby2) document.getElementById('editable-hobby-2').innerText = texts.hobby2;
+          if (texts.political) document.getElementById('editable-political').innerText = texts.political;
+          if (texts.words1) document.getElementById('editable-words-1').innerText = texts.words1;
+          if (texts.shopTitle) document.getElementById('editable-shop-title').innerText = texts.shopTitle;
+        }
+      });
+    }
+
+    // 編輯模式切換
+    let isEditMode = false;
+    function toggleEditMode() {
+      isEditMode = !isEditMode;
+      const btn = document.getElementById('edit-mode-btn');
+      const editableIds = ['editable-quote-churchill', 'editable-hobby-1', 'editable-hobby-2', 'editable-political', 'editable-words-1', 'editable-shop-title'];
       
-      const newHash = await hashPassword(newPass);
-      if (db) {
-        db.ref('admin_hash').set(newHash).then(() => {
-          alert('密碼已成功加密更新！');
-          document.getElementById('new-pass-input').value = '';
+      if (isEditMode) {
+        btn.innerText = "儲存並關閉編輯模式";
+        btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs";
+        editableIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.setAttribute('contenteditable', 'true');
+            el.classList.add('editable-mode');
+          }
         });
       } else {
-        localStorage.setItem('admin_hash', newHash);
-        alert('密碼已於本地更新！');
-        document.getElementById('new-pass-input').value = '';
+        btn.innerText = "開啟編輯模式";
+        btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs";
+        
+        const textsToSave = {
+          quoteChurchill: document.getElementById('editable-quote-churchill').innerText,
+          hobby1: document.getElementById('editable-hobby-1').innerText,
+          hobby2: document.getElementById('editable-hobby-2').innerText,
+          political: document.getElementById('editable-political').innerText,
+          words1: document.getElementById('editable-words-1').innerText,
+          shopTitle: document.getElementById('editable-shop-title').innerText
+        };
+
+        if (db) db.ref('custom_texts').set(textsToSave);
+
+        editableIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.removeAttribute('contenteditable');
+            el.classList.remove('editable-mode');
+          }
+        });
+        alert('全域內容已成功更新並同步至雲端！');
+      }
+    }
+
+    // 載入訪客日誌與實時圖表統計
+    function loadVisitorLogs() {
+      const viewer = document.getElementById('admin-logs-viewer');
+      viewer.innerHTML = '<p class="text-amber-500">正在加載日誌數據...</p>';
+
+      if (db) {
+        db.ref('visitor_logs').once('value').then(snapshot => {
+          const logs = snapshot.val();
+          if (!logs) {
+            viewer.innerHTML = '<p class="text-gray-400">目前尚無訪客紀錄。</p>';
+            updateStats({});
+            return;
+          }
+
+          updateStats(logs);
+
+          let html = '';
+          const logEntries = Object.entries(logs).reverse();
+          logEntries.forEach(([key, log]) => {
+            const mapLink = log.coords ? `https://www.google.com/maps?q=${log.coords}` : `https://www.google.com/maps/search/${encodeURIComponent(log.location)}`;
+            
+            html += `
+              <div class="border-b border-gray-800 pb-2 mb-2 flex justify-between items-start" id="log-${key}">
+                <div>
+                  <div class="text-amber-400 font-bold">🎯 裝置: ${log.device_name || log.device} | 📍 <a href="${mapLink}" target="_blank" class="underline">${log.location}</a></div>
+                  <div class="text-gray-300">🌐 IP: ${log.ip} | ⏰ 時間: ${log.local_time}</div>
+                  <div class="text-gray-400">📄 瀏覽頁面: <span class="text-white">${log.visited_page}</span></div>
+                </div>
+                <button onclick="deleteVisitorLog('${key}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+              </div>
+            `;
+          });
+          viewer.innerHTML = html;
+        });
+      }
+    }
+
+    // 單獨刪除訪客記錄
+    function deleteVisitorLog(key) {
+      if (confirm("確定要刪除這條訪客記錄嗎？")) {
+        if (db) db.ref('visitor_logs/' + key).remove();
+        const el = document.getElementById('log-' + key);
+        if (el) el.remove();
+        alert("已成功刪除！");
+      }
+    }
+
+    // 清除全部訪客記錄
+    function clearAllVisitorLogs() {
+      if (confirm("警告：確定要清空所有訪客軌跡資料嗎？")) {
+        if (db) db.ref('visitor_logs').remove();
+        document.getElementById('admin-logs-viewer').innerHTML = '<p class="text-gray-400">目前尚無訪客紀錄。</p>';
+        updateStats({});
+        alert("已清空所有訪客記錄！");
+      }
+    }
+
+    // 即時更新統計圖表數據
+    function updateStats(logs) {
+      const logsArray = Object.values(logs);
+      const total = logsArray.length;
+      document.getElementById('stat-total-visits').innerText = total;
+
+      if (total === 0) {
+        document.getElementById('stat-mobile-pct').innerText = '0%';
+        document.getElementById('stat-desktop-pct').innerText = '0%';
+        document.getElementById('stat-top-page').innerText = '-';
+        return;
+      }
+
+      let mobileCount = 0;
+      let desktopCount = 0;
+      const pageCounts = {};
+
+      logsArray.forEach(log => {
+        if (log.device && log.device.includes('Mobile')) mobileCount++;
+        else desktopCount++;
+
+        const p = log.visited_page || 'home';
+        pageCounts[p] = (pageCounts[p] || 0) + 1;
+      });
+
+      document.getElementById('stat-mobile-pct').innerText = Math.round((mobileCount / total) * 100) + '%';
+      document.getElementById('stat-desktop-pct').innerText = Math.round((desktopCount / total) * 100) + '%';
+
+      let topPage = 'home';
+      let maxCount = 0;
+      for (const [page, count] of Object.entries(pageCounts)) {
+        if (count > maxCount) {
+          maxCount = count;
+          topPage = page;
+        }
+      }
+      document.getElementById('stat-top-page').innerText = topPage;
+    }
+
+    function deleteNews(id) {
+      if (confirm("確定要刪除這篇最新消息嗎？")) {
+        const item = document.getElementById(id);
+        if (item) item.remove();
+        if (db) db.ref('news/' + id).remove();
+        alert("消息已成功刪除！");
       }
     }
 
     function addNewsPost() {
-      const date = document.getElementById('new-news-date').value;
+      const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
       const content = document.getElementById('new-news-content').value;
 
-      if (!date || !content) return alert('請填寫日期與內容！');
+      if (!content) return alert('請輸入內容');
 
-      const newsData = { date, content, timestamp: Date.now() };
-      if (db) {
-        db.ref('news').push(newsData).then(() => {
-          alert('發布成功！');
-          document.getElementById('new-news-date').value = '';
-          document.getElementById('new-news-content').value = '';
-          loadNews();
-        });
-      }
+      const newsId = 'news-' + Date.now();
+      const newsObj = { id: newsId, date: date, content: content };
+
+      if (db) db.ref('news/' + newsId).set(newsObj);
+
+      renderNewsItem(newsObj);
+      alert('消息發布成功！全球裝置即時同步。');
+      document.getElementById('new-news-date').value = '';
+      document.getElementById('new-news-content').value = '';
     }
 
-    function loadNews() {
-      if (!db) return;
-      db.ref('news').once('value').then(snapshot => {
-        const newsObj = snapshot.val();
-        if (!newsObj) return;
-        const container = document.getElementById('news-container');
-
-        Object.keys(newsObj).forEach(key => {
-          const item = newsObj[key];
-          if (!document.getElementById(key)) {
-            const div = document.createElement('div');
-            div.id = key;
-            div.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start";
-            div.innerHTML = `
-              <div>
-                <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${item.date}&gt;</span>
-                <p class="text-white text-lg">${item.content}</p>
-              </div>
-              <button onclick="deleteNews('${key}')" class="admin-only ${document.getElementById('admin-dashboard').classList.contains('hidden') ? 'hidden' : ''} text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
-            `;
-            container.prepend(div);
-          }
-        });
-      });
+    function renderNewsItem(n) {
+      const newsContainer = document.getElementById('news-container');
+      const newNewsHTML = `
+        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
+          <div>
+            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
+            <p class="text-white text-lg">${n.content}</p>
+          </div>
+          <button onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+        </div>
+      `;
+      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
     }
 
-    function deleteNews(key) {
-      if (confirm('確定要刪除這條消息嗎？')) {
-        if (db && key.startsWith('-')) {
-          db.ref('news/' + key).remove().then(() => {
-            const el = document.getElementById(key);
-            if (el) el.remove();
-          });
-        } else {
-          const el = document.getElementById(key);
-          if (el) el.remove();
-        }
-      }
-    }
+    function updateAdminPassword() {
+      const newPass = document.getElementById('new-pass-input').value;
+      if (!newPass) return alert("請輸入新密碼");
 
-    function loadVisitorLogs() {
-      if (!db) return;
-      db.ref('analytics/visits').limitToLast(15).once('value').then(snapshot => {
-        const viewer = document.getElementById('admin-logs-viewer');
-        const data = snapshot.val();
-        if (!data) return viewer.innerHTML = '<p class="text-gray-500">暫無訪客紀錄。</p>';
+      localStorage.setItem('admin_pass', newPass);
+      if (db) db.ref('admin_password').set(newPass);
 
-        viewer.innerHTML = '';
-        Object.keys(data).reverse().forEach(key => {
-          const item = data[key];
-          const p = document.createElement('p');
-          p.className = 'text-gray-400 border-b border-gray-800 pb-1';
-          p.innerText = `[${item.time || '未知時間'}] 裝置: ${item.device || 'Desktop'} | 頁面: ${item.tab || 'home'}`;
-          viewer.appendChild(p);
-        });
-      });
+      alert('密碼已成功更新！全網同步生效。');
+      document.getElementById('new-pass-input').value = '';
     }
 
     function handleContact(e) {
       e.preventDefault();
-      alert('感謝您的來信！訊息已傳送。');
+      alert('訊息已成功傳送！');
       e.target.reset();
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    function closeModal() { document.getElementById('legal-modal').classList.add('hidden'); }
+
+    function showTermsOfService() {
+      document.getElementById('modal-title').innerText = '網站使用條款及免責聲明';
+      document.getElementById('modal-body').innerHTML = `
+        <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
+        <p>歡迎造訪本網站。當您存取或使用本站時，即表示您同意受本條款約束。</p>
+        <h4 class="font-bold text-white text-base pt-2">一、 管轄法律</h4>
+        <p>本條款受美國加利福尼亞州法律管轄。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+
+    function showPrivacyPolicy() {
+      document.getElementById('modal-title').innerText = '商城隱私權政策';
+      document.getElementById('modal-body').innerHTML = `
+        <p>本網站收集訪客 IP、精確定位與裝置類型，用於維護營運與安全性。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+
+    // 精確裝置型號辨識解析
+    function parseDeviceName(ua) {
+      if (/iPhone/i.test(ua)) return 'Apple iPhone';
+      if (/iPad/i.test(ua)) return 'Apple iPad';
+      if (/Xiaomi|Redmi/i.test(ua)) return 'Xiaomi / Redmi';
+      if (/Huawei|Honor/i.test(ua)) return 'Huawei';
+      if (/Samsung/i.test(ua)) return 'Samsung Galaxy';
+      if (/Macintosh/i.test(ua)) return 'Mac Desktop';
+      if (/Windows/i.test(ua)) return 'Windows PC';
+      if (/Android/i.test(ua)) return 'Android Mobile';
+      return 'Generic Device';
+    }
+
+    // 高精準定位與數據收集系統
+    async function trackUserAnalytics(pageName = 'home') {
+      const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
+      const deviceModelName = parseDeviceName(navigator.userAgent);
+      const userLang = localStorage.getItem('user_preferred_lang') || navigator.language;
+      const localFormattedTime = new Date().toLocaleString('zh-HK');
+
+      let clientIp = '127.0.0.1';
+      let locationStr = '定位解析中...';
+      let coordsStr = null;
+
+      try {
+        const ipRes = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
+        if (ipRes && ipRes.success) {
+          clientIp = ipRes.ip;
+          locationStr = `${ipRes.city}, ${ipRes.region}, ${ipRes.country}`;
+          coordsStr = `${ipRes.latitude},${ipRes.longitude}`;
+        }
+      } catch(e) {}
+
+      // 若支援 GPS 衛星晶片授權則優先採用
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            coordsStr = `${lat.toFixed(6)},${lng.toFixed(6)}`;
+            locationStr = `GPS 晶片極致精準 (±${Math.round(pos.coords.accuracy)}米)`;
+            saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
+          },
+          (err) => {
+            saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
+          },
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+      } else {
+        saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
+      }
+    }
+
+    function saveLogToFirebase(ip, coords, location, device, deviceName, lang, time, page) {
+      const logData = {
+        ip: ip,
+        coords: coords,
+        location: location,
+        device: device,
+        device_name: deviceName,
+        language: lang,
+        local_time: time,
+        visited_page: page,
+        timestamp: Date.now()
+      };
+      if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
+    }
+
+    // 滾動式淡入淡出動畫監聽 (Intersection Observer)
+    function initScrollObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+    }
+
+    // 頁面載入初始化
+    window.onload = function() {
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
-      loadNews();
-    });
+
+      loadCustomTexts();
+
+      if (db) {
+        db.ref('news').once('value').then(snapshot => {
+          const newsData = snapshot.val();
+          if (newsData) {
+            Object.values(newsData).forEach(n => renderNewsItem(n));
+          }
+        });
+      }
+
+      trackUserAnalytics('home');
+      initScrollObserver();
+    };
   </script>
 </body>
 </html>
