@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matthew Au 歐鍵鋒 | 官方網站</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .top-banner {
+      background-color: #a87954;
+      color: #ffffff;
+    }
+    .nav-bar {
+      background-color: #1a1a1a;
+    }
+    .nav-link {
+      color: #d1d5db;
+      font-size: 0.95rem;
+      padding-bottom: 4px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-link.active {
+      color: #a87954;
+      border-bottom: 2px solid #a87954;
+    }
+    .marquee-section {
+      background-color: #1a1a1a;
+      border-top: 1px solid #2a2a2a;
+      border-bottom: 1px solid #2a2a2a;
+      color: #a87954;
+    }
+    .chat-btn {
+      background-color: #c49a78;
+      color: #ffffff;
+    }
+    .btn-buy {
+      background-color: #c49a78;
+      color: #ffffff;
+    }
+    .btn-buy:hover {
+      background-color: #b08563;
+    }
+    .modal-bg {
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- 1. 頂部公告條 -->
+  <div class="top-banner py-2 px-4 text-center text-sm font-medium tracking-wide flex items-center justify-center gap-2">
+    <span>🌱</span> 歡迎來到Matthew official website <span>🌱</span>
+  </div>
+
+  <!-- 2. 主導覽列 -->
+  <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- 原版 LOGO：向量內嵌 SVG（含金皇冠、足球、花紋底座與黑字，100% 絕不破圖變白條） -->
+      <a onclick="switchTab('home')" class="bg-white p-1.5 rounded shadow flex items-center justify-center cursor-pointer">
+        <svg width="130" height="55" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+          <!-- 皇冠 -->
+          <path d="M70 30 L82 10 L100 22 L118 10 L130 30 Z" fill="#E5C158"/>
+          <!-- 足球 -->
+          <circle cx="100" cy="44" r="16" fill="black"/>
+          <circle cx="100" cy="44" r="15" fill="white"/>
+          <polygon points="100,34 105,38 103,45 97,45 95,38" fill="black"/>
+          <!-- 花紋 -->
+          <path d="M68 62 C 82 56, 94 68, 100 62 C 106 68, 118 56, 132 62" stroke="#999999" stroke-width="2" fill="none"/>
+          <!-- 文字 THE KING MATTHEW AU ® -->
+          <text x="100" y="72" font-family="Arial, sans-serif" font-weight="900" font-size="10" fill="#4A3425" text-anchor="middle">THE KING</text>
+          <text x="100" y="86" font-family="Arial, sans-serif" font-weight="900" font-size="15" fill="#3D2817" text-anchor="middle">MATTHEW AU</text>
+          <text x="156" y="70" font-family="Arial, sans-serif" font-size="8" fill="#3D2817">®</text>
+        </svg>
+      </a>
+
+      <!-- 導覽選單 -->
+      <nav class="flex items-center gap-8">
+        <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active">首頁</span>
+        <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link">鍵鋒的話</span>
+        <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link">新聞公報</span>
+        <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link">商城</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== 1. 首頁 TAB ==================== -->
+  <div id="page-home" class="tab-page">
+    
+    <!-- Hero 主圖 (陽光散景背景) -->
+    <section class="relative h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800">
+      <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <div class="relative z-10">
+        <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
+        <p class="text-3xl md:text-4xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">歐鍵鋒</p>
+      </div>
+    </section>
+
+    <!-- 跑馬燈 -->
+    <div class="marquee-section py-4 overflow-hidden">
+      <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
+        <span class="mx-6">歡迎 welcome</span><span class="mx-6">歡迎 welcome</span>
+        <span class="mx-6">歡迎 welcome</span><span class="mx-6">歡迎 welcome</span>
+        <span class="mx-6">歡迎 welcome</span><span class="mx-6">歡迎 welcome</span>
+      </div>
+    </div>
+
+    <!-- 邱吉爾名言區塊 -->
+    <section class="bg-stone-900 py-24 px-8 text-center border-b border-gray-800">
+      <div class="max-w-3xl mx-auto">
+        <blockquote class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80">To improve is to change; to be perfect is to change often.</p>
+        <p class="text-sm font-sans tracking-wide text-amber-600 font-bold">—— 溫斯頓·邱吉爾 Winston Churchill</p>
+      </div>
+    </section>
+
+    <!-- 興趣與政治理念區塊 (使用高可用圖庫，絕無奧巴馬/政治人物) -->
+    <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
+      
+      <!-- 足球 -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-2xl font-bold mb-4">關於我</h2>
+          <h3 class="text-xl text-gray-300 mb-2">我的興趣</h3>
+          <p class="text-gray-400">足球</p>
+        </div>
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://picsum.photos/id/1058/800/500" alt="足球" class="w-full h-72 object-cover">
+        </div>
+      </div>
+
+      <!-- Roblox -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-xl text-gray-300 mb-2">我的興趣</h3>
+          <p class="text-gray-400">玩Roblox</p>
+        </div>
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://picsum.photos/id/1070/800/500" alt="Roblox" class="w-full h-72 object-cover">
+        </div>
+      </div>
+
+      <!-- 政治理念 (民主指示牌／無人物) -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://picsum.photos/id/1020/800/500" alt="Democracy" class="w-full h-72 object-cover">
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold mb-4">政治理念</h2>
+          <p class="text-gray-300">促進民主、自由社會發展，拒絕專制政權。</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 評論區 -->
+    <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-12">評論</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4">匿</div>
+            <div class="text-amber-400 text-xl mb-4">★★★★★</div>
+            <p class="text-lg font-medium mb-6">"佢樣樣都好呀"</p>
+            <p class="text-xs text-gray-500">匿名 - 11/2/2023</p>
+          </div>
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4">匿</div>
+            <div class="text-amber-400 text-xl mb-4">★★★★★</div>
+            <p class="text-lg font-medium mb-6">"佢係我見過踢波最好嘅人！"</p>
+            <p class="text-xs text-gray-500">匿名 - 7/6/2023</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 拿破崙名言 -->
+    <section class="py-24 px-6 text-center bg-neutral-900 border-b border-gray-800">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">The man who has made up his mind to win will never say “impossible”.</h2>
+        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80">有著必勝信念的人，從不說「不可能」。</p>
+        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold">Napoléon Bonaparte 拿破崙</p>
+      </div>
+    </section>
+
+    <!-- 聯絡與預約 -->
+    <section class="max-w-3xl mx-auto px-6 py-20 text-center">
+      <h2 class="text-3xl font-bold text-amber-600/90 mb-2">與我聯絡</h2>
+      <p class="text-gray-300 mb-8">歡迎來信！</p>
+      <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-16">
+        <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
+        <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
+        <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none"></textarea>
+        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition">傳送</button>
+      </form>
+
+      <div class="border-t border-gray-800 pt-12 text-sm text-gray-300 space-y-2">
+        <p class="font-bold mb-4">可預約見時間</p>
+        <div class="max-w-md mx-auto space-y-2 text-left">
+          <div class="flex justify-between border-b border-gray-800 py-1"><span>週一</span><span class="text-gray-500">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span>週二</span><span class="text-gray-500">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span>週三</span><span class="text-gray-500">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span>週四</span><span class="text-gray-500">關閉中</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span>週五</span><span class="text-gray-400">請先預約</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span class="text-amber-500">週六</span><span class="text-amber-500">下午04:00 – 下午08:00</span></div>
+          <div class="flex justify-between border-b border-gray-800 py-1"><span>週日</span><span class="text-gray-400">請先預約</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
+  <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-8 text-amber-500">鍵鋒的話</h2>
+    <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
+      <p class="text-lg">歡迎來到我的官方網站！作為一個重視獨立思考與社會自由的人，我希望能透過此平台與大家分享我的理念與日常心得。</p>
+      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+      <p>無論是在足球場上的奔跑，還是在遊戲世界裡的探索，我都抱持著堅持與熱情。感謝大家的關心與支持！</p>
+    </div>
+  </div>
+
+  <!-- ==================== 3. 新聞公報 TAB ==================== -->
+  <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-8 text-amber-500">新聞公報</h2>
+    <div class="space-y-8">
+      <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+        <span class="text-amber-500 text-sm font-mono block mb-2">&lt;13/5/2026&gt;</span>
+        <p class="text-white text-lg">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
+      </div>
+
+      <div class="bg-gray-900 p-6 rounded-lg border border-gray-800">
+        <span class="text-red-400 text-sm font-mono block mb-2">&lt;27/3/2026&gt;</span>
+        <p class="text-white text-lg mb-4">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。本人亦正考慮使用全新帳號，詳情將於稍後公佈。</p>
+        <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 4. 商城 TAB ==================== -->
+  <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-12 text-amber-500">官方商城</h2>
+    <div class="space-y-20">
+      
+      <!-- 商品 1 -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://picsum.photos/id/1058/800/500" alt="足球訓練" class="w-full h-80 object-cover">
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4">歐鍵鋒大師級一對一足球訓練</h2>
+          <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
+          <div class="mb-6">
+            <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow flex items-center justify-center gap-2 mb-3">
+              <span>💳</span> 立即購買
+            </button>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            由歐鍵鋒主理，課程時間為90分鐘一節。<br>
+            <span class="text-amber-500/80">此為玩笑切勿當真</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- 商品 2 -->
+      <div class="grid md:grid-cols-2 gap-12 items-center border-t border-gray-800 pt-16">
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://picsum.photos/id/1025/800/500" alt="心靈支持" class="w-full h-80 object-cover">
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold text-amber-600/90 mb-4">得到我心靈上的支持</h2>
+          <p class="text-2xl font-semibold text-white mb-6">HK$100.00</p>
+          <div>
+            <button onclick="alert('感謝購買！')" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow flex items-center justify-center gap-2 mb-3">
+              <span>💳</span> 立即購買
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 條款 Modal 彈窗 -->
+  <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center p-6 border-b border-gray-800">
+        <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
+      </div>
+      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-6 leading-relaxed"></div>
+      <div class="p-4 border-t border-gray-800 text-right">
+        <button onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 頁尾 -->
+  <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3">
+    <p>© 2026 Matthew Au — 保留所有權利</p>
+    <div class="flex justify-center gap-6 text-gray-400">
+      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer">商城隱私權政策</a>
+      <a onclick="showTermsOfService()" class="hover:underline cursor-pointer">網站使用條款</a>
+    </div>
+    <p class="text-gray-600">By Matthew Au</p>
+  </footer>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+
+      const targetPage = document.getElementById('page-' + tab);
+      const targetBtn = document.getElementById('tab-btn-' + tab);
+
+      if (targetPage) targetPage.classList.remove('hidden');
+      if (targetBtn) targetBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleContact(e) {
+      e.preventDefault();
+      alert('訊息已成功傳送！感謝您的來信。');
+      document.getElementById('contact-name').value = '';
+      document.getElementById('contact-email').value = '';
+      document.getElementById('contact-msg').value = '';
+    }
+
+    function closeModal() {
+      document.getElementById('legal-modal').classList.add('hidden');
+    }
+
+    function showTermsOfService() {
+      document.getElementById('modal-title').innerText = '網站使用條款';
+      document.getElementById('modal-body').innerHTML = `
+        <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
+        <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
+        
+        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明、爭議解決與管轄法律</h4>
+        <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
+        <p><strong>違約責任與賠償：</strong> 若您違反本條款之任何規定，致使本站或其關聯方遭受任何損失、第三方追討或權利主張，您同意負擔完全之賠償責任（包括但不限於訴訟費用及合理律師費）。</p>
+        <p><strong>管轄法律與法院管轄權：</strong><br>
+        1. 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。<br>
+        2. 您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。您並明確同意且接受該等法院具備無可爭議之屬人管轄權（Personal Jurisdiction）與屬地管轄權（Venue）。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">二、 智慧財產權與授權使用</h4>
+        <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
+        <p><strong>禁止行為：</strong> 未經事前書面授權，您不得複製、重製、修改、散布、轉載本站任何內容，亦不得將本站內容用於任何商業目的。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">三、 使用者規範與行為限制</h4>
+        <p>使用本站時，您承諾不得從事以下行為：<br>
+        1. 上傳、張貼或傳播任何違法、侵權、誹謗、猥褻或有害之內容。<br>
+        2. 使用任何自動化工具（如爬蟲程式）未經許可擷取本站資料。<br>
+        3. 試圖未經授權存取本站系統，或植入木馬、病毒等惡意程式。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">四、 外部第三方網站連結</h4>
+        <p>本站可能包含前往第三方網站之超連結。本站對任何第三方網站之內容、隱私政策或商業行為無控制權，亦不承擔任何責任。存取外部連結之風險由您自行承擔。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">五、 條款修訂與更新</h4>
+        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。您於條款變更後繼續使用本站，即視為您已接受該等變更。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+
+    function showPrivacyPolicy() {
+      document.getElementById('modal-title').innerText = '隱私權政策';
+      document.getElementById('modal-body').innerHTML = `
+        <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。本站之運作方式以歐盟《一般資料保護規範》（GDPR）、美國《加州消費者隱私法》（CCPA/CPRA）以及香港《個人資料（隱私）條例》之規範與標準為基礎擬定。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">一、 資料收集與使用</h4>
+        <p><strong>伺服器紀錄：</strong> 當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。這些資料用於系統維護、流量分析與網絡安全。</p>
+        <p><strong>聯絡資料：</strong> 若您透過本站表單或電子郵件聯絡本站，本站會收集您提供的姓名與電子郵件地址，用於處理您的查詢或相關聯繫。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">二、 資料處理依據</h4>
+        <p>本站處理個人資料基於以下情況：您主動發送訊息或同意使用 Cookie；或本站為維持網站正常運作與安全防護之必要。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">三、 Cookie 技術</h4>
+        <p>本站會使用 Cookie 以優化瀏覽體驗。您可以隨時透過瀏覽器設定拒絕或刪除 Cookie，但這可能會影響本站部分功能的運作。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">四、 資料分享與轉讓</h4>
+        <p>本站保留將收集到的資料（包括但不限於去識別化數據或個人資料）出售、出租或分享予第三方的權利。<br>
+        如因法律規定、行政命令或執法單位要求，本站亦可能向相關機構披露資料。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">五、 跨境傳輸</h4>
+        <p>本站資料可能於您所在國家/地區以外的伺服器進行處理與儲存，本站會採取合理措施保障資料安全。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">六、 使用者權利</h4>
+        <p>您有權向本站提出以下要求：<br>
+        • 查詢、閱覽或更正您的個人資料。<br>
+        • 請求刪除本站留存的個人資料。<br>
+        • 限制或反對本站處理您的資料。<br>
+        • 索取您個人資料的電子副本。<br>
+        如需行使上述權利，請透過電子郵件(<a href="mailto:mattew0205au@gmail.com" class="text-amber-500 underline">mattew0205au@gmail.com</a>)聯絡本站。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">七、 外部連結</h4>
+        <p>本站包含第三方網站連結。點擊連結離開本站後，本政策即不再適用，本站不對外部網站的內容與做法負責。</p>
+
+        <h4 class="font-bold text-white text-base pt-2">八、 條款修訂</h4>
+        <p>本站有權隨時修改本隱私權政策。更新內容刊登於本頁面即時生效，不另行通知。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
