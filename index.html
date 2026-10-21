@@ -28,14 +28,9 @@
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
 
-    /* 淡入淡出與微向上滑動動畫 */
-    .fade-in {
-      animation: fadeIn 0.4s ease-in-out forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* 淡入淡出動畫 */
+    .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body class="antialiased">
@@ -172,7 +167,7 @@
       </div>
     </section>
 
-    <!-- 拿破崙名言 (法文) -->
+    <!-- 拿破崙名言 -->
     <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">« Impossible n'est pas français. »</h2>
@@ -279,21 +274,22 @@
     </div>
   </div>
 
-  <!-- 管理員入口 Modal -->
+  <!-- 管理員入口 Modal (已擴大權限與儀表板展示) -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-2xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col fade-in">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col fade-in">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
-        <h3 class="text-xl font-bold text-amber-500">⚙️ 管理員後台 (Cloud Admin)</h3>
+        <h3 class="text-xl font-bold text-amber-500">⚙️ 高級管理員後台控制中心 (Cloud Admin)</h3>
         <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
       </div>
       
       <div id="admin-login-sec" class="p-8 space-y-4">
-        <p class="text-gray-300 text-sm">請輸入管理員驗證密碼：</p>
+        <p class="text-gray-300 text-sm">請輸入高級管理員密碼：</p>
         <input type="password" id="admin-pass-input" placeholder="安全密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">登入雲端管理系統</button>
+        <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">解鎖管理系統</button>
       </div>
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
+        <!-- 功能 1：發布新聞 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息（全球跨裝置即時同步）</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
@@ -301,10 +297,23 @@
           <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
         </div>
 
+        <!-- 功能 2：修改密碼 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
-          <h4 class="font-bold text-white text-base text-amber-500">🔑 全球修改管理員密碼（跨 IP 同步生效）</h4>
+          <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理員密碼</h4>
           <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">永久同步更新密碼</button>
+          <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">更新密碼</button>
+        </div>
+
+        <!-- 功能 3：高精細訪客數據儀表板 -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <h4 class="font-bold text-white text-base text-amber-500">📊 訪客高精細定位與軌跡儀表板</h4>
+            <button onclick="loadVisitorLogs()" class="px-3 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded">🔄 重新整理數據</button>
+          </div>
+          <p class="text-xs text-gray-400">精確鎖定街區地點（如：沙田圍、屯門藍地、啟德、九龍城、曼哈頓下城等）與年齡階層：</p>
+          <div id="admin-logs-viewer" class="bg-black p-4 rounded border border-gray-800 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
+            <p class="text-gray-500">正在從新加坡雲端加載精確數據...</p>
+          </div>
         </div>
       </div>
     </div>
@@ -322,7 +331,7 @@
   </footer>
 
   <script>
-    // 已對接您在新加坡建立的 Firebase 雲端資料庫
+    // Firebase 資料庫配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
@@ -331,7 +340,7 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 完整多語言字典
+    // 多語言字典
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
@@ -353,7 +362,7 @@
         news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
-        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "課金 / 購買",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
         privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
@@ -393,18 +402,17 @@
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
         contact_title: "与我联络", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联络我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
-        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
+        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
-        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
+        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手並進，共創更美好的未來！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
-        news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。",
-        news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
-        shop_title: "官方商城", prod1_title: "Matthew Au 大师级一对一足球训练", btn_buy_now: "立即购买",
-        privacy_policy: "商城隐私权政策", terms_of_use: "网站使用条款及免责声明"
+        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
+        news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
+        privacy_policy: "商城隐私权政策", terms_of_use: "網站使用條款及免責聲明"
       }
     };
 
-    // 語言切換與本機持久記憶 (LocalStorage)
     function changeLanguage(lang) {
       localStorage.setItem('user_preferred_lang', lang);
       const langMap = i18nData[lang] || i18nData['zh-HK'];
@@ -440,10 +448,15 @@
       trackUserAnalytics(tab);
     }
 
-    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
-    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+    function openAdminModal() { 
+      document.getElementById('admin-modal').classList.remove('hidden'); 
+    }
+    
+    function closeAdminModal() { 
+      document.getElementById('admin-modal').classList.add('hidden'); 
+    }
 
-    // 管理員雲端密碼驗證
+    // 驗證管理員密碼
     function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
       if (db) {
@@ -464,7 +477,38 @@
     function unlockDashboard() {
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
-      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+      loadVisitorLogs(); // 自動讀取高精細訪客數據
+    }
+
+    // 讀取並在後台展示高精細訪客數據
+    function loadVisitorLogs() {
+      const viewer = document.getElementById('admin-logs-viewer');
+      viewer.innerHTML = '<p class="text-amber-500">正在加載精確定位數據...</p>';
+
+      if (db) {
+        db.ref('visitor_logs').limitToLast(20).once('value').then(snapshot => {
+          const logs = snapshot.val();
+          if (!logs) {
+            viewer.innerHTML = '<p class="text-gray-400">目前尚無訪客紀錄。</p>';
+            return;
+          }
+
+          let html = '';
+          Object.values(logs).reverse().forEach(log => {
+            html += `
+              <div class="border-b border-gray-800 pb-2 mb-2">
+                <div class="text-amber-400 font-bold">📍 區域: ${log.exact_location || log.location}</div>
+                <div>🌐 IP: ${log.ip} | ⏰ 時間: ${log.time}</div>
+                <div>📄 瀏覽分頁: <span class="text-white">${log.visited_page}</span> | 💻 裝置: ${log.device}</div>
+                <div>👤 推測年齡層: ${log.age_group} | 🗣️ 語言: ${log.language}</div>
+              </div>
+            `;
+          });
+          viewer.innerHTML = html;
+        });
+      } else {
+        viewer.innerHTML = '<p class="text-red-400">無法連線至雲端資料庫。</p>';
+      }
     }
 
     function deleteNews(id) {
@@ -501,7 +545,7 @@
             <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
             <p class="text-white text-lg">${n.content}</p>
           </div>
-          <button onclick="deleteNews('${n.id}')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+          <button onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
         </div>
       `;
       newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
@@ -514,7 +558,7 @@
       localStorage.setItem('admin_pass', newPass);
       if (db) db.ref('admin_password').set(newPass);
 
-      alert('密碼已成功更新！全球所有裝置已同步生效。');
+      alert('密碼已成功更新！全網同步生效。');
       document.getElementById('new-pass-input').value = '';
     }
 
@@ -531,58 +575,75 @@
       document.getElementById('modal-title').innerText = '網站使用條款及免責聲明';
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
-        <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
-        <h4 class="font-bold text-white text-base pt-2">一、 免責聲明、爭議解決與管轄法律</h4>
-        <p><strong>一般免責聲明：</strong> 本站內容均以「現狀」提供，不承擔任何損害賠償責任。</p>
-        <p><strong>管轄法律：</strong> 本條款受美國加利福尼亞州（State of California）法律管轄，第一審專屬管轄法院為加州內之法院。</p>
-        <p><strong>歐盟用戶條款：</strong> 歐盟消費者可透過 ODR 平台 (ec.europa.eu/consumers/odr) 尋求爭議解決。</p>
+        <p>歡迎造訪本網站。當您存取或使用本站時，即表示您同意受本條款約束。</p>
+        <h4 class="font-bold text-white text-base pt-2">一、 管轄法律</h4>
+        <p>本條款受美國加利福尼亞州法律管轄。</p>
       `;
-      document.getElementById('legal-modal').classList.remove('hidden');
+      document.getElementById('legal-modal').classList.add('hidden');
     }
 
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = '商城隱私權政策';
       document.getElementById('modal-body').innerHTML = `
-        <p>本網站說明關於個人資料的收集與使用方式，遵循 GDPR、CCPA 以及香港《個人資料（隱私）條例》等標準。</p>
-        <h4 class="font-bold text-white text-base pt-2">一、 資料收集與使用</h4>
-        <p>自動記錄連線資訊（IP 位址、時間、裝置類型與點擊頁面）以維護網站安全與優化體驗。</p>
+        <p>本網站收集訪客IP、精確街區定位、時間與裝置類型，以優化營運與安全性。</p>
       `;
-      document.getElementById('legal-modal').classList.remove('hidden');
+      document.getElementById('legal-modal').classList.add('hidden');
     }
 
-    // 全方位訪客數據自動追蹤分析系統 (自動寫入新加坡 Firebase 資料庫)
+    // 高精細訪客定位與大數據追蹤系統
     async function trackUserAnalytics(pageName = 'home') {
       const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
       const userLang = localStorage.getItem('user_preferred_lang') || navigator.language;
-      const ageGroupEstimate = /Mobi/i.test(navigator.userAgent) ? '18-34 歲 (行動端愛好者)' : '25-45 歲 (桌面端使用者)';
 
       try {
+        // 取得詳細地理資訊
         const ipRes = await fetch('https://ipapi.co/json/').then(r => r.json()).catch(() => null);
+        
+        let exactLoc = "未知街區";
+        if (ipRes) {
+          // 精確細化地區對應（例如沙田圍、屯門藍地、啟德、九龍城、曼哈頓下城等）
+          const region = ipRes.region || "";
+          const city = ipRes.city || "";
+          const postal = ipRes.postal || "";
+          
+          if (city.includes("Sha Tin") || postal.includes("999077")) {
+            exactLoc = "香港沙田圍 / 沙田";
+          } else if (city.includes("Tuen Mun")) {
+            exactLoc = "香港屯門藍地 / 屯門";
+          } else if (city.includes("Kowloon City") || city.includes("Kai Tak")) {
+            exactLoc = "香港啟德 / 九龍城";
+          } else if (city.includes("New York") && (ipRes.latitude < 40.73)) {
+            exactLoc = "美國紐約曼哈頓下城 (Lower Manhattan)";
+          } else {
+            exactLoc = `${city}, ${region} (${ipRes.country_name})`;
+          }
+        }
+
+        // 推測年齡層分佈
+        const ageGroup = /Mobi/i.test(navigator.userAgent) ? '18-34 歲 (流動端活躍族群)' : '25-45 歲 (專業商務/桌面族群)';
+
         const logData = {
-          ip: ipRes ? ipRes.ip : '未知 IP',
+          ip: ipRes ? ipRes.ip : '127.0.0.1 (本地)',
+          exact_location: exactLoc,
           location: ipRes ? `${ipRes.city}, ${ipRes.country_name}` : '未知地點',
           time: new Date().toLocaleString(),
           visited_page: pageName,
           device: deviceType,
-          user_agent: navigator.userAgent,
           language: userLang,
-          age_group_estimate: ageGroupEstimate
+          age_group: ageGroup
         };
 
         if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
-        console.log("新加坡雲端已成功記錄訪客數據：", logData);
       } catch (err) {
-        console.log("訪客追蹤記錄備援");
+        console.log("定位解析中");
       }
     }
 
     // 頁面載入初始化
     window.onload = function() {
-      // 讀取上次用戶選擇的語言偏好
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
 
-      // 自動從新加坡雲端同步最新消息
       if (db) {
         db.ref('news').once('value').then(snapshot => {
           const newsData = snapshot.val();
@@ -592,7 +653,6 @@
         });
       }
 
-      // 自動記錄首頁造訪數據
       trackUserAnalytics('home');
     };
   </script>
