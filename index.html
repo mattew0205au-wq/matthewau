@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matthew Au | Official Website</title>
-  
+
   <!-- Google AdSense 廣告腳本 -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5676302736000722" crossorigin="anonymous"></script>
 
@@ -14,14 +14,11 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- 如果你的圖片是 favicon.ico -->
-<link rel="icon" href="./favicon.ico?v=2" type="image/x-icon">
 
-<!-- 如果你的圖片是 favicon.png -->
-<link rel="icon" href="./favicon.png?v=2" type="image/png">
- 
-  <link rel="apple-touch-icon" href="./favicon.png?v=2">
+  <!-- ==================== 網站圖標 (Favicon & Apple Touch Icon) ==================== -->
+  <link rel="icon" href="./favicon.ico?v=2" type="image/x-icon">
+  <link rel="icon" href="./favicon.png?v=2" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png?v=2">
 
   <style>
     body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -261,7 +258,6 @@
         <div>
           <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
-          <!-- 點擊觸發付款 Modal -->
           <button onclick="openPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
       </div>
@@ -271,8 +267,6 @@
   <!-- 💳 付款選擇 Modal (PayPal + AlipayHK) -->
   <div id="payment-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative fade-in">
-      
-      <!-- Modal 標頭 -->
       <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
         <h3 class="text-xl font-bold text-amber-500 flex items-center gap-2">
           💳 請選擇您的付款方式
@@ -280,10 +274,7 @@
         <button onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold">✕</button>
       </div>
 
-      <!-- 付款選項 -->
       <div class="space-y-4">
-        
-        <!-- 1. PayPal 免 API 直接網址付款 -->
         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
@@ -295,7 +286,6 @@
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">前往付款 ➔</span>
         </a>
 
-        <!-- 2. AlipayHK 支付寶二維碼付款 -->
         <div onclick="toggleAlipay()" class="cursor-pointer flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">📱</span>
@@ -306,10 +296,8 @@
           </div>
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">顯示 QR Code ➔</span>
         </div>
-
       </div>
 
-      <!-- 支付寶 QR Code 展開區域 -->
       <div id="alipay-sec" class="hidden mt-6 pt-6 border-t border-gray-800 text-center space-y-3">
         <h4 class="font-bold text-white">📱 請使用 AlipayHK App 掃碼付款</h4>
         <div class="bg-white p-3 rounded-xl inline-block shadow-lg">
@@ -317,11 +305,10 @@
         </div>
         <p class="text-xs text-gray-400">完成轉帳後，請保留截圖並透過 Email 與我們核對訂單。</p>
       </div>
-
     </div>
   </div>
 
-  <!-- 📜 法律條款 / 隱私權政策 Modal -->
+  <!-- 📜 法律條款 Modal -->
   <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col fade-in">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -365,11 +352,11 @@
 
         <div class="space-y-3">
           <div class="flex justify-between items-center">
-            <h4 class="font-bold text-white text-base text-amber-500">🎯 GPS 米級極致高精準訪客軌跡</h4>
+            <h4 class="font-bold text-white text-base text-amber-500">🎯 訪客精確軌跡與日誌記錄</h4>
             <button onclick="loadVisitorLogs()" class="px-3 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded">🔄 重新整理數據</button>
           </div>
           <div id="admin-logs-viewer" class="bg-black p-4 rounded border border-gray-800 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
-            <p class="text-gray-500">正在加載極致精準數據...</p>
+            <p class="text-gray-500">正在加載精確數據...</p>
           </div>
         </div>
       </div>
@@ -388,10 +375,9 @@
   </footer>
 
   <script>
-    // 預設密碼 "1234" 的 SHA-256 雜湊亂碼（F12 檢查只會看到這串亂碼，無法反推原密碼）
+    // 預設密碼 "1234" 的 SHA-256 雜湊值
     const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
 
-    // 原生 Web Crypto API SHA-256 加密算法
     async function hashPassword(str) {
       const msgBuffer = new TextEncoder().encode(str);
       const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -399,7 +385,7 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // Firebase 資料庫配置
+    // Firebase 配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
@@ -408,7 +394,7 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 語言字典
+    // 多國語言字典
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
@@ -474,7 +460,7 @@
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
         words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透過此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
-        news_2_body: "27日2时多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
+        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
         privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
@@ -515,7 +501,11 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 📜 法律條款與隱私權政策 Modal 控制
+    // Modal 與付款控制
+    function openPaymentModal() { document.getElementById('payment-modal').classList.remove('hidden'); }
+    function closePaymentModal() { document.getElementById('payment-modal').classList.add('hidden'); }
+    function toggleAlipay() { document.getElementById('alipay-sec').classList.toggle('hidden'); }
+
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = "隱私權政策";
       document.getElementById('modal-body').innerHTML = `
@@ -530,53 +520,35 @@
     function showTermsOfService() {
       document.getElementById('modal-title').innerText = "網站使用條款及免責聲明";
       document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 免責聲明</p>
-        <p>本網站所載之一切資料僅供參考之用。 Matthew Au 團隊已盡力確保網站內容之準確性，但對於任何因使用本網站資料而引致之損失，概不承擔任何法律責任。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 智慧財產權</p>
-        <p>本網站內之所有文字、標誌及多媒體內容版權均屬 Matthew Au 所有，未經授權禁止擅自複製、轉載或作為商業用途。</p>
+        <p class="font-bold text-amber-500">1. 服務條款</p>
+        <p>歡迎瀏覽 Matthew Au 官方網站。本網站提供之所有內容僅供資訊參考，未經授權禁止商業複製。</p>
+        <p class="font-bold text-amber-500 mt-4">2. 免責聲明</p>
+        <p>本網站保留隨時更新或修改網站內容之權利，恕不另行通知。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
-    function closeModal() {
-      document.getElementById('legal-modal').classList.add('hidden');
-    }
+    function closeModal() { document.getElementById('legal-modal').classList.add('hidden'); }
 
-    // 💳 付款 Modal 控制函數
-    function openPaymentModal() {
-      document.getElementById('payment-modal').classList.remove('hidden');
-    }
-    function closePaymentModal() {
-      document.getElementById('payment-modal').classList.add('hidden');
-      document.getElementById('alipay-sec').classList.add('hidden');
-    }
-    function toggleAlipay() {
-      document.getElementById('alipay-sec').classList.toggle('hidden');
-    }
-
-    // ⚙️ 管理員 Modal 控制函數（引入 SHA-256 安全比對）
+    // 管理員 Modal 控制
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
     async function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
-      if (!inputPass) return alert('請輸入密碼！');
-
-      const inputHash = await hashPassword(inputPass);
+      const hashedInput = await hashPassword(inputPass);
 
       if (db) {
-        db.ref('admin_password_hash').once('value').then(snapshot => {
+        db.ref('admin_hash').once('value').then(snapshot => {
           const cloudHash = snapshot.val() || DEFAULT_HASH;
-          if (inputHash === cloudHash) unlockDashboard();
+          if (hashedInput === cloudHash) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         }).catch(() => {
-          const localHash = localStorage.getItem('admin_pass_hash') || DEFAULT_HASH;
-          if (inputHash === localHash) unlockDashboard();
+          if (hashedInput === (localStorage.getItem('admin_hash') || DEFAULT_HASH)) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         });
       } else {
-        const localHash = localStorage.getItem('admin_pass_hash') || DEFAULT_HASH;
-        if (inputHash === localHash) unlockDashboard();
+        if (hashedInput === (localStorage.getItem('admin_hash') || DEFAULT_HASH)) unlockDashboard();
         else alert('驗證失敗！密碼不正確。');
       }
     }
@@ -584,121 +556,112 @@
     function unlockDashboard() {
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
+      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
       loadVisitorLogs();
     }
 
-    function loadVisitorLogs() {
-      const viewer = document.getElementById('admin-logs-viewer');
-      viewer.innerHTML = '<p class="text-amber-500">正在加載日誌數據...</p>';
-
-      if (db) {
-        db.ref('visitor_logs').limitToLast(20).once('value').then(snapshot => {
-          const logs = snapshot.val();
-          if (!logs) {
-            viewer.innerHTML = '<p class="text-gray-400">目前尚無訪客紀錄。</p>';
-            return;
-          }
-
-          let html = '';
-          Object.values(logs).reverse().forEach(log => {
-            const gpsTag = log.coords ? `<a href="https://www.google.com/maps?q=${log.coords}" target="_blank" class="text-amber-400 underline font-bold">📍 地圖點擊對照 (${log.coords})</a>` : `<span class="text-gray-400">${log.location}</span>`;
-            
-            html += `
-              <div class="border-b border-gray-800 pb-2 mb-2">
-                <div class="text-amber-400 font-bold">🎯 極致定位: ${gpsTag}</div>
-                <div class="text-gray-300">🌐 IP: ${log.ip} | ⏰ 時間: ${log.local_time}</div>
-                <div class="text-gray-400">📄 瀏覽: ${log.visited_page} | 💻 裝置: ${log.device}</div>
-              </div>
-            `;
-          });
-          viewer.innerHTML = html;
-        });
-      } else {
-        viewer.innerHTML = '<p class="text-red-400">無法連線至雲端資料庫。</p>';
-      }
-    }
-
-    function deleteNews(id) {
-      if (confirm("確定要刪除這篇最新消息嗎？")) {
-        const item = document.getElementById(id);
-        if (item) item.remove();
-        if (db) db.ref('news/' + id).remove();
-        alert("消息已成功刪除！");
-      }
-    }
-
-    function addNewsPost() {
-      const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
-      const content = document.getElementById('new-news-content').value;
-
-      if (!content) return alert('請輸入內容');
-
-      const newsId = 'news-' + Date.now();
-      const newsObj = { id: newsId, date: date, content: content };
-
-      if (db) db.ref('news/' + newsId).set(newsObj);
-
-      renderNewsItem(newsObj);
-      alert('消息發布成功！全球裝置即時同步。');
-      document.getElementById('new-news-date').value = '';
-      document.getElementById('new-news-content').value = '';
-    }
-
-    function renderNewsItem(n) {
-      const newsContainer = document.getElementById('news-container');
-      const newNewsHTML = `
-        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
-          <div>
-            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
-            <p class="text-white text-lg">${n.content}</p>
-          </div>
-          <button onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
-        </div>
-      `;
-      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
-    }
-
-    // 修改密碼（保存 SHA-256 加密亂碼而非明文）
     async function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
-      if (!newPass) return alert('請輸入新密碼');
-
+      if (!newPass) return alert('請輸入新密碼！');
+      
       const newHash = await hashPassword(newPass);
-
       if (db) {
-        db.ref('admin_password_hash').set(newHash).then(() => {
-          alert('管理員密碼已成功進行加密儲存！');
+        db.ref('admin_hash').set(newHash).then(() => {
+          alert('密碼已成功加密更新！');
           document.getElementById('new-pass-input').value = '';
         });
       } else {
-        localStorage.setItem('admin_pass_hash', newHash);
-        alert('管理員密碼已成功進行加密儲存！');
+        localStorage.setItem('admin_hash', newHash);
+        alert('密碼已於本地更新！');
         document.getElementById('new-pass-input').value = '';
       }
     }
 
+    function addNewsPost() {
+      const date = document.getElementById('new-news-date').value;
+      const content = document.getElementById('new-news-content').value;
+
+      if (!date || !content) return alert('請填寫日期與內容！');
+
+      const newsData = { date, content, timestamp: Date.now() };
+      if (db) {
+        db.ref('news').push(newsData).then(() => {
+          alert('發布成功！');
+          document.getElementById('new-news-date').value = '';
+          document.getElementById('new-news-content').value = '';
+          loadNews();
+        });
+      }
+    }
+
+    function loadNews() {
+      if (!db) return;
+      db.ref('news').once('value').then(snapshot => {
+        const newsObj = snapshot.val();
+        if (!newsObj) return;
+        const container = document.getElementById('news-container');
+
+        Object.keys(newsObj).forEach(key => {
+          const item = newsObj[key];
+          if (!document.getElementById(key)) {
+            const div = document.createElement('div');
+            div.id = key;
+            div.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start";
+            div.innerHTML = `
+              <div>
+                <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${item.date}&gt;</span>
+                <p class="text-white text-lg">${item.content}</p>
+              </div>
+              <button onclick="deleteNews('${key}')" class="admin-only ${document.getElementById('admin-dashboard').classList.contains('hidden') ? 'hidden' : ''} text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+            `;
+            container.prepend(div);
+          }
+        });
+      });
+    }
+
+    function deleteNews(key) {
+      if (confirm('確定要刪除這條消息嗎？')) {
+        if (db && key.startsWith('-')) {
+          db.ref('news/' + key).remove().then(() => {
+            const el = document.getElementById(key);
+            if (el) el.remove();
+          });
+        } else {
+          const el = document.getElementById(key);
+          if (el) el.remove();
+        }
+      }
+    }
+
+    function loadVisitorLogs() {
+      if (!db) return;
+      db.ref('analytics/visits').limitToLast(15).once('value').then(snapshot => {
+        const viewer = document.getElementById('admin-logs-viewer');
+        const data = snapshot.val();
+        if (!data) return viewer.innerHTML = '<p class="text-gray-500">暫無訪客紀錄。</p>';
+
+        viewer.innerHTML = '';
+        Object.keys(data).reverse().forEach(key => {
+          const item = data[key];
+          const p = document.createElement('p');
+          p.className = 'text-gray-400 border-b border-gray-800 pb-1';
+          p.innerText = `[${item.time || '未知時間'}] 裝置: ${item.device || 'Desktop'} | 頁面: ${item.tab || 'home'}`;
+          viewer.appendChild(p);
+        });
+      });
+    }
+
     function handleContact(e) {
       e.preventDefault();
-      alert('訊息已成功傳送！我們會儘快回覆您。');
+      alert('感謝您的來信！訊息已傳送。');
       e.target.reset();
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
-
-      if (db) {
-        db.ref('news').once('value').then(snapshot => {
-          const newsData = snapshot.val();
-          if (newsData) {
-            Object.values(newsData).reverse().forEach(n => {
-              if (!document.getElementById(n.id)) {
-                renderNewsItem(n);
-              }
-            });
-          }
-        });
-      }
+      loadNews();
     });
   </script>
 </body>
