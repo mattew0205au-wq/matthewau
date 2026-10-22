@@ -1,3 +1,11 @@
+這裡為您重新提供完整的 `index.html` 程式碼。
+
+### 這次修改重點：
+
+1. **直接跳轉至 PDF 檔案**：頁尾的「隱私權政策」與「網站使用條款及免責聲明」改為直接連結至 `Privacy_Policy.pdf` 與 `Terms_of_Use.pdf`（在新分頁中開啟），完全移除了原本的條款彈窗機制。只要您將這兩個 PDF 檔案放置於 GitHub 倉庫根目錄中即可運作。
+2. **完整程式碼無省略**：提供從頭到尾完整的 HTML、CSS 及 JavaScript。
+
+```html
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
@@ -412,20 +420,6 @@
     </div>
   </div>
 
-  <!-- 📜 法律條款 Modal (隱私權政策 / 網站使用條款) -->
-  <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
-      <div class="flex justify-between items-center p-6 border-b border-gray-800">
-        <h3 id="modal-title" class="text-xl font-bold text-amber-500 editable-element" data-i18n="legal_modal_title">條款與政策</h3>
-        <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
-      </div>
-      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-4 leading-relaxed editable-element" data-i18n="legal_modal_content"></div>
-      <div class="p-4 border-t border-gray-800 text-right">
-        <button type="button" onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 cursor-pointer">關閉</button>
-      </div>
-    </div>
-  </div>
-
   <!-- ⚙️ 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col">
@@ -445,8 +439,8 @@
         <!-- 全域內容編輯模式切換 -->
         <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex justify-between items-center">
           <div>
-            <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式 (支援條款與彈窗)</h4>
-            <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字（包含條款與政策），關閉時雲端儲存。</p>
+            <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
+            <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字，關閉時雲端儲存。</p>
           </div>
           <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
         </div>
@@ -513,8 +507,9 @@
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
     <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
-      <a onclick="showTermsOfService()" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
+      <!-- 點擊直接開啟 GitHub 上的 PDF 檔案 -->
+      <a href="Privacy_Policy.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
+      <a href="Terms_of_Use.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
       <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
     <p class="text-gray-600">By Matthew Au</p>
@@ -568,9 +563,7 @@
         btn_support: "給予心靈支持",
         label_select_currency: "🌐 選擇結帳幣別：",
         opt_hkd: "HKD (港幣)", opt_usd: "USD (美元)", opt_cny: "CNY (人民幣)", opt_eur: "EUR (歐元)", opt_twd: "TWD (新台幣)",
-        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明",
-        legal_modal_title: "條款與政策",
-        legal_modal_content: "請點擊下方隱私權政策或網站使用條款以檢視詳細內容。"
+        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
@@ -601,9 +594,7 @@
         btn_support: "Give Moral Support",
         label_select_currency: "🌐 Select Payment Currency:",
         opt_hkd: "HKD (Hong Kong Dollar)", opt_usd: "USD (US Dollar)", opt_cny: "CNY (Chinese Yuan)", opt_eur: "EUR (Euro)", opt_twd: "TWD (New Taiwan Dollar)",
-        privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use",
-        legal_modal_title: "Terms & Policies",
-        legal_modal_content: "Please click on Privacy Policy or Terms of Use below to view details."
+        privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use"
       },
       'zh-CN': {
         top_banner: "欢迎来到Matthew official website",
@@ -634,9 +625,7 @@
         btn_support: "给予心灵支持",
         label_select_currency: "🌐 选择结算币别：",
         opt_hkd: "HKD (港币)", opt_usd: "USD (美元)", opt_cny: "CNY (人民币)", opt_eur: "EUR (欧元)", opt_twd: "TWD (新台币)",
-        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明",
-        legal_modal_title: "条款与政策",
-        legal_modal_content: "请点击下方隐私权政策或网站使用条款以查看详细内容。"
+        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
       }
     };
 
@@ -695,65 +684,6 @@
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       trackUserAnalytics(tab);
-    }
-
-    const legalContents = {
-      'privacy': {
-        'zh-HK': `
-          <h4 class="font-bold text-white text-base text-amber-500">隱私權政策</h4>
-          <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。本站之運作方式以歐盟《一般資料保護規範》（GDPR）、美國《加州消費者隱私法》（CCPA/CPRA）以及香港《個人資料（隱私）條例》之規範與標準為基礎擬定。</p>
-          <h5 class="font-bold text-white pt-2">一、 資料收集與使用</h5>
-          <p><strong>伺服器紀錄：</strong> 當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。這些資料用於系統維護、流量分析與網絡安全。</p>
-          <p><strong>聯絡資料：</strong> 若您透過本站表單或電子郵件聯絡本站，本站會收集您提供的姓名與電子郵件地址，用於處理您的查詢或相關聯繫。</p>
-          <h5 class="font-bold text-white pt-2">二、 資料處理依據與權利</h5>
-          <p>您有權向本站提出查詢、閱覽、更正或刪除您的個人資料。如需行使上述權利，請透過電子郵件 (mattew0205au@gmail.com) 聯絡本站。</p>
-        `,
-        'en': `
-          <h4 class="font-bold text-white text-base text-amber-500">Privacy Policy</h4>
-          <p>This website explains how personal data is collected, processed, and used, adhering to GDPR, CCPA, and PDPO standards.</p>
-          <h5 class="font-bold text-white pt-2">1. Data Collection</h5>
-          <p>Server logs and contact information are used exclusively for security and communication purposes.</p>
-        `,
-        'zh-CN': `
-          <h4 class="font-bold text-white text-base text-amber-500">隐私权政策</h4>
-          <p>本网站在此说明关于个人资料的收集、处理及使用方式，基于欧盟GDPR及相关隐私条例拟定。</p>
-        `
-      },
-      'terms': {
-        'zh-HK': `
-          <h4 class="font-bold text-white text-base text-amber-500">網站使用條款</h4>
-          <p class="text-xs text-amber-400 font-mono">最新更新日期：2026年9月15日</p>
-          <p>歡迎造訪本網站。當您存取、瀏覽或使用本站時，即表示您已閱讀、理解並同意受本條款之約束。</p>
-          <h5 class="font-bold text-white pt-2">一、 免責聲明與管轄法律</h5>
-          <p>本站及其所有內容均以「現狀」提供。所有因本站使用所引發之爭議，均受美國加利福尼亞州法律所管轄。</p>
-        `,
-        'en': `
-          <h4 class="font-bold text-white text-base text-amber-500">Terms of Use</h4>
-          <p class="text-xs text-amber-400 font-mono">Last Updated: September 15, 2026</p>
-          <p>Welcome to this website. By accessing or using this site, you agree to be bound by these terms.</p>
-        `,
-        'zh-CN': `
-          <h4 class="font-bold text-white text-base text-amber-500">网站使用条款</h4>
-          <p class="text-xs text-amber-400 font-mono">最新更新日期：2026年9月15日</p>
-          <p>欢迎访问本网站。当您存取、浏览或使用本站时，即表示您同意受本条款之约束。</p>
-        `
-      }
-    };
-
-    function showPrivacyPolicy() {
-      document.getElementById('modal-title').innerText = (currentLang === 'en' ? 'Privacy Policy' : (currentLang === 'zh-CN' ? '隐私权政策' : '隱私權政策'));
-      document.getElementById('modal-body').innerHTML = legalContents['privacy'][currentLang] || legalContents['privacy']['zh-HK'];
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
-
-    function showTermsOfService() {
-      document.getElementById('modal-title').innerText = (currentLang === 'en' ? 'Terms of Use' : (currentLang === 'zh-CN' ? '网站使用条款' : '網站使用條款'));
-      document.getElementById('modal-body').innerHTML = legalContents['terms'][currentLang] || legalContents['terms']['zh-HK'];
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-      document.getElementById('legal-modal').classList.add('hidden');
     }
 
     let currentGlobalAmountHKD = 5000;
@@ -1128,3 +1058,5 @@
   </script>
 </body>
 </html>
+
+```
