@@ -64,6 +64,11 @@
       border-radius: 4px;
       cursor: text;
     }
+
+    /* 簽名圖片轉純白色效果 */
+    .white-signature {
+      filter: brightness(0) invert(1);
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -149,6 +154,7 @@
 
     <!-- 關於我與興趣 -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
+      <!-- 興趣一：足球 -->
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
           <h2 id="editable-about-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="about_me">關於我</h2>
@@ -156,17 +162,18 @@
           <p id="editable-hobby-1" class="text-gray-400 editable-element" data-i18n="hobby_football">足球</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="足球" class="w-full h-72 object-cover">
+          <img src="Football.jpeg" alt="足球" class="w-full h-72 object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80';">
         </div>
       </div>
 
+      <!-- 興趣二：電腦 -->
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
           <h3 id="editable-hobby-title-2" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title">我的興趣</h3>
-          <p id="editable-hobby-2" class="text-gray-400 editable-element" data-i18n="hobby_roblox">玩Roblox</p>
+          <p id="editable-hobby-2" class="text-gray-400 editable-element" data-i18n="hobby_computer">電腦</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Roblox" class="w-full h-72 object-cover">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="電腦" class="w-full h-72 object-cover">
         </div>
       </div>
 
@@ -249,13 +256,13 @@
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
       <p id="editable-words-1" class="text-lg editable-element" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
       <blockquote id="editable-words-quote" class="border-l-4 border-amber-600 pl-4 text-white italic editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
+      <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
       <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
       
-      <!-- 簽名與下款區 -->
+      <!-- 純白色簽名與下款區 -->
       <div class="pt-8 mt-8 border-t border-gray-800 flex flex-col items-end space-y-2">
         <div class="text-right">
-          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block filter invert brightness-200" onerror="this.onerror=null; this.replaceWith('(簽名)');">
+          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block white-signature" onerror="this.onerror=null; this.replaceWith('(簽名)');">
         </div>
         <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element">歐鍵鋒</div>
       </div>
@@ -312,7 +319,7 @@
           <p id="editable-prod2-desc" class="text-gray-400 text-sm mb-6 editable-element">感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！</p>
           
           <div class="mb-6">
-            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element">請輸入自由贊助金額：</label>
+            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element">請輸入自由贊助金額 (HKD)：</label>
             <div class="flex items-center gap-2 max-w-xs">
               <span id="currency-symbol-label" class="text-xl font-bold text-amber-500">HK$</span>
               <input type="number" id="custom-amount-input" min="1" placeholder="自定義金額" value="100" class="w-full p-2.5 bg-gray-800 border border-gray-700 text-white rounded font-bold focus:border-amber-500 focus:outline-none">
@@ -338,10 +345,10 @@
 
       <!-- 幣別選擇下拉選單 -->
       <div class="mb-4 flex items-center justify-between bg-gray-800/80 p-3 rounded border border-gray-700">
-        <span class="text-xs text-gray-300 font-medium">選擇支付幣別 (Currency)：</span>
+        <span class="text-xs text-gray-300 font-medium">支付幣別 (含 15% 溢價匯率)：</span>
         <select id="currency-selector" onchange="changeCurrency(this.value)" class="bg-gray-900 text-amber-400 font-bold border border-gray-600 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
-          <option value="USD">USD (美元)</option>
           <option value="HKD">HKD (港幣)</option>
+          <option value="USD">USD (美元)</option>
           <option value="CNY">CNY (人民幣)</option>
           <option value="EUR">EUR (歐元)</option>
           <option value="TWD">TWD (新台幣)</option>
@@ -350,12 +357,12 @@
 
       <div class="mb-6 p-3 bg-gray-800/60 rounded border border-gray-700 flex justify-between items-center text-sm">
         <span class="text-gray-300">應付金額：</span>
-        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">USD 5,000.00</span>
+        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">HK$ 5,000.00</span>
       </div>
 
       <div class="space-y-4">
-        <!-- PayPal 連結帶入當前選擇金額與幣別 -->
-        <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=USD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
+        <!-- PayPal 連結帶入當前選擇金額與溢價匯率 -->
+        <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
             <div class="text-left">
@@ -522,7 +529,7 @@
         marquee_text: "歡迎 welcome",
         quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
         quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
-        about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球", hobby_computer: "電腦",
         political_view_title: "政治理念", political_view_desc: "促進民主、自由社會發展，拒絕專制政權。",
         reviews_title: "評論", anon_user: "匿",
         review1_text: '"佢樣樣都好呀"', review1_author: "匿名 - 11/2/2023",
@@ -531,7 +538,7 @@
         contact_title: "與我聯絡", contact_sub: "歡迎來信！", social_hint: "或使用社交媒體聯絡我",
         ph_name: "名稱", ph_email: "電子郵件*", ph_msg: "訊息", btn_send: "傳送",
         words_p1: "歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
-        words_p2: "無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。",
+        words_p2: "無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
         news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
@@ -545,7 +552,7 @@
         marquee_text: "Welcome 歡迎",
         quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
         quote_churchill_author: "—— Winston Churchill",
-        about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football", hobby_roblox: "Playing Roblox",
+        about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football", hobby_computer: "Computer",
         political_view_title: "Political Views", political_view_desc: "Promote democracy, free society, and resist authoritarian regimes.",
         reviews_title: "Reviews", anon_user: "A",
         review1_text: '"He is great at everything!"', review1_author: "Anonymous - 11/2/2023",
@@ -554,7 +561,7 @@
         contact_title: "Contact Me", contact_sub: "Feel free to get in touch!", social_hint: "Or connect via social media",
         ph_name: "Name", ph_email: "Email*", ph_msg: "Message", btn_send: "Send",
         words_p1: "Welcome to my official website! As someone who upholds independent thinking and advocates for freedom and democracy, I hope to share my vision, reflections, and insights here.",
-        words_p2: "Whether playing football on the pitch or exploring endless creativity in digital gaming worlds like Roblox, I approach everything with passion and persistence. Life is a marathon where continuous adaptation and strong conviction are essential.",
+        words_p2: "Whether playing football on the pitch or exploring endless creativity in digital gaming worlds, I approach everything with passion and persistence. Life is a marathon where continuous adaptation and strong conviction are essential.",
         words_p3: "Thank you for your support. I will continue to post updates here. Let's move forward together!",
         news_1: "Warmly welcome the President of the United States on visiting China for cooperation.",
         news_2_body: "On the 27th around 2 AM, my official social media (@mattew0205_au) was hacked. The hacker posts financial scam images every 2 hours. Legal action or police reports may follow.",
@@ -568,7 +575,7 @@
         marquee_text: "欢迎 welcome",
         quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
         quote_churchill_author: "—— 温斯顿·丘吉尔 Winston Churchill",
-        about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球", hobby_roblox: "玩Roblox",
+        about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球", hobby_computer: "电脑",
         political_view_title: "政治理念", political_view_desc: "促进民主、自由社会发展，拒绝专制政权。",
         reviews_title: "评论", anon_user: "匿",
         review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
@@ -577,7 +584,7 @@
         contact_title: "与我联絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联絡我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
         words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
-        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
+        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
@@ -664,58 +671,64 @@
       document.getElementById('legal-modal').classList.add('hidden');
     }
 
-    // 💳 多幣別付款 Modal 與 IP 自動偵測設定
-    let currentGlobalAmount = 5000;
-    let detectedCurrency = 'USD'; // 預設其他國家/地區為美元
+    // 💳 多幣別付款 Modal 與高於市場價 15% 溢價匯率換算
+    let currentGlobalAmountHKD = 5000;
+    let detectedCurrency = 'HKD';
+
+    // 1 HKD 兌換各幣別基準市場匯率（帶入高於市場價 15% 溢價係數 1.15）
+    const BASE_EXCHANGE_RATES_FROM_HKD = {
+      'HKD': 1.0,
+      'USD': (1 / 7.82) * 1.15,  // 約 0.147
+      'CNY': (0.936 / 1) * 1.15, // 約 1.076
+      'EUR': (0.118 / 1) * 1.15, // 約 0.1357
+      'TWD': (4.139 / 1) * 1.15  // 約 4.76
+    };
 
     async function detectUserCurrencyByIP() {
       try {
         const res = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
         if (res && res.success) {
-          const countryCode = res.country_code; // 例如 HK, TW, CN, DE 等
-          if (countryCode === 'HK') {
-            detectedCurrency = 'HKD';
-          } else if (countryCode === 'TW') {
-            detectedCurrency = 'TWD';
-          } else if (countryCode === 'CN') {
-            detectedCurrency = 'CNY';
-          } else if (['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'PT', 'IE', 'FI', 'GR'].includes(countryCode)) {
-            detectedCurrency = 'EUR';
-          } else {
-            detectedCurrency = 'USD';
-          }
+          const countryCode = res.country_code;
+          if (countryCode === 'HK') detectedCurrency = 'HKD';
+          else if (countryCode === 'TW') detectedCurrency = 'TWD';
+          else if (countryCode === 'CN') detectedCurrency = 'CNY';
+          else if (['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'PT', 'IE', 'FI', 'GR'].includes(countryCode)) detectedCurrency = 'EUR';
+          else detectedCurrency = 'USD';
         }
       } catch(e) {
-        detectedCurrency = 'USD';
+        detectedCurrency = 'HKD';
       }
     }
 
-    function openPaymentModal(amount = 5000) {
-      currentGlobalAmount = amount;
+    function openPaymentModal(amountHKD = 5000) {
+      currentGlobalAmountHKD = amountHKD;
       const selector = document.getElementById('currency-selector');
       if (selector) selector.value = detectedCurrency;
-      updatePaymentDisplay(detectedCurrency, currentGlobalAmount);
+      updatePaymentDisplay(detectedCurrency, currentGlobalAmountHKD);
       document.getElementById('payment-modal').classList.remove('hidden');
     }
 
     function openCustomPaymentModal() {
       const val = document.getElementById('custom-amount-input').value;
-      const amount = parseFloat(val);
-      if (isNaN(amount) || amount <= 0) {
+      const amountHKD = parseFloat(val);
+      if (isNaN(amountHKD) || amountHKD <= 0) {
         alert('請輸入有效的金額！');
         return;
       }
-      openPaymentModal(amount);
+      openPaymentModal(amountHKD);
     }
 
     function changeCurrency(currency) {
       detectedCurrency = currency;
-      updatePaymentDisplay(currency, currentGlobalAmount);
+      updatePaymentDisplay(currency, currentGlobalAmountHKD);
     }
 
-    function updatePaymentDisplay(currency, amount) {
-      document.getElementById('payment-amount-display').innerText = `${currency} ${Number(amount).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
-      document.getElementById('paypal-link-btn').href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=${currency}&amount=${amount}`;
+    function updatePaymentDisplay(currency, hkdAmount) {
+      const rate = BASE_EXCHANGE_RATES_FROM_HKD[currency] || 1.0;
+      const convertedAmount = Math.round(hkdAmount * rate * 100) / 100;
+
+      document.getElementById('payment-amount-display').innerText = `${currency} ${convertedAmount.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('paypal-link-btn').href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=${currency}&amount=${convertedAmount}`;
       document.getElementById('currency-symbol-label').innerText = currency;
     }
 
