@@ -261,8 +261,8 @@
     </div>
   </div>
 
- <!-- ==================== 4. 商城 TAB ==================== -->
-  <div id="page-shop" class="tab-page hidden fade-in max-w-6xl mx-auto px-6 py-16">
+  <!-- ==================== 4. 商城 TAB ==================== -->
+  <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16 scroll-fade">
     <h2 class="text-3xl font-bold mb-12 text-amber-500" data-i18n="shop_title">官方商城</h2>
     <div id="shop-container" class="space-y-20">
       <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -270,9 +270,9 @@
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
+          <h2 id="editable-shop-title" class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
           <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
-          <button onclick="openPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
+          <button type="button" onclick="openPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
       </div>
     </div>
@@ -280,12 +280,12 @@
 
   <!-- 💳 付款選擇 Modal (PayPal + AlipayHK) -->
   <div id="payment-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative fade-in">
+    <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative">
       <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
         <h3 class="text-xl font-bold text-amber-500 flex items-center gap-2">
           💳 請選擇您的付款方式
         </h3>
-        <button onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold">✕</button>
+        <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">✕</button>
       </div>
 
       <div class="space-y-4">
@@ -327,11 +327,11 @@
     <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
+        <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
       <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-6 leading-relaxed"></div>
       <div class="p-4 border-t border-gray-800 text-right">
-        <button onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">關閉</button>
+        <button type="button" onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 cursor-pointer">關閉</button>
       </div>
     </div>
   </div>
@@ -341,13 +341,13 @@
     <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 class="text-xl font-bold text-amber-500">⚙️ 高級管理員後台控制中心 (Cloud Admin)</h3>
-        <button onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
+        <button type="button" onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
       
       <div id="admin-login-sec" class="p-8 space-y-4">
         <p class="text-gray-300 text-sm">請輸入管理員密碼：</p>
         <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <button onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600">解鎖系統</button>
+        <button type="button" onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600 cursor-pointer">解鎖系統</button>
       </div>
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
@@ -358,7 +358,7 @@
             <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
             <p class="text-xs text-gray-400">開啟後可直接在網頁上編輯並儲存所有文字內容。</p>
           </div>
-          <button id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs">開啟編輯模式</button>
+          <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
         </div>
 
         <!-- 發布最新消息 -->
@@ -366,7 +366,7 @@
           <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <textarea id="new-news-content" placeholder="內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></textarea>
-          <button onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500">即時發布並同步</button>
+          <button type="button" onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500 cursor-pointer">即時發布並同步</button>
         </div>
 
         <!-- 實時數據統計儀表板 (Analytics & Charts) -->
@@ -398,8 +398,8 @@
             <summary class="cursor-pointer font-bold text-amber-500 text-base flex justify-between items-center">
               <span>🎯 訪客精確軌跡與 IP 定位日誌（點擊展開/收合）</span>
               <div class="space-x-2">
-                <button onclick="event.stopPropagation(); loadVisitorLogs()" class="px-2 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded">🔄 重新整理</button>
-                <button onclick="event.stopPropagation(); clearAllVisitorLogs()" class="px-2 py-1 bg-red-700 hover:bg-red-600 text-white text-xs rounded">🗑️ 清除全部</button>
+                <button type="button" onclick="event.stopPropagation(); loadVisitorLogs()" class="px-2 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded cursor-pointer">🔄 重新整理</button>
+                <button type="button" onclick="event.stopPropagation(); clearAllVisitorLogs()" class="px-2 py-1 bg-red-700 hover:bg-red-600 text-white text-xs rounded cursor-pointer">🗑️ 清除全部</button>
               </div>
             </summary>
             <div id="admin-logs-viewer" class="mt-4 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
@@ -408,11 +408,11 @@
           </details>
         </div>
 
-        <!-- 修改管理員密碼（已移至最底部） -->
+        <!-- 修改管理員密碼 -->
         <div class="space-y-3 pt-2">
           <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理員密碼</h4>
           <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <button onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600">更新密碼</button>
+          <button type="button" onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600 cursor-pointer">更新密碼</button>
         </div>
 
       </div>
@@ -431,6 +431,16 @@
   </footer>
 
   <script>
+    // 預設密碼 "1234" 的 SHA-256 加密雜湊亂碼（安全防護）
+    const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+
+    async function hashPassword(str) {
+      const msgBuffer = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
     // Firebase 資料庫配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -502,11 +512,11 @@
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
         contact_title: "与我联絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联絡我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
-        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
-        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中进行无限的创意探索与挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的大时代中站稳脚跟。",
-        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
+        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
+        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
+        words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
-        news_2_body: "27日2时多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
+        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
         privacy_policy: "商城隐私权政策", terms_of_use: "網站使用條款及免責聲明"
@@ -548,22 +558,78 @@
       trackUserAnalytics(tab);
     }
 
+    // 📜 隱私權政策與免責聲明 Modal
+    function showPrivacyPolicy() {
+      document.getElementById('modal-title').innerText = "商城隱私權政策";
+      document.getElementById('modal-body').innerHTML = `
+        <p class="font-bold text-amber-500">1. 個人資料收集與使用</p>
+        <p>本網站僅在您進行商品購買或透過聯絡表單發送訊息時收集必要之個人資料（例如電子郵件、名稱及付款備註）。相關資料僅用於訂單核對及溝通服務，絕不會洩漏給第三方。</p>
+        <p class="font-bold text-amber-500 mt-4">2. 交易安全</p>
+        <p>本網站之付款流程均直接透過 PayPal 及 AlipayHK 官方安全加密平台完成，本網站伺服器不會記錄或儲存您的信用卡號碼或支付密碼。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+
+    function showTermsOfService() {
+      document.getElementById('modal-title').innerText = "網站使用條款及免責聲明";
+      document.getElementById('modal-body').innerHTML = `
+        <p class="font-bold text-amber-500">1. 免責聲明</p>
+        <p>本網站所載之一切資料僅供參考之用。 Matthew Au 團隊已盡力確保網站內容之準確性，但對於任何因使用本網站資料而引致之損失，概不承擔任何法律責任。</p>
+        <p class="font-bold text-amber-500 mt-4">2. 智慧財產權</p>
+        <p>本網站內之所有文字、標誌及多媒體內容版權均屬 Matthew Au 所有，未經授權禁止擅自複製、轉載或作為商業用途。</p>
+      `;
+      document.getElementById('legal-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('legal-modal').classList.add('hidden');
+    }
+
+    // 💳 付款 Modal 控制函數（明確確保可以正常彈出）
+    function openPaymentModal() {
+      const modal = document.getElementById('payment-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+      }
+    }
+    function closePaymentModal() {
+      const modal = document.getElementById('payment-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+      const alipaySec = document.getElementById('alipay-sec');
+      if (alipaySec) {
+        alipaySec.classList.add('hidden');
+      }
+    }
+    function toggleAlipay() {
+      const alipaySec = document.getElementById('alipay-sec');
+      if (alipaySec) {
+        alipaySec.classList.toggle('hidden');
+      }
+    }
+
+    // ⚙️ 管理員登入與控制中心
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    function checkAdminPassword() {
+    async function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
+      if (!inputPass) return alert('請輸入密碼！');
+
+      const inputHash = await hashPassword(inputPass);
+
       if (db) {
-        db.ref('admin_password').once('value').then(snapshot => {
-          const cloudPass = snapshot.val() || "1234";
-          if (inputPass === cloudPass) unlockDashboard();
+        db.ref('admin_password_hash').once('value').then(snapshot => {
+          const cloudHash = snapshot.val() || DEFAULT_HASH;
+          if (inputHash === cloudHash) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         }).catch(() => {
-          if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
+          if (inputHash === DEFAULT_HASH) unlockDashboard();
           else alert('驗證失敗！密碼不正確。');
         });
       } else {
-        if (inputPass === (localStorage.getItem('admin_pass') || "1234")) unlockDashboard();
+        if (inputHash === DEFAULT_HASH) unlockDashboard();
         else alert('驗證失敗！密碼不正確。');
       }
     }
@@ -599,7 +665,7 @@
       
       if (isEditMode) {
         btn.innerText = "儲存並關閉編輯模式";
-        btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs";
+        btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs cursor-pointer";
         editableIds.forEach(id => {
           const el = document.getElementById(id);
           if (el) {
@@ -609,7 +675,7 @@
         });
       } else {
         btn.innerText = "開啟編輯模式";
-        btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs";
+        btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer";
         
         const textsToSave = {
           quoteChurchill: document.getElementById('editable-quote-churchill').innerText,
@@ -661,7 +727,7 @@
                   <div class="text-gray-300">🌐 IP: ${log.ip} | ⏰ 時間: ${log.local_time}</div>
                   <div class="text-gray-400">📄 瀏覽頁面: <span class="text-white">${log.visited_page}</span></div>
                 </div>
-                <button onclick="deleteVisitorLog('${key}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+                <button type="button" onclick="deleteVisitorLog('${key}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
               </div>
             `;
           });
@@ -670,7 +736,6 @@
       }
     }
 
-    // 單獨刪除訪客記錄
     function deleteVisitorLog(key) {
       if (confirm("確定要刪除這條訪客記錄嗎？")) {
         if (db) db.ref('visitor_logs/' + key).remove();
@@ -680,7 +745,6 @@
       }
     }
 
-    // 清除全部訪客記錄
     function clearAllVisitorLogs() {
       if (confirm("警告：確定要清空所有訪客軌跡資料嗎？")) {
         if (db) db.ref('visitor_logs').remove();
@@ -690,7 +754,6 @@
       }
     }
 
-    // 即時更新統計圖表數據
     function updateStats(logs) {
       const logsArray = Object.values(logs);
       const total = logsArray.length;
@@ -750,7 +813,7 @@
       if (db) db.ref('news/' + newsId).set(newsObj);
 
       renderNewsItem(newsObj);
-      alert('消息發布成功！全球裝置即時同步。');
+      alert('消息發布成功！');
       document.getElementById('new-news-date').value = '';
       document.getElementById('new-news-content').value = '';
     }
@@ -763,48 +826,34 @@
             <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
             <p class="text-white text-lg">${n.content}</p>
           </div>
-          <button onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+          <button type="button" onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
         </div>
       `;
       newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
     }
 
-    function updateAdminPassword() {
+    async function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
       if (!newPass) return alert("請輸入新密碼");
 
-      localStorage.setItem('admin_pass', newPass);
-      if (db) db.ref('admin_password').set(newPass);
+      const newHash = await hashPassword(newPass);
 
-      alert('密碼已成功更新！全網同步生效。');
-      document.getElementById('new-pass-input').value = '';
+      if (db) {
+        db.ref('admin_password_hash').set(newHash).then(() => {
+          alert('管理員密碼已成功加密更新！');
+          document.getElementById('new-pass-input').value = '';
+        });
+      } else {
+        localStorage.setItem('admin_pass_hash', newHash);
+        alert('管理員密碼已成功加密更新！');
+        document.getElementById('new-pass-input').value = '';
+      }
     }
 
     function handleContact(e) {
       e.preventDefault();
       alert('訊息已成功傳送！');
       e.target.reset();
-    }
-
-    function closeModal() { document.getElementById('legal-modal').classList.add('hidden'); }
-
-    function showTermsOfService() {
-      document.getElementById('modal-title').innerText = '網站使用條款及免責聲明';
-      document.getElementById('modal-body').innerHTML = `
-        <p class="text-xs text-amber-500 font-mono">最新更新日期：2026年9月15日</p>
-        <p>歡迎造訪本網站。當您存取或使用本站時，即表示您同意受本條款約束。</p>
-        <h4 class="font-bold text-white text-base pt-2">一、 管轄法律</h4>
-        <p>本條款受美國加利福尼亞州法律管轄。</p>
-      `;
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
-
-    function showPrivacyPolicy() {
-      document.getElementById('modal-title').innerText = '商城隱私權政策';
-      document.getElementById('modal-body').innerHTML = `
-        <p>本網站收集訪客 IP、精確定位與裝置類型，用於維護營運與安全性。</p>
-      `;
-      document.getElementById('legal-modal').classList.remove('hidden');
     }
 
     // 精確裝置型號辨識解析
@@ -820,7 +869,6 @@
       return 'Generic Device';
     }
 
-    // 高精準定位與數據收集系統
     async function trackUserAnalytics(pageName = 'home') {
       const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
       const deviceModelName = parseDeviceName(navigator.userAgent);
@@ -840,7 +888,6 @@
         }
       } catch(e) {}
 
-      // 若支援 GPS 衛星晶片授權則優先採用
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
@@ -875,7 +922,6 @@
       if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
     }
 
-    // 滾動式淡入淡出動畫監聽 (Intersection Observer)
     function initScrollObserver() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -888,7 +934,6 @@
       document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
     }
 
-    // 頁面載入初始化
     window.onload = function() {
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
