@@ -383,7 +383,7 @@
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
             <div class="text-left">
-              <div class="font-bold text-white text-base">PayPal / 國際信用卡</div>
+              <div class="font-bold text-white text-base">PayPal /信用卡</div>
               <div class="text-xs text-gray-400">收款帳號：mattew0205au@gmail.com</div>
             </div>
           </div>
@@ -395,7 +395,7 @@
             <span class="text-3xl">📱</span>
             <div class="text-left">
               <div class="font-bold text-white text-base">AlipayHK 支付寶</div>
-              <div class="text-xs text-gray-400">香港 / 內地支付寶 App 直接掃碼轉帳</div>
+              <div class="text-xs text-gray-400">支付寶直接掃碼轉帳</div>
             </div>
           </div>
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">顯示 QR Code ➔</span>
@@ -460,24 +460,16 @@
   <!-- 頁尾 -->
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
     <p>© 2026 Matthew Au — 保留所有權利</p>
-    <div class="flex justify-center gap-6 text-gray-400">
+    <div class="flex justify-center flex-wrap gap-6 text-gray-400">
       <a href="Privacy_Policy.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
       <a href="Terms_of_Use.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
+      <a href="https://kwokfenix.net/" target="_blank" class="hover:underline cursor-pointer text-amber-500 font-bold">+ KWOKFENIX.NET</a>
       <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
     <p class="text-gray-600">By Matthew Au</p>
   </footer>
 
   <script>
-    const DEFAULT_HASH = "8d1d86d6cdcc67ae967a57a8a07c34bfa85df5d064c1e4d3c40f5cb1b764b85c";
-
-    async function hashPassword(str) {
-      const msgBuffer = new TextEncoder().encode(str);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
@@ -577,7 +569,7 @@
         prod2_input_label: "请输入自由赞助金额：",
         btn_support: "给予心灵支持",
         label_select_currency: "🌐 选择结算币别：",
-        opt_hkd: "HKD (港币)", opt_usd: "USD (美元)", opt_cny: "CNY (人民币)", opt_eur: "EUR (欧元)", opt_twd: "TWD (新台币)",
+        opt_hkd: "HKD (港币)", opt_usd: "USD (美元)", opt_cny: "CNY (人民币)", opt_eur: "欧元)", opt_twd: "TWD (新台币)",
         privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
       }
     };
@@ -721,13 +713,12 @@
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    async function checkAdminPassword() {
+    // 直接使用 1234 作為驗證密碼
+    function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
       if (!inputPass) return alert('請輸入密碼！');
 
-      const inputHash = await hashPassword(inputPass);
-
-      if (inputHash === DEFAULT_HASH) {
+      if (inputPass === "1234") {
         unlockDashboard();
         document.getElementById('admin-pass-input').value = '';
       } else {
