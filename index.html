@@ -260,12 +260,12 @@
       <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
       <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
       
-      <!-- 純白色簽名與下款區 -->
+      <!-- 純白色簽名與英文署名區 -->
       <div class="pt-8 mt-8 border-t border-gray-800 flex flex-col items-end space-y-2">
         <div class="text-right">
           <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block white-signature" onerror="this.onerror=null; this.replaceWith('(簽名)');">
         </div>
-        <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element">歐鍵鋒</div>
+        <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element" data-i18n="signature_name">歐鍵鋒 Matthew Au</div>
       </div>
     </div>
   </div>
@@ -300,15 +300,15 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 border-b border-gray-800 pb-6">
       <h2 id="editable-main-shop-title" class="text-3xl font-bold text-amber-500 editable-element" data-i18n="shop_title">官方商城</h2>
       
-      <!-- 商城左上角直接設定幣別 -->
+      <!-- 商城左上角直接設定幣別 (含翻譯) -->
       <div class="flex items-center gap-3 bg-gray-900 p-3 rounded-lg border border-gray-800 shadow">
-        <span class="text-xs text-gray-400 font-medium">🌐 選擇結帳幣別：</span>
+        <span class="text-xs text-gray-400 font-medium editable-element" data-i18n="label_select_currency">🌐 選擇結帳幣別：</span>
         <select id="shop-top-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="bg-gray-800 text-amber-400 font-bold border border-gray-700 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
-          <option value="HKD">HKD (港幣)</option>
-          <option value="USD">USD (美元)</option>
-          <option value="CNY">CNY (人民幣)</option>
-          <option value="EUR">EUR (歐元)</option>
-          <option value="TWD">TWD (新台幣)</option>
+          <option value="HKD" data-i18n="opt_hkd">HKD (港幣)</option>
+          <option value="USD" data-i18n="opt_usd">USD (美元)</option>
+          <option value="CNY" data-i18n="opt_cny">CNY (人民幣)</option>
+          <option value="EUR" data-i18n="opt_eur">EUR (歐元)</option>
+          <option value="TWD" data-i18n="opt_twd">TWD (新台幣)</option>
         </select>
       </div>
     </div>
@@ -333,18 +333,18 @@
           <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" alt="心靈支持" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 id="editable-prod2-title" class="text-3xl font-bold text-amber-500 mb-2 editable-element">得到我心靈上的支持</h2>
-          <p id="editable-prod2-desc" class="text-gray-400 text-sm mb-6 editable-element">感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！</p>
+          <h2 id="editable-prod2-title" class="text-3xl font-bold text-amber-500 mb-2 editable-element" data-i18n="prod2_title">得到我心靈上的支持</h2>
+          <p id="editable-prod2-desc" class="text-gray-400 text-sm mb-6 editable-element" data-i18n="prod2_desc">感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！</p>
           
           <div class="mb-6">
-            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element">請輸入自由贊助金額：</label>
+            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element" data-i18n="prod2_input_label">請輸入自由贊助金額：</label>
             <div class="flex items-center gap-2 max-w-xs">
               <span id="currency-symbol-label" class="text-xl font-bold text-amber-500">HKD</span>
               <input type="number" id="custom-amount-input" min="1" placeholder="自定義金額" value="100" class="w-full p-2.5 bg-gray-800 border border-gray-700 text-white rounded font-bold focus:border-amber-500 focus:outline-none">
             </div>
           </div>
 
-          <button type="button" onclick="openCustomPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💖 <span>給予心靈支持</span></button>
+          <button type="button" onclick="openCustomPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💖 <span data-i18n="btn_support">給予心靈支持</span></button>
         </div>
       </div>
 
@@ -363,13 +363,13 @@
 
       <!-- 幣別選擇彈窗選單 -->
       <div class="mb-4 flex items-center justify-between bg-gray-800/80 p-3 rounded border border-gray-700">
-        <span class="text-xs text-gray-300 font-medium">支付幣別 (Currency)：</span>
+        <span class="text-xs text-gray-300 font-medium editable-element" data-i18n="label_select_currency">支付幣別 (Currency)：</span>
         <select id="modal-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="bg-gray-900 text-amber-400 font-bold border border-gray-600 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
-          <option value="HKD">HKD (港幣)</option>
-          <option value="USD">USD (美元)</option>
-          <option value="CNY">CNY (人民幣)</option>
-          <option value="EUR">EUR (歐元)</option>
-          <option value="TWD">TWD (新台幣)</option>
+          <option value="HKD" data-i18n="opt_hkd">HKD (港幣)</option>
+          <option value="USD" data-i18n="opt_usd">USD (美元)</option>
+          <option value="CNY" data-i18n="opt_cny">CNY (人民幣)</option>
+          <option value="EUR" data-i18n="opt_eur">EUR (歐元)</option>
+          <option value="TWD" data-i18n="opt_twd">TWD (新台幣)</option>
         </select>
       </div>
 
@@ -379,7 +379,6 @@
       </div>
 
       <div class="space-y-4">
-        <!-- PayPal 連結帶入當前選擇金額 -->
         <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
@@ -391,7 +390,6 @@
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">前往付款 ➔</span>
         </a>
 
-        <!-- AlipayHK 支付寶 -->
         <div onclick="toggleAlipay()" class="cursor-pointer flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">📱</span>
@@ -414,14 +412,14 @@
     </div>
   </div>
 
-  <!-- 📜 法律條款 Modal (隱私權政策 / 網站使用條款) -->
+  <!-- 📜 法律條款 Modal (隱私權政策 / 網站使用條款 - 全域編輯模式可編輯) -->
   <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
-        <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
+        <h3 id="modal-title" class="text-xl font-bold text-amber-500 editable-element" data-i18n="legal_modal_title">條款與政策</h3>
         <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
-      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-4 leading-relaxed"></div>
+      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-4 leading-relaxed editable-element" data-i18n="legal_modal_content"></div>
       <div class="p-4 border-t border-gray-800 text-right">
         <button type="button" onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 cursor-pointer">關閉</button>
       </div>
@@ -444,11 +442,11 @@
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
         
-        <!-- 全域內容編輯模式切換 -->
+        <!-- 全域內容編輯模式切換 (支援 AI 即時全語言自動翻譯同步) -->
         <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex justify-between items-center">
           <div>
-            <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
-            <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字，關閉時全網儲存並雲端同步。</p>
+            <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式 (支援跨語言即時同步翻譯)</h4>
+            <p class="text-xs text-gray-400">開啟後可在網頁/彈窗直接修改文字。關閉時將自動翻譯並同步更新至所有語言！</p>
           </div>
           <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
         </div>
@@ -540,7 +538,8 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    const i18nData = {
+    // 全網完整多語言字典（含補齊的所有項目）
+    let i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
         nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "最新消息", nav_shop: "商城",
@@ -559,11 +558,19 @@
         words_p1: "歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
         words_p2: "無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
+        signature_name: "歐鍵鋒 Matthew Au",
         news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明"
+        prod2_title: "得到我心靈上的支持",
+        prod2_desc: "感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！",
+        prod2_input_label: "請輸入自由贊助金額：",
+        btn_support: "給予心靈支持",
+        label_select_currency: "🌐 選擇結帳幣別：",
+        opt_hkd: "HKD (港幣)", opt_usd: "USD (美元)", opt_cny: "CNY (人民幣)", opt_eur: "EUR (歐元)", opt_twd: "TWD (新台幣)",
+        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明",
+        legal_modal_title: "條款與政策", legal_modal_content: "加載中..."
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
@@ -583,11 +590,19 @@
         words_p1: "Welcome to my official website! As someone who upholds independent thinking and advocates for freedom and democracy, I hope to share my vision, reflections, and insights here.",
         words_p2: "Whether playing football on the pitch or exploring infinite tech possibilities through computers, I approach everything with passion and persistence. Life is a marathon where continuous adaptation is key.",
         words_p3: "Thank you for your support. I will continue to post updates here. Let's move forward together!",
+        signature_name: "Matthew Au",
         news_1: "Warmly welcome the President of the United States on visiting China for cooperation.",
         news_2_body: "On the 27th around 2 AM, my official social media (@mattew0205_au) was hacked. The hacker posts financial scam images every 2 hours. Legal action or police reports may follow.",
         news_2_sub: "Finally, I strongly condemn account theft and financial fraud, demanding an immediate stop and compensation.",
         shop_title: "Official Shop", prod1_title: "Matthew Au Master 1-on-1 Football Coaching", btn_buy_now: "Buy Now",
-        privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use"
+        prod2_title: "Get My Moral Support",
+        prod2_desc: "Thank you for your sponsorship and support. Your moral encouragement is my biggest motivation to keep creating and moving forward!",
+        prod2_input_label: "Enter custom sponsorship amount:",
+        btn_support: "Give Moral Support",
+        label_select_currency: "🌐 Select Payment Currency:",
+        opt_hkd: "HKD (Hong Kong Dollar)", opt_usd: "USD (US Dollar)", opt_cny: "CNY (Chinese Yuan)", opt_eur: "EUR (Euro)", opt_twd: "TWD (New Taiwan Dollar)",
+        privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use",
+        legal_modal_title: "Terms & Policies", legal_modal_content: "Loading..."
       },
       'zh-CN': {
         top_banner: "欢迎来到Matthew official website",
@@ -607,21 +622,35 @@
         words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字电脑世界中進行無限的科技探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
+        signature_name: "欧键锋 Matthew Au",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
+        prod2_title: "获得我心灵上的支持",
+        prod2_desc: "感谢您的赞助与支持，您的心灵鼓励是我持续创作与前进的最大动力！",
+        prod2_input_label: "请输入自由赞助金额：",
+        btn_support: "给予心灵支持",
+        label_select_currency: "🌐 选择结算币别：",
+        opt_hkd: "HKD (港币)", opt_usd: "USD (美元)", opt_cny: "CNY (人民币)", opt_eur: "EUR (欧元)", opt_twd: "TWD (新台币)",
+        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明",
+        legal_modal_title: "条款与政策", legal_modal_content: "加载中..."
       }
     };
 
+    let currentLang = 'zh-HK';
+
     function changeLanguage(lang) {
+      currentLang = lang;
       localStorage.setItem('user_preferred_lang', lang);
       const langMap = i18nData[lang] || i18nData['zh-HK'];
       
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (langMap[key]) el.innerText = langMap[key];
+        if (langMap[key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = langMap[key];
+          else el.innerText = langMap[key];
+        }
       });
       document.querySelectorAll('[data-i18n-ph]').forEach(el => {
         const key = el.getAttribute('data-i18n-ph');
@@ -636,7 +665,6 @@
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
-    // 分頁切換與平滑淡入淡出動畫
     function switchTab(tab) {
       const activePage = document.querySelector('.tab-page:not(.hidden)');
       const targetPage = document.getElementById('page-' + tab);
@@ -667,24 +695,31 @@
       trackUserAnalytics(tab);
     }
 
-    // 📜 法律條款 Modal
+    // 📜 法律條款 Modal (可編輯與多語言支援)
+    let currentModalType = '';
     function showPrivacyPolicy() {
-      document.getElementById('modal-title').innerText = "隱私權政策";
+      currentModalType = 'privacy';
+      document.getElementById('modal-title').setAttribute('data-i18n', 'privacy_policy');
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono mb-2">適用法規標準：歐盟 GDPR、美國 CCPA/CPRA、香港《個人資料（隱私）條例》</p>
         <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。</p>
         <h4 class="font-bold text-white text-base pt-2 text-amber-500">一、 資料收集與使用</h4>
-        <p>當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。</p>
+        <p>當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。本站承諾嚴格保護用戶隱私，絕不出售或非法洩漏個人數據。</p>
       `;
+      changeLanguage(currentLang);
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
     function showTermsOfService() {
-      document.getElementById('modal-title').innerText = "網站使用條款";
+      currentModalType = 'terms';
+      document.getElementById('modal-title').setAttribute('data-i18n', 'terms_of_use');
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono mb-2">最新更新日期：2026年9月15日</p>
         <p>歡迎造訪本網站。當您存取或使用本站時，即表示您同意受本條款約束。</p>
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">一、 智慧財產權聲明</h4>
+        <p>本網站內所有內容（包括但不限於文字、圖片、標誌及多媒體內容）均為 Matthew Au 所有或已獲合法授權，未經許可不得任意轉載或商業使用。</p>
       `;
+      changeLanguage(currentLang);
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
@@ -692,11 +727,10 @@
       document.getElementById('legal-modal').classList.add('hidden');
     }
 
-    // 💳 多幣別付款 Modal 與動態匯率轉換設定
+    // 💳 多幣別付款 Modal 與動態轉換
     let currentGlobalAmountHKD = 5000;
     let selectedCurrency = 'HKD';
 
-    // 1 HKD 兌換各幣別基準匯率（內部運算，對外不顯示任何溢價說明）
     const BASE_EXCHANGE_RATES_FROM_HKD = {
       'HKD': 1.0,
       'USD': (1 / 7.82) * 1.15,
@@ -721,25 +755,20 @@
       }
     }
 
-    // 用戶在商城左上角或彈窗內直接切換幣別
     function updateShopCurrencySetting(currency) {
       selectedCurrency = currency;
       
-      // 同步兩個選單的選取值
       const topSel = document.getElementById('shop-top-currency-selector');
       const modalSel = document.getElementById('modal-currency-selector');
       if (topSel) topSel.value = currency;
       if (modalSel) modalSel.value = currency;
 
-      // 更新自由贊助符號
       document.getElementById('currency-symbol-label').innerText = currency;
 
-      // 更新第一個商品的顯示價格
       const rate = BASE_EXCHANGE_RATES_FROM_HKD[currency] || 1.0;
       const convertedProd1 = Math.round(5000 * rate * 100) / 100;
       document.getElementById('editable-prod1-price').innerText = `${currency} ${convertedProd1.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
 
-      // 如果彈窗開著，同步更新彈窗中的金額
       updatePaymentDisplay(currency, currentGlobalAmountHKD);
     }
 
@@ -757,7 +786,6 @@
         return;
       }
 
-      // 如果當前選擇的是非港幣，反向計算成基底 HKD 帶入
       const rate = BASE_EXCHANGE_RATES_FROM_HKD[selectedCurrency] || 1.0;
       const baseHKD = inputAmount / rate;
 
@@ -780,7 +808,7 @@
       document.getElementById('alipay-sec').classList.toggle('hidden');
     }
 
-    // ⚙️ 管理員入口
+    // ⚙️ 管理員入口與全語言即時翻譯同步編輯模式
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
@@ -811,44 +839,72 @@
       loadVisitorLogs();
     }
 
-    function loadCustomTexts() {
-      if (!db) return;
-      db.ref('global_custom_texts').once('value').then(snapshot => {
-        const texts = snapshot.val();
-        if (texts) {
-          Object.entries(texts).forEach(([id, content]) => {
-            const el = document.getElementById(id);
-            if (el) el.innerText = content;
-          });
+    // 免費即時 Google 翻譯 API
+    async function translateText(text, targetLang) {
+      if (!text || text.trim() === '') return text;
+      const langCode = targetLang === 'en' ? 'en' : (targetLang === 'zh-CN' ? 'zh-CN' : 'zh-TW');
+      try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${langCode}&dt=t&q=${encodeURIComponent(text)}`;
+        const res = await fetch(url).then(r => r.json());
+        if (res && res[0]) {
+          return res[0].map(item => item[0]).join('');
         }
-      });
+      } catch (e) {}
+      return text;
     }
 
     let isEditMode = false;
-    function toggleEditMode() {
+    async function toggleEditMode() {
       isEditMode = !isEditMode;
       const btn = document.getElementById('edit-mode-btn');
       const editableElements = document.querySelectorAll('.editable-element');
       
       if (isEditMode) {
         document.body.classList.add('editable-mode');
-        btn.innerText = "儲存並關閉全域編輯模式";
+        btn.innerText = "💾 儲存並自動同步翻譯至所有語言";
         btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs cursor-pointer";
         editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
       } else {
         document.body.classList.remove('editable-mode');
+        btn.innerText = "⏳ 正在自動翻譯並同步全語言...";
+        btn.className = "px-4 py-2 bg-amber-700 text-white rounded font-bold text-xs cursor-wait";
+
+        // 逐一讀取被修改的項目，並自動翻譯儲存至所有語言字典
+        for (const el of editableElements) {
+          el.removeAttribute('contenteditable');
+          const key = el.getAttribute('data-i18n');
+          const currentVal = el.innerText || el.innerHTML;
+
+          if (key) {
+            i18nData[currentLang][key] = currentVal;
+
+            // 即時翻譯給另外兩種語言
+            const targetLangs = ['zh-HK', 'en', 'zh-CN'].filter(l => l !== currentLang);
+            for (const lang of targetLangs) {
+              const translated = await translateText(currentVal, lang);
+              i18nData[lang][key] = translated;
+            }
+          }
+        }
+
+        // 同步至 Firebase 雲端資料庫
+        if (db) db.ref('global_i18n_data').set(i18nData);
+
         btn.innerText = "開啟編輯模式";
         btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer";
-        
-        const textsToSave = {};
-        editableElements.forEach(el => {
-          el.removeAttribute('contenteditable');
-          if (el.id) textsToSave[el.id] = el.innerText;
-        });
-
-        if (db) db.ref('global_custom_texts').set(textsToSave);
-        alert('全網內容已成功儲存並同步至雲端！');
+        alert('🎉 全網內容已成功修改，並自動翻譯同步至繁體中文、English 與簡體中文！');
       }
+    }
+
+    function loadCustomTexts() {
+      if (!db) return;
+      db.ref('global_i18n_data').once('value').then(snapshot => {
+        const cloudData = snapshot.val();
+        if (cloudData) {
+          i18nData = cloudData;
+          changeLanguage(currentLang);
+        }
+      });
     }
 
     function loadVisitorLogs() {
@@ -1056,7 +1112,7 @@
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
 
-      await detectUserCurrencyByIP(); // 初始化依 IP 自動偵測預設幣別
+      await detectUserCurrencyByIP();
       updateShopCurrencySetting(selectedCurrency);
       loadCustomTexts();
 
