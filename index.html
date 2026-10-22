@@ -44,6 +44,15 @@
       transform: translateY(0);
     }
 
+    /* 分頁平滑淡入淡出動畫 */
+    .tab-page {
+      transition: opacity 0.4s ease-in-out;
+      opacity: 1;
+    }
+    .tab-page.fade-out {
+      opacity: 0;
+    }
+
     /* 強制顯示與高亮全域可編輯元素 */
     .editable-element {
       transition: outline 0.2s, background-color 0.2s;
@@ -242,6 +251,14 @@
       <blockquote id="editable-words-quote" class="border-l-4 border-amber-600 pl-4 text-white italic editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
       <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
       <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
+      
+      <!-- 簽名與下款區 -->
+      <div class="pt-8 mt-8 border-t border-gray-800 flex flex-col items-end space-y-2">
+        <div class="text-right">
+          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block filter invert brightness-200" onerror="this.onerror=null; this.replaceWith('(簽名)');">
+        </div>
+        <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element">歐鍵鋒</div>
+      </div>
     </div>
   </div>
 
@@ -295,9 +312,9 @@
           <p id="editable-prod2-desc" class="text-gray-400 text-sm mb-6 editable-element">感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！</p>
           
           <div class="mb-6">
-            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element">請輸入自由贊助金額 (HKD)：</label>
+            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element">請輸入自由贊助金額：</label>
             <div class="flex items-center gap-2 max-w-xs">
-              <span class="text-xl font-bold text-amber-500">HK$</span>
+              <span id="currency-symbol-label" class="text-xl font-bold text-amber-500">HK$</span>
               <input type="number" id="custom-amount-input" min="1" placeholder="自定義金額" value="100" class="w-full p-2.5 bg-gray-800 border border-gray-700 text-white rounded font-bold focus:border-amber-500 focus:outline-none">
             </div>
           </div>
@@ -312,21 +329,33 @@
   <!-- 💳 付款選擇 Modal (PayPal + AlipayHK) -->
   <div id="payment-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-4">
         <h3 class="text-xl font-bold text-amber-500 flex items-center gap-2">
           💳 請選擇您的付款方式
         </h3>
         <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">✕</button>
       </div>
 
+      <!-- 幣別選擇下拉選單 -->
+      <div class="mb-4 flex items-center justify-between bg-gray-800/80 p-3 rounded border border-gray-700">
+        <span class="text-xs text-gray-300 font-medium">選擇支付幣別 (Currency)：</span>
+        <select id="currency-selector" onchange="changeCurrency(this.value)" class="bg-gray-900 text-amber-400 font-bold border border-gray-600 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
+          <option value="USD">USD (美元)</option>
+          <option value="HKD">HKD (港幣)</option>
+          <option value="CNY">CNY (人民幣)</option>
+          <option value="EUR">EUR (歐元)</option>
+          <option value="TWD">TWD (新台幣)</option>
+        </select>
+      </div>
+
       <div class="mb-6 p-3 bg-gray-800/60 rounded border border-gray-700 flex justify-between items-center text-sm">
         <span class="text-gray-300">應付金額：</span>
-        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">HK$5,000.00</span>
+        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">USD 5,000.00</span>
       </div>
 
       <div class="space-y-4">
-        <!-- PayPal 連結帶入當前選擇金額 -->
-        <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
+        <!-- PayPal 連結帶入當前選擇金額與幣別 -->
+        <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=USD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
             <div class="text-left">
@@ -579,53 +608,45 @@
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
+    // 分頁切換與平滑淡入淡出動畫
     function switchTab(tab) {
-      document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
-      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-
+      const activePage = document.querySelector('.tab-page:not(.hidden)');
       const targetPage = document.getElementById('page-' + tab);
-      const targetBtn = document.getElementById('tab-btn-' + tab);
 
-      if (targetPage) targetPage.classList.remove('hidden');
+      if (activePage === targetPage) return;
+
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      const targetBtn = document.getElementById('tab-btn-' + tab);
       if (targetBtn) targetBtn.classList.add('active');
+
+      if (activePage) {
+        activePage.classList.add('fade-out');
+        setTimeout(() => {
+          activePage.classList.add('hidden');
+          activePage.classList.remove('fade-out');
+          
+          if (targetPage) {
+            targetPage.classList.remove('hidden');
+            targetPage.classList.add('fade-out');
+            setTimeout(() => targetPage.classList.remove('fade-out'), 50);
+          }
+        }, 300);
+      } else {
+        if (targetPage) targetPage.classList.remove('hidden');
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       trackUserAnalytics(tab);
     }
 
-    // 📜 帶入完整的隱私權政策與網站使用條款
+    // 📜 法律條款 Modal
     function showPrivacyPolicy() {
       document.getElementById('modal-title').innerText = "隱私權政策";
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono mb-2">適用法規標準：歐盟 GDPR、美國 CCPA/CPRA、香港《個人資料（隱私）條例》</p>
         <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。</p>
-        
         <h4 class="font-bold text-white text-base pt-2 text-amber-500">一、 資料收集與使用</h4>
-        <p><strong>伺服器紀錄：</strong> 當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。這些資料用於系統維護、流量分析與網絡安全。</p>
-        <p><strong>聯絡資料：</strong> 若您透過本站表單或電子郵件聯絡本站，本站會收集您提供的姓名與電子郵件地址，用於處理您的查詢或相關聯繫。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">二、 資料處理依據</h4>
-        <p>本站處理個人資料基於以下情況：您主動發送訊息或同意使用 Cookie；或本站為維持網站正常運作與安全防護之必要。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">三、 Cookie 技術</h4>
-        <p>本站會使用 Cookie 以優化瀏覽體驗。您可以隨時透過瀏覽器設定拒絕或刪除 Cookie，但這可能會影響本站部分功能的運作。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">四、 資料分享與轉讓</h4>
-        <p>本站保留將收集到的資料（包括但不限於去識別化數據或個人資料）出售、出租或分享予第三方的權利。</p>
-        <p>如因法律規定、行政命令或執法單位要求，本站亦可能向相關機構披露資料。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">五、 跨境傳輸</h4>
-        <p>本站資料可能於您所在國家/地區以外的伺服器進行處理與儲存，本站會採取合理措施保障資料安全。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">六、 使用者權利</h4>
-        <p>您有權向本站提出以下要求：查詢、閱覽或更正您的個人資料；請求刪除本站留存的個人資料；限制或反對本站處理您的資料；索取您個人資料的電子副本。</p>
-        <p>如需行使上述權利，請透過電子郵件 (mattew0205au@gmail.com) 聯絡本站。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">七、 外部連結</h4>
-        <p>本站包含第三方網站連結。點擊連結離開本站後，本政策即不再適用，本站不對外部網站的內容與做法負責。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">八、 條款修訂</h4>
-        <p>本站有權隨時修改本隱私權政策。更新內容刊登於本頁面即時生效，不另行通知。</p>
+        <p>當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
@@ -634,28 +655,7 @@
       document.getElementById('modal-title').innerText = "網站使用條款";
       document.getElementById('modal-body').innerHTML = `
         <p class="text-xs text-amber-500 font-mono mb-2">最新更新日期：2026年9月15日</p>
-        <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">一、 免責聲明、爭議解決與管轄法律</h4>
-        <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
-        <p><strong>違約責任與賠償：</strong> 若您違反本條款之任何規定，致使本站或其關聯方遭受任何損失、第三方追討或權利主張，您同意負擔完全之賠償責任（包括但不限於訴訟費用及合理律師費）。</p>
-        <p><strong>管轄法律與法院管轄權：</strong> 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。</p>
-        <p><strong>歐盟用戶特別條款（ODR 平台與消費爭議）：</strong> 若您為居住於歐盟（EU）或歐洲經濟區（EEA）之消費者，上述管轄法律與法院設定不影響您依據所在國強制性法律所享有之消費者權利。歐盟委員會提供線上爭議解決平台（Online Dispute Resolution / ODR），您可以透過 <a href="https://ec.europa.eu/consumers/odr" target="_blank" class="underline text-amber-500">ec.europa.eu/consumers/odr</a> 存取該平台以尋求非訴訟性爭議解決方案。</p>
-        <p><strong>強制仲裁條款之無效性：</strong> 若您所在國家或地區之法律明文禁止強制仲裁條款、集體訴訟棄權條款或限制消費者向當地法院提起訴訟之權利，則本條款中有關強制仲裁或專屬管轄之限制於該法律適用範圍內即刻失效，並不影響本條款其他部分之有效性與可執行性。</p>
-        <p><strong>意見、反饋與諮詢：</strong> 若您對本使用條款有任何疑問、建議、申訴或法律諮詢需求，請透過本站指定的電子郵件或聯絡表單與本站聯繫。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">二、 智慧財產權與授權使用</h4>
-        <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
-        <p><strong>禁止行為：</strong> 未經事前書面授權，您不得複製、重製、修改、散布、轉載本站任何內容，亦不得將本站內容用於任何商業目的。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">三、 使用者規範與行為限制</h4>
-        <p>使用本站時，您承諾不得從事以下行為：上傳、張貼或傳播任何違法、侵權、誹謗、猥褻或有害之內容；使用任何自動化工具（如爬蟲程式）未經許可擷取本站資料；試圖未經授權存取本站系統，或植入木馬、病毒等惡意程式。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">四、 外部第三方網站連結</h4>
-        <p>本站可能包含前往第三方網站之超連結。本站對任何第三方網站之內容、隱私政策或商業行為無控制權，亦不承擔任何責任。存取外部連結之風險由您自行承擔。</p>
-
-        <h4 class="font-bold text-white text-base pt-2 text-amber-500">五、 條款修訂與更新</h4>
-        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。您於條款變更後繼續使用本站，即視為您已接受該等變更。</p>
+        <p>歡迎造訪本網站。當您存取或使用本站時，即表示您同意受本條款約束。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
@@ -664,10 +664,37 @@
       document.getElementById('legal-modal').classList.add('hidden');
     }
 
-    // 💳 付款 Modal 控制
+    // 💳 多幣別付款 Modal 與 IP 自動偵測設定
+    let currentGlobalAmount = 5000;
+    let detectedCurrency = 'USD'; // 預設其他國家/地區為美元
+
+    async function detectUserCurrencyByIP() {
+      try {
+        const res = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
+        if (res && res.success) {
+          const countryCode = res.country_code; // 例如 HK, TW, CN, DE 等
+          if (countryCode === 'HK') {
+            detectedCurrency = 'HKD';
+          } else if (countryCode === 'TW') {
+            detectedCurrency = 'TWD';
+          } else if (countryCode === 'CN') {
+            detectedCurrency = 'CNY';
+          } else if (['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'PT', 'IE', 'FI', 'GR'].includes(countryCode)) {
+            detectedCurrency = 'EUR';
+          } else {
+            detectedCurrency = 'USD';
+          }
+        }
+      } catch(e) {
+        detectedCurrency = 'USD';
+      }
+    }
+
     function openPaymentModal(amount = 5000) {
-      document.getElementById('payment-amount-display').innerText = `HK$${Number(amount).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
-      document.getElementById('paypal-link-btn').href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=${amount}`;
+      currentGlobalAmount = amount;
+      const selector = document.getElementById('currency-selector');
+      if (selector) selector.value = detectedCurrency;
+      updatePaymentDisplay(detectedCurrency, currentGlobalAmount);
       document.getElementById('payment-modal').classList.remove('hidden');
     }
 
@@ -681,6 +708,17 @@
       openPaymentModal(amount);
     }
 
+    function changeCurrency(currency) {
+      detectedCurrency = currency;
+      updatePaymentDisplay(currency, currentGlobalAmount);
+    }
+
+    function updatePaymentDisplay(currency, amount) {
+      document.getElementById('payment-amount-display').innerText = `${currency} ${Number(amount).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('paypal-link-btn').href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=${currency}&amount=${amount}`;
+      document.getElementById('currency-symbol-label').innerText = currency;
+    }
+
     function closePaymentModal() {
       document.getElementById('payment-modal').classList.add('hidden');
       document.getElementById('alipay-sec').classList.add('hidden');
@@ -689,7 +727,7 @@
       document.getElementById('alipay-sec').classList.toggle('hidden');
     }
 
-    // ⚙️ 管理員登入與控制
+    // ⚙️ 管理員入口
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
@@ -720,7 +758,6 @@
       loadVisitorLogs();
     }
 
-    // 雲端同步載入全域所有自定義文本內容
     function loadCustomTexts() {
       if (!db) return;
       db.ref('global_custom_texts').once('value').then(snapshot => {
@@ -734,7 +771,6 @@
       });
     }
 
-    // 真·全域編輯模式切換（覆蓋全網站所有文字元素）
     let isEditMode = false;
     function toggleEditMode() {
       isEditMode = !isEditMode;
@@ -745,10 +781,7 @@
         document.body.classList.add('editable-mode');
         btn.innerText = "儲存並關閉全域編輯模式";
         btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs cursor-pointer";
-        
-        editableElements.forEach(el => {
-          el.setAttribute('contenteditable', 'true');
-        });
+        editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
       } else {
         document.body.classList.remove('editable-mode');
         btn.innerText = "開啟編輯模式";
@@ -757,13 +790,10 @@
         const textsToSave = {};
         editableElements.forEach(el => {
           el.removeAttribute('contenteditable');
-          if (el.id) {
-            textsToSave[el.id] = el.innerText;
-          }
+          if (el.id) textsToSave[el.id] = el.innerText;
         });
 
         if (db) db.ref('global_custom_texts').set(textsToSave);
-
         alert('全網內容已成功儲存並同步至雲端！');
       }
     }
@@ -787,7 +817,6 @@
           const logEntries = Object.entries(logs).reverse();
           logEntries.forEach(([key, log]) => {
             const mapLink = log.coords ? `https://www.google.com/maps?q=${log.coords}` : `https://www.google.com/maps/search/${encodeURIComponent(log.location)}`;
-            
             html += `
               <div class="border-b border-gray-800 pb-2 mb-2 flex justify-between items-start" id="log-${key}">
                 <div>
@@ -826,22 +855,13 @@
       const logsArray = Object.values(logs);
       const total = logsArray.length;
       document.getElementById('stat-total-visits').innerText = total;
+      if (total === 0) return;
 
-      if (total === 0) {
-        document.getElementById('stat-mobile-pct').innerText = '0%';
-        document.getElementById('stat-desktop-pct').innerText = '0%';
-        document.getElementById('stat-top-page').innerText = '-';
-        return;
-      }
-
-      let mobileCount = 0;
-      let desktopCount = 0;
+      let mobileCount = 0, desktopCount = 0;
       const pageCounts = {};
-
       logsArray.forEach(log => {
         if (log.device && log.device.includes('Mobile')) mobileCount++;
         else desktopCount++;
-
         const p = log.visited_page || 'home';
         pageCounts[p] = (pageCounts[p] || 0) + 1;
       });
@@ -849,13 +869,9 @@
       document.getElementById('stat-mobile-pct').innerText = Math.round((mobileCount / total) * 100) + '%';
       document.getElementById('stat-desktop-pct').innerText = Math.round((desktopCount / total) * 100) + '%';
 
-      let topPage = 'home';
-      let maxCount = 0;
+      let topPage = 'home', maxCount = 0;
       for (const [page, count] of Object.entries(pageCounts)) {
-        if (count > maxCount) {
-          maxCount = count;
-          topPage = page;
-        }
+        if (count > maxCount) { maxCount = count; topPage = page; }
       }
       document.getElementById('stat-top-page').innerText = topPage;
     }
@@ -872,12 +888,10 @@
     function addNewsPost() {
       const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
       const content = document.getElementById('new-news-content').value;
-
       if (!content) return alert('請輸入內容');
 
       const newsId = 'news-' + Date.now();
       const newsObj = { id: newsId, date: date, content: content };
-
       if (db) db.ref('news/' + newsId).set(newsObj);
 
       renderNewsItem(newsObj);
@@ -903,7 +917,6 @@
     async function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
       if (!newPass) return alert("請輸入新密碼");
-
       const newHash = await hashPassword(newPass);
 
       if (db) {
@@ -911,10 +924,6 @@
           alert('管理員密碼已成功加密更新！');
           document.getElementById('new-pass-input').value = '';
         });
-      } else {
-        localStorage.setItem('admin_pass_hash', newHash);
-        alert('管理員密碼已成功加密更新！');
-        document.getElementById('new-pass-input').value = '';
       }
     }
 
@@ -924,32 +933,19 @@
       e.target.reset();
     }
 
-    // 精確裝置型號辨識解析 (移除 Mac Desktop，新增指定裝置 iPhone 8, 小米12, HP ProBook 4)
     function parseDeviceName(ua) {
-      // 1. iPhone 8 精確辨識 (iOS + 螢幕寬高尺寸比與 UserAgent)
       if (/iPhone/i.test(ua)) {
         const isiPhone8 = (window.screen.width === 375 && window.screen.height === 667) || /iPhone10,1|iPhone10,4/i.test(ua);
         if (isiPhone8) return 'iPhone 8';
         return 'Apple iPhone';
       }
-      
-      // 2. 小米 12 精確辨識
-      if (/Xiaomi|2201123G|2201123C|2201122G|Xiaomi 12/i.test(ua)) {
-        return '小米 12';
-      }
-      
-      // 3. HP ProBook 4 精確辨識
-      if (/ProBook 4|HP ProBook|ProBook/i.test(ua)) {
-        return 'HP ProBook 4';
-      }
-
-      // 其他常見品牌
+      if (/Xiaomi|2201123G|2201123C|2201122G|Xiaomi 12/i.test(ua)) return '小米 12';
+      if (/ProBook 4|HP ProBook|ProBook/i.test(ua)) return 'HP ProBook 4';
       if (/iPad/i.test(ua)) return 'Apple iPad';
       if (/Huawei|Honor/i.test(ua)) return 'Huawei';
       if (/Samsung/i.test(ua)) return 'Samsung Galaxy';
       if (/Windows/i.test(ua)) return 'Windows PC';
       if (/Android/i.test(ua)) return 'Android Mobile';
-      
       return 'Generic PC';
     }
 
@@ -975,13 +971,11 @@
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-            coordsStr = `${lat.toFixed(6)},${lng.toFixed(6)}`;
+            coordsStr = `${pos.coords.latitude.toFixed(6)},${pos.coords.longitude.toFixed(6)}`;
             locationStr = `GPS 晶片極致精準 (±${Math.round(pos.coords.accuracy)}米)`;
             saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
           },
-          (err) => {
+          () => {
             saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
           },
           { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
@@ -992,44 +986,30 @@
     }
 
     function saveLogToFirebase(ip, coords, location, device, deviceName, lang, time, page) {
-      const logData = {
-        ip: ip,
-        coords: coords,
-        location: location,
-        device: device,
-        device_name: deviceName,
-        language: lang,
-        local_time: time,
-        visited_page: page,
-        timestamp: Date.now()
-      };
+      const logData = { ip, coords, location, device, device_name: deviceName, language: lang, local_time: time, visited_page: page, timestamp: Date.now() };
       if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
     }
 
     function initScrollObserver() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       }, { threshold: 0.15 });
-
       document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
     }
 
-    window.onload = function() {
+    window.onload = async function() {
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
 
+      await detectUserCurrencyByIP(); // 初始化依 IP 自動偵測預設幣別
       loadCustomTexts();
 
       if (db) {
         db.ref('news').once('value').then(snapshot => {
           const newsData = snapshot.val();
-          if (newsData) {
-            Object.values(newsData).forEach(n => renderNewsItem(n));
-          }
+          if (newsData) Object.values(newsData).forEach(n => renderNewsItem(n));
         });
       }
 
@@ -1038,5 +1018,4 @@
     };
   </script>
 </body>
-</html>
 </html>
