@@ -22,6 +22,8 @@
   <!-- Firebase 雲端 SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  
   <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -433,9 +435,31 @@
       <div id="admin-login-sec" class="p-8 space-y-4">
         <p class="text-gray-300 text-sm">請輸入管理員密碼：</p>
         <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <button type="button" onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600 cursor-pointer">解鎖系統</button>
-      </div>
+        // 初始化 Firebase Auth
+  const auth = firebase.auth();
 
+  async function checkAdminPassword() {
+    const inputPass = document.getElementById('admin-pass-input').value;
+    if (!inputPass) return alert('請輸入密碼！');
+
+    // 這裡填入你在 Firebase Console 剛剛建立的管理員信箱
+    const adminEmail = "admin@matthew.com";
+
+    if (db) {
+      auth.signInWithEmailAndPassword(adminEmail, inputPass)
+        .then((userCredential) => {
+          // 登入成功！解鎖後台
+          unlockDashboard();
+          document.getElementById('admin-pass-input').value = '';
+        })
+        .catch((error) => {
+          // 登入失敗或密碼錯誤
+          alert('驗證失敗！帳號或密碼不正確。');
+        });
+    } else {
+      alert('Firebase 連線未初始化！');
+    }
+  }
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
         
         <!-- 全域內容編輯模式切換 -->
@@ -941,18 +965,38 @@
     }
 
     function renderNewsItem(n) {
-      const newsContainer = document.getElementById('news-container');
-      const newNewsHTML = `
-        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
-          <div>
-            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
-            <p class="text-white text-lg">${n.content}</p>
-          </div>
-          <button type="button" onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
-        </div>
-      `;
-      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
-    }
+    const newsContainer = document.getElementById('news-container');
+    
+    // 建立主容器
+    const wrapper = document.createElement('div');
+    wrapper.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in";
+    wrapper.id = n.id;
+
+    // 內容區
+    const contentDiv = document.createElement('div');
+    
+    const dateSpan = document.createElement('span');
+    dateSpan.className = "text-amber-500 text-sm font-mono block mb-2";
+    dateSpan.textContent = `<${n.date}>`; // 安全：轉譯純文字
+    
+    const p = document.createElement('p');
+    p.className = "text-white text-lg";
+    p.textContent = n.content; // 安全：杜絕 XSS 注入！
+
+    contentDiv.appendChild(dateSpan);
+    contentDiv.appendChild(p);
+
+    // 刪除按鈕
+    const delBtn = document.createElement('button');
+    delBtn.type = "button";
+    delBtn.className = "admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer";
+    delBtn.innerText = "刪除";
+    delBtn.onclick = () => deleteNews(n.id);
+
+    wrapper.appendChild(contentDiv);
+    wrapper.appendChild(delBtn);
+    newsContainer.prepend(wrapper);
+  }
 
     async function updateAdminPassword() {
       const newPass = document.getElementById('new-pass-input').value;
