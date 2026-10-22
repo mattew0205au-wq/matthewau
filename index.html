@@ -455,29 +455,21 @@
           <button type="button" onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500 cursor-pointer">即時發布並同步</button>
         </div>
 
-        <!-- 實時數據統計儀表板 (Analytics & Charts) -->
-        <div class="border-b border-gray-800 pb-6 space-y-4">
-          <h4 class="font-bold text-white text-base text-amber-500">📊 實時流量與數據統計儀表板</h4>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-total-visits">0</div>
-              <div class="text-xs text-gray-400">總訪問次數</div>
-            </div>
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-mobile-pct">0%</div>
-              <div class="text-xs text-gray-400">行動裝置佔比</div>
-            </div>
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-desktop-pct">0%</div>
-              <div class="text-xs text-gray-400">桌面裝置佔比</div>
-            </div>
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-top-page">-</div>
-              <div class="text-xs text-gray-400">熱門分頁</div>
-            </div>
-          </div>
-        </div>
-
+      <!-- 📊 Google Analytics / Looker Studio 實時數據統計圖表區塊 -->
+<div class="border-b border-gray-800 pb-6 space-y-4">
+  <h4 class="font-bold text-white text-base text-amber-500">📊 Google Analytics 實時流量統計圖表</h4>
+  <div class="w-full rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-black">
+    <iframe 
+      width="100%" 
+      height="450" 
+      src="https://datastudio.google.com/embed/reporting/54cea90b-1fa8-45ef-b982-770156c3ec13/page/jnsBG" 
+      frameborder="0" 
+      style="border:0" 
+      allowfullscreen 
+      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+    </iframe>
+  </div>
+</div>
         <!-- 訪客軌跡與高精準定位 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <details class="bg-black rounded border border-gray-800 p-4">
