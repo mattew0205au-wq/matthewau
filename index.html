@@ -15,7 +15,7 @@
   <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- ==================== 網站圖標 (Favicon & Apple Touch Icon) ==================== -->
+  <!-- 網站圖標 (Favicon) -->
   <link rel="icon" href="./favicon.ico?v=2" type="image/x-icon">
   <link rel="icon" href="./favicon.png?v=2" type="image/png">
   <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png?v=2">
@@ -27,13 +27,13 @@
     .nav-link { color: #d1d5db; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
     .nav-link.active { color: #a87954; border-bottom: 2px solid #a87954; font-weight: bold; }
     .marquee-section { background-color: #1a1a1a; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; color: #a87954; }
-    .btn-buy { background-color: #c49a78; color: #ffffff; }
+    .btn-buy { background-color: #c49a78; color: #ffffff; transition: all 0.2s; }
     .btn-buy:hover { background-color: #b08563; }
     .modal-bg { background-color: rgba(0, 0, 0, 0.85); }
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
 
-    /* 滾動式漸進淡入動畫 (Scroll-Triggered Fade-In) */
+    /* 滾動式漸進淡入動畫 */
     .scroll-fade {
       opacity: 0;
       transform: translateY(30px);
@@ -44,11 +44,30 @@
       transform: translateY(0);
     }
 
-    /* 編輯模式下可編輯元素的邊框樣式 */
-    .editable-mode {
-      border: 2px dashed #a87954 !important;
-      padding: 4px;
-      background-color: rgba(168, 121, 84, 0.1);
+    /* 分頁平滑淡入淡出動畫 */
+    .tab-page {
+      transition: opacity 0.4s ease-in-out;
+      opacity: 1;
+    }
+    .tab-page.fade-out {
+      opacity: 0;
+    }
+
+    /* 強制顯示與高亮全域可編輯元素 */
+    .editable-element {
+      transition: outline 0.2s, background-color 0.2s;
+    }
+    .editable-mode .editable-element {
+      outline: 2px dashed #a87954 !important;
+      outline-offset: 3px;
+      background-color: rgba(168, 121, 84, 0.15) !important;
+      border-radius: 4px;
+      cursor: text;
+    }
+
+    /* 簽名圖片轉純白色效果 */
+    .white-signature {
+      filter: brightness(0) invert(1);
     }
   </style>
 </head>
@@ -56,7 +75,7 @@
 
   <!-- 1. 頂部公告條 -->
   <div class="top-banner py-2 px-4 text-center text-xs md:text-sm font-medium tracking-wide flex items-center justify-center gap-2">
-    <span>🌱</span> <span data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
+    <span>🌱</span> <span id="editable-top-banner" class="editable-element" data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
   <!-- 2. 主導覽列 -->
@@ -70,10 +89,10 @@
       <!-- 電腦版導覽 -->
       <div class="hidden md:flex items-center gap-6">
         <nav class="flex items-center gap-6">
-          <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active" data-i18n="nav_home">首頁</span>
-          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link" data-i18n="nav_words">鍵鋒的話</span>
-          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link" data-i18n="nav_news">最新消息</span>
-          <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link" data-i18n="nav_shop">商城</span>
+          <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active editable-element" data-i18n="nav_home">首頁</span>
+          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link editable-element" data-i18n="nav_words">鍵鋒的話</span>
+          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link editable-element" data-i18n="nav_news">最新消息</span>
+          <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link editable-element" data-i18n="nav_shop">商城</span>
         </nav>
 
         <select onchange="changeLanguage(this.value)" id="lang-select-desktop" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2.5 py-1.5 rounded focus:outline-none cursor-pointer">
@@ -90,7 +109,7 @@
           <option value="en">EN</option>
           <option value="zh-CN">简中</option>
         </select>
-        <button onclick="toggleMobileMenu()" class="text-amber-500 text-xl p-2 rounded focus:outline-none">
+        <button onclick="toggleMobileMenu()" class="text-amber-500 text-xl p-2 rounded focus:outline-none cursor-pointer">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -99,10 +118,10 @@
 
     <!-- 手機版下拉選單 -->
     <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-b border-gray-800 px-6 py-4 space-y-3">
-      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_home">首頁</div>
-      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_words">鍵鋒的話</div>
-      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_news">最新消息</div>
-      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_shop">商城</div>
+      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_home">首頁</div>
+      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_words">鍵鋒的話</div>
+      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_news">最新消息</div>
+      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_shop">商城</div>
     </div>
   </header>
 
@@ -111,56 +130,61 @@
     <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800 scroll-fade">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
-        <p class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">Official Website</p>
+        <h1 id="editable-hero-title" class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md editable-element">Matthew Au</h1>
+        <p id="editable-hero-sub" class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md editable-element">Official Website</p>
       </div>
     </section>
 
     <div class="marquee-section py-4 overflow-hidden scroll-fade">
       <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
-        <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
-        <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-1" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-2" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-3" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-4" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
       </div>
     </div>
 
     <!-- 邱吉爾名言 -->
     <section class="bg-stone-900 py-20 px-6 text-center border-b border-gray-800 scroll-fade">
       <div class="max-w-3xl mx-auto">
-        <blockquote id="editable-quote-churchill" class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-        <p class="text-sm font-sans tracking-wide text-amber-600 font-bold" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
+        <blockquote id="editable-quote-churchill" class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100 editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+        <p id="editable-quote-churchill-author" class="text-sm font-sans tracking-wide text-amber-600 font-bold editable-element" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
       </div>
     </section>
 
     <!-- 關於我與興趣 -->
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
+      <!-- 興趣一：足球 -->
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
-          <h2 class="text-2xl font-bold mb-4" data-i18n="about_me">關於我</h2>
-          <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
-          <p id="editable-hobby-1" class="text-gray-400" data-i18n="hobby_football">足球[cite: 5]</p>
+          <h2 id="editable-about-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="about_me">關於我</h2>
+          <h3 id="editable-hobby-title-1" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title_1">我的興趣：足球</h3>
+          <p id="editable-hobby-1" class="text-gray-400 leading-relaxed editable-element" data-i18n="hobby_football_desc">足球對我而言不只是一項運動，更是考驗團隊合作、戰術戰略與堅持不懈意志的舞台。在綠茵場上的每一次奔跑與傳球，都鍛鍊著我的專注力與大局觀。</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="足球" class="w-full h-72 object-cover">
+          <img src="Football.jpeg" alt="足球" class="w-full h-72 object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80';">
         </div>
       </div>
 
+      <!-- 興趣二：電腦 -->
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
-          <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
-          <p id="editable-hobby-2" class="text-gray-400" data-i18n="hobby_roblox">玩Roblox[cite: 5]</p>
+          <h3 id="editable-hobby-title-2" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title_2">我的興趣：電腦與資訊科技</h3>
+          <p id="editable-hobby-2" class="text-gray-400 leading-relaxed editable-element" data-i18n="hobby_computer_desc">熱衷於探索數位科技、電腦軟硬體與網路技術。透過電腦這個無限廣闊的工具，不僅能激發邏輯思維與創作靈感，更讓我得以自主學習最新的資訊技術。</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Roblox" class="w-full h-72 object-cover">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="電腦" class="w-full h-72 object-cover">
         </div>
       </div>
 
+      <!-- 政治理念 -->
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80" alt="民主自由" class="w-full h-72 object-cover">
         </div>
         <div>
-          <h2 class="text-2xl font-bold mb-4" data-i18n="political_view_title">政治理念</h2>
-          <p id="editable-political" class="text-gray-300" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
+          <h2 id="editable-political-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="political_view_title">政治理念</h2>
+          <p id="editable-political" class="text-gray-300 leading-relaxed editable-element" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
         </div>
       </div>
     </section>
@@ -168,19 +192,19 @@
     <!-- 評論區 -->
     <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800 scroll-fade">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-white mb-12" data-i18n="reviews_title">評論</h2>
+        <h2 id="editable-reviews-title" class="text-3xl font-bold text-white mb-12 editable-element" data-i18n="reviews_title">評論</h2>
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p class="text-lg font-medium mb-6" data-i18n="review1_text">"佢樣樣都好呀"</p>
-            <p class="text-xs text-gray-500" data-i18n="review1_author">匿名 - 11/2/2023</p>
+            <p id="editable-review-1" class="text-lg font-medium mb-6 editable-element" data-i18n="review1_text">"佢樣樣都好呀"</p>
+            <p id="editable-review-1-author" class="text-xs text-gray-500 editable-element" data-i18n="review1_author">匿名 - 11/2/2023</p>
           </div>
           <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p class="text-lg font-medium mb-6" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
-            <p class="text-xs text-gray-500" data-i18n="review2_author">匿名 - 7/6/2023</p>
+            <p id="editable-review-2" class="text-lg font-medium mb-6 editable-element" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
+            <p id="editable-review-2-author" class="text-xs text-gray-500 editable-element" data-i18n="review2_author">匿名 - 7/6/2023</p>
           </div>
         </div>
       </div>
@@ -189,26 +213,26 @@
     <!-- 拿破崙名言 -->
     <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800 scroll-fade">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">« Impossible n'est pas français. »</h2>
-        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
-        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold">—— Napoléon Bonaparte 拿破崙</p>
+        <h2 id="editable-quote-napoleon-fr" class="text-2xl md:text-3xl font-serif mb-4 text-gray-100 editable-element">« Impossible n'est pas français. »</h2>
+        <p id="editable-quote-napoleon-zh" class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80 editable-element" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
+        <p id="editable-quote-napoleon-author" class="text-xs font-sans tracking-widest text-amber-600 font-bold editable-element">—— Napoléon Bonaparte 拿破崙</p>
       </div>
     </section>
 
     <!-- 聯絡表單與社群媒體圖標區 -->
     <section class="max-w-3xl mx-auto px-6 py-20 text-center scroll-fade">
-      <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
-      <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
+      <h2 id="editable-contact-title" class="text-3xl font-bold text-amber-600/90 mb-2 editable-element" data-i18n="contact_title">與我聯絡</h2>
+      <p id="editable-contact-sub" class="text-gray-300 mb-8 editable-element" data-i18n="contact_sub">歡迎來信！</p>
       <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-12">
         <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
         <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_email">
         <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_msg"></textarea>
-        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition" data-i18n="btn_send">傳送</button>
+        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition cursor-pointer" data-i18n="btn_send">傳送</button>
       </form>
 
       <!-- 社群連結按鈕 -->
       <div class="pt-8 border-t border-gray-800">
-        <p class="text-sm text-gray-400 mb-6 font-medium" data-i18n="social_hint">或使用社交媒體聯絡我</p>
+        <p id="editable-social-hint" class="text-sm text-gray-400 mb-6 font-medium editable-element" data-i18n="social_hint">或使用社交媒體聯絡我</p>
         <div class="flex justify-center items-center gap-6">
           <a href="https://www.facebook.com/kinfung.au.3" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-facebook-f"></i>
@@ -229,71 +253,137 @@
 
   <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
   <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_words">鍵鋒的話</h2>
+    <h2 id="editable-words-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_words">鍵鋒的話</h2>
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
-      <p id="editable-words-1" class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
-      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p id="editable-words-2" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
-      <p id="editable-words-3" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
+      <p id="editable-words-1" class="text-lg editable-element" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
+      <blockquote id="editable-words-quote" class="border-l-4 border-amber-600 pl-4 text-white italic editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+      <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
+      <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
+      
+      <!-- 純白色簽名與英文署名區 -->
+      <div class="pt-8 mt-8 border-t border-gray-800 flex flex-col items-end space-y-2">
+        <div class="text-right">
+          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block white-signature" onerror="this.onerror=null; this.replaceWith('(簽名)');">
+        </div>
+        <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element" data-i18n="signature_name">Matthew Au</div>
+      </div>
     </div>
   </div>
 
   <!-- ==================== 3. 最新消息 TAB ==================== -->
   <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">最新消息</h2>
+    <h2 id="editable-news-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_news">最新消息</h2>
     <div id="news-container" class="space-y-8">
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
         <div>
-          <span class="text-amber-500 text-sm font-mono block mb-2">&lt;13/5/2026&gt;</span>
-          <p class="text-white text-lg" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
+          <span id="editable-news-date-1" class="text-amber-500 text-sm font-mono block mb-2 editable-element">&lt;13/5/2026&gt;</span>
+          <p id="editable-news-body-1" class="text-white text-lg editable-element" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
         </div>
-        <button onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+        <button type="button" onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
       </div>
 
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-2">
         <div>
-          <span class="text-red-400 text-sm font-mono block mb-2">&lt;27/3/2026&gt;</span>
-          <p class="text-white text-lg mb-4" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
-          <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
+          <span id="editable-news-date-2" class="text-red-400 text-sm font-mono block mb-2 editable-element">&lt;27/3/2026&gt;</span>
+          <p id="editable-news-body-2" class="text-white text-lg mb-4 editable-element" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
+          <p id="editable-news-sub-2" class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1 editable-element" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
         </div>
-        <button onclick="deleteNews('news-item-2')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+        <button type="button" onclick="deleteNews('news-item-2')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
       </div>
     </div>
   </div>
 
   <!-- ==================== 4. 商城 TAB ==================== -->
   <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16 scroll-fade">
-    <h2 class="text-3xl font-bold mb-12 text-amber-500" data-i18n="shop_title">官方商城</h2>
-    <div id="shop-container" class="space-y-20">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+    
+    <!-- 商城頁面頂部：標題與左上角全域貨幣選擇器 -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 border-b border-gray-800 pb-6">
+      <h2 id="editable-main-shop-title" class="text-3xl font-bold text-amber-500 editable-element" data-i18n="shop_title">官方商城</h2>
+      
+      <!-- 商城左上角直接設定幣別 -->
+      <div class="flex items-center gap-3 bg-gray-900 p-3 rounded-lg border border-gray-800 shadow">
+        <span class="text-xs text-gray-400 font-medium editable-element" data-i18n="label_select_currency">🌐 選擇結帳幣別：</span>
+        <select id="shop-top-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="bg-gray-800 text-amber-400 font-bold border border-gray-700 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
+          <option value="HKD" data-i18n="opt_hkd">HKD (港幣)</option>
+          <option value="USD" data-i18n="opt_usd">USD (美元)</option>
+          <option value="CNY" data-i18n="opt_cny">CNY (人民幣)</option>
+          <option value="EUR" data-i18n="opt_eur">EUR (歐元)</option>
+          <option value="TWD" data-i18n="opt_twd">TWD (新台幣)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="shop-container" class="space-y-16">
+      
+      <!-- 商品 1：固定金額足球訓練 -->
+      <div class="grid md:grid-cols-2 gap-12 items-center border-b border-gray-800 pb-16">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 id="editable-shop-title" class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
-          <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
-          <button type="button" onclick="openPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
+          <h2 id="editable-shop-title" class="text-3xl font-bold text-amber-600/90 mb-4 editable-element" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
+          <p id="editable-prod1-price" class="text-2xl font-semibold text-white mb-6">HK$ 5,000.00</p>
+          <button type="button" onclick="openPaymentModal(5000)" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
       </div>
+
+      <!-- 商品 2：得到心靈上的支持 (自定義金額) -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" alt="心靈支持" class="w-full h-80 object-cover">
+        </div>
+        <div>
+          <h2 id="editable-prod2-title" class="text-3xl font-bold text-amber-500 mb-2 editable-element" data-i18n="prod2_title">得到我心靈上的支持</h2>
+          <p id="editable-prod2-desc" class="text-gray-400 text-sm mb-6 editable-element" data-i18n="prod2_desc">感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！</p>
+          
+          <div class="mb-6">
+            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element" data-i18n="prod2_input_label">請輸入自由贊助金額：</label>
+            <div class="flex items-center gap-2 max-w-xs">
+              <span id="currency-symbol-label" class="text-xl font-bold text-amber-500">HKD</span>
+              <input type="number" id="custom-amount-input" min="1" placeholder="自定義金額" value="100" class="w-full p-2.5 bg-gray-800 border border-gray-700 text-white rounded font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+
+          <button type="button" onclick="openCustomPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💖 <span data-i18n="btn_support">給予心靈支持</span></button>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- 💳 付款選擇 Modal (PayPal + AlipayHK) -->
   <div id="payment-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative">
-      <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-4">
         <h3 class="text-xl font-bold text-amber-500 flex items-center gap-2">
           💳 請選擇您的付款方式
         </h3>
         <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">✕</button>
       </div>
 
+      <!-- 幣別選擇彈窗選單 -->
+      <div class="mb-4 flex items-center justify-between bg-gray-800/80 p-3 rounded border border-gray-700">
+        <span class="text-xs text-gray-300 font-medium editable-element" data-i18n="label_select_currency">支付幣別 (Currency)：</span>
+        <select id="modal-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="bg-gray-900 text-amber-400 font-bold border border-gray-600 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
+          <option value="HKD" data-i18n="opt_hkd">HKD (港幣)</option>
+          <option value="USD" data-i18n="opt_usd">USD (美元)</option>
+          <option value="CNY" data-i18n="opt_cny">CNY (人民幣)</option>
+          <option value="EUR" data-i18n="opt_eur">EUR (歐元)</option>
+          <option value="TWD" data-i18n="opt_twd">TWD (新台幣)</option>
+        </select>
+      </div>
+
+      <div class="mb-6 p-3 bg-gray-800/60 rounded border border-gray-700 flex justify-between items-center text-sm">
+        <span class="text-gray-300">應付金額：</span>
+        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">HK$ 5,000.00</span>
+      </div>
+
       <div class="space-y-4">
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
+        <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
             <div class="text-left">
-              <div class="font-bold text-white text-base">PayPal / 國際信用卡</div>
+              <div class="font-bold text-white text-base">PayPal /信用卡</div>
               <div class="text-xs text-gray-400">收款帳號：mattew0205au@gmail.com</div>
             </div>
           </div>
@@ -305,7 +395,7 @@
             <span class="text-3xl">📱</span>
             <div class="text-left">
               <div class="font-bold text-white text-base">AlipayHK 支付寶</div>
-              <div class="text-xs text-gray-400">香港 / 內地支付寶 App 直接掃碼轉帳</div>
+              <div class="text-xs text-gray-400">支付寶直接掃碼轉帳</div>
             </div>
           </div>
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">顯示 QR Code ➔</span>
@@ -315,28 +405,14 @@
       <div id="alipay-sec" class="hidden mt-6 pt-6 border-t border-gray-800 text-center space-y-3">
         <h4 class="font-bold text-white">📱 請使用 AlipayHK App 掃碼付款</h4>
         <div class="bg-white p-3 rounded-xl inline-block shadow-lg">
-          <img src="alipay-qr.jpg" alt="Alipay QR Code" class="w-48 h-48 mx-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/200?text=Alipay+QR+Code';">
+          <img src="alipay.jpg" alt="Alipay QR Code" class="w-48 h-48 mx-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/200?text=Alipay+QR+Code';">
         </div>
         <p class="text-xs text-gray-400">完成轉帳後，請保留截圖並透過 Email 與我們核對訂單。</p>
       </div>
     </div>
   </div>
 
-  <!-- 法律條款 Modal -->
-  <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
-    <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
-      <div class="flex justify-between items-center p-6 border-b border-gray-800">
-        <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
-        <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
-      </div>
-      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-6 leading-relaxed"></div>
-      <div class="p-4 border-t border-gray-800 text-right">
-        <button type="button" onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 cursor-pointer">關閉</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 管理員入口 Modal -->
+  <!-- ⚙️ 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -356,7 +432,7 @@
         <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex justify-between items-center">
           <div>
             <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
-            <p class="text-xs text-gray-400">開啟後可直接在網頁上編輯並儲存所有文字內容。</p>
+            <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字，關閉時雲端儲存。</p>
           </div>
           <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
         </div>
@@ -408,13 +484,6 @@
           </details>
         </div>
 
-        <!-- 修改管理員密碼 -->
-        <div class="space-y-3 pt-2">
-          <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理員密碼</h4>
-          <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <button type="button" onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600 cursor-pointer">更新密碼</button>
-        </div>
-
       </div>
     </div>
   </div>
@@ -422,26 +491,16 @@
   <!-- 頁尾 -->
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
     <p>© 2026 Matthew Au — 保留所有權利</p>
-    <div class="flex justify-center gap-6 text-gray-400">
-      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">商城隱私權政策</a>
-      <a onclick="showTermsOfService()" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
+    <div class="flex justify-center flex-wrap gap-6 text-gray-400">
+      <a href="Privacy_Policy.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
+      <a href="Terms_of_Use.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
+      <a href="https://kwokfenix.net/" target="_blank" class="hover:underline cursor-pointer text-amber-500 font-bold">+ KWOKFENIX.NET</a>
       <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
     <p class="text-gray-600">By Matthew Au</p>
   </footer>
 
   <script>
-    // 預設密碼 "1234" 的 SHA-256 加密雜湊亂碼（安全防護）
-    const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
-
-    async function hashPassword(str) {
-      const msgBuffer = new TextEncoder().encode(str);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    // Firebase 資料庫配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
@@ -450,15 +509,15 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 語言字典
-    const i18nData = {
+    let i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
         nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "最新消息", nav_shop: "商城",
         marquee_text: "歡迎 welcome",
         quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
         quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
-        about_me: "關於我", hobby_title: "我的興趣", hobby_football: "足球[cite: 5]", hobby_roblox: "玩Roblox[cite: 5]",
+        about_me: "關於我", hobby_title_1: "我的興趣：足球", hobby_football_desc: "足球對我而言不只是一項運動，更是考驗團隊合作、戰術戰略與堅持不懈意志的舞台。在綠茵場上的每一次奔跑與傳球，都鍛鍊著我的專注力與大局觀。",
+        hobby_title_2: "我的興趣：電腦與資訊科技", hobby_computer_desc: "熱衷於探索數位科技、電腦軟硬體與網路技術。透過電腦這個無限廣闊的工具，不僅能激發邏輯思維與創作靈感，更讓我得以自主學習最新的資訊技術。",
         political_view_title: "政治理念", political_view_desc: "促進民主、自由社會發展，拒絕專制政權。",
         reviews_title: "評論", anon_user: "匿",
         review1_text: '"佢樣樣都好呀"', review1_author: "匿名 - 11/2/2023",
@@ -467,13 +526,20 @@
         contact_title: "與我聯絡", contact_sub: "歡迎來信！", social_hint: "或使用社交媒體聯絡我",
         ph_name: "名稱", ph_email: "電子郵件*", ph_msg: "訊息", btn_send: "傳送",
         words_p1: "歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
-        words_p2: "無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。",
+        words_p2: "無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
+        signature_name: "Matthew Au",
         news_1: "本人熱烈歡迎美國總統訪華，與中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
+        prod2_title: "得到我心靈上的支持",
+        prod2_desc: "感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！",
+        prod2_input_label: "請輸入自由贊助金額：",
+        btn_support: "給予心靈支持",
+        label_select_currency: "🌐 選擇結帳幣別：",
+        opt_hkd: "HKD (港幣)", opt_usd: "USD (美元)", opt_cny: "CNY (人民幣)", opt_eur: "EUR (歐元)", opt_twd: "TWD (新台幣)",
+        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
@@ -481,7 +547,8 @@
         marquee_text: "Welcome 歡迎",
         quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
         quote_churchill_author: "—— Winston Churchill",
-        about_me: "About Me", hobby_title: "My Hobbies", hobby_football: "Football[cite: 5]", hobby_roblox: "Playing Roblox[cite: 5]",
+        about_me: "About Me", hobby_title_1: "My Hobby: Football", hobby_football_desc: "Football is more than just a sport to me; it is a test of teamwork, tactics, and perseverance. Every run on the pitch sharpens my vision and determination.",
+        hobby_title_2: "My Hobby: Computer & IT", hobby_computer_desc: "Passionate about computer technology, hardware, and software development. Computers allow me to explore infinite creativity and cultivate logical thinking.",
         political_view_title: "Political Views", political_view_desc: "Promote democracy, free society, and resist authoritarian regimes.",
         reviews_title: "Reviews", anon_user: "A",
         review1_text: '"He is great at everything!"', review1_author: "Anonymous - 11/2/2023",
@@ -490,12 +557,19 @@
         contact_title: "Contact Me", contact_sub: "Feel free to get in touch!", social_hint: "Or connect via social media",
         ph_name: "Name", ph_email: "Email*", ph_msg: "Message", btn_send: "Send",
         words_p1: "Welcome to my official website! As someone who upholds independent thinking and advocates for freedom and democracy, I hope to share my vision, reflections, and insights here.",
-        words_p2: "Whether playing football on the pitch or exploring endless creativity in digital gaming worlds like Roblox, I approach everything with passion and persistence. Life is a marathon where continuous adaptation and strong conviction are essential.",
+        words_p2: "Whether playing football on the pitch or exploring infinite tech possibilities through computers, I approach everything with passion and persistence. Life is a marathon where continuous adaptation is key.",
         words_p3: "Thank you for your support. I will continue to post updates here. Let's move forward together!",
+        signature_name: "Matthew Au",
         news_1: "Warmly welcome the President of the United States on visiting China for cooperation.",
         news_2_body: "On the 27th around 2 AM, my official social media (@mattew0205_au) was hacked. The hacker posts financial scam images every 2 hours. Legal action or police reports may follow.",
         news_2_sub: "Finally, I strongly condemn account theft and financial fraud, demanding an immediate stop and compensation.",
         shop_title: "Official Shop", prod1_title: "Matthew Au Master 1-on-1 Football Coaching", btn_buy_now: "Buy Now",
+        prod2_title: "Get My Moral Support",
+        prod2_desc: "Thank you for your sponsorship and support. Your moral encouragement is my biggest motivation to keep creating and moving forward!",
+        prod2_input_label: "Enter custom sponsorship amount:",
+        btn_support: "Give Moral Support",
+        label_select_currency: "🌐 Select Payment Currency:",
+        opt_hkd: "HKD (Hong Kong Dollar)", opt_usd: "USD (US Dollar)", opt_cny: "CNY (Chinese Yuan)", opt_eur: "EUR (Euro)", opt_twd: "TWD (New Taiwan Dollar)",
         privacy_policy: "Privacy Policy", terms_of_use: "Terms of Use"
       },
       'zh-CN': {
@@ -504,7 +578,8 @@
         marquee_text: "欢迎 welcome",
         quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
         quote_churchill_author: "—— 温斯顿·邱吉尔 Winston Churchill",
-        about_me: "关于我", hobby_title: "我的兴趣", hobby_football: "足球[cite: 5]", hobby_roblox: "玩Roblox[cite: 5]",
+        about_me: "关于我", hobby_title_1: "我的兴趣：足球", hobby_football_desc: "足球对我而言不只是一项运动，更是考验证团队合作、战术战略与坚持不懈意志的舞台。在绿茵场上的每一次奔跑与傳球，都鍛鍊著我的專注力與大局觀。",
+        hobby_title_2: "我的兴趣：电脑与资讯科技", hobby_computer_desc: "热衷于探索数字科技、电脑软硬件与网络技术。透过电脑这个无限广阔的工具，不仅能激发逻辑思维与创作灵感，更让我得以自主学习最新的资讯技术。",
         political_view_title: "政治理念", political_view_desc: "促进民主、自由社会发展，拒绝专制政权。",
         reviews_title: "评论", anon_user: "匿",
         review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
@@ -513,23 +588,36 @@
         contact_title: "与我联絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联絡我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
         words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
-        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字游戏世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
+        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字电脑世界中進行無限的科技探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
+        signature_name: "Matthew Au",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "商城隐私权政策", terms_of_use: "網站使用條款及免責聲明"
+        prod2_title: "获得我心灵上的支持",
+        prod2_desc: "感谢您的赞助与支持，您的心灵鼓励是我持续创作与前进的最大动力！",
+        prod2_input_label: "请输入自由赞助金额：",
+        btn_support: "给予心灵支持",
+        label_select_currency: "🌐 选择结算币别：",
+        opt_hkd: "HKD (港币)", opt_usd: "USD (美元)", opt_cny: "CNY (人民币)", opt_eur: "EUR (欧元)", opt_twd: "TWD (新台币)",
+        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
       }
     };
 
+    let currentLang = 'zh-HK';
+
     function changeLanguage(lang) {
+      currentLang = lang;
       localStorage.setItem('user_preferred_lang', lang);
       const langMap = i18nData[lang] || i18nData['zh-HK'];
       
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (langMap[key]) el.innerText = langMap[key];
+        if (langMap[key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = langMap[key];
+          else el.innerText = langMap[key];
+        }
       });
       document.querySelectorAll('[data-i18n-ph]').forEach(el => {
         const key = el.getAttribute('data-i18n-ph');
@@ -545,163 +633,181 @@
     }
 
     function switchTab(tab) {
-      document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
-      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-
+      const activePage = document.querySelector('.tab-page:not(.hidden)');
       const targetPage = document.getElementById('page-' + tab);
-      const targetBtn = document.getElementById('tab-btn-' + tab);
 
-      if (targetPage) targetPage.classList.remove('hidden');
+      if (activePage === targetPage) return;
+
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      const targetBtn = document.getElementById('tab-btn-' + tab);
       if (targetBtn) targetBtn.classList.add('active');
+
+      if (activePage) {
+        activePage.classList.add('fade-out');
+        setTimeout(() => {
+          activePage.classList.add('hidden');
+          activePage.classList.remove('fade-out');
+          
+          if (targetPage) {
+            targetPage.classList.remove('hidden');
+            targetPage.classList.add('fade-out');
+            setTimeout(() => targetPage.classList.remove('fade-out'), 50);
+          }
+        }, 300);
+      } else {
+        if (targetPage) targetPage.classList.remove('hidden');
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       trackUserAnalytics(tab);
     }
 
-    // 📜 隱私權政策與免責聲明 Modal
-    function showPrivacyPolicy() {
-      document.getElementById('modal-title').innerText = "商城隱私權政策";
-      document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 個人資料收集與使用</p>
-        <p>本網站僅在您進行商品購買或透過聯絡表單發送訊息時收集必要之個人資料（例如電子郵件、名稱及付款備註）。相關資料僅用於訂單核對及溝通服務，絕不會洩漏給第三方。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 交易安全</p>
-        <p>本網站之付款流程均直接透過 PayPal 及 AlipayHK 官方安全加密平台完成，本網站伺服器不會記錄或儲存您的信用卡號碼或支付密碼。</p>
-      `;
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
+    let currentGlobalAmountHKD = 5000;
+    let selectedCurrency = 'HKD';
 
-    function showTermsOfService() {
-      document.getElementById('modal-title').innerText = "網站使用條款及免責聲明";
-      document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 免責聲明</p>
-        <p>本網站所載之一切資料僅供參考之用。 Matthew Au 團隊已盡力確保網站內容之準確性，但對於任何因使用本網站資料而引致之損失，概不承擔任何法律責任。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 智慧財產權</p>
-        <p>本網站內之所有文字、標誌及多媒體內容版權均屬 Matthew Au 所有，未經授權禁止擅自複製、轉載或作為商業用途。</p>
-      `;
-      document.getElementById('legal-modal').classList.remove('hidden');
-    }
+    const BASE_EXCHANGE_RATES_FROM_HKD = {
+      'HKD': 1.0,
+      'USD': (1 / 7.82) * 1.15,
+      'CNY': (0.936 / 1) * 1.15,
+      'EUR': (0.118 / 1) * 1.15,
+      'TWD': (4.139 / 1) * 1.15
+    };
 
-    function closeModal() {
-      document.getElementById('legal-modal').classList.add('hidden');
-    }
-
-    // 💳 付款 Modal 控制函數（明確確保可以正常彈出）
-    function openPaymentModal() {
-      const modal = document.getElementById('payment-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
+    async function detectUserCurrencyByIP() {
+      try {
+        const res = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
+        if (res && res.success) {
+          const countryCode = res.country_code;
+          if (countryCode === 'HK') selectedCurrency = 'HKD';
+          else if (countryCode === 'TW') selectedCurrency = 'TWD';
+          else if (countryCode === 'CN') selectedCurrency = 'CNY';
+          else if (['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'PT', 'IE', 'FI', 'GR'].includes(countryCode)) selectedCurrency = 'EUR';
+          else selectedCurrency = 'USD';
+        }
+      } catch(e) {
+        selectedCurrency = 'HKD';
       }
     }
+
+    function updateShopCurrencySetting(currency) {
+      selectedCurrency = currency;
+      
+      const topSel = document.getElementById('shop-top-currency-selector');
+      const modalSel = document.getElementById('modal-currency-selector');
+      if (topSel) topSel.value = currency;
+      if (modalSel) modalSel.value = currency;
+
+      document.getElementById('currency-symbol-label').innerText = currency;
+
+      const rate = BASE_EXCHANGE_RATES_FROM_HKD[currency] || 1.0;
+      const convertedProd1 = Math.round(5000 * rate * 100) / 100;
+      document.getElementById('editable-prod1-price').innerText = `${currency} ${convertedProd1.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+
+      updatePaymentDisplay(currency, currentGlobalAmountHKD);
+    }
+
+    function openPaymentModal(amountHKD = 5000) {
+      currentGlobalAmountHKD = amountHKD;
+      updateShopCurrencySetting(selectedCurrency);
+      document.getElementById('payment-modal').classList.remove('hidden');
+    }
+
+    function openCustomPaymentModal() {
+      const val = document.getElementById('custom-amount-input').value;
+      const inputAmount = parseFloat(val);
+      if (isNaN(inputAmount) || inputAmount <= 0) {
+        alert('請輸入有效的金額！');
+        return;
+      }
+
+      const rate = BASE_EXCHANGE_RATES_FROM_HKD[selectedCurrency] || 1.0;
+      const baseHKD = inputAmount / rate;
+
+      openPaymentModal(baseHKD);
+    }
+
+    function updatePaymentDisplay(currency, hkdAmount) {
+      const rate = BASE_EXCHANGE_RATES_FROM_HKD[currency] || 1.0;
+      const convertedAmount = Math.round(hkdAmount * rate * 100) / 100;
+
+      document.getElementById('payment-amount-display').innerText = `${currency} ${convertedAmount.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('paypal-link-btn').href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=${currency}&amount=${convertedAmount}`;
+    }
+
     function closePaymentModal() {
-      const modal = document.getElementById('payment-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-      }
-      const alipaySec = document.getElementById('alipay-sec');
-      if (alipaySec) {
-        alipaySec.classList.add('hidden');
-      }
+      document.getElementById('payment-modal').classList.add('hidden');
+      document.getElementById('alipay-sec').classList.add('hidden');
     }
     function toggleAlipay() {
-      const alipaySec = document.getElementById('alipay-sec');
-      if (alipaySec) {
-        alipaySec.classList.toggle('hidden');
-      }
+      document.getElementById('alipay-sec').classList.toggle('hidden');
     }
 
-    // ⚙️ 管理員登入與控制中心
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
-    async function checkAdminPassword() {
+    function checkAdminPassword() {
       const inputPass = document.getElementById('admin-pass-input').value;
       if (!inputPass) return alert('請輸入密碼！');
 
-      const inputHash = await hashPassword(inputPass);
-
-      if (db) {
-        db.ref('admin_password_hash').once('value').then(snapshot => {
-          const cloudHash = snapshot.val() || DEFAULT_HASH;
-          if (inputHash === cloudHash) unlockDashboard();
-          else alert('驗證失敗！密碼不正確。');
-        }).catch(() => {
-          if (inputHash === DEFAULT_HASH) unlockDashboard();
-          else alert('驗證失敗！密碼不正確。');
-        });
+      if (inputPass === "1234") {
+        unlockDashboard();
+        document.getElementById('admin-pass-input').value = '';
       } else {
-        if (inputHash === DEFAULT_HASH) unlockDashboard();
-        else alert('驗證失敗！密碼不正確。');
+        alert('驗證失敗！密碼不正確。');
       }
     }
 
     function unlockDashboard() {
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
+      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
       loadVisitorLogs();
     }
 
-    // 雲端同步載入自定義文本內容
     function loadCustomTexts() {
       if (!db) return;
-      db.ref('custom_texts').once('value').then(snapshot => {
+      db.ref('global_custom_texts').once('value').then(snapshot => {
         const texts = snapshot.val();
         if (texts) {
-          if (texts.quoteChurchill) document.getElementById('editable-quote-churchill').innerText = texts.quoteChurchill;
-          if (texts.hobby1) document.getElementById('editable-hobby-1').innerText = texts.hobby1;
-          if (texts.hobby2) document.getElementById('editable-hobby-2').innerText = texts.hobby2;
-          if (texts.political) document.getElementById('editable-political').innerText = texts.political;
-          if (texts.words1) document.getElementById('editable-words-1').innerText = texts.words1;
-          if (texts.shopTitle) document.getElementById('editable-shop-title').innerText = texts.shopTitle;
+          Object.entries(texts).forEach(([id, content]) => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = content;
+          });
         }
       });
     }
 
-    // 編輯模式切換
     let isEditMode = false;
     function toggleEditMode() {
       isEditMode = !isEditMode;
       const btn = document.getElementById('edit-mode-btn');
-      const editableIds = ['editable-quote-churchill', 'editable-hobby-1', 'editable-hobby-2', 'editable-political', 'editable-words-1', 'editable-shop-title'];
+      const editableElements = document.querySelectorAll('.editable-element');
       
       if (isEditMode) {
-        btn.innerText = "儲存並關閉編輯模式";
+        document.body.classList.add('editable-mode');
+        btn.innerText = "儲存並關閉全域編輯模式";
         btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs cursor-pointer";
-        editableIds.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.setAttribute('contenteditable', 'true');
-            el.classList.add('editable-mode');
-          }
-        });
+        editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
       } else {
+        document.body.classList.remove('editable-mode');
         btn.innerText = "開啟編輯模式";
         btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer";
         
-        const textsToSave = {
-          quoteChurchill: document.getElementById('editable-quote-churchill').innerText,
-          hobby1: document.getElementById('editable-hobby-1').innerText,
-          hobby2: document.getElementById('editable-hobby-2').innerText,
-          political: document.getElementById('editable-political').innerText,
-          words1: document.getElementById('editable-words-1').innerText,
-          shopTitle: document.getElementById('editable-shop-title').innerText
-        };
-
-        if (db) db.ref('custom_texts').set(textsToSave);
-
-        editableIds.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.removeAttribute('contenteditable');
-            el.classList.remove('editable-mode');
-          }
+        const textsToSave = {};
+        editableElements.forEach(el => {
+          el.removeAttribute('contenteditable');
+          if (el.id) textsToSave[el.id] = el.innerText;
         });
-        alert('全域內容已成功更新並同步至雲端！');
+
+        if (db) db.ref('global_custom_texts').set(textsToSave);
+        alert('全網內容已成功儲存並同步至雲端！');
       }
     }
 
     // 載入訪客日誌與實時圖表統計
     function loadVisitorLogs() {
       const viewer = document.getElementById('admin-logs-viewer');
+      if (!viewer) return;
       viewer.innerHTML = '<p class="text-amber-500">正在加載日誌數據...</p>';
 
       if (db) {
@@ -804,12 +910,10 @@
     function addNewsPost() {
       const date = document.getElementById('new-news-date').value || new Date().toLocaleDateString();
       const content = document.getElementById('new-news-content').value;
-
       if (!content) return alert('請輸入內容');
 
       const newsId = 'news-' + Date.now();
       const newsObj = { id: newsId, date: date, content: content };
-
       if (db) db.ref('news/' + newsId).set(newsObj);
 
       renderNewsItem(newsObj);
@@ -820,34 +924,33 @@
 
     function renderNewsItem(n) {
       const newsContainer = document.getElementById('news-container');
-      const newNewsHTML = `
-        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
-          <div>
-            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
-            <p class="text-white text-lg">${n.content}</p>
-          </div>
-          <button type="button" onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
-        </div>
-      `;
-      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
-    }
+      
+      const wrapper = document.createElement('div');
+      wrapper.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in";
+      wrapper.id = n.id;
 
-    async function updateAdminPassword() {
-      const newPass = document.getElementById('new-pass-input').value;
-      if (!newPass) return alert("請輸入新密碼");
+      const contentDiv = document.createElement('div');
+      
+      const dateSpan = document.createElement('span');
+      dateSpan.className = "text-amber-500 text-sm font-mono block mb-2";
+      dateSpan.textContent = `<${n.date}>`;
+      
+      const p = document.createElement('p');
+      p.className = "text-white text-lg";
+      p.textContent = n.content;
 
-      const newHash = await hashPassword(newPass);
+      contentDiv.appendChild(dateSpan);
+      contentDiv.appendChild(p);
 
-      if (db) {
-        db.ref('admin_password_hash').set(newHash).then(() => {
-          alert('管理員密碼已成功加密更新！');
-          document.getElementById('new-pass-input').value = '';
-        });
-      } else {
-        localStorage.setItem('admin_pass_hash', newHash);
-        alert('管理員密碼已成功加密更新！');
-        document.getElementById('new-pass-input').value = '';
-      }
+      const delBtn = document.createElement('button');
+      delBtn.type = "button";
+      delBtn.className = "admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer";
+      delBtn.innerText = "刪除";
+      delBtn.onclick = () => deleteNews(n.id);
+
+      wrapper.appendChild(contentDiv);
+      wrapper.appendChild(delBtn);
+      newsContainer.prepend(wrapper);
     }
 
     function handleContact(e) {
@@ -856,7 +959,6 @@
       e.target.reset();
     }
 
-    // 精確裝置型號辨識解析
     function parseDeviceName(ua) {
       if (/iPhone/i.test(ua)) return 'Apple iPhone';
       if (/iPad/i.test(ua)) return 'Apple iPad';
@@ -925,27 +1027,24 @@
     function initScrollObserver() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       }, { threshold: 0.15 });
-
       document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
     }
 
-    window.onload = function() {
+    window.onload = async function() {
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
 
+      await detectUserCurrencyByIP();
+      updateShopCurrencySetting(selectedCurrency);
       loadCustomTexts();
 
       if (db) {
         db.ref('news').once('value').then(snapshot => {
           const newsData = snapshot.val();
-          if (newsData) {
-            Object.values(newsData).forEach(n => renderNewsItem(n));
-          }
+          if (newsData) Object.values(newsData).forEach(n => renderNewsItem(n));
         });
       }
 
@@ -955,4 +1054,3 @@
   </script>
 </body>
 </html>
-```[cite: 5]
