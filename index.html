@@ -383,7 +383,7 @@
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
             <div class="text-left">
-              <div class="font-bold text-white text-base">PayPal / 國際信用卡</div>
+              <div class="font-bold text-white text-base">PayPal /信用卡</div>
               <div class="text-xs text-gray-400">收款帳號：mattew0205au@gmail.com</div>
             </div>
           </div>
@@ -395,7 +395,7 @@
             <span class="text-3xl">📱</span>
             <div class="text-left">
               <div class="font-bold text-white text-base">AlipayHK 支付寶</div>
-              <div class="text-xs text-gray-400">香港 / 內地支付寶 App 直接掃碼轉帳</div>
+              <div class="text-xs text-gray-400">支付寶直接掃碼轉帳</div>
             </div>
           </div>
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">顯示 QR Code ➔</span>
@@ -405,7 +405,6 @@
       <div id="alipay-sec" class="hidden mt-6 pt-6 border-t border-gray-800 text-center space-y-3">
         <h4 class="font-bold text-white">📱 請使用 AlipayHK App 掃碼付款</h4>
         <div class="bg-white p-3 rounded-xl inline-block shadow-lg">
-          <!-- 這裡已經幫你設定好對應 alipay.jpg -->
           <img src="alipay.jpg" alt="Alipay QR Code" class="w-48 h-48 mx-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/200?text=Alipay+QR+Code';">
         </div>
         <p class="text-xs text-gray-400">完成轉帳後，請保留截圖並透過 Email 與我們核對訂單。</p>
@@ -446,50 +445,12 @@
           <button type="button" onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500 cursor-pointer">即時發布並同步</button>
         </div>
 
-        <!-- 實時數據統計儀表板 (Analytics & Charts) -->
+        <!-- 📊 Google Looker Studio 實時數據統計圖表 -->
         <div class="border-b border-gray-800 pb-6 space-y-4">
-          <h4 class="font-bold text-white text-base text-amber-500">📊 實時流量與數據統計儀表板</h4>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-total-visits">0</div>
-              <div class="text-xs text-gray-400">總訪問次數</div>
-            </div>
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-mobile-pct">0%</div>
-              <div class="text-xs text-gray-400">行動裝置佔比</div>
-            </div>
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-desktop-pct">0%</div>
-              <div class="text-xs text-gray-400">桌面裝置佔比</div>
-            </div>
-            <div class="bg-black p-3 rounded border border-gray-800">
-              <div class="text-2xl font-bold text-amber-500" id="stat-top-page">-</div>
-              <div class="text-xs text-gray-400">熱門分頁</div>
-            </div>
+          <h4 class="font-bold text-white text-base text-amber-500">📊 Google Analytics 實時流量統計圖表</h4>
+          <div class="w-full rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-black">
+            <iframe width="100%" height="450" src="https://datastudio.google.com/embed/reporting/54cea90b-1fa8-45ef-b982-770156c3ec13/page/jnsBG" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
           </div>
-        </div>
-
-        <!-- 訪客軌跡與高精準定位 -->
-        <div class="border-b border-gray-800 pb-6 space-y-3">
-          <details class="bg-black rounded border border-gray-800 p-4">
-            <summary class="cursor-pointer font-bold text-amber-500 text-base flex justify-between items-center">
-              <span>🎯 訪客精確軌跡與 IP 定位日誌（點擊展開/收合）</span>
-              <div class="space-x-2">
-                <button type="button" onclick="event.stopPropagation(); loadVisitorLogs()" class="px-2 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded cursor-pointer">🔄 重新整理</button>
-                <button type="button" onclick="event.stopPropagation(); clearAllVisitorLogs()" class="px-2 py-1 bg-red-700 hover:bg-red-600 text-white text-xs rounded cursor-pointer">🗑️ 清除全部</button>
-              </div>
-            </summary>
-            <div id="admin-logs-viewer" class="mt-4 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
-              <p class="text-gray-500">正在加載精確數據...</p>
-            </div>
-          </details>
-        </div>
-
-        <!-- 修改管理員密碼 -->
-        <div class="space-y-3 pt-2">
-          <h4 class="font-bold text-white text-base text-amber-500">🔑 修改管理員密碼</h4>
-          <input type="password" id="new-pass-input" placeholder="輸入新密碼" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
-          <button type="button" onclick="updateAdminPassword()" class="px-4 py-2 bg-gray-700 text-white rounded font-bold hover:bg-gray-600 cursor-pointer">更新密碼</button>
         </div>
 
       </div>
@@ -500,7 +461,6 @@
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
     <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <!-- 這裡直接連結到你的 PDF 檔案 -->
       <a href="Privacy_Policy.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
       <a href="Terms_of_Use.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
       <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
@@ -509,7 +469,7 @@
   </footer>
 
   <script>
-    const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+    const DEFAULT_HASH = "8d1d86d6cdcc67ae967a57a8a07c34bfa85df5d064c1e4d3c40f5cb1b764b85c";
 
     async function hashPassword(str) {
       const msgBuffer = new TextEncoder().encode(str);
@@ -604,7 +564,7 @@
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
         contact_title: "与我联絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联絡我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
-        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
+        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，與所有志同道合的朋友分享我的核心理念、生活点滴以及對社會時事的深度觀察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字电脑世界中進行無限的科技探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
         words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
         signature_name: "Matthew Au",
@@ -676,7 +636,6 @@
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      trackUserAnalytics(tab);
     }
 
     let currentGlobalAmountHKD = 5000;
@@ -768,25 +727,18 @@
 
       const inputHash = await hashPassword(inputPass);
 
-      if (db) {
-        db.ref('admin_password_hash').once('value').then(snapshot => {
-          const cloudHash = snapshot.val() || DEFAULT_HASH;
-          if (inputHash === cloudHash) unlockDashboard();
-          else alert('驗證失敗！密碼不正確。');
-        }).catch(() => {
-          if (inputHash === DEFAULT_HASH) unlockDashboard();
-          else alert('驗證失敗！密碼不正確。');
-        });
+      if (inputHash === DEFAULT_HASH) {
+        unlockDashboard();
+        document.getElementById('admin-pass-input').value = '';
       } else {
-        if (inputHash === DEFAULT_HASH) unlockDashboard();
-        else alert('驗證失敗！密碼不正確。');
+        alert('驗證失敗！密碼不正確。');
       }
     }
 
     function unlockDashboard() {
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
-      loadVisitorLogs();
+      document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
     }
 
     function loadCustomTexts() {
@@ -829,84 +781,6 @@
       }
     }
 
-    function loadVisitorLogs() {
-      const viewer = document.getElementById('admin-logs-viewer');
-      viewer.innerHTML = '<p class="text-amber-500">正在加載日誌數據...</p>';
-
-      if (db) {
-        db.ref('visitor_logs').once('value').then(snapshot => {
-          const logs = snapshot.val();
-          if (!logs) {
-            viewer.innerHTML = '<p class="text-gray-400">目前尚無訪客紀錄。</p>';
-            updateStats({});
-            return;
-          }
-
-          updateStats(logs);
-
-          let html = '';
-          const logEntries = Object.entries(logs).reverse();
-          logEntries.forEach(([key, log]) => {
-            const mapLink = log.coords ? `https://www.google.com/maps?q=${log.coords}` : `https://www.google.com/maps/search/${encodeURIComponent(log.location)}`;
-            html += `
-              <div class="border-b border-gray-800 pb-2 mb-2 flex justify-between items-start" id="log-${key}">
-                <div>
-                  <div class="text-amber-400 font-bold">🎯 裝置: ${log.device_name || log.device} | 📍 <a href="${mapLink}" target="_blank" class="underline">${log.location}</a></div>
-                  <div class="text-gray-300">🌐 IP: ${log.ip} | ⏰ 時間: ${log.local_time}</div>
-                  <div class="text-gray-400">📄 瀏覽頁面: <span class="text-white">${log.visited_page}</span></div>
-                </div>
-                <button type="button" onclick="deleteVisitorLog('${key}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
-              </div>
-            `;
-          });
-          viewer.innerHTML = html;
-        });
-      }
-    }
-
-    function deleteVisitorLog(key) {
-      if (confirm("確定要刪除這條訪客記錄嗎？")) {
-        if (db) db.ref('visitor_logs/' + key).remove();
-        const el = document.getElementById('log-' + key);
-        if (el) el.remove();
-        alert("已成功刪除！");
-      }
-    }
-
-    function clearAllVisitorLogs() {
-      if (confirm("警告：確定要清空所有訪客軌跡資料嗎？")) {
-        if (db) db.ref('visitor_logs').remove();
-        document.getElementById('admin-logs-viewer').innerHTML = '<p class="text-gray-400">目前尚無訪客紀錄。</p>';
-        updateStats({});
-        alert("已清空所有訪客記錄！");
-      }
-    }
-
-    function updateStats(logs) {
-      const logsArray = Object.values(logs);
-      const total = logsArray.length;
-      document.getElementById('stat-total-visits').innerText = total;
-      if (total === 0) return;
-
-      let mobileCount = 0, desktopCount = 0;
-      const pageCounts = {};
-      logsArray.forEach(log => {
-        if (log.device && log.device.includes('Mobile')) mobileCount++;
-        else desktopCount++;
-        const p = log.visited_page || 'home';
-        pageCounts[p] = (pageCounts[p] || 0) + 1;
-      });
-
-      document.getElementById('stat-mobile-pct').innerText = Math.round((mobileCount / total) * 100) + '%';
-      document.getElementById('stat-desktop-pct').innerText = Math.round((desktopCount / total) * 100) + '%';
-
-      let topPage = 'home', maxCount = 0;
-      for (const [page, count] of Object.entries(pageCounts)) {
-        if (count > maxCount) { maxCount = count; topPage = page; }
-      }
-      document.getElementById('stat-top-page').innerText = topPage;
-    }
-
     function deleteNews(id) {
       if (confirm("確定要刪除這篇最新消息嗎？")) {
         const item = document.getElementById(id);
@@ -933,92 +807,39 @@
 
     function renderNewsItem(n) {
       const newsContainer = document.getElementById('news-container');
-      const newNewsHTML = `
-        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
-          <div>
-            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
-            <p class="text-white text-lg">${n.content}</p>
-          </div>
-          <button type="button" onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
-        </div>
-      `;
-      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
-    }
+      
+      const wrapper = document.createElement('div');
+      wrapper.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in";
+      wrapper.id = n.id;
 
-    async function updateAdminPassword() {
-      const newPass = document.getElementById('new-pass-input').value;
-      if (!newPass) return alert("請輸入新密碼");
-      const newHash = await hashPassword(newPass);
+      const contentDiv = document.createElement('div');
+      
+      const dateSpan = document.createElement('span');
+      dateSpan.className = "text-amber-500 text-sm font-mono block mb-2";
+      dateSpan.textContent = `<${n.date}>`;
+      
+      const p = document.createElement('p');
+      p.className = "text-white text-lg";
+      p.textContent = n.content;
 
-      if (db) {
-        db.ref('admin_password_hash').set(newHash).then(() => {
-          alert('管理員密碼已成功加密更新！');
-          document.getElementById('new-pass-input').value = '';
-        });
-      }
+      contentDiv.appendChild(dateSpan);
+      contentDiv.appendChild(p);
+
+      const delBtn = document.createElement('button');
+      delBtn.type = "button";
+      delBtn.className = "admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer";
+      delBtn.innerText = "刪除";
+      delBtn.onclick = () => deleteNews(n.id);
+
+      wrapper.appendChild(contentDiv);
+      wrapper.appendChild(delBtn);
+      newsContainer.prepend(wrapper);
     }
 
     function handleContact(e) {
       e.preventDefault();
       alert('訊息已成功傳送！');
       e.target.reset();
-    }
-
-    function parseDeviceName(ua) {
-      if (/iPhone/i.test(ua)) {
-        const isiPhone8 = (window.screen.width === 375 && window.screen.height === 667) || /iPhone10,1|iPhone10,4/i.test(ua);
-        if (isiPhone8) return 'iPhone 8';
-        return 'Apple iPhone';
-      }
-      if (/Xiaomi|2201123G|2201123C|2201122G|Xiaomi 12/i.test(ua)) return '小米 12';
-      if (/ProBook 4|HP ProBook|ProBook/i.test(ua)) return 'HP ProBook 4';
-      if (/iPad/i.test(ua)) return 'Apple iPad';
-      if (/Huawei|Honor/i.test(ua)) return 'Huawei';
-      if (/Samsung/i.test(ua)) return 'Samsung Galaxy';
-      if (/Windows/i.test(ua)) return 'Windows PC';
-      if (/Android/i.test(ua)) return 'Android Mobile';
-      return 'Generic PC';
-    }
-
-    async function trackUserAnalytics(pageName = 'home') {
-      const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
-      const deviceModelName = parseDeviceName(navigator.userAgent);
-      const userLang = localStorage.getItem('user_preferred_lang') || navigator.language;
-      const localFormattedTime = new Date().toLocaleString('zh-HK');
-
-      let clientIp = '127.0.0.1';
-      let locationStr = '定位解析中...';
-      let coordsStr = null;
-
-      try {
-        const ipRes = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
-        if (ipRes && ipRes.success) {
-          clientIp = ipRes.ip;
-          locationStr = `${ipRes.city}, ${ipRes.region}, ${ipRes.country}`;
-          coordsStr = `${ipRes.latitude},${ipRes.longitude}`;
-        }
-      } catch(e) {}
-
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            coordsStr = `${pos.coords.latitude.toFixed(6)},${pos.coords.longitude.toFixed(6)}`;
-            locationStr = `GPS 晶片極致精準 (±${Math.round(pos.coords.accuracy)}米)`;
-            saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
-          },
-          () => {
-            saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
-          },
-          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-        );
-      } else {
-        saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
-      }
-    }
-
-    function saveLogToFirebase(ip, coords, location, device, deviceName, lang, time, page) {
-      const logData = { ip, coords, location, device, device_name: deviceName, language: lang, local_time: time, visited_page: page, timestamp: Date.now() };
-      if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
     }
 
     function initScrollObserver() {
@@ -1045,7 +866,6 @@
         });
       }
 
-      trackUserAnalytics('home');
       initScrollObserver();
     };
   </script>
