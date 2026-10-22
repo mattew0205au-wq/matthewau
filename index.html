@@ -15,7 +15,7 @@
   <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- ==================== 網站圖標 (Favicon & Apple Touch Icon) ==================== -->
+  <!-- 網站圖標 (Favicon) -->
   <link rel="icon" href="./favicon.ico?v=2" type="image/x-icon">
   <link rel="icon" href="./favicon.png?v=2" type="image/png">
   <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png?v=2">
@@ -27,13 +27,13 @@
     .nav-link { color: #d1d5db; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
     .nav-link.active { color: #a87954; border-bottom: 2px solid #a87954; font-weight: bold; }
     .marquee-section { background-color: #1a1a1a; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; color: #a87954; }
-    .btn-buy { background-color: #c49a78; color: #ffffff; }
+    .btn-buy { background-color: #c49a78; color: #ffffff; transition: all 0.2s; }
     .btn-buy:hover { background-color: #b08563; }
     .modal-bg { background-color: rgba(0, 0, 0, 0.85); }
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
 
-    /* 滾動式漸進淡入動畫 (Scroll-Triggered Fade-In) */
+    /* 滾動式漸進淡入動畫 */
     .scroll-fade {
       opacity: 0;
       transform: translateY(30px);
@@ -44,11 +44,16 @@
       transform: translateY(0);
     }
 
-    /* 編輯模式下可編輯元素的邊框樣式 */
-    .editable-mode {
-      border: 2px dashed #a87954 !important;
-      padding: 4px;
-      background-color: rgba(168, 121, 84, 0.1);
+    /* 強制顯示與高亮全域可編輯元素 */
+    .editable-element {
+      transition: outline 0.2s, background-color 0.2s;
+    }
+    .editable-mode .editable-element {
+      outline: 2px dashed #a87954 !important;
+      outline-offset: 3px;
+      background-color: rgba(168, 121, 84, 0.15) !important;
+      border-radius: 4px;
+      cursor: text;
     }
   </style>
 </head>
@@ -56,7 +61,7 @@
 
   <!-- 1. 頂部公告條 -->
   <div class="top-banner py-2 px-4 text-center text-xs md:text-sm font-medium tracking-wide flex items-center justify-center gap-2">
-    <span>🌱</span> <span data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
+    <span>🌱</span> <span id="editable-top-banner" class="editable-element" data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
   <!-- 2. 主導覽列 -->
@@ -70,10 +75,10 @@
       <!-- 電腦版導覽 -->
       <div class="hidden md:flex items-center gap-6">
         <nav class="flex items-center gap-6">
-          <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active" data-i18n="nav_home">首頁</span>
-          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link" data-i18n="nav_words">鍵鋒的話</span>
-          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link" data-i18n="nav_news">最新消息</span>
-          <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link" data-i18n="nav_shop">商城</span>
+          <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active editable-element" data-i18n="nav_home">首頁</span>
+          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link editable-element" data-i18n="nav_words">鍵鋒的話</span>
+          <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link editable-element" data-i18n="nav_news">最新消息</span>
+          <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link editable-element" data-i18n="nav_shop">商城</span>
         </nav>
 
         <select onchange="changeLanguage(this.value)" id="lang-select-desktop" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2.5 py-1.5 rounded focus:outline-none cursor-pointer">
@@ -90,7 +95,7 @@
           <option value="en">EN</option>
           <option value="zh-CN">简中</option>
         </select>
-        <button onclick="toggleMobileMenu()" class="text-amber-500 text-xl p-2 rounded focus:outline-none">
+        <button onclick="toggleMobileMenu()" class="text-amber-500 text-xl p-2 rounded focus:outline-none cursor-pointer">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -99,10 +104,10 @@
 
     <!-- 手機版下拉選單 -->
     <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-b border-gray-800 px-6 py-4 space-y-3">
-      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_home">首頁</div>
-      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_words">鍵鋒的話</div>
-      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_news">最新消息</div>
-      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer" data-i18n="nav_shop">商城</div>
+      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_home">首頁</div>
+      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_words">鍵鋒的話</div>
+      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_news">最新消息</div>
+      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_shop">商城</div>
     </div>
   </header>
 
@@ -111,23 +116,25 @@
     <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800 scroll-fade">
       <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md">Matthew Au</h1>
-        <p class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md">Official Website</p>
+        <h1 id="editable-hero-title" class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md editable-element">Matthew Au</h1>
+        <p id="editable-hero-sub" class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md editable-element">Official Website</p>
       </div>
     </section>
 
     <div class="marquee-section py-4 overflow-hidden scroll-fade">
       <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
-        <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
-        <span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span><span class="mx-6" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-1" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-2" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-3" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span id="editable-marquee-4" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
       </div>
     </div>
 
     <!-- 邱吉爾名言 -->
     <section class="bg-stone-900 py-20 px-6 text-center border-b border-gray-800 scroll-fade">
       <div class="max-w-3xl mx-auto">
-        <blockquote id="editable-quote-churchill" class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-        <p class="text-sm font-sans tracking-wide text-amber-600 font-bold" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
+        <blockquote id="editable-quote-churchill" class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100 editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+        <p id="editable-quote-churchill-author" class="text-sm font-sans tracking-wide text-amber-600 font-bold editable-element" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
       </div>
     </section>
 
@@ -135,9 +142,9 @@
     <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
-          <h2 class="text-2xl font-bold mb-4" data-i18n="about_me">關於我</h2>
-          <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
-          <p id="editable-hobby-1" class="text-gray-400" data-i18n="hobby_football">足球</p>
+          <h2 id="editable-about-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="about_me">關於我</h2>
+          <h3 id="editable-hobby-title-1" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title">我的興趣</h3>
+          <p id="editable-hobby-1" class="text-gray-400 editable-element" data-i18n="hobby_football">足球</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="足球" class="w-full h-72 object-cover">
@@ -146,8 +153,8 @@
 
       <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div>
-          <h3 class="text-xl text-gray-300 mb-2" data-i18n="hobby_title">我的興趣</h3>
-          <p id="editable-hobby-2" class="text-gray-400" data-i18n="hobby_roblox">玩Roblox</p>
+          <h3 id="editable-hobby-title-2" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title">我的興趣</h3>
+          <p id="editable-hobby-2" class="text-gray-400 editable-element" data-i18n="hobby_roblox">玩Roblox</p>
         </div>
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Roblox" class="w-full h-72 object-cover">
@@ -159,8 +166,8 @@
           <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80" alt="民主自由" class="w-full h-72 object-cover">
         </div>
         <div>
-          <h2 class="text-2xl font-bold mb-4" data-i18n="political_view_title">政治理念</h2>
-          <p id="editable-political" class="text-gray-300" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
+          <h2 id="editable-political-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="political_view_title">政治理念</h2>
+          <p id="editable-political" class="text-gray-300 editable-element" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
         </div>
       </div>
     </section>
@@ -168,19 +175,19 @@
     <!-- 評論區 -->
     <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800 scroll-fade">
       <div class="max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold text-white mb-12" data-i18n="reviews_title">評論</h2>
+        <h2 id="editable-reviews-title" class="text-3xl font-bold text-white mb-12 editable-element" data-i18n="reviews_title">評論</h2>
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p class="text-lg font-medium mb-6" data-i18n="review1_text">"佢樣樣都好呀"</p>
-            <p class="text-xs text-gray-500" data-i18n="review1_author">匿名 - 11/2/2023</p>
+            <p id="editable-review-1" class="text-lg font-medium mb-6 editable-element" data-i18n="review1_text">"佢樣樣都好呀"</p>
+            <p id="editable-review-1-author" class="text-xs text-gray-500 editable-element" data-i18n="review1_author">匿名 - 11/2/2023</p>
           </div>
           <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4" data-i18n="anon_user">匿</div>
+            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p class="text-lg font-medium mb-6" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
-            <p class="text-xs text-gray-500" data-i18n="review2_author">匿名 - 7/6/2023</p>
+            <p id="editable-review-2" class="text-lg font-medium mb-6 editable-element" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
+            <p id="editable-review-2-author" class="text-xs text-gray-500 editable-element" data-i18n="review2_author">匿名 - 7/6/2023</p>
           </div>
         </div>
       </div>
@@ -189,26 +196,26 @@
     <!-- 拿破崙名言 -->
     <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800 scroll-fade">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-serif mb-4 text-gray-100">« Impossible n'est pas français. »</h2>
-        <p class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
-        <p class="text-xs font-sans tracking-widest text-amber-600 font-bold">—— Napoléon Bonaparte 拿破崙</p>
+        <h2 id="editable-quote-napoleon-fr" class="text-2xl md:text-3xl font-serif mb-4 text-gray-100 editable-element">« Impossible n'est pas français. »</h2>
+        <p id="editable-quote-napoleon-zh" class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80 editable-element" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
+        <p id="editable-quote-napoleon-author" class="text-xs font-sans tracking-widest text-amber-600 font-bold editable-element">—— Napoléon Bonaparte 拿破崙</p>
       </div>
     </section>
 
     <!-- 聯絡表單與社群媒體圖標區 -->
     <section class="max-w-3xl mx-auto px-6 py-20 text-center scroll-fade">
-      <h2 class="text-3xl font-bold text-amber-600/90 mb-2" data-i18n="contact_title">與我聯絡</h2>
-      <p class="text-gray-300 mb-8" data-i18n="contact_sub">歡迎來信！</p>
+      <h2 id="editable-contact-title" class="text-3xl font-bold text-amber-600/90 mb-2 editable-element" data-i18n="contact_title">與我聯絡</h2>
+      <p id="editable-contact-sub" class="text-gray-300 mb-8 editable-element" data-i18n="contact_sub">歡迎來信！</p>
       <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-12">
         <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
         <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_email">
         <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_msg"></textarea>
-        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition" data-i18n="btn_send">傳送</button>
+        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition cursor-pointer" data-i18n="btn_send">傳送</button>
       </form>
 
       <!-- 社群連結按鈕 -->
       <div class="pt-8 border-t border-gray-800">
-        <p class="text-sm text-gray-400 mb-6 font-medium" data-i18n="social_hint">或使用社交媒體聯絡我</p>
+        <p id="editable-social-hint" class="text-sm text-gray-400 mb-6 font-medium editable-element" data-i18n="social_hint">或使用社交媒體聯絡我</p>
         <div class="flex justify-center items-center gap-6">
           <a href="https://www.facebook.com/kinfung.au.3" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-facebook-f"></i>
@@ -229,52 +236,76 @@
 
   <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
   <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_words">鍵鋒的話</h2>
+    <h2 id="editable-words-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_words">鍵鋒的話</h2>
     <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
-      <p id="editable-words-1" class="text-lg" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
-      <blockquote class="border-l-4 border-amber-600 pl-4 text-white italic" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p id="editable-words-2" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
-      <p id="editable-words-3" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
+      <p id="editable-words-1" class="text-lg editable-element" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
+      <blockquote id="editable-words-quote" class="border-l-4 border-amber-600 pl-4 text-white italic editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
+      <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位遊戲世界（如 Roblox）中進行無限的創意探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
+      <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
     </div>
   </div>
 
   <!-- ==================== 3. 最新消息 TAB ==================== -->
   <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 class="text-3xl font-bold mb-8 text-amber-500" data-i18n="nav_news">最新消息</h2>
+    <h2 id="editable-news-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_news">最新消息</h2>
     <div id="news-container" class="space-y-8">
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
         <div>
-          <span class="text-amber-500 text-sm font-mono block mb-2">&lt;13/5/2026&gt;</span>
-          <p class="text-white text-lg" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
+          <span id="editable-news-date-1" class="text-amber-500 text-sm font-mono block mb-2 editable-element">&lt;13/5/2026&gt;</span>
+          <p id="editable-news-body-1" class="text-white text-lg editable-element" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
         </div>
-        <button onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+        <button type="button" onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
       </div>
 
       <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-2">
         <div>
-          <span class="text-red-400 text-sm font-mono block mb-2">&lt;27/3/2026&gt;</span>
-          <p class="text-white text-lg mb-4" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
-          <p class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
+          <span id="editable-news-date-2" class="text-red-400 text-sm font-mono block mb-2 editable-element">&lt;27/3/2026&gt;</span>
+          <p id="editable-news-body-2" class="text-white text-lg mb-4 editable-element" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
+          <p id="editable-news-sub-2" class="text-gray-300 text-sm border-l-2 border-red-500 pl-4 py-1 editable-element" data-i18n="news_2_sub">最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。</p>
         </div>
-        <button onclick="deleteNews('news-item-2')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded">刪除</button>
+        <button type="button" onclick="deleteNews('news-item-2')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
       </div>
     </div>
   </div>
 
   <!-- ==================== 4. 商城 TAB ==================== -->
   <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16 scroll-fade">
-    <h2 class="text-3xl font-bold mb-12 text-amber-500" data-i18n="shop_title">官方商城</h2>
-    <div id="shop-container" class="space-y-20">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+    <h2 id="editable-main-shop-title" class="text-3xl font-bold mb-12 text-amber-500 editable-element" data-i18n="shop_title">官方商城</h2>
+    <div id="shop-container" class="space-y-16">
+      
+      <!-- 商品 1：固定金額足球訓練 -->
+      <div class="grid md:grid-cols-2 gap-12 items-center border-b border-gray-800 pb-16">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
         <div>
-          <h2 id="editable-shop-title" class="text-3xl font-bold text-amber-600/90 mb-4" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
-          <p class="text-2xl font-semibold text-white mb-6">HK$5,000.00</p>
-          <button type="button" onclick="openPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
+          <h2 id="editable-shop-title" class="text-3xl font-bold text-amber-600/90 mb-4 editable-element" data-i18n="prod1_title">Matthew Au 大師級一對一足球訓練</h2>
+          <p id="editable-prod1-price" class="text-2xl font-semibold text-white mb-6 editable-element">HK$5,000.00</p>
+          <button type="button" onclick="openPaymentModal(5000)" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💳 <span data-i18n="btn_buy_now">立即購買</span></button>
         </div>
       </div>
+
+      <!-- 商品 2：得到心靈上的支持 (自定義金額) -->
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
+          <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" alt="心靈支持" class="w-full h-80 object-cover">
+        </div>
+        <div>
+          <h2 id="editable-prod2-title" class="text-3xl font-bold text-amber-500 mb-2 editable-element">得到我心靈上的支持</h2>
+          <p id="editable-prod2-desc" class="text-gray-400 text-sm mb-6 editable-element">感謝您的贊助與支持，您的心靈鼓勵是我持續創作與前進的最大動力！</p>
+          
+          <div class="mb-6">
+            <label id="editable-prod2-label" class="block text-xs text-amber-500 font-bold mb-2 editable-element">請輸入自由贊助金額 (HKD)：</label>
+            <div class="flex items-center gap-2 max-w-xs">
+              <span class="text-xl font-bold text-amber-500">HK$</span>
+              <input type="number" id="custom-amount-input" min="1" placeholder="自定義金額" value="100" class="w-full p-2.5 bg-gray-800 border border-gray-700 text-white rounded font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+
+          <button type="button" onclick="openCustomPaymentModal()" class="btn-buy px-8 py-3 rounded font-bold text-lg shadow mb-3 flex items-center gap-2 cursor-pointer">💖 <span>給予心靈支持</span></button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -288,8 +319,14 @@
         <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">✕</button>
       </div>
 
+      <div class="mb-6 p-3 bg-gray-800/60 rounded border border-gray-700 flex justify-between items-center text-sm">
+        <span class="text-gray-300">應付金額：</span>
+        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">HK$5,000.00</span>
+      </div>
+
       <div class="space-y-4">
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
+        <!-- PayPal 連結帶入當前選擇金額 -->
+        <a id="paypal-link-btn" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=5000" target="_blank" class="flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">🅿️</span>
             <div class="text-left">
@@ -300,6 +337,7 @@
           <span class="text-amber-500 font-bold text-sm group-hover:translate-x-1 transition">前往付款 ➔</span>
         </a>
 
+        <!-- AlipayHK 支付寶 -->
         <div onclick="toggleAlipay()" class="cursor-pointer flex items-center justify-between p-4 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 transition duration-200 group">
           <div class="flex items-center gap-4">
             <span class="text-3xl">📱</span>
@@ -322,21 +360,21 @@
     </div>
   </div>
 
-  <!-- 法律條款 Modal -->
+  <!-- 📜 法律條款 Modal (隱私權政策 / 網站使用條款) -->
   <div id="legal-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-3xl rounded-xl shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
         <h3 id="modal-title" class="text-xl font-bold text-amber-500">條款與政策</h3>
         <button type="button" onclick="closeModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
-      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-6 leading-relaxed"></div>
+      <div id="modal-body" class="p-6 overflow-y-auto text-sm text-gray-300 space-y-4 leading-relaxed"></div>
       <div class="p-4 border-t border-gray-800 text-right">
         <button type="button" onclick="closeModal()" class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 cursor-pointer">關閉</button>
       </div>
     </div>
   </div>
 
-  <!-- 管理員入口 Modal -->
+  <!-- ⚙️ 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -356,7 +394,7 @@
         <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex justify-between items-center">
           <div>
             <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
-            <p class="text-xs text-gray-400">開啟後可直接在網頁上編輯並儲存所有文字內容。</p>
+            <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字，關閉時全網儲存並雲端同步。</p>
           </div>
           <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
         </div>
@@ -392,7 +430,7 @@
           </div>
         </div>
 
-        <!-- 訪客軌跡與高精準定位（摺疊下拉選單 + 單獨清除/清除全部） -->
+        <!-- 訪客軌跡與高精準定位 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <details class="bg-black rounded border border-gray-800 p-4">
             <summary class="cursor-pointer font-bold text-amber-500 text-base flex justify-between items-center">
@@ -423,7 +461,7 @@
   <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
     <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">商城隱私權政策</a>
+      <a onclick="showPrivacyPolicy()" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
       <a onclick="showTermsOfService()" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
       <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
@@ -431,7 +469,6 @@
   </footer>
 
   <script>
-    // 預設密碼 "1234" 的 SHA-256 加密雜湊亂碼（安全防護）
     const DEFAULT_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
 
     async function hashPassword(str) {
@@ -441,7 +478,6 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // Firebase 資料庫配置
     const firebaseConfig = {
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
     };
@@ -450,7 +486,6 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
 
-    // 語言字典
     const i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
@@ -473,7 +508,7 @@
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一對一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "商城隱私權政策", terms_of_use: "網站使用條款及免責聲明"
+        privacy_policy: "隱私權政策", terms_of_use: "網站使用條款及免責聲明"
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
@@ -519,7 +554,7 @@
         news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
         news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
         shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
-        privacy_policy: "商城隐私权政策", terms_of_use: "網站使用條款及免責聲明"
+        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
       }
     };
 
@@ -558,25 +593,69 @@
       trackUserAnalytics(tab);
     }
 
-    // 📜 隱私權政策與免責聲明 Modal
+    // 📜 帶入完整的隱私權政策與網站使用條款
     function showPrivacyPolicy() {
-      document.getElementById('modal-title').innerText = "商城隱私權政策";
+      document.getElementById('modal-title').innerText = "隱私權政策";
       document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 個人資料收集與使用</p>
-        <p>本網站僅在您進行商品購買或透過聯絡表單發送訊息時收集必要之個人資料（例如電子郵件、名稱及付款備註）。相關資料僅用於訂單核對及溝通服務，絕不會洩漏給第三方。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 交易安全</p>
-        <p>本網站之付款流程均直接透過 PayPal 及 AlipayHK 官方安全加密平台完成，本網站伺服器不會記錄或儲存您的信用卡號碼或支付密碼。</p>
+        <p class="text-xs text-amber-500 font-mono mb-2">適用法規標準：歐盟 GDPR、美國 CCPA/CPRA、香港《個人資料（隱私）條例》</p>
+        <p>本網站（以下簡稱「本站」）在此說明關於個人資料的收集、處理及使用方式。</p>
+        
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">一、 資料收集與使用</h4>
+        <p><strong>伺服器紀錄：</strong> 當您瀏覽本站時，系統會自動記錄連線資訊（例如 IP 位址、存取時間、瀏覽器類型及頁面點擊紀錄）。這些資料用於系統維護、流量分析與網絡安全。</p>
+        <p><strong>聯絡資料：</strong> 若您透過本站表單或電子郵件聯絡本站，本站會收集您提供的姓名與電子郵件地址，用於處理您的查詢或相關聯繫。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">二、 資料處理依據</h4>
+        <p>本站處理個人資料基於以下情況：您主動發送訊息或同意使用 Cookie；或本站為維持網站正常運作與安全防護之必要。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">三、 Cookie 技術</h4>
+        <p>本站會使用 Cookie 以優化瀏覽體驗。您可以隨時透過瀏覽器設定拒絕或刪除 Cookie，但這可能會影響本站部分功能的運作。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">四、 資料分享與轉讓</h4>
+        <p>本站保留將收集到的資料（包括但不限於去識別化數據或個人資料）出售、出租或分享予第三方的權利。</p>
+        <p>如因法律規定、行政命令或執法單位要求，本站亦可能向相關機構披露資料。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">五、 跨境傳輸</h4>
+        <p>本站資料可能於您所在國家/地區以外的伺服器進行處理與儲存，本站會採取合理措施保障資料安全。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">六、 使用者權利</h4>
+        <p>您有權向本站提出以下要求：查詢、閱覽或更正您的個人資料；請求刪除本站留存的個人資料；限制或反對本站處理您的資料；索取您個人資料的電子副本。</p>
+        <p>如需行使上述權利，請透過電子郵件 (mattew0205au@gmail.com) 聯絡本站。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">七、 外部連結</h4>
+        <p>本站包含第三方網站連結。點擊連結離開本站後，本政策即不再適用，本站不對外部網站的內容與做法負責。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">八、 條款修訂</h4>
+        <p>本站有權隨時修改本隱私權政策。更新內容刊登於本頁面即時生效，不另行通知。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
 
     function showTermsOfService() {
-      document.getElementById('modal-title').innerText = "網站使用條款及免責聲明";
+      document.getElementById('modal-title').innerText = "網站使用條款";
       document.getElementById('modal-body').innerHTML = `
-        <p class="font-bold text-amber-500">1. 免責聲明</p>
-        <p>本網站所載之一切資料僅供參考之用。 Matthew Au 團隊已盡力確保網站內容之準確性，但對於任何因使用本網站資料而引致之損失，概不承擔任何法律責任。</p>
-        <p class="font-bold text-amber-500 mt-4">2. 智慧財產權</p>
-        <p>本網站內之所有文字、標誌及多媒體內容版權均屬 Matthew Au 所有，未經授權禁止擅自複製、轉載或作為商業用途。</p>
+        <p class="text-xs text-amber-500 font-mono mb-2">最新更新日期：2026年9月15日</p>
+        <p>歡迎造訪本網站（以下簡稱「本站」）。當您存取、瀏覽或使用本站及其提供的任何服務時，即表示您已閱讀、理解並同意受本條款之約束。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">一、 免責聲明、爭議解決與管轄法律</h4>
+        <p><strong>一般免責聲明：</strong> 本站及其所有內容均以「現狀（As-Is）」及「可提供性（As-Available）」基礎提供。本站對本服務之即時性、準確性、完整性、特定用途適用性或無侵權性不作任何明示或暗示之保證。若因使用或無法使用本站而導致任何直接、間接、附帶或衍生性損害，本站概不承擔任何賠償責任。</p>
+        <p><strong>違約責任與賠償：</strong> 若您違反本條款之任何規定，致使本站或其關聯方遭受任何損失、第三方追討或權利主張，您同意負擔完全之賠償責任（包括但不限於訴訟費用及合理律師費）。</p>
+        <p><strong>管轄法律與法院管轄權：</strong> 本條款之解釋、效力及因本站所引發或與本站使用相關的一切爭議，均應受美國加利福尼亞州（State of California）法律所管轄，並排除任何衝突法原則之適用。您無條件同意，因本條款或本站使用所生之任何訴訟或法律程序，均應以美國加利福尼亞州內有管轄權之州法院或聯邦法院為第一審專屬管轄法院。</p>
+        <p><strong>歐盟用戶特別條款（ODR 平台與消費爭議）：</strong> 若您為居住於歐盟（EU）或歐洲經濟區（EEA）之消費者，上述管轄法律與法院設定不影響您依據所在國強制性法律所享有之消費者權利。歐盟委員會提供線上爭議解決平台（Online Dispute Resolution / ODR），您可以透過 <a href="https://ec.europa.eu/consumers/odr" target="_blank" class="underline text-amber-500">ec.europa.eu/consumers/odr</a> 存取該平台以尋求非訴訟性爭議解決方案。</p>
+        <p><strong>強制仲裁條款之無效性：</strong> 若您所在國家或地區之法律明文禁止強制仲裁條款、集體訴訟棄權條款或限制消費者向當地法院提起訴訟之權利，則本條款中有關強制仲裁或專屬管轄之限制於該法律適用範圍內即刻失效，並不影響本條款其他部分之有效性與可執行性。</p>
+        <p><strong>意見、反饋與諮詢：</strong> 若您對本使用條款有任何疑問、建議、申訴或法律諮詢需求，請透過本站指定的電子郵件或聯絡表單與本站聯繫。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">二、 智慧財產權與授權使用</h4>
+        <p><strong>所有權聲明：</strong> 本站上呈現的所有內容（包括文字、圖片、標誌、軟體及介面設計），其智慧財產權均屬本站或相關權利人所有，受相關法律保護。</p>
+        <p><strong>禁止行為：</strong> 未經事前書面授權，您不得複製、重製、修改、散布、轉載本站任何內容，亦不得將本站內容用於任何商業目的。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">三、 使用者規範與行為限制</h4>
+        <p>使用本站時，您承諾不得從事以下行為：上傳、張貼或傳播任何違法、侵權、誹謗、猥褻或有害之內容；使用任何自動化工具（如爬蟲程式）未經許可擷取本站資料；試圖未經授權存取本站系統，或植入木馬、病毒等惡意程式。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">四、 外部第三方網站連結</h4>
+        <p>本站可能包含前往第三方網站之超連結。本站對任何第三方網站之內容、隱私政策或商業行為無控制權，亦不承擔任何責任。存取外部連結之風險由您自行承擔。</p>
+
+        <h4 class="font-bold text-white text-base pt-2 text-amber-500">五、 條款修訂與更新</h4>
+        <p>本站保留隨時修改本條款之權利。修改後的條款刊登於本頁面即時生效，不另行個別通知。您於條款變更後繼續使用本站，即視為您已接受該等變更。</p>
       `;
       document.getElementById('legal-modal').classList.remove('hidden');
     }
@@ -585,31 +664,32 @@
       document.getElementById('legal-modal').classList.add('hidden');
     }
 
-    // 💳 付款 Modal 控制函數（明確確保可以正常彈出）
-    function openPaymentModal() {
-      const modal = document.getElementById('payment-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-      }
-    }
-    function closePaymentModal() {
-      const modal = document.getElementById('payment-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-      }
-      const alipaySec = document.getElementById('alipay-sec');
-      if (alipaySec) {
-        alipaySec.classList.add('hidden');
-      }
-    }
-    function toggleAlipay() {
-      const alipaySec = document.getElementById('alipay-sec');
-      if (alipaySec) {
-        alipaySec.classList.toggle('hidden');
-      }
+    // 💳 付款 Modal 控制
+    function openPaymentModal(amount = 5000) {
+      document.getElementById('payment-amount-display').innerText = `HK$${Number(amount).toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+      document.getElementById('paypal-link-btn').href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mattew0205au@gmail.com&currency_code=HKD&amount=${amount}`;
+      document.getElementById('payment-modal').classList.remove('hidden');
     }
 
-    // ⚙️ 管理員登入與控制中心
+    function openCustomPaymentModal() {
+      const val = document.getElementById('custom-amount-input').value;
+      const amount = parseFloat(val);
+      if (isNaN(amount) || amount <= 0) {
+        alert('請輸入有效的金額！');
+        return;
+      }
+      openPaymentModal(amount);
+    }
+
+    function closePaymentModal() {
+      document.getElementById('payment-modal').classList.add('hidden');
+      document.getElementById('alipay-sec').classList.add('hidden');
+    }
+    function toggleAlipay() {
+      document.getElementById('alipay-sec').classList.toggle('hidden');
+    }
+
+    // ⚙️ 管理員登入與控制
     function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
     function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
@@ -640,66 +720,54 @@
       loadVisitorLogs();
     }
 
-    // 雲端同步載入自定義文本內容
+    // 雲端同步載入全域所有自定義文本內容
     function loadCustomTexts() {
       if (!db) return;
-      db.ref('custom_texts').once('value').then(snapshot => {
+      db.ref('global_custom_texts').once('value').then(snapshot => {
         const texts = snapshot.val();
         if (texts) {
-          if (texts.quoteChurchill) document.getElementById('editable-quote-churchill').innerText = texts.quoteChurchill;
-          if (texts.hobby1) document.getElementById('editable-hobby-1').innerText = texts.hobby1;
-          if (texts.hobby2) document.getElementById('editable-hobby-2').innerText = texts.hobby2;
-          if (texts.political) document.getElementById('editable-political').innerText = texts.political;
-          if (texts.words1) document.getElementById('editable-words-1').innerText = texts.words1;
-          if (texts.shopTitle) document.getElementById('editable-shop-title').innerText = texts.shopTitle;
+          Object.entries(texts).forEach(([id, content]) => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = content;
+          });
         }
       });
     }
 
-    // 編輯模式切換
+    // 真·全域編輯模式切換（覆蓋全網站所有文字元素）
     let isEditMode = false;
     function toggleEditMode() {
       isEditMode = !isEditMode;
       const btn = document.getElementById('edit-mode-btn');
-      const editableIds = ['editable-quote-churchill', 'editable-hobby-1', 'editable-hobby-2', 'editable-political', 'editable-words-1', 'editable-shop-title'];
+      const editableElements = document.querySelectorAll('.editable-element');
       
       if (isEditMode) {
-        btn.innerText = "儲存並關閉編輯模式";
+        document.body.classList.add('editable-mode');
+        btn.innerText = "儲存並關閉全域編輯模式";
         btn.className = "px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold text-xs cursor-pointer";
-        editableIds.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.setAttribute('contenteditable', 'true');
-            el.classList.add('editable-mode');
-          }
+        
+        editableElements.forEach(el => {
+          el.setAttribute('contenteditable', 'true');
         });
       } else {
+        document.body.classList.remove('editable-mode');
         btn.innerText = "開啟編輯模式";
         btn.className = "px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer";
         
-        const textsToSave = {
-          quoteChurchill: document.getElementById('editable-quote-churchill').innerText,
-          hobby1: document.getElementById('editable-hobby-1').innerText,
-          hobby2: document.getElementById('editable-hobby-2').innerText,
-          political: document.getElementById('editable-political').innerText,
-          words1: document.getElementById('editable-words-1').innerText,
-          shopTitle: document.getElementById('editable-shop-title').innerText
-        };
-
-        if (db) db.ref('custom_texts').set(textsToSave);
-
-        editableIds.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            el.removeAttribute('contenteditable');
-            el.classList.remove('editable-mode');
+        const textsToSave = {};
+        editableElements.forEach(el => {
+          el.removeAttribute('contenteditable');
+          if (el.id) {
+            textsToSave[el.id] = el.innerText;
           }
         });
-        alert('全域內容已成功更新並同步至雲端！');
+
+        if (db) db.ref('global_custom_texts').set(textsToSave);
+
+        alert('全網內容已成功儲存並同步至雲端！');
       }
     }
 
-    // 載入訪客日誌與實時圖表統計
     function loadVisitorLogs() {
       const viewer = document.getElementById('admin-logs-viewer');
       viewer.innerHTML = '<p class="text-amber-500">正在加載日誌數據...</p>';
@@ -856,17 +924,33 @@
       e.target.reset();
     }
 
-    // 精確裝置型號辨識解析
+    // 精確裝置型號辨識解析 (移除 Mac Desktop，新增指定裝置 iPhone 8, 小米12, HP ProBook 4)
     function parseDeviceName(ua) {
-      if (/iPhone/i.test(ua)) return 'Apple iPhone';
+      // 1. iPhone 8 精確辨識 (iOS + 螢幕寬高尺寸比與 UserAgent)
+      if (/iPhone/i.test(ua)) {
+        const isiPhone8 = (window.screen.width === 375 && window.screen.height === 667) || /iPhone10,1|iPhone10,4/i.test(ua);
+        if (isiPhone8) return 'iPhone 8';
+        return 'Apple iPhone';
+      }
+      
+      // 2. 小米 12 精確辨識
+      if (/Xiaomi|2201123G|2201123C|2201122G|Xiaomi 12/i.test(ua)) {
+        return '小米 12';
+      }
+      
+      // 3. HP ProBook 4 精確辨識
+      if (/ProBook 4|HP ProBook|ProBook/i.test(ua)) {
+        return 'HP ProBook 4';
+      }
+
+      // 其他常見品牌
       if (/iPad/i.test(ua)) return 'Apple iPad';
-      if (/Xiaomi|Redmi/i.test(ua)) return 'Xiaomi / Redmi';
       if (/Huawei|Honor/i.test(ua)) return 'Huawei';
       if (/Samsung/i.test(ua)) return 'Samsung Galaxy';
-      if (/Macintosh/i.test(ua)) return 'Mac Desktop';
       if (/Windows/i.test(ua)) return 'Windows PC';
       if (/Android/i.test(ua)) return 'Android Mobile';
-      return 'Generic Device';
+      
+      return 'Generic PC';
     }
 
     async function trackUserAnalytics(pageName = 'home') {
@@ -954,4 +1038,5 @@
     };
   </script>
 </body>
+</html>
 </html>
