@@ -7,22 +7,11 @@
   
   <!-- Google AdSense 廣告腳本 -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5676302736000722" crossorigin="anonymous"></script>
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7R1P85TS0J"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7R1P85TS0J');
-  </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Firebase 雲端 SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  
   <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -416,6 +405,7 @@
       <div id="alipay-sec" class="hidden mt-6 pt-6 border-t border-gray-800 text-center space-y-3">
         <h4 class="font-bold text-white">📱 請使用 AlipayHK App 掃碼付款</h4>
         <div class="bg-white p-3 rounded-xl inline-block shadow-lg">
+          <!-- 這裡已經幫你設定好對應 alipay.jpg -->
           <img src="alipay.jpg" alt="Alipay QR Code" class="w-48 h-48 mx-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/200?text=Alipay+QR+Code';">
         </div>
         <p class="text-xs text-gray-400">完成轉帳後，請保留截圖並透過 Email 與我們核對訂單。</p>
@@ -431,14 +421,12 @@
         <button type="button" onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
       
-      <!-- 登入驗證介面 -->
       <div id="admin-login-sec" class="p-8 space-y-4">
         <p class="text-gray-300 text-sm">請輸入管理員密碼：</p>
         <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
         <button type="button" onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600 cursor-pointer">解鎖系統</button>
       </div>
 
-      <!-- 後台管理控制面板 -->
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
         
         <!-- 全域內容編輯模式切換 -->
@@ -458,17 +446,28 @@
           <button type="button" onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500 cursor-pointer">即時發布並同步</button>
         </div>
 
-        <!-- 📊 Google Looker Studio 實時數據統計圖表 -->
+        <!-- 實時數據統計儀表板 (Analytics & Charts) -->
         <div class="border-b border-gray-800 pb-6 space-y-4">
-          <h4 class="font-bold text-white text-base text-amber-500">📊 Google Analytics 實時流量統計圖表</h4>
-          <div class="w-full rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-black">
-            <iframe width="100%" height="450" src="https://datastudio.google.com/embed/reporting/54cea90b-1fa8-45ef-b982-770156c3ec13/page/jnsBG" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+          <h4 class="font-bold text-white text-base text-amber-500">📊 實時流量與數據統計儀表板</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-total-visits">0</div>
+              <div class="text-xs text-gray-400">總訪問次數</div>
+            </div>
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-mobile-pct">0%</div>
+              <div class="text-xs text-gray-400">行動裝置佔比</div>
+            </div>
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-desktop-pct">0%</div>
+              <div class="text-xs text-gray-400">桌面裝置佔比</div>
+            </div>
+            <div class="bg-black p-3 rounded border border-gray-800">
+              <div class="text-2xl font-bold text-amber-500" id="stat-top-page">-</div>
+              <div class="text-xs text-gray-400">熱門分頁</div>
+            </div>
           </div>
         </div>
-
-      </div>
-    </div>
-  </div>
 
         <!-- 訪客軌跡與高精準定位 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
@@ -497,15 +496,16 @@
     </div>
   </div>
 
-  <!-- 頁尾 (Footer) -->
-  <footer class="bg-black py-10 text-center text-xs text-gray-500 border-t border-gray-900 space-y-4 relative z-30">
-    <p class="text-gray-400 font-medium">© 2026 Matthew Au — 保留所有權利</p>
+  <!-- 頁尾 -->
+  <footer class="bg-black py-8 text-center text-xs text-gray-500 border-t border-gray-900 space-y-3 scroll-fade">
+    <p>© 2026 Matthew Au — 保留所有權利</p>
     <div class="flex justify-center gap-6 text-gray-400">
-      <a href="Privacy_Policy.pdf" target="_blank" class="hover:text-amber-500 transition cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
-      <a href="Terms_of_Use.pdf" target="_blank" class="hover:text-amber-500 transition cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
-      <a onclick="openAdminModal()" class="hover:text-amber-500 transition cursor-pointer text-amber-600/90 font-bold">🔒 管理員登入</a>
+      <!-- 這裡直接連結到你的 PDF 檔案 -->
+      <a href="Privacy_Policy.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
+      <a href="Terms_of_Use.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
+      <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
     </div>
-    <p class="text-gray-600 text-[11px]">By Matthew Au</p>
+    <p class="text-gray-600">By Matthew Au</p>
   </footer>
 
   <script>
@@ -933,33 +933,16 @@
 
     function renderNewsItem(n) {
       const newsContainer = document.getElementById('news-container');
-      
-      const wrapper = document.createElement('div');
-      wrapper.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in";
-      wrapper.id = n.id;
-
-      const contentDiv = document.createElement('div');
-      
-      const dateSpan = document.createElement('span');
-      dateSpan.className = "text-amber-500 text-sm font-mono block mb-2";
-      dateSpan.textContent = `<${n.date}>`;
-      
-      const p = document.createElement('p');
-      p.className = "text-white text-lg";
-      p.textContent = n.content;
-
-      contentDiv.appendChild(dateSpan);
-      contentDiv.appendChild(p);
-
-      const delBtn = document.createElement('button');
-      delBtn.type = "button";
-      delBtn.className = "admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer";
-      delBtn.innerText = "刪除";
-      delBtn.onclick = () => deleteNews(n.id);
-
-      wrapper.appendChild(contentDiv);
-      wrapper.appendChild(delBtn);
-      newsContainer.prepend(wrapper);
+      const newNewsHTML = `
+        <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in" id="${n.id}">
+          <div>
+            <span class="text-amber-500 text-sm font-mono block mb-2">&lt;${n.date}&gt;</span>
+            <p class="text-white text-lg">${n.content}</p>
+          </div>
+          <button type="button" onclick="deleteNews('${n.id}')" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
+        </div>
+      `;
+      newsContainer.insertAdjacentHTML('afterbegin', newNewsHTML);
     }
 
     async function updateAdminPassword() {
