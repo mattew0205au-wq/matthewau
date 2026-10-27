@@ -15,7 +15,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   
   <!-- FontAwesome 圖標庫 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-fontawesome/6.4.0/css/all.min.css">
 
   <!-- 網站圖標 (Favicon) -->
   <link rel="icon" href="./favicon.ico?v=2" type="image/x-icon">
@@ -523,13 +523,16 @@
   </footer>
 
   <script>
-    // ✏️ Firebase Config 設定 (只需將 YOUR_API_KEY 與 YOUR_APP_ID 替換為你的真實憑證)
+    // ✏️ 已完整填入的 Firebase 設定
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY", // 👈 請在此處貼上你的 Firebase API Key
+      apiKey: "AIzaSyCFuY3Z8bCcV7C9xSvKKAwlcMBESl-yJJU",
       authDomain: "matthew-web.firebaseapp.com",
+      databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app",
       projectId: "matthew-web",
-      databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/",
-      appId: "YOUR_APP_ID"   // 👈 請在此處貼上你的 Firebase App ID
+      storageBucket: "matthew-web.firebasestorage.app",
+      messagingSenderId: "574728253725",
+      appId: "1:574728253725:web:99d03808b44ba300e171f4",
+      measurementId: "G-0WX0EN7C7K"
     };
 
     if (typeof firebase !== 'undefined' && !firebase.apps.length) {
@@ -541,7 +544,7 @@
     // 🔑 Google 登入處理與管理員白名單比對
     async function loginWithGoogle() {
       if (!auth) {
-        alert('Firebase Auth 未初始化成功，請確認 apiKey 是否正確填寫！');
+        alert('Firebase Auth 未初始化成功，請確認網絡與金鑰設定！');
         return;
       }
 
@@ -551,7 +554,7 @@
         const result = await auth.signInWithPopup(provider);
         const user = result.user;
 
-        // ✏️ 管理員 Gmail 白名單列表
+        // 管理員 Gmail 白名單
         const ALLOWED_ADMINS = [
           "mattew0205au@gmail.com"
         ];
