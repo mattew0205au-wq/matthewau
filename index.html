@@ -12,6 +12,9 @@
   <!-- Firebase 雲端 SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <!-- 🔑 新增：Firebase Auth SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  
   <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -420,10 +423,27 @@
         <button type="button" onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
       
-      <div id="admin-login-sec" class="p-8 space-y-4">
-        <p class="text-gray-300 text-sm">請輸入管理員密碼：</p>
-        <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none">
-        <button type="button" onclick="checkAdminPassword()" class="w-full py-3 bg-amber-700 text-white font-bold rounded hover:bg-amber-600 cursor-pointer">解鎖系統</button>
+      <!-- 🔑 Google 登入驗證區塊 -->
+      <div id="admin-login-sec" class="p-8 space-y-6 text-center">
+        <p class="text-gray-300 text-sm">請使用授權的管理員 Google 帳號進行身份驗證：</p>
+        
+        <button type="button" onclick="loginWithGoogle()" class="w-full py-3.5 px-4 bg-white hover:bg-gray-100 text-gray-800 font-bold rounded-lg shadow-md flex items-center justify-center gap-3 cursor-pointer transition">
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          使用 Google 帳號登入管理員後台
+        </button>
+
+        <div class="pt-4 border-t border-gray-800 text-left">
+          <p class="text-xs text-gray-500 mb-2">備用密碼登入：</p>
+          <div class="flex gap-2">
+            <input type="password" id="admin-pass-input" placeholder="密碼" class="w-full p-2.5 bg-gray-800 border border-gray-700 text-white text-xs rounded focus:border-amber-600 focus:outline-none">
+            <button type="button" onclick="checkAdminPassword()" class="px-4 py-2 bg-gray-700 text-white font-bold text-xs rounded hover:bg-gray-600 cursor-pointer whitespace-nowrap">解鎖</button>
+          </div>
+        </div>
       </div>
 
       <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
@@ -468,7 +488,7 @@
           </div>
         </div>
 
-        <!-- 訪客軌跡與高精準定位（摺疊下拉選單 + 單獨清除/清除全部） -->
+        <!-- 訪客軌跡與高精準定位 -->
         <div class="border-b border-gray-800 pb-6 space-y-3">
           <details class="bg-black rounded border border-gray-800 p-4">
             <summary class="cursor-pointer font-bold text-amber-500 text-base flex justify-between items-center">
@@ -501,13 +521,53 @@
   </footer>
 
   <script>
+    // ✏️ Firebase Config 設定 (替換為你的 API Key 與 App ID)
     const firebaseConfig = {
-      databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/"
+      apiKey: "YOUR_API_KEY", // 👈 在此填入你的 Firebase API Key
+      authDomain: "matthew-web.firebaseapp.com",
+      projectId: "matthew-web",
+      databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/",
+      appId: "YOUR_APP_ID"   // 👈 在此填入你的 Firebase App ID
     };
+
     if (typeof firebase !== 'undefined' && !firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
+    const auth = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.auth() : null;
+
+    // 🔑 Google 登入處理與管理員白名單比對
+    async function loginWithGoogle() {
+      if (!auth) {
+        alert('Firebase Auth 未初始化成功，請確認 SDK 載入與設定！');
+        return;
+      }
+
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+
+        // ✏️ 管理員 Gmail 白名單列表
+        const ALLOWED_ADMINS = [
+          "mattew0205au@gmail.com" // 在此新增或修改你的 Google Email
+        ];
+
+        if (user && ALLOWED_ADMINS.includes(user.email)) {
+          alert(`驗證成功！歡迎回來，${user.displayName || user.email}`);
+          unlockDashboard();
+        } else {
+          alert(`存取拒絕：帳號 (${user ? user.email : '未知'}) 不具備管理員權限！`);
+          await auth.signOut();
+        }
+      } catch (error) {
+        console.error("Google 登入失敗：", error);
+        if (error.code !== 'auth/popup-closed-by-user') {
+          alert("登入失敗：" + error.message);
+        }
+      }
+    }
 
     let i18nData = {
       'zh-HK': {
@@ -585,7 +645,7 @@
         review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
         review2_text: '"他是我见过踢球最好的人！"', review2_author: "匿名 - 7/6/2023",
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
-        contact_title: "与我联絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联絡我",
+        contact_title: "与我聯絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体聯絡我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
         words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
         words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字电脑世界中進行無限的科技探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
