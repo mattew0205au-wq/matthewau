@@ -9,10 +9,9 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5676302736000722" crossorigin="anonymous"></script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Firebase 雲端 SDK -->
+  <!-- Firebase 雲端 SDK (v9.22.2 Compat) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <!-- 🔑 新增：Firebase Auth SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   
   <!-- FontAwesome 圖標庫 -->
@@ -454,7 +453,10 @@
             <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
             <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字，關閉時雲端儲存。</p>
           </div>
-          <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
+          <div class="flex gap-2">
+            <button type="button" onclick="resetCustomTexts()" class="px-3 py-2 bg-red-700 hover:bg-red-600 text-white rounded font-bold text-xs cursor-pointer">🗑️ 重置雲端文字</button>
+            <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
+          </div>
         </div>
 
         <!-- 發布最新消息 -->
@@ -521,13 +523,13 @@
   </footer>
 
   <script>
-    // ✏️ Firebase Config 設定 (替換為你的 API Key 與 App ID)
+    // ✏️ Firebase Config 設定 (只需將 YOUR_API_KEY 與 YOUR_APP_ID 替換為你的真實憑證)
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY", // 👈 在此填入你的 Firebase API Key
+      apiKey: "YOUR_API_KEY", // 👈 請在此處貼上你的 Firebase API Key
       authDomain: "matthew-web.firebaseapp.com",
       projectId: "matthew-web",
       databaseURL: "https://matthew-web-default-rtdb.asia-southeast1.firebasedatabase.app/",
-      appId: "YOUR_APP_ID"   // 👈 在此填入你的 Firebase App ID
+      appId: "YOUR_APP_ID"   // 👈 請在此處貼上你的 Firebase App ID
     };
 
     if (typeof firebase !== 'undefined' && !firebase.apps.length) {
@@ -539,7 +541,7 @@
     // 🔑 Google 登入處理與管理員白名單比對
     async function loginWithGoogle() {
       if (!auth) {
-        alert('Firebase Auth 未初始化成功，請確認 SDK 載入與設定！');
+        alert('Firebase Auth 未初始化成功，請確認 apiKey 是否正確填寫！');
         return;
       }
 
@@ -551,7 +553,7 @@
 
         // ✏️ 管理員 Gmail 白名單列表
         const ALLOWED_ADMINS = [
-          "mattew0205au@gmail.com" // 在此新增或修改你的 Google Email
+          "mattew0205au@gmail.com"
         ];
 
         if (user && ALLOWED_ADMINS.includes(user.email)) {
@@ -835,6 +837,19 @@
           });
         }
       });
+    }
+
+    function resetCustomTexts() {
+      if (confirm("確定要重置並清空所有在雲端儲存的自訂文字嗎？重置後頁面將恢復為預設狀態。")) {
+        if (db) {
+          db.ref('global_custom_texts').remove().then(() => {
+            alert("已成功清空雲端文字記錄！頁面即將重新載入...");
+            window.location.reload();
+          }).catch(err => {
+            alert("清除失敗：" + err.message);
+          });
+        }
+      }
     }
 
     let isEditMode = false;
