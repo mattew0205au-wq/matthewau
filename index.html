@@ -14,7 +14,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   
-  <!-- FontAwesome 圖標庫 (修復 CDN 連結) -->
+  <!-- FontAwesome 圖標庫 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- 網站圖標 (Favicon) -->
@@ -25,9 +25,9 @@
   <style>
     body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .top-banner { background-color: #a87954; color: #ffffff; }
-    .nav-bar { background-color: #1a1a1a; }
-    .nav-link { color: #d1d5db; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
-    .nav-link.active { color: #a87954; border-bottom: 2px solid #a87954; font-weight: bold; }
+    .nav-bar { background-color: #ffffff; }
+    .nav-link { color: #0b2c4d; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
+    .nav-link.active { color: #07223f; border-bottom: 2px solid #188799; font-weight: bold; }
     .marquee-section { background-color: #1a1a1a; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; color: #a87954; }
     .btn-buy { background-color: #c49a78; color: #ffffff; transition: all 0.2s; }
     .btn-buy:hover { background-color: #b08563; }
@@ -71,13 +71,14 @@
     .white-signature {
       filter: brightness(0) invert(1);
     }
-    /* MATTHEW AU — refined visual system */
-    :root{--ma-navy:#173B59;--ma-teal:#24A58C;--ma-graphite:#26383D;--ma-silver:#BFC5C7;--ma-paper:#F4F4EF;--ma-white:#FFFFFF}
+
+    /* MATTHEW AU — 基礎視覺系統 */
+    :root{--ma-navy:#092847;--ma-teal:#188799;--ma-graphite:#26383D;--ma-silver:#BFC5C7;--ma-paper:#F4F4EF;--ma-white:#FFFFFF}
     html{scroll-behavior:smooth}
     body{background:var(--ma-paper)!important;color:var(--ma-graphite)!important;font-family:Inter,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif!important;line-height:1.7}
     .top-banner{display:none!important}
-    .nav-bar{background:rgba(255,255,255,.96)!important;border-color:#e4e8e8!important;box-shadow:0 3px 18px rgba(23,59,89,.05);backdrop-filter:blur(14px)}
-    .nav-link{color:#52636b!important;font-size:.92rem!important;font-weight:600;padding:9px 0;border-bottom:2px solid transparent}
+    .nav-bar{background:#ffffff!important;border-bottom:1px solid #e4e8ec!important;box-shadow:0 2px 12px rgba(9,40,71,.04)}
+    .nav-link{color:#163859!important;font-size:.95rem!important;font-weight:600;padding:8px 0;border-bottom:2px solid transparent}
     .nav-link:hover,.nav-link.active{color:var(--ma-navy)!important;border-color:var(--ma-teal)!important}
     #mobile-menu{background:#fff!important;border-color:#e5e9e9!important}
     #mobile-menu>div{color:var(--ma-navy)!important}
@@ -89,55 +90,84 @@
     body .text-amber-500,body .text-amber-600,body .text-amber-700{color:var(--ma-teal)!important}
     body .border-gray-800,body .border-gray-700{border-color:#e1e7e7!important}
     body .bg-amber-700,body .bg-amber-600{background:var(--ma-navy)!important}
-    body .hover\:bg-amber-600:hover,body .hover\:bg-amber-500:hover{background:#245477!important}
+    body .hover\:bg-amber-600:hover,body .hover\:bg-amber-500:hover{background:#164673!important}
     .btn-buy{background:var(--ma-navy)!important;color:#fff!important;border-radius:999px!important}
-    .btn-buy:hover{background:#245477!important}
+    .btn-buy:hover{background:#164673!important}
     .modal-bg{background:rgba(15,31,42,.62)!important}
     .tab-page{min-height:65vh}
     .scroll-fade{opacity:1;transform:none}
-    .editable-mode .editable-element{outline-color:var(--ma-teal)!important;background:rgba(36,165,140,.08)!important}
-    .ma-brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ma-navy)}
-    .ma-brand img{height:48px;width:72px;object-fit:contain}
-    .ma-brand span{font-size:1.28rem;font-weight:800;letter-spacing:.075em;white-space:nowrap}
-    .ma-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#fff 0%,#f6f8f7 62%,#e9f0ef 100%);border-bottom:1px solid #e1e7e7;min-height:500px;display:flex;align-items:center}
-    .ma-hero:before{content:"";position:absolute;right:-100px;top:-220px;width:720px;height:720px;border:1px solid rgba(23,59,89,.12);border-radius:50%}
-    .ma-hero:after{content:"";position:absolute;right:-20px;bottom:-300px;width:720px;height:520px;border:1px solid rgba(36,165,140,.22);border-radius:50%;transform:rotate(-20deg)}
-    .ma-hero-inner{position:relative;z-index:2;max-width:1180px;width:100%;margin:auto;padding:76px 28px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-    .ma-eyebrow{font-size:.75rem;letter-spacing:.22em;font-weight:700;color:var(--ma-teal);text-transform:uppercase}
-    .ma-hero h1{font-size:clamp(2.8rem,6vw,5.3rem);line-height:1.04;letter-spacing:.045em;color:var(--ma-navy);font-weight:800;margin:18px 0}
-    .ma-hero p{max-width:570px;color:#52636b;font-size:1.12rem;line-height:1.9}
-    .ma-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-    .ma-button{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:999px;background:var(--ma-navy);color:#fff!important;font-weight:700;text-decoration:none;transition:.2s}
-    .ma-button:hover{background:#245477;transform:translateY(-1px)}
-    .ma-button.secondary{background:#fff;color:var(--ma-navy)!important;border:1px solid #d6dfe0}
-    .ma-hero-symbol{display:flex;align-items:center;justify-content:center;min-height:260px}
-    .ma-hero-symbol img{width:min(100%,390px);height:auto;filter:drop-shadow(0 18px 28px rgba(23,59,89,.08))}
-    .ma-section{max-width:1180px;margin:auto;padding:76px 28px}
-    .ma-section-heading{font-size:1.9rem;font-weight:750;color:var(--ma-navy);margin-bottom:8px}
-    .ma-section-lead{color:#65747a;max-width:680px;margin-bottom:30px}
-    .ma-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .ma-card{background:#fff;border:1px solid #e2e8e8;border-radius:18px;padding:26px;min-height:190px;box-shadow:0 8px 26px rgba(23,59,89,.035)}
-    .ma-card .ma-card-kicker{color:var(--ma-teal);font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
-    .ma-card h3{font-size:1.22rem;color:var(--ma-navy);font-weight:750;margin:12px 0 8px}
-    .ma-card p{color:#617078;font-size:.94rem}
-    .ma-card a{display:inline-block;color:var(--ma-navy);font-weight:700;text-decoration:none;margin-top:16px}
-    .ma-contact{background:#edf2f1;border-top:1px solid #e0e7e6}
-    .ma-social{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
-    .ma-social a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #dce4e3;color:var(--ma-navy);font-size:1.1rem}
-    .ma-social a:hover{background:var(--ma-navy);color:#fff}
+    .editable-mode .editable-element{outline-color:var(--ma-teal)!important;background:rgba(24,135,153,.08)!important}
+
+    /* 頁首品牌標誌 */
+    .ma-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ma-navy)}
+    .ma-brand img{height:40px;width:64px;object-fit:contain}
+    .ma-brand span{font-size:1.22rem;font-weight:800;letter-spacing:.06em;white-space:nowrap;color:#092847}
+
+    /* 新版流線波浪主視覺橫幅（對應圖 1） */
+    .ma-wave-hero {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      background-color: #062447;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .ma-wave-hero svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .ma-wave-hero-title {
+      position: relative;
+      z-index: 2;
+      color: #ffffff !important;
+      font-size: clamp(2.1rem, 5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0;
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    /* 付款彈窗清晰高對比修正（對應圖 2） */
+    .pay-info-box {
+      background-color: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .pay-info-label {
+      color: #0f2942 !important;
+      font-weight: 700 !important;
+      font-size: 0.9rem;
+    }
+    .pay-info-amount {
+      color: #0d7a8a !important;
+      font-weight: 800 !important;
+      font-size: 1.25rem;
+    }
+    .pay-currency-select {
+      background-color: #ffffff !important;
+      color: #0f2942 !important;
+      border: 1px solid #94a3b8 !important;
+      font-weight: 700 !important;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
     #page-words,#page-news,#page-shop{max-width:1000px!important;margin:0 auto;padding:64px 28px!important}
     #page-words h2,#page-news h2,#page-shop h2{color:var(--ma-navy)!important}
-    #page-words .ma-article-intro{background:#fff;border:1px solid #e1e7e7;border-radius:18px;padding:32px;line-height:1.9}
-    #page-words .ma-template-link{display:inline-flex;margin-top:18px;padding:11px 18px;border-radius:999px;background:var(--ma-navy);color:#fff;text-decoration:none;font-weight:700}
     footer{background:#fff!important;color:#637078!important;border-color:#e1e7e7!important}
     footer a{color:var(--ma-navy)!important}
     @media(max-width:760px){
-      .ma-brand img{height:40px;width:58px}.ma-brand span{font-size:1.02rem;letter-spacing:.045em}
-      .ma-hero{min-height:unset}.ma-hero-inner{grid-template-columns:1fr;gap:18px;padding:58px 22px 48px}
-      .ma-hero-symbol{min-height:140px;justify-content:flex-start}.ma-hero-symbol img{width:180px}
-      .ma-hero h1{font-size:clamp(2.5rem,12vw,4rem)}
-      .ma-card-grid{grid-template-columns:1fr}
-      .ma-section{padding:54px 22px}
+      .ma-brand img{height:34px;width:54px}
+      .ma-brand span{font-size:1.05rem;letter-spacing:.04em}
+      .ma-wave-hero{height:240px}
       #page-words,#page-news,#page-shop{padding:44px 20px!important}
     }
   </style>
@@ -150,9 +180,9 @@
     <span>🌱</span> <span id="editable-top-banner" class="editable-element" data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
-  <!-- 2. 主導覽列 -->
-  <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
+  <!-- 2. 主導覽列（對應圖 1 白底頁首） -->
+  <header class="nav-bar sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
       
       <a onclick="switchTab('home')" class="ma-brand cursor-pointer">
         <img src="data:image/png;base64,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" alt="Matthew Au approved bridge M/A logo">
@@ -160,15 +190,15 @@
       </a>
 
       <!-- 電腦版導覽 -->
-      <div class="hidden md:flex items-center gap-6">
-        <nav class="flex items-center gap-6">
+      <div class="hidden md:flex items-center gap-7">
+        <nav class="flex items-center gap-7">
           <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active editable-element" data-i18n="nav_home">首頁</span>
           <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link editable-element" data-i18n="nav_words">鍵鋒的話</span>
           <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link editable-element" data-i18n="nav_news">最新消息</span>
           <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link editable-element" data-i18n="nav_shop">商城</span>
         </nav>
 
-        <select onchange="changeLanguage(this.value)" id="lang-select-desktop" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2.5 py-1.5 rounded focus:outline-none cursor-pointer">
+        <select onchange="changeLanguage(this.value)" id="lang-select-desktop" class="bg-slate-100 text-slate-800 border border-slate-300 font-semibold text-xs px-2.5 py-1.5 rounded focus:outline-none cursor-pointer">
           <option value="zh-HK">繁體中文</option>
           <option value="en">English</option>
           <option value="zh-CN">简体中文</option>
@@ -177,12 +207,12 @@
 
       <!-- 手機版選單控制 -->
       <div class="flex items-center gap-2 md:hidden">
-        <select onchange="changeLanguage(this.value)" id="lang-select-mobile" class="bg-gray-800 text-amber-500 border border-gray-700 text-xs px-2 py-1 rounded">
+        <select onchange="changeLanguage(this.value)" id="lang-select-mobile" class="bg-slate-100 text-slate-800 border border-slate-300 font-semibold text-xs px-2 py-1 rounded">
           <option value="zh-HK">繁中</option>
           <option value="en">EN</option>
           <option value="zh-CN">简中</option>
         </select>
-        <button onclick="toggleMobileMenu()" class="text-amber-500 text-xl p-2 rounded focus:outline-none cursor-pointer">
+        <button onclick="toggleMobileMenu()" class="text-slate-800 text-xl p-2 rounded focus:outline-none cursor-pointer">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -190,22 +220,29 @@
     </div>
 
     <!-- 手機版下拉選單 -->
-    <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-b border-gray-800 px-6 py-4 space-y-3">
-      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_home">首頁</div>
-      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_words">鍵鋒的話</div>
-      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_news">最新消息</div>
-      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_shop">商城</div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-6 py-4 space-y-3">
+      <div onclick="switchTab('home'); toggleMobileMenu();" class="text-slate-800 font-semibold py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_home">首頁</div>
+      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-slate-800 font-semibold py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_words">鍵鋒的話</div>
+      <div onclick="switchTab('news'); toggleMobileMenu();" class="text-slate-800 font-semibold py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_news">最新消息</div>
+      <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-slate-800 font-semibold py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_shop">商城</div>
     </div>
   </header>
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
   <div id="page-home" class="tab-page">
-    <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800 scroll-fade">
-      <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
-      <div class="relative z-10">
-        <h1 id="editable-hero-title" class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md editable-element">Matthew Au</h1>
-        <p id="editable-hero-sub" class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md editable-element">Official Website</p>
-      </div>
+    <!-- 新版流線幾何波浪橫幅（對應圖 1） -->
+    <section class="ma-wave-hero scroll-fade">
+      <svg viewBox="0 0 1440 420" preserveAspectRatio="none">
+        <rect width="1440" height="420" fill="#062447"/>
+        <!-- 左上淺藍灰波浪 -->
+        <path d="M0,0 L860,0 C620,120 320,230 0,340 Z" fill="#dce6f1"/>
+        <path d="M0,0 L990,0 C710,135 370,255 0,375 Z" fill="#9fb6cd" opacity="0.55"/>
+        <!-- 右下青藍漸層波浪 -->
+        <path d="M580,420 C940,385 1230,325 1440,255 L1440,420 Z" fill="#89a8c4" opacity="0.5"/>
+        <path d="M720,420 C1020,370 1260,300 1440,220 L1440,420 Z" fill="#188799"/>
+        <path d="M890,420 C1130,385 1300,340 1440,295 L1440,420 Z" fill="#0d5c75"/>
+      </svg>
+      <h1 id="editable-hero-title" class="ma-wave-hero-title editable-element">MATTHEW AU</h1>
     </section>
 
     <div class="marquee-section py-4 overflow-hidden scroll-fade">
@@ -424,7 +461,7 @@
     </div>
   </div>
 
-  <!-- 💳 付款選擇 Modal (PayPal + AlipayHK) -->
+  <!-- 💳 付款選擇 Modal (PayPal + AlipayHK — 已修復文字清晰對比度) -->
   <div id="payment-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative">
       <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-4">
@@ -434,10 +471,10 @@
         <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">✕</button>
       </div>
 
-      <!-- 幣別選擇彈窗選單 -->
-      <div class="mb-4 flex items-center justify-between bg-gray-800/80 p-3 rounded border border-gray-700">
-        <span class="text-xs text-gray-300 font-medium editable-element" data-i18n="label_select_currency">支付幣別 (Currency)：</span>
-        <select id="modal-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="bg-gray-900 text-amber-400 font-bold border border-gray-600 text-xs px-3 py-1.5 rounded focus:outline-none cursor-pointer">
+      <!-- 幣別選擇彈窗選單（高對比清晰樣式） -->
+      <div class="mb-4 flex items-center justify-between pay-info-box">
+        <span class="pay-info-label editable-element" data-i18n="label_select_currency">🌐 選擇結帳幣別：</span>
+        <select id="modal-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="pay-currency-select text-xs focus:outline-none cursor-pointer">
           <option value="HKD" data-i18n="opt_hkd">HKD (港幣)</option>
           <option value="USD" data-i18n="opt_usd">USD (美元)</option>
           <option value="CNY" data-i18n="opt_cny">CNY (人民幣)</option>
@@ -446,9 +483,10 @@
         </select>
       </div>
 
-      <div class="mb-6 p-3 bg-gray-800/60 rounded border border-gray-700 flex justify-between items-center text-sm">
-        <span class="text-gray-300">應付金額：</span>
-        <span id="payment-amount-display" class="text-xl font-bold text-amber-500">HK$ 5,000.00</span>
+      <!-- 應付金額顯示列（高對比清晰樣式） -->
+      <div class="mb-6 flex justify-between items-center pay-info-box">
+        <span class="pay-info-label">應付金額：</span>
+        <span id="payment-amount-display" class="pay-info-amount">HK$ 5,000.00</span>
       </div>
 
       <div class="space-y-4">
@@ -493,7 +531,7 @@
         <button type="button" onclick="closeAdminModal()" class="text-gray-400 hover:text-white text-xl cursor-pointer">✕</button>
       </div>
       
-      <!-- 🔑 Google 登入驗證區塊 (備用密碼已移除) -->
+      <!-- 🔑 Google 登入驗證區塊 -->
       <div id="admin-login-sec" class="p-8 space-y-6 text-center">
         <p class="text-gray-300 text-sm">請使用授權的管理員 Google 帳號進行身份驗證：</p>
         
@@ -604,7 +642,7 @@
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
     const auth = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.auth() : null;
 
-    // 🔑 Google 登入處理與管理員白名單比對 (已新增授權帳號)
+    // 🔑 Google 登入處理與管理員白名單比對
     async function loginWithGoogle() {
       if (!auth) {
         alert('Firebase Auth 未初始化成功，請確認網絡與金鑰設定！');
@@ -617,7 +655,6 @@
         const result = await auth.signInWithPopup(provider);
         const user = result.user;
 
-        // 管理員 Gmail 白名單
         const ALLOWED_ADMINS = [
           "mattew0205au@gmail.com",
           "s25001@student.ccst.edu.hk"
@@ -672,7 +709,7 @@
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
-        nav_home: "Home", nav_words: "Words", nav_news: "Latest News", nav_shop: "Shop",
+        nav_home: "Home", nav_words: "Articles", nav_news: "News", nav_shop: "Shop",
         marquee_text: "Welcome 歡迎",
         quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
         quote_churchill_author: "—— Winston Churchill",
@@ -707,30 +744,30 @@
         marquee_text: "欢迎 welcome",
         quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
         quote_churchill_author: "—— 温斯顿·邱吉尔 Winston Churchill",
-        about_me: "关于我", hobby_title_1: "我的兴趣：足球", hobby_football_desc: "足球对我而言不只是一项运动，更是考验证团队合作、战术战略与坚持不懈意志的舞台。在绿茵场上的每一次奔跑与傳球，都鍛鍊著我的專注力與大局觀。",
+        about_me: "关于我", hobby_title_1: "我的兴趣：足球", hobby_football_desc: "足球对我而言不只是一项运动，更是考验团队合作、战术战略与坚持不懈意志的舞台。在绿茵场上的每一次奔跑与传球，都锻炼着我的专注力与大局观。",
         hobby_title_2: "我的兴趣：电脑与资讯科技", hobby_computer_desc: "热衷于探索数字科技、电脑软硬件与网络技术。透过电脑这个无限广阔的工具，不仅能激发逻辑思维与创作灵感，更让我得以自主学习最新的资讯技术。",
         political_view_title: "政治理念", political_view_desc: "促进民主、自由社会发展，拒绝专制政权。",
         reviews_title: "评论", anon_user: "匿",
         review1_text: '"他样样都好啊"', review1_author: "匿名 - 11/2/2023",
         review2_text: '"他是我见过踢球最好的人！"', review2_author: "匿名 - 7/6/2023",
         quote_napoleon_zh: "有着必胜信念的人，从不说“不可能”。",
-        contact_title: "与我聯絡", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体聯絡我",
+        contact_title: "与我联络", contact_sub: "欢迎来信！", social_hint: "或使用社交媒体联络我",
         ph_name: "名称", ph_email: "电子邮件*", ph_msg: "讯息", btn_send: "传送",
-        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。",
-        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字电脑世界中進行無限的科技探索與挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的大時代中站穩腳跟。",
-        words_p3: "感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！",
+        words_p1: "欢迎来到我的官方网站！作为一个坚定维护独立思考、追求自由与民主社会发展的人，我希望能透过这个平台，与所有志同道合的朋友分享我的核心理念、生活点滴以及对社会时事的深度观察。",
+        words_p2: "无论是在现实的足球场上挥洒汗水、追求团队协作与卓越表现，还是在数字电脑世界中进行无限的科技探索与创作挑战，我始终保持着高度的热情与不屈不挠的毅力。人生正如同一场长跑，唯有不断自我革新、适应环境并坚持信念，才能在瞬息万变的时代中站稳脚步。",
+        words_p3: "感谢每一位一路走来给予我关心、支持与鼓励的朋友。未来我也会继续透过此平台发布最新动态与公报，愿我们携手并进，共创更美好的未来！",
         signature_name: "Matthew Au",
         news_1: "本人热烈欢迎美国总统访华，与中方共同合作。",
-        news_2_body: "27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。",
-        news_2_sub: "最後，本人強烈譴責盜用他人帳號、金融詐騙等行為，要求立即停止攻擊並給予賠償。",
-        shop_title: "官方商城", prod1_title: "Matthew Au 大師級一对一足球訓練", btn_buy_now: "立即購買",
+        news_2_body: "27日2时多，本人官方社交媒体（@mattew0205_au）受到黑客攻击，黑客两小时会发送一次图片，图片内容涉及金融诈骗，不排除采取法律行动或报警。",
+        news_2_sub: "最后，本人强烈谴责盗用他人账号、金融诈骗等行为，要求立即停止攻击并给予赔偿。",
+        shop_title: "官方商城", prod1_title: "Matthew Au 大师级一对一足球训练", btn_buy_now: "立即购买",
         prod2_title: "获得我心灵上的支持",
         prod2_desc: "感谢您的赞助与支持，您的心灵鼓励是我持续创作与前进的最大动力！",
         prod2_input_label: "请输入自由赞助金额：",
         btn_support: "给予心灵支持",
         label_select_currency: "🌐 选择结算币别：",
         opt_hkd: "HKD (港币)", opt_usd: "USD (美元)", opt_cny: "CNY (人民币)", opt_eur: "EUR (欧元)", opt_twd: "TWD (新台币)",
-        privacy_policy: "隐私权政策", terms_of_use: "網站使用條款及免責聲明"
+        privacy_policy: "隐私权政策", terms_of_use: "网站使用条款及免责声明"
       }
     };
 
@@ -934,7 +971,6 @@
       }
     }
 
-    // 載入訪客日誌與實時圖表統計
     function loadVisitorLogs() {
       const viewer = document.getElementById('admin-logs-viewer');
       if (!viewer) return;
