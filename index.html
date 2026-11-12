@@ -23,14 +23,32 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png?v=2">
 
   <style>
+    /* 全站黑白模式（由管理員後台控制） */
+    html.grayscale-mode {
+      filter: grayscale(100%) !important;
+      -webkit-filter: grayscale(100%) !important;
+    }
+
     body { background-color: #121212; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .top-banner { background-color: #a87954; color: #ffffff; }
     .nav-bar { background-color: #ffffff; }
     .nav-link { color: #0b2c4d; font-size: 0.95rem; cursor: pointer; transition: color 0.2s; white-space: nowrap; }
     .nav-link.active { color: #07223f; border-bottom: 2px solid #188799; font-weight: bold; }
-    .marquee-section { background-color: #1a1a1a; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; color: #a87954; }
-    .btn-buy { background-color: #c49a78; color: #ffffff; transition: all 0.2s; }
-    .btn-buy:hover { background-color: #b08563; }
+
+    /* 配合網站深藍／青藍主題的跑馬燈 */
+    .marquee-section {
+      background: linear-gradient(90deg, #062447 0%, #0b3563 50%, #062447 100%);
+      border-top: 1px solid #188799;
+      border-bottom: 2px solid #188799;
+      color: #ffffff;
+    }
+    .marquee-section span {
+      color: #ffffff !important;
+      letter-spacing: 0.08em;
+    }
+
+    .btn-buy { background-color: #092847; color: #ffffff; transition: all 0.2s; }
+    .btn-buy:hover { background-color: #164673; }
     .modal-bg { background-color: rgba(0, 0, 0, 0.85); }
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
@@ -60,16 +78,16 @@
       transition: outline 0.2s, background-color 0.2s;
     }
     .editable-mode .editable-element {
-      outline: 2px dashed #a87954 !important;
+      outline: 2px dashed #188799 !important;
       outline-offset: 3px;
-      background-color: rgba(168, 121, 84, 0.15) !important;
+      background-color: rgba(24, 135, 153, 0.12) !important;
       border-radius: 4px;
       cursor: text;
     }
 
-    /* 簽名圖片轉純白色效果 */
+    /* 簽名圖片轉深海軍藍色（確保在白底卡片清晰可見） */
     .white-signature {
-      filter: brightness(0) invert(1);
+      filter: brightness(0) saturate(100%) invert(12%) sepia(43%) saturate(2100%) hue-rotate(188deg) brightness(94%) contrast(97%);
     }
 
     /* MATTHEW AU — 基礎視覺系統 */
@@ -89,9 +107,11 @@
     body .text-gray-400,body .text-gray-500{color:#66757b!important}
     body .text-amber-500,body .text-amber-600,body .text-amber-700{color:var(--ma-teal)!important}
     body .border-gray-800,body .border-gray-700{border-color:#e1e7e7!important}
-    body .bg-amber-700,body .bg-amber-600{background:var(--ma-navy)!important}
-    body .hover\:bg-amber-600:hover,body .hover\:bg-amber-500:hover{background:#164673!important}
+    body .bg-amber-700,body .bg-amber-600{background:var(--ma-navy)!important;color:#ffffff!important}
+    body .bg-amber-700 *,body .bg-amber-600 *,body button.text-white{color:#ffffff!important}
+    body .hover\:bg-amber-600:hover,body .hover\:bg-amber-500:hover{background:#164673!important;color:#ffffff!important}
     .btn-buy{background:var(--ma-navy)!important;color:#fff!important;border-radius:999px!important}
+    .btn-buy *{color:#fff!important}
     .btn-buy:hover{background:#164673!important}
     .modal-bg{background:rgba(15,31,42,.62)!important}
     .tab-page{min-height:65vh}
@@ -103,7 +123,7 @@
     .ma-brand img{height:40px;width:64px;object-fit:contain}
     .ma-brand span{font-size:1.22rem;font-weight:800;letter-spacing:.06em;white-space:nowrap;color:#092847}
 
-    /* 新版流線波浪主視覺橫幅（對應圖 1） */
+    /* 新版流線幾何波浪主視覺橫幅 */
     .ma-wave-hero {
       position: relative;
       width: 100%;
@@ -134,7 +154,7 @@
       padding: 0 16px;
     }
 
-    /* 付款彈窗清晰高對比修正（對應圖 2） */
+    /* 付款彈窗清晰高對比樣式 */
     .pay-info-box {
       background-color: #f1f5f9 !important;
       border: 1px solid #cbd5e1 !important;
@@ -180,7 +200,7 @@
     <span>🌱</span> <span id="editable-top-banner" class="editable-element" data-i18n="top_banner">歡迎來到Matthew official website</span> <span>🌱</span>
   </div>
 
-  <!-- 2. 主導覽列（對應圖 1 白底頁首） -->
+  <!-- 2. 主導覽列（白底頁首） -->
   <header class="nav-bar sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
       
@@ -230,7 +250,7 @@
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
   <div id="page-home" class="tab-page">
-    <!-- 新版流線幾何波浪橫幅（對應圖 1） -->
+    <!-- 流線幾何波浪橫幅 -->
     <section class="ma-wave-hero scroll-fade">
       <svg viewBox="0 0 1440 420" preserveAspectRatio="none">
         <rect width="1440" height="420" fill="#062447"/>
@@ -245,12 +265,17 @@
       <h1 id="editable-hero-title" class="ma-wave-hero-title editable-element">MATTHEW AU</h1>
     </section>
 
-    <div class="marquee-section py-4 overflow-hidden scroll-fade">
-      <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
-        <span id="editable-marquee-1" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-        <span id="editable-marquee-2" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-        <span id="editable-marquee-3" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-        <span id="editable-marquee-4" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+    <!-- 配合網站主題的跑馬燈 -->
+    <div class="marquee-section py-3.5 overflow-hidden scroll-fade">
+      <div class="whitespace-nowrap animate-marquee flex items-center text-base md:text-lg font-semibold">
+        <span id="editable-marquee-1" class="mx-8 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span class="text-teal-300">✦</span>
+        <span id="editable-marquee-2" class="mx-8 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span class="text-teal-300">✦</span>
+        <span id="editable-marquee-3" class="mx-8 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span class="text-teal-300">✦</span>
+        <span id="editable-marquee-4" class="mx-8 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
+        <span class="text-teal-300">✦</span>
       </div>
     </div>
 
@@ -337,7 +362,7 @@
         <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
         <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_email">
         <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_msg"></textarea>
-        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition cursor-pointer" data-i18n="btn_send">傳送</button>
+        <button type="submit" style="color: #ffffff !important;" class="w-full py-3.5 bg-amber-700 text-white font-bold text-base tracking-wider rounded hover:bg-amber-600 transition cursor-pointer shadow" data-i18n="btn_send">傳送</button>
       </form>
 
       <!-- 社群連結按鈕 -->
@@ -370,10 +395,10 @@
       <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
       <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
       
-      <!-- 純白色簽名與英文署名區 -->
+      <!-- 深海軍藍簽名與英文署名區 -->
       <div class="pt-8 mt-8 border-t border-gray-800 flex flex-col items-end space-y-2">
         <div class="text-right">
-          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block white-signature" onerror="this.onerror=null; this.replaceWith('(簽名)');">
+          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block white-signature" onerror="this.onerror=null; this.replaceWith('(Matthew Au 簽名)');">
         </div>
         <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element" data-i18n="signature_name">Matthew Au</div>
       </div>
@@ -461,7 +486,7 @@
     </div>
   </div>
 
-  <!-- 💳 付款選擇 Modal (PayPal + AlipayHK — 已修復文字清晰對比度) -->
+  <!-- 💳 付款選擇 Modal (PayPal + AlipayHK — 高對比清晰樣式) -->
   <div id="payment-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-lg rounded-xl shadow-2xl p-6 relative">
       <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-4">
@@ -471,7 +496,7 @@
         <button type="button" onclick="closePaymentModal()" class="text-gray-400 hover:text-white text-2xl font-bold cursor-pointer">✕</button>
       </div>
 
-      <!-- 幣別選擇彈窗選單（高對比清晰樣式） -->
+      <!-- 幣別選擇彈窗選單 -->
       <div class="mb-4 flex items-center justify-between pay-info-box">
         <span class="pay-info-label editable-element" data-i18n="label_select_currency">🌐 選擇結帳幣別：</span>
         <select id="modal-currency-selector" onchange="updateShopCurrencySetting(this.value)" class="pay-currency-select text-xs focus:outline-none cursor-pointer">
@@ -483,7 +508,7 @@
         </select>
       </div>
 
-      <!-- 應付金額顯示列（高對比清晰樣式） -->
+      <!-- 應付金額顯示列 -->
       <div class="mb-6 flex justify-between items-center pay-info-box">
         <span class="pay-info-label">應付金額：</span>
         <span id="payment-amount-display" class="pay-info-amount">HK$ 5,000.00</span>
@@ -523,7 +548,7 @@
     </div>
   </div>
 
-  <!-- ⚙️ 管理員入口 Modal (僅保留 Google 登入) -->
+  <!-- ⚙️ 管理員入口 Modal -->
   <div id="admin-modal" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
     <div class="bg-gray-900 border border-gray-700 w-full max-w-4xl rounded-xl shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-800">
@@ -535,7 +560,7 @@
       <div id="admin-login-sec" class="p-8 space-y-6 text-center">
         <p class="text-gray-300 text-sm">請使用授權的管理員 Google 帳號進行身份驗證：</p>
         
-        <button type="button" onclick="loginWithGoogle()" class="w-full py-3.5 px-4 bg-white hover:bg-gray-100 text-gray-800 font-bold rounded-lg shadow-md flex items-center justify-center gap-3 cursor-pointer transition">
+        <button type="button" onclick="loginWithGoogle()" class="w-full py-3.5 px-4 bg-white hover:bg-gray-100 text-gray-800 font-bold rounded-lg shadow-md flex items-center justify-center gap-3 cursor-pointer transition border border-gray-300">
           <svg class="w-5 h-5" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -546,17 +571,29 @@
         </button>
       </div>
 
-      <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-8 text-sm text-gray-300">
+      <div id="admin-dashboard" class="hidden p-6 overflow-y-auto space-y-6 text-sm text-gray-300">
         
+        <!-- 🖤 全站黑白模式切換（雲端同步） -->
+        <div class="bg-stone-800 p-4 rounded border border-gray-700 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+          <div>
+            <h4 class="font-bold text-white text-base">🖤 全站黑白模式（紀念／哀悼模式）</h4>
+            <p class="text-xs text-gray-400">開啟後整個網頁（含所有圖片與介面）將轉為黑白灰階，並即時同步至所有訪客端。</p>
+            <span id="grayscale-status-text" class="inline-block mt-1 text-xs font-bold text-amber-500">目前狀態：彩色正常模式</span>
+          </div>
+          <div>
+            <button type="button" id="grayscale-toggle-btn" onclick="toggleGrayscaleMode()" style="color: #ffffff !important;" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded font-bold text-xs cursor-pointer shadow">開啟全站黑白模式</button>
+          </div>
+        </div>
+
         <!-- 全域內容編輯模式切換 -->
-        <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex justify-between items-center">
+        <div class="bg-stone-800 p-4 rounded border border-amber-600/40 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
           <div>
             <h4 class="font-bold text-white text-base">✏️ 網頁全域內容編輯模式</h4>
             <p class="text-xs text-gray-400">開啟後可直接在網頁上點擊並修改任何文字，關閉時雲端儲存。</p>
           </div>
           <div class="flex gap-2">
-            <button type="button" onclick="resetCustomTexts()" class="px-3 py-2 bg-red-700 hover:bg-red-600 text-white rounded font-bold text-xs cursor-pointer">🗑️ 重置雲端文字</button>
-            <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
+            <button type="button" onclick="resetCustomTexts()" style="color: #ffffff !important;" class="px-3 py-2 bg-red-700 hover:bg-red-600 text-white rounded font-bold text-xs cursor-pointer">🗑️ 重置雲端文字</button>
+            <button type="button" id="edit-mode-btn" onclick="toggleEditMode()" style="color: #ffffff !important;" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold text-xs cursor-pointer">開啟編輯模式</button>
           </div>
         </div>
 
@@ -565,7 +602,7 @@
           <h4 class="font-bold text-white text-base text-amber-500">📢 發布最新消息</h4>
           <input type="text" id="new-news-date" placeholder="日期 (例：21/10/2026)" class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white">
           <textarea id="new-news-content" placeholder="內容..." class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></textarea>
-          <button type="button" onclick="addNewsPost()" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500 cursor-pointer">即時發布並同步</button>
+          <button type="button" onclick="addNewsPost()" style="color: #ffffff !important;" class="px-4 py-2 bg-amber-600 text-white rounded font-bold hover:bg-amber-500 cursor-pointer">即時發布並同步</button>
         </div>
 
         <!-- 實時數據統計儀表板 (Analytics & Charts) -->
@@ -597,8 +634,8 @@
             <summary class="cursor-pointer font-bold text-amber-500 text-base flex justify-between items-center">
               <span>🎯 訪客精確軌跡與 IP 定位日誌（點擊展開/收合）</span>
               <div class="space-x-2">
-                <button type="button" onclick="event.stopPropagation(); loadVisitorLogs()" class="px-2 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded cursor-pointer">🔄 重新整理</button>
-                <button type="button" onclick="event.stopPropagation(); clearAllVisitorLogs()" class="px-2 py-1 bg-red-700 hover:bg-red-600 text-white text-xs rounded cursor-pointer">🗑️ 清除全部</button>
+                <button type="button" onclick="event.stopPropagation(); loadVisitorLogs()" style="color: #ffffff !important;" class="px-2 py-1 bg-amber-800 hover:bg-amber-700 text-white text-xs rounded cursor-pointer">🔄 重新整理</button>
+                <button type="button" onclick="event.stopPropagation(); clearAllVisitorLogs()" style="color: #ffffff !important;" class="px-2 py-1 bg-red-700 hover:bg-red-600 text-white text-xs rounded cursor-pointer">🗑️ 清除全部</button>
               </div>
             </summary>
             <div id="admin-logs-viewer" class="mt-4 max-h-72 overflow-y-auto space-y-3 text-xs font-mono">
@@ -641,6 +678,54 @@
     }
     const db = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.database() : null;
     const auth = (typeof firebase !== 'undefined' && firebase.apps.length) ? firebase.auth() : null;
+
+    // 🖤 全站黑白模式控制與雲端即時同步
+    let isGrayscaleMode = false;
+
+    function applyGrayscaleState(enabled) {
+      isGrayscaleMode = Boolean(enabled);
+      if (isGrayscaleMode) {
+        document.documentElement.classList.add('grayscale-mode');
+      } else {
+        document.documentElement.classList.remove('grayscale-mode');
+      }
+      localStorage.setItem('site_grayscale_mode', isGrayscaleMode ? '1' : '0');
+
+      const btn = document.getElementById('grayscale-toggle-btn');
+      const statusText = document.getElementById('grayscale-status-text');
+      if (btn && statusText) {
+        if (isGrayscaleMode) {
+          btn.innerText = "關閉黑白模式（恢復彩色）";
+          btn.className = "px-4 py-2.5 bg-teal-700 hover:bg-teal-600 text-white rounded font-bold text-xs cursor-pointer shadow";
+          statusText.innerText = "目前狀態：全站黑白模式已開啟";
+        } else {
+          btn.innerText = "開啟全站黑白模式";
+          btn.className = "px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded font-bold text-xs cursor-pointer shadow";
+          statusText.innerText = "目前狀態：彩色正常模式";
+        }
+      }
+    }
+
+    function toggleGrayscaleMode() {
+      const nextState = !isGrayscaleMode;
+      applyGrayscaleState(nextState);
+      if (db) {
+        db.ref('site_settings/grayscale_mode').set(nextState);
+      }
+      alert(nextState ? '已開啟全站黑白模式並同步至雲端！' : '已關閉黑白模式，全站恢復彩色！');
+    }
+
+    function initGrayscaleSync() {
+      const cached = localStorage.getItem('site_grayscale_mode') === '1';
+      applyGrayscaleState(cached);
+
+      if (db) {
+        db.ref('site_settings/grayscale_mode').on('value', snapshot => {
+          const val = snapshot.val();
+          applyGrayscaleState(Boolean(val));
+        });
+      }
+    }
 
     // 🔑 Google 登入處理與管理員白名單比對
     async function loginWithGoogle() {
@@ -915,6 +1000,7 @@
       document.getElementById('admin-login-sec').classList.add('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
       document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+      applyGrayscaleState(isGrayscaleMode);
       loadVisitorLogs();
     }
 
@@ -1200,6 +1286,8 @@
     }
 
     window.onload = async function() {
+      initGrayscaleSync();
+
       const savedLang = localStorage.getItem('user_preferred_lang') || 'zh-HK';
       changeLanguage(savedLang);
 
