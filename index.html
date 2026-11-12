@@ -71,6 +71,77 @@
     .white-signature {
       filter: brightness(0) invert(1);
     }
+
+    /* MATTHEW AU — refined visual system */
+    :root{--ma-navy:#173B59;--ma-teal:#24A58C;--ma-graphite:#26383D;--ma-silver:#BFC5C7;--ma-paper:#F4F4EF;--ma-white:#FFFFFF}
+    html{scroll-behavior:smooth}
+    body{background:var(--ma-paper)!important;color:var(--ma-graphite)!important;font-family:Inter,"Noto Sans TC","Microsoft JhengHei",Arial,sans-serif!important;line-height:1.7}
+    .top-banner{display:none!important}
+    .nav-bar{background:rgba(255,255,255,.96)!important;border-color:#e4e8e8!important;box-shadow:0 3px 18px rgba(23,59,89,.05);backdrop-filter:blur(14px)}
+    .nav-link{color:#52636b!important;font-size:.92rem!important;font-weight:600;padding:9px 0;border-bottom:2px solid transparent}
+    .nav-link:hover,.nav-link.active{color:var(--ma-navy)!important;border-color:var(--ma-teal)!important}
+    #mobile-menu{background:#fff!important;border-color:#e5e9e9!important}
+    #mobile-menu>div{color:var(--ma-navy)!important}
+    body .bg-gray-900,body .bg-stone-900,body .bg-neutral-900,body .bg-black{background-color:#fff!important}
+    body .bg-gray-800,body .bg-stone-800{background-color:#f1f4f3!important}
+    body .text-white{color:var(--ma-navy)!important}
+    body .text-gray-100,body .text-gray-200,body .text-gray-300{color:#40525a!important}
+    body .text-gray-400,body .text-gray-500{color:#66757b!important}
+    body .text-amber-500,body .text-amber-600,body .text-amber-700{color:var(--ma-teal)!important}
+    body .border-gray-800,body .border-gray-700{border-color:#e1e7e7!important}
+    body .bg-amber-700,body .bg-amber-600{background:var(--ma-navy)!important}
+    body .hover\:bg-amber-600:hover,body .hover\:bg-amber-500:hover{background:#245477!important}
+    .btn-buy{background:var(--ma-navy)!important;color:#fff!important;border-radius:999px!important}
+    .btn-buy:hover{background:#245477!important}
+    .modal-bg{background:rgba(15,31,42,.62)!important}
+    .tab-page{min-height:65vh}
+    .scroll-fade{opacity:1;transform:none}
+    .editable-mode .editable-element{outline-color:var(--ma-teal)!important;background:rgba(36,165,140,.08)!important}
+    .ma-brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ma-navy)}
+    .ma-brand img{height:48px;width:72px;object-fit:contain}
+    .ma-brand span{font-size:1.28rem;font-weight:800;letter-spacing:.075em;white-space:nowrap}
+    .ma-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#fff 0%,#f6f8f7 62%,#e9f0ef 100%);border-bottom:1px solid #e1e7e7;min-height:500px;display:flex;align-items:center}
+    .ma-hero:before{content:"";position:absolute;right:-100px;top:-220px;width:720px;height:720px;border:1px solid rgba(23,59,89,.12);border-radius:50%}
+    .ma-hero:after{content:"";position:absolute;right:-20px;bottom:-300px;width:720px;height:520px;border:1px solid rgba(36,165,140,.22);border-radius:50%;transform:rotate(-20deg)}
+    .ma-hero-inner{position:relative;z-index:2;max-width:1180px;width:100%;margin:auto;padding:76px 28px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+    .ma-eyebrow{font-size:.75rem;letter-spacing:.22em;font-weight:700;color:var(--ma-teal);text-transform:uppercase}
+    .ma-hero h1{font-size:clamp(2.8rem,6vw,5.3rem);line-height:1.04;letter-spacing:.045em;color:var(--ma-navy);font-weight:800;margin:18px 0}
+    .ma-hero p{max-width:570px;color:#52636b;font-size:1.12rem;line-height:1.9}
+    .ma-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .ma-button{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:999px;background:var(--ma-navy);color:#fff!important;font-weight:700;text-decoration:none;transition:.2s}
+    .ma-button:hover{background:#245477;transform:translateY(-1px)}
+    .ma-button.secondary{background:#fff;color:var(--ma-navy)!important;border:1px solid #d6dfe0}
+    .ma-hero-symbol{display:flex;align-items:center;justify-content:center;min-height:260px}
+    .ma-hero-symbol img{width:min(100%,390px);height:auto;filter:drop-shadow(0 18px 28px rgba(23,59,89,.08))}
+    .ma-section{max-width:1180px;margin:auto;padding:76px 28px}
+    .ma-section-heading{font-size:1.9rem;font-weight:750;color:var(--ma-navy);margin-bottom:8px}
+    .ma-section-lead{color:#65747a;max-width:680px;margin-bottom:30px}
+    .ma-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .ma-card{background:#fff;border:1px solid #e2e8e8;border-radius:18px;padding:26px;min-height:190px;box-shadow:0 8px 26px rgba(23,59,89,.035)}
+    .ma-card .ma-card-kicker{color:var(--ma-teal);font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .ma-card h3{font-size:1.22rem;color:var(--ma-navy);font-weight:750;margin:12px 0 8px}
+    .ma-card p{color:#617078;font-size:.94rem}
+    .ma-card a{display:inline-block;color:var(--ma-navy);font-weight:700;text-decoration:none;margin-top:16px}
+    .ma-contact{background:#edf2f1;border-top:1px solid #e0e7e6}
+    .ma-social{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+    .ma-social a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #dce4e3;color:var(--ma-navy);font-size:1.1rem}
+    .ma-social a:hover{background:var(--ma-navy);color:#fff}
+    #page-words,#page-news,#page-shop{max-width:1000px!important;margin:0 auto;padding:64px 28px!important}
+    #page-words h2,#page-news h2,#page-shop h2{color:var(--ma-navy)!important}
+    #page-words .ma-article-intro{background:#fff;border:1px solid #e1e7e7;border-radius:18px;padding:32px;line-height:1.9}
+    #page-words .ma-template-link{display:inline-flex;margin-top:18px;padding:11px 18px;border-radius:999px;background:var(--ma-navy);color:#fff;text-decoration:none;font-weight:700}
+    footer{background:#fff!important;color:#637078!important;border-color:#e1e7e7!important}
+    footer a{color:var(--ma-navy)!important}
+    @media(max-width:760px){
+      .ma-brand img{height:40px;width:58px}.ma-brand span{font-size:1.02rem;letter-spacing:.045em}
+      .ma-hero{min-height:unset}.ma-hero-inner{grid-template-columns:1fr;gap:18px;padding:58px 22px 48px}
+      .ma-hero-symbol{min-height:140px;justify-content:flex-start}.ma-hero-symbol img{width:180px}
+      .ma-hero h1{font-size:clamp(2.5rem,12vw,4rem)}
+      .ma-card-grid{grid-template-columns:1fr}
+      .ma-section{padding:54px 22px}
+      #page-words,#page-news,#page-shop{padding:44px 20px!important}
+    }
+
   </style>
 </head>
 <body class="antialiased">
@@ -84,15 +155,16 @@
   <header class="nav-bar sticky top-0 z-40 border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
       
-      <a onclick="switchTab('home')" class="cursor-pointer flex items-center">
-        <img src="Logo.jpg" alt="Matthew Au Logo" class="h-10 md:h-12 w-auto object-contain" onerror="this.onerror=null; this.src='logo.jpg';">
+      <a onclick="switchTab('home')" class="ma-brand cursor-pointer">
+        <img src="assets/brand/approved-bridge-ma-logo.png" alt="Matthew Au 橋樑 M/A 標誌">
+        <span>MATTHEW AU</span>
       </a>
 
       <!-- 電腦版導覽 -->
       <div class="hidden md:flex items-center gap-6">
         <nav class="flex items-center gap-6">
           <span onclick="switchTab('home')" id="tab-btn-home" class="nav-link active editable-element" data-i18n="nav_home">首頁</span>
-          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link editable-element" data-i18n="nav_words">鍵鋒的話</span>
+          <span onclick="switchTab('words')" id="tab-btn-words" class="nav-link editable-element" data-i18n="nav_words">文章與觀點</span>
           <span onclick="switchTab('news')" id="tab-btn-news" class="nav-link editable-element" data-i18n="nav_news">最新消息</span>
           <span onclick="switchTab('shop')" id="tab-btn-shop" class="nav-link editable-element" data-i18n="nav_shop">商城</span>
         </nav>
@@ -121,7 +193,7 @@
     <!-- 手機版下拉選單 -->
     <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-b border-gray-800 px-6 py-4 space-y-3">
       <div onclick="switchTab('home'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_home">首頁</div>
-      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_words">鍵鋒的話</div>
+      <div onclick="switchTab('words'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_words">文章與觀點</div>
       <div onclick="switchTab('news'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_news">最新消息</div>
       <div onclick="switchTab('shop'); toggleMobileMenu();" class="text-gray-200 py-1.5 text-base cursor-pointer editable-element" data-i18n="nav_shop">商城</div>
     </div>
@@ -129,147 +201,54 @@
 
   <!-- ==================== 1. 首頁 TAB ==================== -->
   <div id="page-home" class="tab-page">
-    <section class="relative h-[400px] md:h-[480px] bg-gradient-to-b from-stone-800 via-neutral-900 to-black flex items-center justify-center text-center px-4 border-b border-gray-800 scroll-fade">
-      <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#a87954_1px,transparent_1px)] [background-size:16px_16px]"></div>
-      <div class="relative z-10">
-        <h1 id="editable-hero-title" class="text-4xl md:text-5xl font-serif text-white tracking-wide mb-2 drop-shadow-md editable-element">Matthew Au</h1>
-        <p id="editable-hero-sub" class="text-xl md:text-3xl font-serif text-amber-200/90 tracking-widest drop-shadow-md editable-element">Official Website</p>
-      </div>
-    </section>
-
-    <div class="marquee-section py-4 overflow-hidden scroll-fade">
-      <div class="whitespace-nowrap animate-marquee flex text-xl md:text-2xl font-serif">
-        <span id="editable-marquee-1" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-        <span id="editable-marquee-2" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-        <span id="editable-marquee-3" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-        <span id="editable-marquee-4" class="mx-6 editable-element" data-i18n="marquee_text">歡迎 welcome</span>
-      </div>
-    </div>
-
-    <!-- 邱吉爾名言 -->
-    <section class="bg-stone-900 py-20 px-6 text-center border-b border-gray-800 scroll-fade">
-      <div class="max-w-3xl mx-auto">
-        <blockquote id="editable-quote-churchill" class="text-2xl md:text-3xl font-serif leading-relaxed mb-4 text-gray-100 editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-        <p id="editable-quote-churchill-author" class="text-sm font-sans tracking-wide text-amber-600 font-bold editable-element" data-i18n="quote_churchill_author">—— 溫斯頓·邱吉爾 Winston Churchill</p>
-      </div>
-    </section>
-
-    <!-- 關於我與興趣 -->
-    <section class="max-w-6xl mx-auto px-6 py-20 space-y-20">
-      <!-- 興趣一：足球 -->
-      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
+    <section class="ma-hero">
+      <div class="ma-hero-inner">
         <div>
-          <h2 id="editable-about-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="about_me">關於我</h2>
-          <h3 id="editable-hobby-title-1" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title_1">我的興趣：足球</h3>
-          <p id="editable-hobby-1" class="text-gray-400 leading-relaxed editable-element" data-i18n="hobby_football_desc">足球對我而言不只是一項運動，更是考驗團隊合作、戰術戰略與堅持不懈意志的舞台。在綠茵場上的每一次奔跑與傳球，都鍛鍊著我的專注力與大局觀。</p>
-        </div>
-        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="Football.jpeg" alt="足球" class="w-full h-72 object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80';">
-        </div>
-      </div>
-
-      <!-- 興趣二：電腦 -->
-      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
-        <div>
-          <h3 id="editable-hobby-title-2" class="text-xl text-gray-300 mb-2 editable-element" data-i18n="hobby_title_2">我的興趣：電腦與資訊科技</h3>
-          <p id="editable-hobby-2" class="text-gray-400 leading-relaxed editable-element" data-i18n="hobby_computer_desc">熱衷於探索數位科技、電腦軟硬體與網路技術。透過電腦這個無限廣闊的工具，不僅能激發邏輯思維與創作靈感，更讓我得以自主學習最新的資訊技術。</p>
-        </div>
-        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="電腦" class="w-full h-72 object-cover">
-        </div>
-      </div>
-
-      <!-- 政治理念 -->
-      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
-        <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
-          <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80" alt="民主自由" class="w-full h-72 object-cover">
-        </div>
-        <div>
-          <h2 id="editable-political-title" class="text-2xl font-bold mb-4 editable-element" data-i18n="political_view_title">政治理念</h2>
-          <p id="editable-political" class="text-gray-300 leading-relaxed editable-element" data-i18n="political_view_desc">促進民主、自由社會發展，拒絕專制政權。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 評論區 -->
-    <section class="bg-stone-900 py-24 px-6 text-center border-t border-b border-gray-800 scroll-fade">
-      <div class="max-w-5xl mx-auto">
-        <h2 id="editable-reviews-title" class="text-3xl font-bold text-white mb-12 editable-element" data-i18n="reviews_title">評論</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
-            <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p id="editable-review-1" class="text-lg font-medium mb-6 editable-element" data-i18n="review1_text">"佢樣樣都好呀"</p>
-            <p id="editable-review-1-author" class="text-xs text-gray-500 editable-element" data-i18n="review1_author">匿名 - 11/2/2023</p>
-          </div>
-          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
-            <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
-            <div class="text-amber-400 text-xl mb-4">★★★★★</div>
-            <p id="editable-review-2" class="text-lg font-medium mb-6 editable-element" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
-            <p id="editable-review-2-author" class="text-xs text-gray-500 editable-element" data-i18n="review2_author">匿名 - 7/6/2023</p>
+          <div class="ma-eyebrow">OFFICIAL PERSONAL WEBSITE</div>
+          <h1 id="editable-hero-title">MATTHEW AU</h1>
+          <p id="editable-hero-sub">個人介紹、文章與觀點、最新消息及公開資訊。這裡是 Matthew Au 的官方個人網站。</p>
+          <div class="ma-actions">
+            <a class="ma-button" href="#" onclick="switchTab('words');return false;">閱讀文章與觀點</a>
+            <a class="ma-button secondary" href="#" onclick="switchTab('news');return false;">查看最新消息</a>
           </div>
         </div>
+        <div class="ma-hero-symbol"><img src="assets/brand/approved-bridge-ma-logo.png" alt="已選定的橋樑 M/A 標誌"></div>
       </div>
     </section>
-
-    <!-- 拿破崙名言 -->
-    <section class="py-20 px-6 text-center bg-neutral-900 border-b border-gray-800 scroll-fade">
-      <div class="max-w-3xl mx-auto">
-        <h2 id="editable-quote-napoleon-fr" class="text-2xl md:text-3xl font-serif mb-4 text-gray-100 editable-element">« Impossible n'est pas français. »</h2>
-        <p id="editable-quote-napoleon-zh" class="text-xl md:text-2xl font-serif mb-6 text-amber-200/80 editable-element" data-i18n="quote_napoleon_zh">有著必勝信念的人，從不說「不可能」。</p>
-        <p id="editable-quote-napoleon-author" class="text-xs font-sans tracking-widest text-amber-600 font-bold editable-element">—— Napoléon Bonaparte 拿破崙</p>
+    <section class="ma-section">
+      <div class="ma-eyebrow">EXPLORE</div>
+      <h2 class="ma-section-heading">網站內容</h2>
+      <p class="ma-section-lead">以清晰的分類整理個人介紹、文章、消息及聯絡資訊，讓訪客更容易找到需要的內容。</p>
+      <div class="ma-card-grid">
+        <article class="ma-card"><div class="ma-card-kicker">01 / PROFILE</div><h3>關於 Matthew</h3><p>了解個人背景、興趣及這個網站的內容方向。</p><a href="#" onclick="switchTab('words');return false;">了解更多 →</a></article>
+        <article class="ma-card"><div class="ma-card-kicker">02 / ARTICLES</div><h3>文章與觀點</h3><p>閱讀文章、評論及對不同議題的整理與思考。</p><a href="#" onclick="switchTab('words');return false;">瀏覽文章 →</a></article>
+        <article class="ma-card"><div class="ma-card-kicker">03 / UPDATES</div><h3>最新消息</h3><p>查看網站更新、公開資訊及最新發布的消息。</p><a href="#" onclick="switchTab('news');return false;">查看消息 →</a></article>
       </div>
     </section>
-
-    <!-- 聯絡表單與社群媒體圖標區 -->
-    <section class="max-w-3xl mx-auto px-6 py-20 text-center scroll-fade">
-      <h2 id="editable-contact-title" class="text-3xl font-bold text-amber-600/90 mb-2 editable-element" data-i18n="contact_title">與我聯絡</h2>
-      <p id="editable-contact-sub" class="text-gray-300 mb-8 editable-element" data-i18n="contact_sub">歡迎來信！</p>
-      <form onsubmit="handleContact(event)" class="space-y-4 text-left max-w-xl mx-auto mb-12">
-        <input type="text" id="contact-name" placeholder="名稱" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_name">
-        <input type="email" id="contact-email" placeholder="電子郵件*" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_email">
-        <textarea rows="4" id="contact-msg" placeholder="訊息" required class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded focus:border-amber-600 focus:outline-none" data-i18n-ph="ph_msg"></textarea>
-        <button type="submit" class="w-full py-3 bg-amber-700 text-white font-medium rounded hover:bg-amber-600 transition cursor-pointer" data-i18n="btn_send">傳送</button>
-      </form>
-
-      <!-- 社群連結按鈕 -->
-      <div class="pt-8 border-t border-gray-800">
-        <p id="editable-social-hint" class="text-sm text-gray-400 mb-6 font-medium editable-element" data-i18n="social_hint">或使用社交媒體聯絡我</p>
-        <div class="flex justify-center items-center gap-6">
-          <a href="https://www.facebook.com/kinfung.au.3" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://www.x.com/Matthew_0205au" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center p-3 hover:scale-110 transition shadow-lg">
-            <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="mailto:mattew0205au@gmail.com" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
-        </div>
+    <section class="ma-contact"><div class="ma-section text-center">
+      <div class="ma-eyebrow">GET IN TOUCH</div><h2 id="editable-contact-title" class="ma-section-heading">聯絡 Matthew Au</h2>
+      <p id="editable-contact-sub" class="ma-section-lead mx-auto">如有查詢或合作事宜，歡迎透過以下公開平台聯絡。</p>
+      <div class="ma-social">
+        <a href="https://www.facebook.com/kinfung.au.3" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/matthew.au_0205" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://x.com/Matthew_0205au" target="_blank" rel="noopener noreferrer" aria-label="X"><span style="font-weight:700">𝕏</span></a>
+        <a href="mailto:mattew0205au@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
       </div>
-    </section>
+    </div></section>
   </div>
 
-  <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
-  <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 id="editable-words-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_words">鍵鋒的話</h2>
-    <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
-      <p id="editable-words-1" class="text-lg editable-element" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
-      <blockquote id="editable-words-quote" class="border-l-4 border-amber-600 pl-4 text-white italic editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
-      <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
-      <p id="editable-words-3" class="editable-element" data-i18n="words_p3">感謝每一位一路走來給予我關心、支持與鼓勵的朋友。未來我也會繼續透過此平台發布最新動態與公報，願我們攜手並進，共創更美好的未來！</p>
-      
-      <!-- 純白色簽名與英文署名區 -->
-      <div class="pt-8 mt-8 border-t border-gray-800 flex flex-col items-end space-y-2">
-        <div class="text-right">
-          <img src="sing.png" alt="簽名" class="h-16 w-auto object-contain inline-block white-signature" onerror="this.onerror=null; this.replaceWith('(簽名)');">
-        </div>
-        <div id="editable-signature-name" class="text-amber-500 font-serif text-xl tracking-wider font-bold editable-element" data-i18n="signature_name">Matthew Au</div>
+  <!-- ==================== 2. 文章與觀點 TAB ==================== -->
+  <div id="page-words" class="tab-page hidden">
+    <section class="ma-section">
+      <div class="ma-eyebrow">ARTICLES & PERSPECTIVES</div>
+      <h2 id="editable-words-title" class="ma-section-heading">文章與觀點</h2>
+      <p class="ma-section-lead">文章、評論與個人觀點將在此整理發布。每篇內容會標示發布日期，並盡可能附上相關資料來源。</p>
+      <div class="ma-article-intro">
+        <h3 class="text-xl font-bold mb-3" style="color:var(--ma-navy)">文章閱讀與發布原則</h3>
+        <p class="text-gray-600">本頁用作整理長篇文章及觀點。內容會清楚區分已核實資料、引用內容與個人分析；如資料仍有待確認，會明確標示。新文章發布後，將按日期及主題排列。</p>
+        <a class="ma-template-link" href="assets/docs/Matthew_Au_Editable_Writing_Templates.docx" download>下載文章及正式文件範本</a>
       </div>
-    </div>
+    </section>
   </div>
 
   <!-- ==================== 3. 最新消息 TAB ==================== -->
@@ -570,7 +549,7 @@
     let i18nData = {
       'zh-HK': {
         top_banner: "歡迎來到Matthew official website",
-        nav_home: "首頁", nav_words: "鍵鋒的話", nav_news: "最新消息", nav_shop: "商城",
+        nav_home: "首頁", nav_words: "文章與觀點", nav_news: "最新消息", nav_shop: "商城",
         marquee_text: "歡迎 welcome",
         quote_churchill_zh: "“要提升價值就要改變；要達到完美就得經常改變。”",
         quote_churchill_author: "—— 溫斯頓·邱吉爾 Winston Churchill",
@@ -601,7 +580,7 @@
       },
       'en': {
         top_banner: "Welcome to Matthew Official Website",
-        nav_home: "Home", nav_words: "Words", nav_news: "Latest News", nav_shop: "Shop",
+        nav_home: "Home", nav_words: "Articles & Perspectives", nav_news: "Latest News", nav_shop: "Shop",
         marquee_text: "Welcome 歡迎",
         quote_churchill_zh: "“To improve is to change; to be perfect is to change often.”",
         quote_churchill_author: "—— Winston Churchill",
@@ -632,7 +611,7 @@
       },
       'zh-CN': {
         top_banner: "欢迎来到Matthew official website",
-        nav_home: "首页", nav_words: "键锋的话", nav_news: "最新消息", nav_shop: "商城",
+        nav_home: "首页", nav_words: "文章与观点", nav_news: "最新消息", nav_shop: "商城",
         marquee_text: "欢迎 welcome",
         quote_churchill_zh: "“要提升价值就要改变；要达到完美就得经常改变。”",
         quote_churchill_author: "—— 温斯顿·邱吉尔 Winston Churchill",
@@ -732,19 +711,8 @@
     };
 
     async function detectUserCurrencyByIP() {
-      try {
-        const res = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
-        if (res && res.success) {
-          const countryCode = res.country_code;
-          if (countryCode === 'HK') selectedCurrency = 'HKD';
-          else if (countryCode === 'TW') selectedCurrency = 'TWD';
-          else if (countryCode === 'CN') selectedCurrency = 'CNY';
-          else if (['DE', 'FR', 'IT', 'ES', 'NL', 'BE', 'AT', 'PT', 'IE', 'FI', 'GR'].includes(countryCode)) selectedCurrency = 'EUR';
-          else selectedCurrency = 'USD';
-        }
-      } catch(e) {
-        selectedCurrency = 'HKD';
-      }
+      // Do not send visitor IP addresses to a third-party lookup service.
+      selectedCurrency = 'HKD';
     }
 
     function updateShopCurrencySetting(currency) {
@@ -1030,42 +998,9 @@
       return 'Generic Device';
     }
 
-    async function trackUserAnalytics(pageName = 'home') {
-      const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile 手機' : 'Desktop 電腦';
-      const deviceModelName = parseDeviceName(navigator.userAgent);
-      const userLang = localStorage.getItem('user_preferred_lang') || navigator.language;
-      const localFormattedTime = new Date().toLocaleString('zh-HK');
-
-      let clientIp = '127.0.0.1';
-      let locationStr = '定位解析中...';
-      let coordsStr = null;
-
-      try {
-        const ipRes = await fetch('https://ipwho.is/').then(r => r.json()).catch(() => null);
-        if (ipRes && ipRes.success) {
-          clientIp = ipRes.ip;
-          locationStr = `${ipRes.city}, ${ipRes.region}, ${ipRes.country}`;
-          coordsStr = `${ipRes.latitude},${ipRes.longitude}`;
-        }
-      } catch(e) {}
-
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-            coordsStr = `${lat.toFixed(6)},${lng.toFixed(6)}`;
-            locationStr = `GPS 晶片極致精準 (±${Math.round(pos.coords.accuracy)}米)`;
-            saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
-          },
-          (err) => {
-            saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
-          },
-          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-        );
-      } else {
-        saveLogToFirebase(clientIp, coordsStr, locationStr, deviceType, deviceModelName, userLang, localFormattedTime, pageName);
-      }
+    function trackUserAnalytics(pageName = 'home') {
+      // Privacy-first: no IP lookup, no GPS request, and no precise visitor-location logging.
+      return;
     }
 
     function saveLogToFirebase(ip, coords, location, device, deviceName, lang, time, page) {
