@@ -53,15 +53,16 @@
     @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
     .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
 
-    /* 滾動式漸進淡入動畫 */
+    /* 滾動式彈性彈入動畫 */
     .scroll-fade {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transform: translateY(42px) scale(0.92);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+      will-change: opacity, transform;
     }
     .scroll-fade.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
     /* 分頁平滑淡入淡出動畫 */
@@ -115,7 +116,6 @@
     .btn-buy:hover{background:#164673!important}
     .modal-bg{background:rgba(15,31,42,.62)!important}
     .tab-page{min-height:65vh}
-    .scroll-fade{opacity:1;transform:none}
     .editable-mode .editable-element{outline-color:var(--ma-teal)!important;background:rgba(24,135,153,.08)!important}
 
     /* 頁首品牌標誌 */
@@ -329,13 +329,13 @@
       <div class="max-w-5xl mx-auto">
         <h2 id="editable-reviews-title" class="text-3xl font-bold text-white mb-12 editable-element" data-i18n="reviews_title">評論</h2>
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg scroll-fade">
             <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
             <p id="editable-review-1" class="text-lg font-medium mb-6 editable-element" data-i18n="review1_text">"佢樣樣都好呀"</p>
             <p id="editable-review-1-author" class="text-xs text-gray-500 editable-element" data-i18n="review1_author">匿名 - 11/2/2023</p>
           </div>
-          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg">
+          <div class="bg-white text-gray-900 p-8 flex flex-col items-center shadow-2xl rounded-lg scroll-fade">
             <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-2xl font-bold mb-4 editable-element" data-i18n="anon_user">匿</div>
             <div class="text-amber-400 text-xl mb-4">★★★★★</div>
             <p id="editable-review-2" class="text-lg font-medium mb-6 editable-element" data-i18n="review2_text">"佢係我見過踢波最好嘅人！"</p>
@@ -368,17 +368,26 @@
       <!-- 社群連結按鈕 -->
       <div class="pt-8 border-t border-gray-800">
         <p id="editable-social-hint" class="text-sm text-gray-400 mb-6 font-medium editable-element" data-i18n="social_hint">或使用社交媒體聯絡我</p>
-        <div class="flex justify-center items-center gap-6">
-          <a href="https://www.facebook.com/kinfung.au.3" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+        <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+          <a href="https://www.facebook.com/kinfung.au.3" target="_blank" rel="noopener noreferrer" title="Facebook" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-facebook-f"></i>
           </a>
-          <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+          <a href="https://www.instagram.com/matthew.au_0205?srtk=djNjejZlYzdka3Iy" target="_blank" rel="noopener noreferrer" title="Instagram" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-brands fa-instagram"></i>
           </a>
-          <a href="https://www.x.com/Matthew_0205au" target="_blank" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center p-3 hover:scale-110 transition shadow-lg">
+          <a href="https://www.x.com/Matthew_0205au" target="_blank" rel="noopener noreferrer" title="X (Twitter)" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center p-3 hover:scale-110 transition shadow-lg">
             <svg class="w-full h-full fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
-          <a href="mailto:mattew0205au@gmail.com" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+          <a href="https://v.douyin.com/u-TTADd83nE/" target="_blank" rel="noopener noreferrer" title="抖音 Douyin" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a href="https://line.me/ti/p/ZgS5EXbPSF" target="_blank" rel="noopener noreferrer" title="LINE" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-brands fa-line"></i>
+          </a>
+          <a href="https://www.snapchat.com/add/matthew_au0205?share_id=UQ4sH4ZqPH4&locale=zh-HK" target="_blank" rel="noopener noreferrer" title="Snapchat" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
+            <i class="fa-brands fa-snapchat"></i>
+          </a>
+          <a href="mailto:mattew0205au@gmail.com" title="Email" class="w-12 h-12 rounded-full bg-white text-gray-900 flex items-center justify-center text-xl hover:scale-110 transition shadow-lg">
             <i class="fa-solid fa-envelope"></i>
           </a>
         </div>
@@ -387,9 +396,9 @@
   </div>
 
   <!-- ==================== 2. 鍵鋒的話 TAB ==================== -->
-  <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 id="editable-words-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_words">鍵鋒的話</h2>
-    <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed">
+  <div id="page-words" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
+    <h2 id="editable-words-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element scroll-fade" data-i18n="nav_words">鍵鋒的話</h2>
+    <div class="bg-gray-900 p-8 rounded-lg border border-gray-800 space-y-6 text-gray-300 leading-relaxed scroll-fade">
       <p id="editable-words-1" class="text-lg editable-element" data-i18n="words_p1">歡迎來到我的官方網站！作為一個堅定維護獨立思考、追求自由與民主社會發展的人，我希望能透過這個平台，與所有志同道合的朋友分享我的核心理念、生活點滴以及對社會時事的深度觀察。</p>
       <blockquote id="editable-words-quote" class="border-l-4 border-amber-600 pl-4 text-white italic editable-element" data-i18n="quote_churchill_zh">“要提升價值就要改變；要達到完美就得經常改變。”</blockquote>
       <p id="editable-words-2" class="editable-element" data-i18n="words_p2">無論是在現實的足球場上揮灑汗水、追求團隊協作與卓越表現，還是在數位電腦世界中進行無限的科技探索與創作挑戰，我始終保持著高度的熱情與不屈不撓的毅力。人生正如同一場長跑，唯有不斷自我革新、適應環境並堅持信念，才能在瞬息萬變的時代中站穩腳步。</p>
@@ -406,10 +415,10 @@
   </div>
 
   <!-- ==================== 3. 最新消息 TAB ==================== -->
-  <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16 scroll-fade">
-    <h2 id="editable-news-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element" data-i18n="nav_news">最新消息</h2>
+  <div id="page-news" class="tab-page hidden max-w-4xl mx-auto px-6 py-16">
+    <h2 id="editable-news-title" class="text-3xl font-bold mb-8 text-amber-500 editable-element scroll-fade" data-i18n="nav_news">最新消息</h2>
     <div id="news-container" class="space-y-8">
-      <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-1">
+      <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start scroll-fade" id="news-item-1">
         <div>
           <span id="editable-news-date-1" class="text-amber-500 text-sm font-mono block mb-2 editable-element">&lt;13/5/2026&gt;</span>
           <p id="editable-news-body-1" class="text-white text-lg editable-element" data-i18n="news_1">本人熱烈歡迎美國總統訪華，與中方共同合作。</p>
@@ -417,7 +426,7 @@
         <button type="button" onclick="deleteNews('news-item-1')" class="admin-only hidden text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-500/30 rounded cursor-pointer">刪除</button>
       </div>
 
-      <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start" id="news-item-2">
+      <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start scroll-fade" id="news-item-2">
         <div>
           <span id="editable-news-date-2" class="text-red-400 text-sm font-mono block mb-2 editable-element">&lt;27/3/2026&gt;</span>
           <p id="editable-news-body-2" class="text-white text-lg mb-4 editable-element" data-i18n="news_2_body">27日2時多，本人官方社交媒體（@mattew0205_au）受到黑客攻擊，黑客兩小時會發送一次圖片，圖片內容涉及金融詐騙，不排除採取法律行動或報警。</p>
@@ -429,10 +438,10 @@
   </div>
 
   <!-- ==================== 4. 商城 TAB ==================== -->
-  <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16 scroll-fade">
+  <div id="page-shop" class="tab-page hidden max-w-6xl mx-auto px-6 py-16">
     
     <!-- 商城頁面頂部：標題與左上角全域貨幣選擇器 -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 border-b border-gray-800 pb-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 border-b border-gray-800 pb-6 scroll-fade">
       <h2 id="editable-main-shop-title" class="text-3xl font-bold text-amber-500 editable-element" data-i18n="shop_title">官方商城</h2>
       
       <!-- 商城左上角直接設定幣別 -->
@@ -451,7 +460,7 @@
     <div id="shop-container" class="space-y-16">
       
       <!-- 商品 1：固定金額足球訓練 -->
-      <div class="grid md:grid-cols-2 gap-12 items-center border-b border-gray-800 pb-16">
+      <div class="grid md:grid-cols-2 gap-12 items-center border-b border-gray-800 pb-16 scroll-fade">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="足球訓練" class="w-full h-80 object-cover">
         </div>
@@ -463,7 +472,7 @@
       </div>
 
       <!-- 商品 2：得到心靈上的支持 (自定義金額) -->
-      <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="grid md:grid-cols-2 gap-12 items-center scroll-fade">
         <div class="rounded-lg overflow-hidden border border-gray-800 shadow-xl bg-gray-900">
           <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" alt="心靈支持" class="w-full h-80 object-cover">
         </div>
@@ -654,8 +663,8 @@
     <div class="flex justify-center flex-wrap gap-6 text-gray-400">
       <a href="Privacy_Policy.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="privacy_policy">隱私權政策</a>
       <a href="Terms_of_Use.pdf" target="_blank" class="hover:underline cursor-pointer" data-i18n="terms_of_use">網站使用條款及免責聲明</a>
-      <a href="https://kwokfenix.net/" target="_blank" class="hover:underline cursor-pointer text-amber-500 font-bold">KWOKFENIX.NET</a>
-      <a onclick="openAdminModal()" class="hover:underline cursor-pointer text-amber-600/80">🔒 管理員登入</a>
+      <a href="https://mc.kwokfenix.net/" target="_blank" rel="noopener noreferrer" class="hover:underline cursor-pointer">KWOKFENIX.NET</a>
+      <a onclick="openAdminModal()" class="hover:underline cursor-pointer">管理員登入</a>
     </div>
     <p class="text-gray-600">By Matthew Au</p>
   </footer>
@@ -893,20 +902,26 @@
       const targetBtn = document.getElementById('tab-btn-' + tab);
       if (targetBtn) targetBtn.classList.add('active');
 
+      const revealTarget = () => {
+        if (targetPage) {
+          targetPage.classList.remove('hidden');
+          targetPage.classList.add('fade-out');
+          setTimeout(() => {
+            targetPage.classList.remove('fade-out');
+            initScrollObserver();
+          }, 50);
+        }
+      };
+
       if (activePage) {
         activePage.classList.add('fade-out');
         setTimeout(() => {
           activePage.classList.add('hidden');
           activePage.classList.remove('fade-out');
-          
-          if (targetPage) {
-            targetPage.classList.remove('hidden');
-            targetPage.classList.add('fade-out');
-            setTimeout(() => targetPage.classList.remove('fade-out'), 50);
-          }
+          revealTarget();
         }, 300);
       } else {
-        if (targetPage) targetPage.classList.remove('hidden');
+        revealTarget();
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1178,7 +1193,7 @@
       const newsContainer = document.getElementById('news-container');
       
       const wrapper = document.createElement('div');
-      wrapper.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start fade-in";
+      wrapper.className = "bg-gray-900 p-6 rounded-lg border border-gray-800 flex justify-between items-start scroll-fade";
       wrapper.id = n.id;
 
       const contentDiv = document.createElement('div');
@@ -1203,6 +1218,7 @@
       wrapper.appendChild(contentDiv);
       wrapper.appendChild(delBtn);
       newsContainer.prepend(wrapper);
+      initScrollObserver();
     }
 
     function handleContact(e) {
@@ -1276,13 +1292,19 @@
       if (db) db.ref('visitor_logs/' + Date.now()).set(logData);
     }
 
+    let scrollObserver = null;
     function initScrollObserver() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.15 });
-      document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+      if (!scrollObserver) {
+        scrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              scrollObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+      }
+      document.querySelectorAll('.scroll-fade:not(.visible)').forEach(el => scrollObserver.observe(el));
     }
 
     window.onload = async function() {
