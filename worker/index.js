@@ -135,7 +135,7 @@ export default {
       const cleaned = (parsed.homework || []).slice(0, 30).map(item => ({
         subject: String(item.subject || "其他").slice(0, 40),
         title: String(item.title || "").slice(0, 500),
-        due_date: /^\\d{4}-\\d{2}-\\d{2}$/.test(item.due_date || "") ? item.due_date : null,
+        due_date: /^\d{4}-\d{2}-\d{2}$/.test(item.due_date || "") ? item.due_date : null,
         estimated_minutes: Math.max(10, Math.min(240, Number(item.estimated_minutes) || 30)),
         priority: ["高", "一般", "低"].includes(item.priority) ? item.priority : "一般",
         notes: String(item.notes || "").slice(0, 500)
