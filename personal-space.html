@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Matthew's Personal Space</title>
+<style>
+:root{--bg:#0d1117;--panel:#161d27;--panel2:#202a37;--red:#c8102e;--text:#f4f6f8;--muted:#9aa8b7;--line:#2b3745}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(5vw,20px);position:sticky;top:0;background:#0d1117ed;backdrop-filter:blur(12px);z-index:5}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em}.mark{background:var(--red);width:38px;height:38px;border-radius:11px;display:grid;place-items:center}
+.pill{font-size:11px;color:#f2b8c2;border:1px solid #75303e;padding:4px 9px;border-radius:99px}
+main{max-width:1180px;margin:34px auto;padding:0 22px}.eyebrow{color:#e68a9b;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:7px 0}h2{font-size:18px;margin:0 0 15px}.sub{color:var(--muted);margin:8px 0 24px}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:21px;min-width:0}.wide{grid-column:1/-1}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{background:var(--panel2);border-radius:13px;padding:13px}.stat small{display:block;color:var(--muted)}.stat strong{font-size:25px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.tag{color:#f0a6b3;background:#40202a;padding:4px 8px;border-radius:8px;font-size:11px}
+.news{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--line)}.news:first-of-type{border-top:0}.crest{background:linear-gradient(145deg,#8e001d,#d51b3d);border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:22px;min-height:76px}.muted{color:var(--muted);font-size:13px}
+form{display:grid;gap:9px}input,select,textarea{width:100%;background:#0f151d;color:var(--text);border:1px solid #354252;border-radius:10px;padding:11px;font:inherit}textarea{min-height:85px;resize:vertical}button{background:var(--red);color:white;border:0;border-radius:10px;padding:10px 14px;font-weight:750;cursor:pointer}button.secondary{background:#2a3543}button:focus,input:focus,select:focus,textarea:focus{outline:2px solid #e68a9b;outline-offset:2px}
+.item{padding:11px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}.item:first-child{border-top:0}.item small{display:block;color:var(--muted)}.done{text-decoration:line-through;opacity:.55}
+footer{text-align:center;color:#687686;padding:35px 20px;font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.stats{grid-template-columns:1fr 1fr}.news{grid-template-columns:78px 1fr}.crest{min-height:65px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="mark">M</div><span>MATTHEW'S SPACE</span></div><span class="pill">PRIVATE DASHBOARD CONCEPT</span></header>
+<main>
+<div class="eyebrow" id="todayLabel">YOUR PERSONAL DASHBOARD</div>
+<h1>Welcome back.</h1><p class="sub">一個地方整理足球、功課、課堂和每日生活。</p>
+<div class="grid">
+<section class="card">
+<div class="eyebrow">TOMORROW AT A GLANCE</div><h2 style="font-size:24px;margin:5px 0">明日安排</h2><div class="muted" id="tomorrowDate"></div>
+<div class="stats"><div class="stat"><small>循環日</small><strong id="cycleValue">未設定</strong></div><div class="stat"><small>待交功課</small><strong id="dueCount">0</strong></div><div class="stat"><small>課堂節數</small><strong id="lessonCount">0</strong></div></div>
+<div style="margin-top:18px"><div class="section-head"><h2>明日課堂</h2><span class="tag">MY TIMETABLE</span></div><div id="tomorrowLessons" class="muted">請在下方設定你的課堂資料。</div></div>
+<div style="margin-top:18px"><div class="section-head"><h2>明日要交</h2><span class="tag">HOMEWORK</span></div><div id="tomorrowHomework" class="muted">目前沒有已輸入的功課。</div></div>
+</section>
+<section class="card">
+<div class="section-head"><h2>⚽ 利物浦及足球新聞</h2><span class="tag">DAILY BRIEFING</span></div>
+<div class="news"><div class="crest">LFC</div><div><b>利物浦每日新聞</b><p class="muted">預留每日 AI 新聞摘要位置。正式版會接駁可信新聞來源，整理球會、賽事、轉會及傷停消息。</p></div></div>
+<div class="news"><div class="crest">⚽</div><div><b>世界足球焦點</b><p class="muted">預留國際足球新聞、重要賽果及賽事消息位置。</p></div></div>
+<p class="muted">目前是介面概念，尚未連接新聞 API 或自動排程。</p>
+</section>
+<section class="card">
+<div class="section-head"><h2>📚 功課管理</h2><span class="tag">ADD HOMEWORK</span></div>
+<form id="homeworkForm"><input id="hwTitle" placeholder="功課名稱" required><input id="hwSubject" placeholder="科目"><label class="muted">截止日期</label><input id="hwDate" type="date" required><label class="muted">附加檔案（概念版只在本機預覽）</label><input id="hwFile" type="file"><button>新增功課</button></form>
+<div id="homeworkList" style="margin-top:15px"></div>
+</section>
+<section class="card">
+<div class="section-head"><h2>📅 課堂及循環日設定</h2><span class="tag">MY SCHOOL</span></div>
+<form id="lessonForm"><select id="lessonDay"><option value="A">A 日</option><option value="B">B 日</option><option value="C">C 日</option><option value="D">D 日</option></select><input id="lessonName" placeholder="課堂名稱，例如：英文" required><input id="lessonPeriod" placeholder="節數，例如：第 1 節"><button>加入課堂</button></form>
+<div id="lessonList" style="margin-top:13px"></div>
+<form id="cycleForm" style="margin-top:16px"><label class="muted">設定明天的循環日</label><select id="cycleSelect"><option>未設定</option><option>A 日</option><option>B 日</option><option>C 日</option><option>D 日</option></select><label class="muted">明天服裝／校服備註</label><input id="clothes" placeholder="例如：夏季校服、運動服"><button class="secondary">儲存明日安排</button></form><p class="muted" id="clothesView"></p>
+</section>
+<section class="card wide">
+<div class="section-head"><h2>📝 我的私人空間</h2><span class="tag">ONLY FOR MY NOTES</span></div>
+<textarea id="notes" placeholder="留一個位置給自己：今日想法、計劃、提醒、任何想記低的事情……"></textarea><div style="display:flex;justify-content:flex-end;margin-top:10px"><button id="saveNotes">儲存筆記</button></div>
+</section>
+</div>
+</main><footer>MATTHEW'S PERSONAL SPACE · CONCEPT BUILD</footer>
+<script>
+const $=id=>document.getElementById(id);
+const read=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch{return f}};
+const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let homework=read('mps_homework',[]),lessons=read('mps_lessons',[]),plan=read('mps_plan',{cycle:'未設定',clothes:''});
+const now=new Date(),tom=new Date(now);tom.setDate(now.getDate()+1);
+$('todayLabel').textContent=now.toLocaleDateString('zh-HK',{year:'numeric',month:'long',day:'numeric',weekday:'long'}).toUpperCase();
+$('tomorrowDate').textContent=tom.toLocaleDateString('zh-HK',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+$('cycleSelect').value=plan.cycle;$('clothes').value=plan.clothes;$('notes').value=read('mps_notes','');
+function render(){
+ const due=homework.filter(x=>x.date===tom.toISOString().slice(0,10));
+ $('dueCount').textContent=due.length;$('cycleValue').textContent=plan.cycle;$('clothesView').textContent=plan.clothes?'服裝備註：'+plan.clothes:'';
+ $('tomorrowHomework').innerHTML=due.length?due.map(x=>'<div class="item"><span>'+esc(x.title)+'<small>'+esc(x.subject||'未分類')+'</small></span><span class="muted">明日</span></div>').join(''):'沒有明天到期的功課。';
+ const todays=lessons.filter(x=>x.day===plan.cycle.replace(' 日',''));
+ $('lessonCount').textContent=todays.length;
+ $('tomorrowLessons').innerHTML=todays.length?todays.sort((a,b)=>a.period.localeCompare(b.period,'zh')).map(x=>'<div class="item"><span>'+esc(x.period)+'<small>'+esc(x.day)+' 日</small></span><b>'+esc(x.name)+'</b></div>').join(''):'尚未設定明天的課堂。';
+ $('homeworkList').innerHTML=homework.map((x,i)=>'<div class="item"><span>'+esc(x.title)+'<small>'+esc(x.subject||'未分類')+' · '+x.date+(x.file?' · '+esc(x.file):'')+'</small></span><button class="secondary" data-hw="'+i+'">刪除</button></div>').join('')||'<p class="muted">尚未新增功課。</p>';
+ $('lessonList').innerHTML=lessons.map((x,i)=>'<div class="item"><span>'+esc(x.day)+' 日 · '+esc(x.period)+'<small>'+esc(x.name)+'</small></span><button class="secondary" data-lesson="'+i+'">刪除</button></div>').join('');
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('homeworkForm').addEventListener('submit',e=>{e.preventDefault();homework.push({title:$('hwTitle').value,subject:$('hwSubject').value,date:$('hwDate').value,file:$('hwFile').files[0]?.name||''});write('mps_homework',homework);e.target.reset();render()});
+$('lessonForm').addEventListener('submit',e=>{e.preventDefault();lessons.push({day:$('lessonDay').value,name:$('lessonName').value,period:$('lessonPeriod').value||'未指定'});write('mps_lessons',lessons);e.target.reset();render()});
+$('cycleForm').addEventListener('submit',e=>{e.preventDefault();plan={cycle:$('cycleSelect').value,clothes:$('clothes').value};write('mps_plan',plan);render()});
+document.addEventListener('click',e=>{if(e.target.dataset.hw!==undefined){homework.splice(+e.target.dataset.hw,1);write('mps_homework',homework);render()}if(e.target.dataset.lesson!==undefined){lessons.splice(+e.target.dataset.lesson,1);write('mps_lessons',lessons);render()}});
+$('saveNotes').addEventListener('click',()=>{write('mps_notes',$('notes').value);$('saveNotes').textContent='已儲存';setTimeout(()=>$('saveNotes').textContent='儲存筆記',1200)});
+render();
+</script>
+</body></html>
