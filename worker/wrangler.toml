@@ -1,0 +1,6 @@
+name = "matthew-homework-ai"
+main = "index.js"
+compatibility_date = "2026-11-19"
+
+[vars]
+AI_MODEL = "gpt-6.2-astra"
